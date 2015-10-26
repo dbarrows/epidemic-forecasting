@@ -1,0 +1,87 @@
+\begin{thebibliography}{10}
+
+\bibitem{Cook2011}
+S.~Cook, C.~Conrad, A.~L. Fowlkes, and M.~H. Mohebbi.
+\newblock {Assessing Google Flu trends performance in the United States during
+  the 2009 influenza virus A (H1N1) pandemic}.
+\newblock {\em PLoS ONE}, 6(8):1--8, 2011.
+
+\bibitem{Glaser2014}
+S.~M. Glaser, H.~Ye, and G.~Sugihara.
+\newblock {A nonlinear, low data requirement model for producing spatially
+  explicit fishery forecasts}.
+\newblock {\em Fisheries Oceanography}, 23:45--53, 2014.
+
+\bibitem{Graham2016}
+A.~L. Graham, A.~Camacho, F.~Carrat, O.~Ratmann, B.~Cazelles, and L.~E.-e.
+  Mathe.
+\newblock {Explaining rapid reinfections in multiple- wave influenza outbreaks
+  : Tristan da Cunha 1971 epidemic as a case study}.
+\newblock {\em Proc. R. Soc. B}, 2016.
+
+\bibitem{Hii2012}
+Y.~Hii, J.~Rockl\"{o}v, S.~Wall, and L.~Ng.
+\newblock {Optimal lead time for dengue forecast}.
+\newblock {\em PLoS neglected tropical \ldots}, 6(10), 2012.
+
+\bibitem{Ionides2015}
+E.~L. Ionides, D.~Nguyen, Y.~Atchad\'{e}, S.~Stoev, and A.~a. King.
+\newblock {Inference for dynamic and latent variable models via iterated,
+  perturbed Bayes maps}.
+\newblock {\em Proceedings of the National Academy of Sciences},
+  112(3):719--724, 2015.
+
+\bibitem{Kim2013}
+E.-K. Kim, J.~H. Seok, J.~S. Oh, H.~W. Lee, and K.~H. Kim.
+\newblock {Use of hangeul twitter to track and predict human influenza
+  infection.}
+\newblock {\em PloS one}, 8(7):e69305, Jan. 2013.
+
+\bibitem{Nsoesie2014}
+E.~O. Nsoesie, J.~S. Brownstein, N.~Ramakrishnan, and M.~V. Marathe.
+\newblock {A systematic review of studies on forecasting the dynamics of
+  influenza outbreaks.}
+\newblock {\em Influenza and other respiratory viruses}, 8(3):309--16, May
+  2014.
+
+\bibitem{Reiner2012}
+R.~C. Reiner, A.~a. King, M.~Emch, M.~Yunus, a.~S.~G. Faruque, and M.~Pascual.
+\newblock {Highly localized sensitivity to climate forcing drives endemic
+  cholera in a megacity.}
+\newblock {\em Proceedings of the National Academy of Sciences of the United
+  States of America}, 109(6):2033--6, Feb. 2012.
+
+\bibitem{Reyburn2011}
+R.~Reyburn, D.~R. Kim, M.~Emch, A.~Khatib, L.~von Seidlein, and M.~Ali.
+\newblock {Climate variability and the outbreaks of cholera in Zanzibar, East
+  Africa: a time series analysis.}
+\newblock {\em The American journal of tropical medicine and hygiene},
+  84(6):862--9, June 2011.
+
+\bibitem{Shaman2014}
+J.~Shaman, W.~Yang, S.~Kandula, K.~S. Inference, and S.~Leone.
+\newblock {Inference and Forecast of the Current West African Ebola Outbreak in
+  Guinea , Sierra Leone and Liberia}.
+\newblock pages 1--17, 2014.
+
+\bibitem{Sugihara1994}
+G.~Sugihara.
+\newblock {Nonlinear Forecasting for the Classification of Natural Time
+  Series}.
+\newblock {\em Philosophical Transactions of the Royal Society A: Mathematical,
+  Physical and Engineering Sciences}, 348:477--495, 1994.
+
+\bibitem{Tamerius2013}
+J.~D. Tamerius, J.~Shaman, W.~J. Alonso, K.~Bloom-Feshbach, C.~K. Uejio,
+  A.~Comrie, and C.~Viboud.
+\newblock {Environmental Predictors of Seasonal Influenza Epidemics across
+  Temperate and Tropical Climates}.
+\newblock {\em PLoS Pathogens}, 9(3), 2013.
+
+\bibitem{Yang2014}
+W.~Yang, A.~Karspeck, and J.~Shaman.
+\newblock {Comparison of filtering methods for the modeling and retrospective
+  forecasting of influenza epidemics.}
+\newblock {\em PLoS computational biology}, 10(4):e1003583, Apr. 2014.
+
+\end{thebibliography}

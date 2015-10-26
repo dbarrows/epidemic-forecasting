@@ -1,0 +1,49 @@
+data {
+
+    int     <lower=1>   T;      // total integration steps, observations + missing
+    real                y[T];   // observed number of cases at each time step, must be positive
+    int     <lower=1>   N;      // population size
+    real                h;      // step size (should be 1 day (1/7) or 1/10th of a week or something)
+
+}
+
+parameters {
+
+    real <lower=0, upper=10> sigma;
+    real <lower=0, upper=10> theta [2];
+    real <lower=0, upper=500> y0[3];
+
+}
+
+model {
+
+    real S[T];
+    real I[T];
+    real R[T];
+
+    S[1] <- y0[1];
+    I[1] <- y0[2];
+    R[1] <- y0[3];
+    
+    y[1] ~ normal(y0[2], sigma);
+
+    for (t in 2:T) {
+
+        S[t] <- S[t-1] + h*( - S[t-1]*I[t-1]*theta[1]*theta[2]/N );
+        I[t] <- I[t-1] + h*( S[t-1]*I[t-1]*theta[1]*theta[2]/N  - I[t-1]*theta[2] );
+        R[t] <- R[t-1] + h*( I[t-1]*theta[2] );
+        
+        if (y[t] > 0) {
+            y[t] ~ normal( I[t], sigma );
+        }
+
+    }
+    
+    y0[1] ~ normal(N - y[1], sigma);
+    y0[2] ~ normal(y[1], sigma);
+    
+    theta[1]    ~ lognormal(1,1);
+    theta[2]    ~ lognormal(1,1);
+    sigma       ~ lognormal(1,1);
+        
+}

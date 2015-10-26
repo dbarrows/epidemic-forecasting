@@ -1,0 +1,132 @@
+source("/Users/dexter/Drive/McMaster/Current/Thesis/Rstan_stuff/sir_stan.r")
+library(deSolve)#
+library(rstan)#
+library(shinystan)#
+#
+sigma <- 5#
+#
+SIR <- function(Time, State, Pars) {#
+    with(as.list(c(State, Pars)), {#
+        B   <- R0*r/N#
+        BSI <- B*S*I#
+        rI  <- r*I#
+        dS = -BSI#
+        dI = BSI - rI#
+        dR = rI#
+        return(list(c(dS, dI, dR)))#
+    })#
+}#
+#
+pars  <- c(R0  <- 3.0,    # average number of new infected individuals per infected person#
+           r   <- 0.1,    # recovery rate#
+           N   <- 500)    # population size#
+#
+y_ini <- c(S = 495, I = 5, R = 0)#
+times <- seq(0, 100, by = 1)#
+#
+odeout <- ode(y_ini, times, SIR, pars)#
+#
+infec_counts <- odeout[,3] + rnorm(101, 0, sigma)#
+infec_counts <- ifelse(infec_counts < 0, 0, infec_counts)#
+#sir_data <- list( T = 100,         # simulation time#
+#                  y = infec_counts,  # infection count data#
+#                  N = 500,           # population size#
+#                  ts = 1:100)     # integration time samples#
+#
+sir_data <- list( T = 100,         # simulation time#
+                  y = infec_counts,  # infection count data#
+                  N = 500)           # population size#
+rstan_options(auto_write = TRUE)#
+options(mc.cores = parallel::detectCores())#
+fit <- stan(file = "sirode_custom_seperated.stan", data = sir_data, chains = 1, iter = 2000)#
+#
+sso <- as.shinystan(fit)#
+sso <- launch_shinystan(sso)
+library(deSolve)#
+library(rstan)#
+library(shinystan)#
+#
+sigma <- 5#
+#
+SIR <- function(Time, State, Pars) {#
+    with(as.list(c(State, Pars)), {#
+        B   <- R0*r/N#
+        BSI <- B*S*I#
+        rI  <- r*I#
+        dS = -BSI#
+        dI = BSI - rI#
+        dR = rI#
+        return(list(c(dS, dI, dR)))#
+    })#
+}#
+#
+pars  <- c(R0  <- 3.0,    # average number of new infected individuals per infected person#
+           r   <- 0.1,    # recovery rate#
+           N   <- 500)    # population size#
+#
+y_ini <- c(S = 495, I = 5, R = 0)#
+times <- seq(0, 100, by = 1)#
+#
+odeout <- ode(y_ini, times, SIR, pars)#
+#
+infec_counts <- odeout[,3] + rnorm(101, 0, sigma)#
+infec_counts <- ifelse(infec_counts < 0, 0, infec_counts)#
+#sir_data <- list( T = 100,         # simulation time#
+#                  y = infec_counts,  # infection count data#
+#                  N = 500,           # population size#
+#                  ts = 1:100)     # integration time samples#
+#
+sir_data <- list( T = 100,         # simulation time#
+                  y = infec_counts,  # infection count data#
+                  N = 500)           # population size#
+rstan_options(auto_write = TRUE)#
+options(mc.cores = parallel::detectCores())#
+fit <- stan(file = "sirode_custom_seperated.stan", data = sir_data, chains = 1, iter = 2000)#
+#
+sso <- as.shinystan(fit)#
+sso <- launch_shinystan(sso)
+setwd("/Users/dexter/Drive/McMaster/Current/Thesis/Rstan_stuff")
+dI = BSI - rI
+library(deSolve)#
+library(rstan)#
+library(shinystan)#
+#
+sigma <- 5#
+#
+SIR <- function(Time, State, Pars) {#
+    with(as.list(c(State, Pars)), {#
+        B   <- R0*r/N#
+        BSI <- B*S*I#
+        rI  <- r*I#
+        dS = -BSI#
+        dI = BSI - rI#
+        dR = rI#
+        return(list(c(dS, dI, dR)))#
+    })#
+}#
+#
+pars  <- c(R0  <- 3.0,    # average number of new infected individuals per infected person#
+           r   <- 0.1,    # recovery rate#
+           N   <- 500)    # population size#
+#
+y_ini <- c(S = 495, I = 5, R = 0)#
+times <- seq(0, 100, by = 1)#
+#
+odeout <- ode(y_ini, times, SIR, pars)#
+#
+infec_counts <- odeout[,3] + rnorm(101, 0, sigma)#
+infec_counts <- ifelse(infec_counts < 0, 0, infec_counts)#
+#sir_data <- list( T = 100,         # simulation time#
+#                  y = infec_counts,  # infection count data#
+#                  N = 500,           # population size#
+#                  ts = 1:100)     # integration time samples#
+#
+sir_data <- list( T = 100,         # simulation time#
+                  y = infec_counts,  # infection count data#
+                  N = 500)           # population size#
+rstan_options(auto_write = TRUE)#
+options(mc.cores = parallel::detectCores())#
+fit <- stan(file = "sirode_custom_seperated.stan", data = sir_data, chains = 1, iter = 2000)#
+#
+sso <- as.shinystan(fit)#
+sso <- launch_shinystan(sso)
