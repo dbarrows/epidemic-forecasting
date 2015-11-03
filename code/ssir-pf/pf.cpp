@@ -22,7 +22,7 @@
 #include "timer.h"
 #include "readdata.h"
 
-#define NP 		5*1024		// number of particles per cell
+#define NP 		(5*1024)	// number of particles per cell
 #define R0 		5.0			// infectiousness
 #define r 		2e-1		// recovery rate
 #define N 		500 		// population size
