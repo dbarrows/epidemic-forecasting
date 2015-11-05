@@ -184,7 +184,7 @@ int main(int argc, char *argv[]) {
 
 				float y_diff = y_noise[t] - y_par_noise;
 				
-				w[n] = 1.0/(merr*sqrt(2.0*M_PI)) * exp( - y_diff*y_diff / (2.0*merr*merr) );
+				w[n] = 1.0/(merr_par*sqrt(2.0*M_PI)) * exp( - y_diff*y_diff / (2.0*merr_par*merr_par) );
 
 			}
 
@@ -320,10 +320,17 @@ int main(int argc, char *argv[]) {
 	FILE * paramout = fopen(datafile.c_str(), "w");
 
 	for (int t = 0; t < T; t++) {
+
 		fprintf(paramout, "%d ", t);
 		fprintf(paramout, "%f ", y_true[t]);
-		fprintf(paramout, "%f ", y_noise[t]);
+
+		if (t < Tlim)
+			fprintf(paramout, "%f ", y_noise[t]);
+		else
+			fprintf(paramout, "%d ", -1);
+
 		fprintf(paramout, "%f\n", y_est[t]);
+
 	}
 
 	fclose(paramout);
@@ -335,7 +342,7 @@ int main(int argc, char *argv[]) {
 	syscall += datafile;
 	syscall += "'\" pf.plg";
 
-	system( syscall.c_str() );
+	//system( syscall.c_str() );
 
 }
 
@@ -345,6 +352,7 @@ int main(int argc, char *argv[]) {
 	float t0 	- start time
 	float tn 	- stop time
 	float * y 	- current system state; a three-component vector representing [S I R], susceptible-infected-recovered
+
 	*/
 void exp_euler_SIR(float h, float t0, float tn, Particle * particle) {
 	
@@ -379,10 +387,11 @@ void exp_euler_SIR(float h, float t0, float tn, Particle * particle) {
 
 
 /*	Particle pertubation function to be run between iterations and passes
+
 	*/
 void perturbParticles(Particle * particles, int NP, int passnum) {
 
-	float coolcoef = exp( - (float) passnum/5.0 );
+	float coolcoef = exp( - (float) passnum/2.0 );
 
     float spreadR0 	= coolcoef * R0true 		/ 10.0;
     float spreadr 	= coolcoef * rtrue 			/ 10.0;
@@ -421,6 +430,7 @@ void perturbParticles(Particle * particles, int NP, int passnum) {
 
 
 /*	Convinience function for particle resampling process
+
 	*/
 void copyParticle(Particle * dst, Particle * src) {
 
@@ -440,6 +450,7 @@ void copyParticle(Particle * dst, Particle * src) {
 /*	Checks to see if particles are collapsed
 	This is done by checking if the standard deviations between the particles' parameter
 	values are significantly close to one another. Spread threshold may need to be tuned.
+
 	*/
 bool isCollapsed(Particle * particles, int NP) {
 
