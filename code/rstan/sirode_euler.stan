@@ -9,9 +9,9 @@ data {
 
 parameters {
 
-    real <lower=0, upper=10>    sigma;  // observation error
     real <lower=0, upper=10>    R0;     // R0
     real <lower=0, upper=10>    r;      // recovery rate
+    real <lower=0, upper=10>    sigma;  // observation error
     real <lower=0, upper=500>   y0[3];  // initial conditions
 
 }
