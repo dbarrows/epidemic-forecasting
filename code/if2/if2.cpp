@@ -1,5 +1,6 @@
 /*	Author: Dexter Barrows
 	Github: dbarrows.github.io
+
 	*/
 
 /*	Runs a particle filter on synthetic noisy data and attempts to
@@ -27,7 +28,7 @@
 #define R0true 	3.0			// infectiousness
 #define rtrue 	1e-1		// recovery rate
 #define N 		500.0 		// population size
-#define merr 	5.0  		// expected measurement error
+#define merr 	10.0  		// expected measurement error
 
 
 struct Particle {
@@ -55,7 +56,7 @@ int main(int argc, char *argv[]) {
 
 	float i_infec = 5;
 
-	int NP = 5000;
+	int NP = 10000;
 
 	srand(time(NULL));								// Seed PRNG with system time
 
@@ -102,7 +103,7 @@ int main(int argc, char *argv[]) {
 
 	gettimeofday (&tdr0, NULL);
 
-	int Tlim = T;
+	int Tlim = 40;
 
 	printf("Initializing particle states\n");
 
