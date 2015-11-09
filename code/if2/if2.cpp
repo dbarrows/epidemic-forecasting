@@ -26,7 +26,7 @@
 
 #define T 		100			// time to simulate over
 #define R0true 	3.0			// infectiousness
-#define rtrue 	1e-1		// recovery rate
+#define rtrue 	0.1			// recovery rate
 #define N 		500.0 		// population size
 #define merr 	10.0  		// expected measurement error
 
@@ -43,20 +43,32 @@ struct Particle {
 	float Rinit;
 };
 
+struct ParticleInfo {
+	float R0mean;		float R0sd;
+	float rmean;		float rsd;
+	float sigmamean;	float sigmasd;
+	float Sinitmean; 	float Sinitsd;
+	float Iinitmean;	float Iinitsd;
+	float Rinitmean;	float Rinitsd;
+};
+
 
 int timeval_subtract (double *result, struct timeval *x, struct timeval *y);
 int check_float(float x,float y);
 void exp_euler_SIR(float h, float t0, float tn, Particle * particle);
 void copyParticle(Particle * dst, Particle * src);
-void perturbParticles(Particle * particles, int NP, int passnum);
+void perturbParticles(Particle * particles, int NP, int passnum, float coolrate);
 bool isCollapsed(Particle * particles, int NP);
+void particleDiagnostics(ParticleInfo * partInfo, Particle * particles, int NP);
 
 
 int main(int argc, char *argv[]) {
 
-	float i_infec = 5;
-
-	int NP = 10000;
+	float 	i_infec 	= 5;
+	int 	Tlim 		= T;
+	int 	NP 			= 3000;
+	int 	nPasses 	= 40;
+	float 	coolrate 	= 7;
 
 	srand(time(NULL));								// Seed PRNG with system time
 
@@ -103,87 +115,77 @@ int main(int argc, char *argv[]) {
 
 	gettimeofday (&tdr0, NULL);
 
-	int Tlim = 40;
+
 
 	printf("Initializing particle states\n");
 
-	// initialize particle parameter states
-	for (int i = 0; i < NP; i++) {
+	// initialize particle parameter states (seeding)
+	for (int n = 0; n < NP; n++) {
 
-		// initial parameter values
-		float R0can, rcan, sigmacan;
+		float R0can, rcan, sigmacan, Iinitcan;
 
 		do {
 			R0can = R0true + R0true*randn();
 		} while (R0can < 0);
-		particles[i].R0 = R0can;
+		particles[n].R0 = R0can;
 
 		do {
 			rcan = rtrue + rtrue*randn();
 		} while (rcan < 0);
-		particles[i].r = rcan;
+		particles[n].r = rcan;
 
 		do {
 			sigmacan = merr + merr*randn();
-			//sigmacan = merr;
 		} while (sigmacan < 0);
-		particles[i].sigma = sigmacan;
+		particles[n].sigma = sigmacan;
+
+		do {
+			Iinitcan = i_infec + i_infec*randn();
+		} while (Iinitcan < 0 || N < Iinitcan);
+		particles[n].Sinit = N - Iinitcan;
+		particles[n].Iinit = Iinitcan;
+		particles[n].Rinit = 0.0;
 
 	}
 
 	// START PASSES THROUGH DATA
 
-	int nPasses = 10;
+
 
 	printf("Starting filter\n");
+	printf("---------------\n");
+	printf("Pass");
+
 
 	for (int pass = 0; pass < nPasses; pass++) {
 
-		printf("Pass %d\n", pass);
+		printf("...%d", pass);
+
+		perturbParticles(particles, NP, pass, coolrate);
 
 		// initialize particle system states
 		for (int n = 0; n < NP; n++) {
 
-			// initial SIR states
-			float i_infec_par = i_infec + merr*randn();
-			if (i_infec_par < 0)
-				i_infec_par = 0;
-			float i_sus_par = N - i_infec_par;
-			particles[n].S = i_sus_par;
-			particles[n].I = i_infec_par;
-			particles[n].R = 0;
-			particles[n].Sinit = i_sus_par;
-			particles[n].Iinit = i_infec_par;
-			particles[n].Rinit = 0.0;
+			particles[n].S = particles[n].Sinit;
+			particles[n].I = particles[n].Iinit;
+			particles[n].R = particles[n].Rinit;
 
 		}
 
-		// initial estimate
-		y_est[0] = 0;
-		for (int n = 0; n < NP; n++)
-			y_est[0] += particles[n].I;
-		y_est[0] /= NP;
-
 		// between-pass perturbations
-		perturbParticles(particles, NP, pass);
 
 		for (int t = 1; t < Tlim; t++) {
 
 			// between-iteration perturbations
-			perturbParticles(particles, NP, pass);
+			perturbParticles(particles, NP, pass, coolrate);
 
 			// generate individual predictions and weight
 			for (int n = 0; n < NP; n++) {
 
-				exp_euler_SIR(1.0/100, 0.0, 1.0, &particles[n]);
+				exp_euler_SIR(1.0/10.0, 0.0, 1.0, &particles[n]);
 
-				float merr_par = particles[n].sigma;
-
-				y_par_noise = particles[n].I + (float) merr_par*randn();
-				if (y_par_noise < 0)										
-					y_par_noise = 0;
-
-				float y_diff = y_noise[t] - y_par_noise;
+				float merr_par 	= particles[n].sigma;
+				float y_diff 	= y_noise[t] - particles[n].I;
 				
 				w[n] = 1.0/(merr_par*sqrt(2.0*M_PI)) * exp( - y_diff*y_diff / (2.0*merr_par*merr_par) );
 
@@ -204,7 +206,7 @@ int main(int argc, char *argv[]) {
 
 				float w_r = randu() * w[NP-1];
 				int i = 0;
-				while (w_r >= w[i]) {
+				while (w_r > w[i]) {
 					i++;
 				}
 
@@ -213,101 +215,36 @@ int main(int argc, char *argv[]) {
 
 			}
 
-			// produce estimate
-			y_est[t] = 0;
-			for (int n = 0; n < NP; n++)
-				y_est[t] += particles[n].I;
-			y_est[t] /= NP;
-
 		}
 
 	}
+
+	ParticleInfo pInfo;
+	particleDiagnostics(&pInfo, particles, NP);
+
+	printf("\n");
 
 	gettimeofday (&tdr1, NULL);
     timeval_subtract (&restime, &tdr1, &tdr0);
     printf ("Single threaded runtime %e\n", restime);
 
-    // Get parameter estimates
-
-    float 	R0mean = 0,
-    		rmean = 0,
-    		sigmamean = 0,
-    		Sinitmean = 0,
-    		Iinitmean = 0,
-    		Rinitmean = 0;
-
-    // means
-
-    for (int n = 0; n < NP; n++) {
-
-    	R0mean += particles[n].R0;
-    	rmean += particles[n].r;
-    	sigmamean += particles[n].sigma;
-    	Sinitmean += particles[n].Sinit;
-    	Iinitmean += particles[n].Iinit;
-    	Rinitmean += particles[n].Rinit;
-
-    }
-
-    R0mean 		/= NP;
-    rmean 		/= NP;
-    sigmamean 	/= NP;
-    Sinitmean 	/= NP;
-    Iinitmean 	/= NP;
-    Rinitmean 	/= NP;
-
-    // standard deviations
-
-    float 	R0sd = 0,
-    		rsd = 0,
-    		sigmasd = 0,
-    		Sinitsd = 0,
-    		Iinitsd = 0,
-    		Rinitsd = 0;
-
-    for (int n = 0; n < NP; n++) {
-
-    	R0sd 	+= ( particles[n].R0 - R0mean ) * ( particles[n].R0 - R0mean );
-    	rsd 	+= ( particles[n].r - rmean ) * ( particles[n].r - rmean );
-    	sigmasd += ( particles[n].sigma - sigmamean ) * ( particles[n].sigma - sigmamean );
-    	Sinitsd += ( particles[n].Sinit - Sinitmean ) * ( particles[n].Sinit - Sinitmean );
-    	Iinitsd += ( particles[n].Iinit - Iinitmean ) * ( particles[n].Iinit - Iinitmean );
-    	Rinitsd += ( particles[n].Rinit - Rinitmean ) * ( particles[n].Rinit - Rinitmean );
-
-    }
-
-    R0sd 		/= NP;
-    rsd 		/= NP;
-    sigmasd 	/= NP;
-    Sinitsd 	/= NP;
-    Iinitsd 	/= NP;
-    Rinitsd 	/= NP;
-
-    printf("Parameter estimates (mean | sd)\n");
-	printf("-------------------------------\n");
-	printf("R0:      %f %f\n", R0mean, R0sd);
-	printf("r:       %f %f\n", rmean, rsd);
-	printf("sigma:   %f %f\n", sigmamean, sigmasd);
-	printf("S_init:  %f %f\n", Sinitmean, Sinitsd);
-	printf("I_init:  %f %f\n", Iinitmean, Iinitsd);
-	printf("R_init:  %f %f\n", Rinitmean, Rinitsd);
-
 
 	// Save paramenter distribution results for post-processing
 
 	std::string paramfile("pfdata.dat");
-
-    printf("Writing parameter results to file '%s'...\n", paramfile.c_str());
-
 	FILE * pfout = fopen(paramfile.c_str(), "w");
 
+    //printf("Writing parameter results to file '%s'...\n", paramfile.c_str());
+
 	for (int n = 0; n < NP; n++) {
+
 		fprintf(pfout, "%f ", particles[n].R0);
 		fprintf(pfout, "%f ", particles[n].r);
 		fprintf(pfout, "%f ", particles[n].sigma);
 		fprintf(pfout, "%f ", particles[n].Sinit);
 		fprintf(pfout, "%f ", particles[n].Iinit);
 		fprintf(pfout, "%f\n", particles[n].Rinit);
+
 	}
 
 	fclose(pfout);	
@@ -390,14 +327,14 @@ void exp_euler_SIR(float h, float t0, float tn, Particle * particle) {
 /*	Particle pertubation function to be run between iterations and passes
 
 	*/
-void perturbParticles(Particle * particles, int NP, int passnum) {
+void perturbParticles(Particle * particles, int NP, int passnum, float coolrate) {
 
-	float coolcoef = exp( - (float) passnum/2.0 );
+	float coolcoef = exp( - (float) passnum / coolrate );
 
-    float spreadR0 	= coolcoef * R0true 		/ 10.0;
-    float spreadr 	= coolcoef * rtrue 			/ 10.0;
-    float spreadsigma = coolcoef * merr 	/ 10.0;
-    float spreadIinit = coolcoef * 5.0 	/ 10.0;
+    float spreadR0 		= coolcoef * R0true / 3.0;
+    float spreadr 		= coolcoef * rtrue 	/ 3.0;
+    float spreadsigma 	= coolcoef * merr 	/ 3.0;
+    float spreadIinit 	= coolcoef * 5.0 	/ 3.0;
 
     float R0can, rcan, sigmacan, Iinitcan;
 
@@ -422,8 +359,7 @@ void perturbParticles(Particle * particles, int NP, int passnum) {
     		Iinitcan = particles[n].Iinit + spreadIinit*randn();
     	} while (Iinitcan < 0 || Iinitcan > 500);
     	particles[n].Iinit = Iinitcan;
-
-    	particles[n].Sinit = N - particles[n].Iinit;
+    	particles[n].Sinit = N - Iinitcan;
 
     }
 
@@ -440,7 +376,7 @@ void copyParticle(Particle * dst, Particle * src) {
 	dst->sigma 	= src->sigma;
 	dst->S 		= src->S;
 	dst->I 		= src->I;
-	dst->R 		= src->I;
+	dst->R 		= src->R;
 	dst->Sinit  = src->Sinit;
 	dst->Iinit  = src->Iinit;
 	dst->Rinit  = src->Rinit;
@@ -463,12 +399,12 @@ bool isCollapsed(Particle * particles, int NP) {
 
     for (int n = 0; n < NP; n++) {
 
-    	R0mean += particles[n].R0;
-    	rmean += particles[n].r;
-    	sigmamean += particles[n].sigma;
-    	Sinitmean += particles[n].Sinit;
-    	Iinitmean += particles[n].Iinit;
-    	Rinitmean += particles[n].Rinit;
+    	R0mean 		+= particles[n].R0;
+    	rmean 		+= particles[n].r;
+    	sigmamean 	+= particles[n].sigma;
+    	Sinitmean 	+= particles[n].Sinit;
+    	Iinitmean 	+= particles[n].Iinit;
+    	Rinitmean 	+= particles[n].Rinit;
 
     }
 
@@ -505,5 +441,76 @@ bool isCollapsed(Particle * particles, int NP) {
     	retVal = false;
 
     return retVal;
+
+}
+
+void particleDiagnostics(ParticleInfo * partInfo, Particle * particles, int NP) {
+
+	float 	R0mean 		= 0.0,
+    		rmean 		= 0.0,
+    		sigmamean 	= 0.0,
+    		Sinitmean 	= 0.0,
+    		Iinitmean 	= 0.0,
+    		Rinitmean 	= 0.0;
+
+    // means
+
+    for (int n = 0; n < NP; n++) {
+
+    	R0mean 		+= particles[n].R0;
+    	rmean 		+= particles[n].r;
+    	sigmamean 	+= particles[n].sigma;
+    	Sinitmean 	+= particles[n].Sinit;
+    	Iinitmean 	+= particles[n].Iinit;
+    	Rinitmean 	+= particles[n].Rinit;
+
+    }
+
+    R0mean 		/= NP;
+    rmean 		/= NP;
+    sigmamean 	/= NP;
+    Sinitmean 	/= NP;
+    Iinitmean 	/= NP;
+    Rinitmean 	/= NP;
+
+    // standard deviations
+
+    float 	R0sd 	= 0.0,
+    		rsd 	= 0.0,
+    		sigmasd = 0.0,
+    		Sinitsd = 0.0,
+    		Iinitsd = 0.0,
+    		Rinitsd = 0.0;
+
+    for (int n = 0; n < NP; n++) {
+
+    	R0sd 	+= ( particles[n].R0 - R0mean ) * ( particles[n].R0 - R0mean );
+    	rsd 	+= ( particles[n].r - rmean ) * ( particles[n].r - rmean );
+    	sigmasd += ( particles[n].sigma - sigmamean ) * ( particles[n].sigma - sigmamean );
+    	Sinitsd += ( particles[n].Sinit - Sinitmean ) * ( particles[n].Sinit - Sinitmean );
+    	Iinitsd += ( particles[n].Iinit - Iinitmean ) * ( particles[n].Iinit - Iinitmean );
+    	Rinitsd += ( particles[n].Rinit - Rinitmean ) * ( particles[n].Rinit - Rinitmean );
+
+    }
+
+    R0sd 		/= NP;
+    rsd 		/= NP;
+    sigmasd 	/= NP;
+    Sinitsd 	/= NP;
+    Iinitsd 	/= NP;
+    Rinitsd 	/= NP;
+
+    partInfo->R0mean 	= R0mean;
+    partInfo->R0sd 		= R0sd;
+    partInfo->sigmamean = sigmamean;
+    partInfo->sigmasd 	= sigmasd;
+    partInfo->rmean 	= rmean;
+    partInfo->rsd 		= rsd;
+    partInfo->Sinitmean = Sinitmean;
+    partInfo->Sinitsd 	= Sinitsd;
+    partInfo->Iinitmean = Iinitmean;
+    partInfo->Iinitsd 	= Iinitsd;
+    partInfo->Rinitmean = Rinitmean;
+    partInfo->Rinitsd 	= Rinitsd;
 
 }
