@@ -11,7 +11,7 @@
 #define N 		500 		// population size
 #define B 		R0*r/N		// transmission factor
 #define pnoise 	1.0			// process noise case multiplier
-#define merr 	N/100  		// measurement error, 1% of population
+#define merr 	10.0  		// measurement error, 1% of population
 #define ALP 	1e-2		// cooling parameter for neighbour interactions
 #define SpW		10			// number of Euler steps to take per week
 #define eta		0.5			// Beta drift cooling
@@ -87,9 +87,9 @@ int main (int argc, char ** argv) {
 
 	Param params[nCells];
 	for (int cell = 0; cell < nCells; cell++) {
-		params[cell].Beta 	= B;
-		params[cell].alpha 	= ALP;
-		params[cell].Beta_bar = B;
+		params[cell].Beta 	= B + (float) B/10.0*randn();
+		params[cell].alpha 	= ALP+ (float) ALP/10.0*randn();
+		params[cell].Beta_bar = params[cell].Beta;
 	}
 
 	// ****************************************
