@@ -8,6 +8,8 @@ Single time series
 - HMCMC - R code for forecasting from Stan fitting data
 - Simplex Projection / S-mapping - port code to R and/or C
 
+- find POMP's forecasting code
+- HPDinterval {coda} use as.mcmc
 
 
 Secondary
