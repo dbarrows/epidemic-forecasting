@@ -119,9 +119,9 @@ int main(int argc, char *argv[]) {
 // [[Rcpp::export]]
 NumericMatrix if2(NumericVector data, int T, int N) {
 
-	int 	NP 			= 3000;
-	int 	nPasses 	= 40;
-	float 	coolrate 	= 7;
+	int 	NP 			= 5000;
+	int 	nPasses 	= 50;
+	float 	coolrate 	= 8;
 
 	int 	i_infec 	= I0;
 
@@ -264,31 +264,6 @@ NumericMatrix if2(NumericVector data, int T, int N) {
 	}
 
 	return paramdata;
-
-
-	/*
-
-	// Save paramenter distribution results for post-processing
-
-	std::string paramfile("pfdata.dat");
-	FILE * pfout = fopen(paramfile.c_str(), "w");
-
-    //printf("Writing parameter results to file '%s'...\n", paramfile.c_str());
-
-	for (int n = 0; n < NP; n++) {
-
-		fprintf(pfout, "%f ", particles[n].R0);
-		fprintf(pfout, "%f ", particles[n].r);
-		fprintf(pfout, "%f ", particles[n].sigma);
-		fprintf(pfout, "%f ", particles[n].Sinit);
-		fprintf(pfout, "%f ", particles[n].Iinit);
-		fprintf(pfout, "%f\n", particles[n].Rinit);
-
-	}
-
-	fclose(pfout);
-
-	*/
 
 }
 
