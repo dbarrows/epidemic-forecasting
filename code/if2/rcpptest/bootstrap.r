@@ -3,6 +3,7 @@ library(ggplot2)
 library(reshape2)
 library(gridExtra)
 library(Rcpp)
+library(RColorBrewer)
 
 SIR <- function(Time, State, Pars) {
     
@@ -26,7 +27,7 @@ T 		<- 100
 N 		<- 500
 sigma 	<- 10
 i_infec <- 5
-Tlim 	<- 35
+Tlim 	<- T
 
 ## Generate true trajecory and synthetic data
 ##
@@ -42,10 +43,22 @@ true_pars <- c(R0 = 3.0,
 odeout <- ode(true_init_cond, 0:(T-1), SIR, true_pars)
 trueTraj <- odeout[,3]
 
-set.seed(1001)
+set.seed(1000)
 
 infec_counts_raw <- odeout[,3] + rnorm(T, 0, sigma)
 infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
+
+plotdata <- data.frame(times=1:T,true=trueTraj,data=infec_counts)
+
+g <- ggplot(plotdata, aes(times)) +
+        geom_line(aes(y = true, colour = "True")) +
+        geom_point(aes(y = data, color = "Data")) +
+        labs(x = "Time", y = "Infection count", color = "") +
+        scale_color_brewer(palette="Paired") +
+        theme(panel.background = element_rect(fill = "#F0F0F0"))
+
+print(g)
+ggsave(g, filename="dataplot.pdf", height=4, width=6.5)
 
 ## Rcpp stuff
 ##
@@ -58,10 +71,10 @@ colnames(paramdata) <- c("R0", "r", "sigma", "Sinit", "Iinit", "Rinit")
 ## sample from parameter distributions
 ##
 
-nTraj <- 100
-datlen <- dim(paramdata)[1]
-inds <- sample.int(datlen,nTraj,replace = TRUE)
-params <- paramdata[inds,]
+nTraj 	<- 100
+datlen 	<- dim(paramdata)[1]
+inds 	<- sample.int(datlen,nTraj,replace = TRUE)
+params 	<- paramdata[inds,]
 
 bootstrapdata <- matrix(NA, nrow = nTraj, ncol = T)
 
@@ -81,8 +94,8 @@ for (i in 1:nTraj) {
 }
 
 
-meanTraj <- colMeans(bootstrapdata)
-quantTraj <- apply(bootstrapdata, 2, quantile, probs = c(0.025,0.975))
+meanTraj 	<- colMeans(bootstrapdata)
+quantTraj 	<- apply(bootstrapdata, 2, quantile, probs = c(0.025,0.975))
 
 datapart <- c(infec_counts[1:Tlim],rep(NA,T-Tlim))
 
@@ -100,55 +113,58 @@ g <- ggplot(plotdata, aes(times)) +
 print(g)
 ggsave(g, filename="if2plot.pdf", height=4, width=6.5)
 
+f <- function(pal) brewer.pal(brewer.pal.info[pal, "maxcolors"], pal)
+kcolours <- f("Paired")
 
-trueval.R0 <- 3.0
-trueval.r <- 0.1
-trueval.sigma <- 10.0
-trueval.Iinit <- 5
+
+trueval.R0 		<- 3.0
+trueval.r 		<- 0.1
+trueval.sigma 	<- 10.0
+trueval.Iinit 	<- 5
+
+meanval.R0 		<- mean(paramdata$R0)
+meanval.r 		<- mean(paramdata$r)
+meanval.sigma 	<- mean(paramdata$sigma)
+meanval.Iinit 	<- mean(paramdata$Iinit)
+
+linecolour <- "grey50"
+lineweight <- 0.5
 
 kerdataR0 <- data.frame(R0points = paramdata$R0)
 R0kernel <- ggplot(kerdataR0, aes(x = R0points, y = ..scaled..)) +
-                geom_density(colour="#8dd3c7", fill="#8dd3c7") +
+                geom_density(color = kcolours[1], fill = kcolours[1]) +
                 theme(panel.background = element_rect(fill = "#F0F0F0")) +
                 scale_color_brewer(palette="Paired") +
                 labs(x = expression(R[0]), y = "Density", color = "") +
-                geom_vline(aes(xintercept=trueval.R0), linetype="dashed", size=1, color="grey50")
-
-#print(R0kernel)
-#ggsave(R0kernel, filename="kernelR0.pdf", height=3, width=3.25)
+                geom_vline(aes(xintercept=trueval.R0), linetype="solid", size=lineweight, color=linecolour) +
+                geom_vline(aes(xintercept=meanval.R0), linetype="dashed", size=lineweight, color=linecolour)
 
 kerdatar <- data.frame(rpoints = paramdata$r)
 rkernel <- ggplot(kerdatar, aes(x = rpoints, y = ..scaled..)) +
-                geom_density(colour="#ffffb3", fill="#ffffb3") +
+                geom_density(color = kcolours[2], fill = kcolours[2]) +
                 theme(panel.background = element_rect(fill = "#F0F0F0")) +
                 scale_color_brewer(palette="Paired") +
-                labs(x = "r", y = "Density", color = "") +
-                geom_vline(aes(xintercept=trueval.r), linetype="dashed", size=1, color="grey50")
-
-#print(rkernel)
-#ggsave(rkernel, filename="kernelr.pdf", height=3, width=3.25)
+                labs(x = "r", y = "", color = "") +
+                geom_vline(aes(xintercept=trueval.r), linetype="solid", size=lineweight, color=linecolour) +
+                geom_vline(aes(xintercept=meanval.r), linetype="dashed", size=lineweight, color=linecolour)
 
 kerdatasigma <- data.frame(sigmapoints = paramdata$sigma)
 sigmakernel <- ggplot(kerdatasigma, aes(x = sigmapoints, y = ..scaled..)) +
-                geom_density(colour="#bebada", fill="#bebada") +
+                geom_density(color = kcolours[3], fill = kcolours[3]) +
                 theme(panel.background = element_rect(fill = "#F0F0F0")) +
                 scale_color_brewer(palette="Paired") +
                 labs(x = expression(sigma), y = "Density", color = "") +
-                geom_vline(aes(xintercept=trueval.sigma), linetype="dashed", size=1, color="grey50")
-
-#print(sigmakernel)
-#ggsave(sigmakernel, filename="kernelsigma.pdf", height=3, width=3.25)
+                geom_vline(aes(xintercept=trueval.sigma), linetype="solid", size=lineweight, color=linecolour) +
+                geom_vline(aes(xintercept=meanval.sigma), linetype="dashed", size=lineweight, color=linecolour)
 
 kerdatainfec <- data.frame(infecpoints = paramdata$Iinit)
 infeckernel <- ggplot(kerdatainfec, aes(x = infecpoints, y = ..scaled..)) +
-                geom_density(colour="#fb8072", fill="#fb8072") +
+                geom_density(color = kcolours[4], fill = kcolours[4]) +
                 theme(panel.background = element_rect(fill = "#F0F0F0")) +
                 scale_color_brewer(palette="Paired") +
-                labs(x = "Initial infected", y = "Density", color = "") +
-                geom_vline(aes(xintercept=trueval.Iinit), linetype="dashed", size=1, color="grey50")
-
-#print(infeckernel)
-#ggsave(infeckernel, filename="kernelinfec.pdf", height=3, width=3.25)
+                labs(x = "Initial infected", y = "", color = "") +
+                geom_vline(aes(xintercept=trueval.Iinit), linetype="solid", size=lineweight, color=linecolour) +
+                geom_vline(aes(xintercept=meanval.Iinit), linetype="dashed", size=lineweight, color=linecolour)
 
 # show grid
 grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, ncol = 2, nrow = 2)
@@ -156,4 +172,3 @@ grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, ncol = 2, nrow = 2)
 pdf("if2kernels.pdf", height = 6.5, width = 6.5)
 grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, ncol = 2, nrow = 2)
 dev.off()
-#ggsave(filename="if2kernels.pdf", g2,  height=6.5, width=6.5)

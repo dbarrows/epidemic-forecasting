@@ -1,0 +1,9 @@
+void simplex() {
+
+}
+
+int main () {
+
+	
+
+}

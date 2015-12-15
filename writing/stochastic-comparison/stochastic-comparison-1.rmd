@@ -1,0 +1,786 @@
+---
+title: "Stochastic SIR Forecasting Showdown Part 1: Parameter Fitting"
+author: "Dexter Barrows"
+date: "`r format(Sys.time(), '%H:%M %d %B %Y')`"
+#bibliography: bibliography.bib
+output: 
+  html_document: 
+    fig_width: 9.5
+#output: pdf_document 
+#fig_width: 9.5
+#fontsize: 12pt
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+```
+
+```{r seed, include = FALSE}
+set.seed(112358)
+```
+
+***
+
+# Setup
+
+Now that we have established which methods we wish to evaluate the efficacy of for epidemic forecasting, it is prudent to see how they perform when fitting parameters for a known epidemic model. We have already seen how they perform when fitting parameters for a model with a deterministic evolution process and observation noise, but a more realistic model will have both process and observation noise.
+
+To form such a model, we will take a deterministic SIR ODE model given by
+
+$$
+\begin{aligned}
+	\frac{dS}{dt} & = - \beta S I  \\
+	\frac{dI}{dt} & = \beta S I - \gamma \\
+	\frac{dR}{dt} & = \gamma I,
+\end{aligned}
+$$
+
+and add process noise by allowing $\beta$ to embark on a geometric random walk given by
+
+$$
+\beta_{t+1} = \exp \left( \log(\beta_{t}) + \eta (\log(\bar{\beta}) - \log(\beta_{t})) + \epsilon_{t} \right).
+$$
+
+We will take $\epsilon_{t}$ to be normally distributed with variance $\rho$ such that $\epsilon_{t} \sim \mathcal{N}(0,\rho)$. The geometric attraction term constrains the random walk, the force of which is $\eta \in [0,1]$. If we take $\eta = 0$ then the walk will be unconstrained; if we let $\eta = 1$ then all values of $\beta_t$ will be independent from the previous value (and consequently all other values in the sequence).
+
+We can observe the effect of $\eta$ visually by setting $\eta$ to each extreme value and then to an intermediate value and plotting the results. The anchoring value $\beta_0$ was set to $\beta_0 = R_0 \cdot r / N$ where $R_0 = 3.0$, $r = 0.1$ and $N = 500$, giving $B_0 = 6 \times 10^{-4}$. The noise parameter $\rho$ was set to $0.5$.
+
+For $\eta = 0$ we have
+
+```{r}
+library(ggplot2)
+library(RColorBrewer)
+T <- 7*60
+berr <- 0.5
+B <- numeric(T)
+B0 <- 3.0 * 0.1 / 500;
+B[1] <- B0
+eta <- 0
+for (t in 2:T) {
+	B[t] <- exp( log(B[t-1]) + eta*(log(B0) - log(B[t-1])) + rnorm(1,0,berr) )
+}
+qplot(1:T, B, geom = "line", xlab = "Time", ylab = expression(beta)) + theme_bw()
+```
+Here we can see how the unconstrained walk allows the sequence to climb several orders of magnitude higher than the starting value, which is undesirable for the model formulation and unrealistic from a biological perspective.
+
+Now if we set $\eta = 1$ we have
+
+```{r}
+eta <- 1
+for (t in 2:T) {
+	B[t] <- exp( log(B[t-1]) + eta*(log(B0) - log(B[t-1])) + rnorm(1,0,berr) )
+}
+qplot(1:T, B, geom = "line", xlab = "Time", ylab = expression(beta)) +
+	scale_y_continuous(limits=c(0, 0.002)) +
+	theme_bw()
+```
+
+and corresponding density plot
+
+```{r}
+qplot(B, geom = "density", xlab = "B", ylab = "frequency") +
+	scale_x_continuous(limits=c(0, 0.002)) +
+	theme_bw()
+```
+
+Notice that we have frequent oscillations between smaller and larger values within only a few time steps, but the range of values is desirable.
+
+Finally choosing an intermediate value of $\eta = 0.5$ gives us
+
+```{r}
+eta <- 0.5
+for (t in 2:T) {
+	B[t] <- exp( log(B[t-1]) + eta*(log(B0) - log(B[t-1])) + rnorm(1,0,berr) )
+}
+qplot(1:T, B, geom = "line", xlab = "Time", ylab = expression(beta)) +
+	scale_y_continuous(limits=c(0, 0.002)) +
+	theme_bw()
+```
+
+and corresponding density plot
+
+```{r}
+qplot(B, geom = "density", xlab = "B", ylab = "frequency") +
+	scale_x_continuous(limits=c(0, 0.002)) +
+	theme_bw()
+```
+
+Now we see a density plot similar in shape to the desired density, but now the geometric random walk displays dependence on previous values.
+
+If we take the full stochastic SIR system and evolve it using an Euler stepping scheme with a step size of $h = 1/7$, for 1 step per day, we obtain the following plot
+
+```{r}
+StocSIR <- function(y, pars, T, steps) {
+
+	out <- matrix(NA, nrow = (T+1), ncol = 4)
+
+	R0 <- pars[['R0']]
+	r <- pars[['r']]
+	N <- pars[['N']]
+	eta <- pars[['eta']]
+	berr <- pars[['berr']]
+
+	S <- y[['S']]
+	I <- y[['I']]
+	R <- y[['R']]
+
+	B0 <- R0 * r / N
+	B <- B0
+
+	out[1,] <- c(S,I,R,B)
+
+	h <- 1 / steps
+
+	for ( i in 1:(T*steps) ) {
+
+		B <- exp( log(B) + eta*(log(B0) - log(B)) + rnorm(1, 0, berr) )
+
+		BSI <- B*S*I
+		rI <- r*I
+
+		dS <- -BSI
+		dI <- BSI - rI
+		dR <- rI
+
+		S <- S + h*dS  #newInf
+		I <- I + h*dI  #newInf - h*dR
+		R <- R + h*dR  #h*dR
+
+		if (i %% steps == 0)
+			out[i/steps+1,] <- c(S,I,R,B)
+
+	}
+
+	return(out)
+
+}
+
+set.seed(1004)
+
+T 		<- 60
+i_infec <- 5
+steps 	<- 7
+N 		<- 500
+sigma 	<- 10
+Tlim 	<- T
+
+## Generate true trajecory and synthetic data
+##
+
+pars_true <- c(R0 = 3.0, 	# new infected people per infected person
+          r = 0.1, 		# recovery rate
+		  N = 500, 		# population size
+		  eta = 0.5, 	# geometric random walk
+		  berr = 0.5) 	# Beta geometric walk noise
+
+true_init_cond <- c(S = N - i_infec,
+					I = i_infec,
+					R = 0)
+
+sdeout_true <- StocSIR(true_init_cond, pars_true, T, steps)
+colnames(sdeout_true) <- c('S','I','R','B')
+
+infec_counts_raw <- sdeout_true[,'I'] + rnorm(T+1, 0, sigma)
+infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
+
+datapart <- c(infec_counts[1:(Tlim+1)],rep(NA,T-Tlim))
+
+qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_point(aes(y = datapart)) +
+	theme_bw()
+```
+
+where the solid line is the true trajectory and the dots show the data points obtained by adding in observation error defined as $\epsilon_{obvs} = \mathcal{N}(0,10)$. Note that this is only one possible realization of the system, and that different random numbers drawn from the system's random number generator will produce varying results. The plot below shows 9 additional example trajectories in addition to the one shown in the previous plot
+
+```{r}
+library(reshape2)
+numtraj <- 9
+
+trajData_save <- matrix(NA, nrow = numtraj, ncol = (T+1))
+for(i in 1:numtraj) {
+	sdeout <- StocSIR(true_init_cond, pars_true, T, steps)
+	colnames(sdeout) <- c('S','I','R','B')
+	trajData_save[i,] <- sdeout[,'I']
+}
+
+plotdata <- melt(trajData_save)
+names(plotdata) <- c("traj","time","I")
+
+qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_line(data = plotdata, aes(x = time, y = I, group = traj)) +
+	theme_bw()
+```
+
+We can see the average behaviour of the system by taking the average over 100 trajectories. This is shown below with the 10 sample trajectories from the previous plot overlayed.
+
+```{r}
+numtraj <- 100
+
+trajData <- matrix(NA, nrow = numtraj, ncol = (T+1))
+for(i in 1:numtraj) {
+	sdeout <- StocSIR(true_init_cond, pars_true, T, steps)
+	colnames(sdeout) <- c('S','I','R','B')
+	trajData[i,] <- sdeout[,'I']
+}
+
+meanTraj 	<- colMeans(trajData)
+avTraj      <- meanTraj
+quantTraj 	<- t(apply(trajData, 2, quantile, probs = c(0.025,0.975)))
+colnames(quantTraj) <- c("025","975")
+
+qplot(1:(T+1), meanTraj, geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
+	geom_line(data = plotdata, aes(x = time, y = I, group = traj), linetype = "dotted") +
+	theme_bw()
+```
+
+Here the solid line is the mean behaviour, the dotted lines are the sample trajectories from the previous plot, and the grey ribbon is centre 95th quantile.
+
+***
+
+# IF2 fitting
+
+Now we will use an implementation of the IF2 algorithm to attempt to fit the stochastic SIR model to the data from Figure [?]. The goal here is just parameter inference, but since IF2 works by applying a series on particle filters we essentially get the average system state estimates for a very small additional computational cost. Hence, we will will also look at that estimated behaviour in addition the the parameter estimates.
+
+The code used here is a mix of R and C++ implemented using RCpp. The fitting was undertaken using $10^4$ particles with 10 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.8^{p}$, where p is the pass number starting with 0.
+
+```{r if2_fit}
+library(Rcpp)
+
+NP          <- 10000
+nPasses     <- 10
+coolrate    <- 0.8
+
+if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
+
+sourceCpp(if2file)
+
+if2time <- system.time( if2data <- if2(infec_counts[1:(Tlim+1)], Tlim+1, N, NP, nPasses, coolrate) )
+
+paramdata <- data.frame( if2data$paramdata )
+names(paramdata) <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
+
+convergedata <- data.frame( if2data$means )
+names(convergedata) <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
+
+statedata <- data.frame( if2data$statemeans )
+names(statedata) <- c("S","I","R")
+```
+
+The total runtime for the fitting was determined using the R `system.time()` function, and yielded
+
+```{r}
+if2time
+```
+
+The MLE parameter estimates, taken to be the mean of the particle swarm values after the final pass was
+
+```{r}
+if2means <- colMeans(paramdata[c("R0","r","Iinit","sigma","eta","berr")])
+names(if2means) <- c("R0","r","I0","sigma","eta","berr")
+if2means
+```
+
+giving a relative error of
+
+```{r}
+truevals <- c( pars_true[c("R0","r")], I0 = i_infec, sigma = sigma, pars_true[c("eta","berr")])
+relerrs <- (if2means - truevals) / truevals
+relerrs
+```
+
+From last IF2 particle filtering iteration, the mean state values from the particle swarm at each time step are shown with the true underlying state and data in the plot below
+
+```{r}
+qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection counts") +
+	geom_point(aes(y = infec_counts)) +
+	geom_line(aes(y = statedata[,'I']), linetype = "dashed") +
+	theme_bw()
+```
+
+where the solid line shows the true states, the points are the data, and the dashed line shows the state estimates from the last IF2 filtering pass.
+
+# IF2 convergence plots
+
+Since IF2 is an iterative algorithm where each pass through he data is expected to push the parameter estimates towards the MLE, we can see the evolution of these estimates as a function of the pass number. Plots showing this evolution are shown below for the six most critical parameters
+
+```{r}
+library(gridExtra)
+
+meanval.R0 		<- mean(paramdata$R0)
+meanval.r 		<- mean(paramdata$r)
+meanval.sigma 	<- mean(paramdata$sigma)
+meanval.Iinit 	<- mean(paramdata$Iinit)
+meanval.eta 	<- mean(paramdata$eta)
+meanval.berr 	<- mean(paramdata$berr)
+
+linecolour <- "grey50"
+lineweight <- 0.5
+
+R0converge <- qplot(1:dim(convergedata)[1], convergedata$R0, geom = "line", xlab = "", ylab = expression(R[0])) +
+    			geom_hline(aes(yintercept=pars_true['R0']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_hline(aes(yintercept=meanval.R0), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+rconverge <- qplot(1:dim(convergedata)[1], convergedata$r, geom = "line", xlab = "", ylab = "r") +
+    			geom_hline(aes(yintercept=pars_true['r']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_hline(aes(yintercept=meanval.r), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+sigmaconverge <- qplot(1:dim(convergedata)[1], convergedata$sigma, geom = "line", xlab = "", ylab = expression(sigma)) +
+    			geom_hline(aes(yintercept=sigma), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_hline(aes(yintercept=meanval.sigma), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+infecconverge <- qplot(1:dim(convergedata)[1], convergedata$Iinit, geom = "line", xlab = "", ylab = "Initial Infected") +
+    			geom_hline(aes(yintercept=i_infec), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_hline(aes(yintercept=meanval.Iinit), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+etaconverge <- qplot(1:dim(convergedata)[1], convergedata$eta, geom = "line", xlab = "", ylab = expression(eta)) +
+    			geom_hline(aes(yintercept=pars_true['eta']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_hline(aes(yintercept=meanval.eta), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+berrconverge <- qplot(1:dim(convergedata)[1], convergedata$berr, geom = "line", xlab = "", ylab = expression(epsilon[proc])) +
+    			geom_hline(aes(yintercept=pars_true['berr']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_hline(aes(yintercept=meanval.berr), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+grid.arrange(R0converge, rconverge, sigmaconverge, infecconverge, etaconverge, berrconverge, ncol = 3, nrow = 2)
+```
+
+The horizontal axis shows the IF2 pass number. The solid black lines show the evolution of the ML estimates, the solid grey lines show the true value, and the dashed grey lines show the mean parameter estimates from the particle swarm after the final pass. 
+
+# IF2 density plots
+
+Of particular importance are the densities of the parameter estimates given by the final parameter swarm. These are shown below.
+
+```{r}
+library(gridExtra)
+
+meanval.R0 		<- mean(paramdata$R0)
+meanval.r 		<- mean(paramdata$r)
+meanval.sigma 	<- mean(paramdata$sigma)
+meanval.Iinit 	<- mean(paramdata$Iinit)
+meanval.eta 	<- mean(paramdata$eta)
+meanval.berr 	<- mean(paramdata$berr)
+
+linecolour <- "grey50"
+lineweight <- 0.5
+
+R0kernel <- qplot(paramdata$R0, geom = "density", xlab = expression(R[0]), ylab = "frequency") +
+    			geom_vline(aes(xintercept=pars_true['R0']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.R0), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+rkernel <- qplot(paramdata$r, geom = "density", xlab = "r", ylab = "") +
+    			geom_vline(aes(xintercept=pars_true['r']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.r), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+sigmakernel <- qplot(paramdata$sigma, geom = "density", xlab = expression(sigma), ylab = "") +
+    			geom_vline(aes(xintercept=sigma), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.sigma), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+infeckernel <- qplot(paramdata$Iinit, geom = "density", xlab = "Initial Infected", ylab = "frequency") +
+    			geom_vline(aes(xintercept=i_infec), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.Iinit), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+etakernel <- qplot(paramdata$eta, geom = "density", xlab = expression(eta), ylab = "") +
+    			geom_vline(aes(xintercept=pars_true['eta']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.eta), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+berrkernel <- qplot(paramdata$berr, geom = "density", xlab = expression(epsilon[proc]), ylab = "") +
+    			geom_vline(aes(xintercept=pars_true['berr']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.berr), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+
+# show grid
+grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, etakernel, berrkernel, ncol = 3, nrow = 2)
+```
+
+As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. It is worth noting that the IF2 parameters chosen were in part chosen so as to not artificially narrow these densities; a more aggressive cooling schedule and/or an increased number of passes would have resulted in much narrower densities, and indeed have the potential to collapse them to point estimates.
+
+
+# IF2 bootstrapping
+
+We can now use the parameter estimate densities to perform bootstrapping. Here we have drawn 100 parameter estimates randomly from the final particle swarm, run a single trajectory from each of them, and plotted the results below:
+
+```{r}
+nTraj 		<- 100 	# trajectories for both bootstrapping runs
+
+datlen 	<- dim(paramdata)[1]
+inds 	<- sample.int(datlen,nTraj,replace = TRUE)
+params 	<- paramdata[inds,]
+
+bootstrapdata <- matrix(NA, nrow = nTraj, ncol = T+1)
+
+for (i in 1:nTraj) {
+
+	init_cond <- c(S = params$Sinit[i],
+	               I = params$Iinit[i],
+	               R = params$Rinit[i])
+	pars <- c(R0 = params$R0[i],
+	          r = params$r[i],
+	          N = 500.0,
+	          eta = params$eta[i],
+	          berr = params$berr[i])
+
+	sdeout <- StocSIR(init_cond, pars, T, steps)
+	colnames(sdeout) <- c('S','I','R','B')
+
+	bootstrapdata[i,] <- sdeout[,'I']
+
+}
+
+meanTraj 	<- colMeans(bootstrapdata)
+quantTraj 	<- t(apply(bootstrapdata, 2, quantile, probs = c(0.025,0.975)))
+colnames(quantTraj) <- c("025","975")
+
+qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
+	geom_line(aes(y = meanTraj), linetype = "dashed") +
+	geom_point(aes(y = datapart)) +
+    geom_line(aes(y = avTraj), linetype = "dotted") + 
+	theme_bw()
+```
+
+Here the solid line shows the true system states at each time, the dots show the data, the dotted line shows the mean system behaviour from Figure [?], the dashed line is the bootstrap mean, and the grey ribbon shows the centre 95th quantile of the bootstrap results.
+
+Note that the bootstrap mean is less critical now as we are working with "complete" data over the infection cycle and thus the particle filter state estimates provide more easily obtained and arguably better information, but will become more important in the context of forecasting, to be shown in the next section.
+
+
+# POMP fitting
+
+Given that the previous IF2 fitting was carried out using a (slightly) customised IF2 implementation, it is prudent to compare these results to that produced by the `official' IF2 implementation in the POMP package. All IF2 parameters were chosen so as to match the ones chosen previously as closely as possible.
+
+```{r pomp_fit}
+library(pomp)
+
+data <- data.frame(time = 0:T, y = infec_counts)
+
+sir_step <- Csnippet("
+    B = exp( log(B) + eta*(log(R0*r/500.0) - log(B)) + rnorm(0, berr) );
+	double dS = - B*S*I;
+	double dI = B*S*I - r*I;
+	double dR = r*I;
+	S += dt*dS;
+	I += dt*dI;
+	R += dt*dR;
+")
+
+sir_init <- Csnippet("
+	S = 500.0 - I0;
+	I = I0;
+	R = 0;
+	B = R0*r/500.0;
+")
+
+dmeas <- Csnippet('
+  	lik = dnorm(y, I, sigma, give_log);
+')
+
+rmeas <- Csnippet('
+  	y = rnorm(I, sigma);
+')
+
+logtrans <- Csnippet("
+	TR0 = log(R0);
+	Tr = log(r);
+	Tsigma = log(sigma);
+	Teta = logit(eta);
+	Tberr = log(berr);
+	TI0 = log(I0);
+")
+
+exptrans <- Csnippet("
+	TR0 = exp(R0);
+	Tr = exp(r);
+	Tsigma = exp(sigma);
+	Teta = expit(eta);
+	Tberr = exp(berr);
+	TI0 = exp(I0);
+")
+
+options(verbose=FALSE) 
+sir <- pomp(data = data,
+            time = "time",
+            t0 = 0,
+            initializer = sir_init,
+            rprocess = euler.sim(step.fun = sir_step,
+                                 delta.t = 1.0/steps),
+            dmeasure = dmeas,
+            rmeasure = rmeas,
+            statenames = c("S","I","R","B"),
+            paramnames = c("R0","r","I0","sigma","eta","berr"),
+            toEstimationScale = logtrans,
+            fromEstimationScale = exptrans)
+
+#simStates <- simulate(sir,nsim=1,params=c(R0 = 3.0, r = 0.1, I0 = 5.0, sigma = 10.0, eta = 0.5, berr = 0.3),
+#                      states = TRUE, obvs = TRUE, include = FALSE, as = TRUE)
+
+transfun <- function(params,...) {
+    params[c("R0","r","I0","sigma","berr")] <- exp(params[c("R0","r","I0","sigma", "berr")])
+    params["eta"] <- expit(params["eta"])
+    return(params)
+}
+
+transfun_inv <- function(params,...) {
+    params[c("R0","r","I0","sigma", "berr")] <- log(params[c("R0","r","I0","sigma", "berr")])
+    params["eta"] <- logit(params["eta"])
+    return(params)
+}
+
+pomptime <- system.time(
+				m1 <- mif2(sir,
+					      Nmif = 10,
+					      start = c(R0 = 3.0, r = 0.1, I0 = 5.0, sigma = 10.0, eta = 0.5, berr = 0.5),
+					      rw.sd = rw.sd(R0 = 0.3, r = 0.01, I0 = 0.5, sigma = 1.0, eta = 0.05, berr = 0.05),
+					      cooling.fraction.50 = (0.8)^50,
+					      Np = 10000,
+					      toEstimationScale = transfun,
+				          fromEstimationScale = transfun_inv,
+					      transform = TRUE
+					      )
+			)
+```
+
+The POMP fitting runtime, again determined using R's `system.time()` function was
+
+```{r}
+pomptime
+```
+
+The MLE for the parameters after the final pass was
+
+```{r}
+pompmeans <- coef(m1)
+pompmeans
+```
+
+giving a relative error of
+
+```{r}
+truevals <- c( pars_true[c("R0","r")], I0 = i_infec, sigma = sigma, pars_true[c("eta","berr")])
+relerrs <- (pompmeans - truevals) / truevals
+relerrs
+```
+
+POMP's built-in diagnostic plots show the following
+
+```{r}
+plot(m1)
+```
+
+As before, we can extract the system state estimates at each time step form the last IF2 pass and plot it as below:
+
+```{r}
+m1data <- as(m1, "data.frame")
+
+qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+    geom_point(aes(y = infec_counts)) +
+    geom_line(aes(y = m1data$filter.mean.I), linetype = "dashed") +
+	theme_bw()
+```
+
+Here again the solid line shows the true states, the points show the data, and the dashed line shows the filter mean states.
+
+
+***
+
+# HMC fitting
+
+We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 5000 iterations with 100 warm-up iterations and a tinning value of 10.
+
+```{r hmc_fit, results = 'hide'}
+library(rstan)
+library(reshape2)
+
+datlen <- T*7 + 1
+
+data <- matrix(data = -1, nrow = T+1, ncol = steps)
+data[,1] <- infec_counts
+standata <- as.vector(t(data))[1:datlen]
+
+sir_data <- list( T = datlen,   	# simulation time
+                  y = standata, 	# infection count data
+                  N = 500,      	# population size
+                  h = 1/steps )   	# step size per day 
+                    
+rstan_options(auto_write = TRUE)
+
+stan_options <- list(   chains = 1,    		# number of chains
+                        iter   = 5000, 		# iterations per chain
+                        warmup = 1000, 		# warmup interations
+                        thin   = 10)   		# thinning number
+
+hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
+
+hmctime <- system.time(fit <- with(stan_options,
+		            	stan(file  	= hmcfile,
+				            data    = sir_data,
+				            chains  = chains,
+				            iter    = iter,
+				            warmup  = warmup,
+				            thin    = thin)
+		        		)
+			)
+
+exfit <- extract(fit, permuted = FALSE, inc_warmup = FALSE)
+paramdata <- data.frame(R0 = melt(exfit[,,'R0'])$value,
+               			r = melt(exfit[,,'r'])$value,
+               			sigma = melt(exfit[,,'sigma'])$value,
+               			eta = melt(exfit[,,'eta'])$value,
+               			berr = melt(exfit[,,'berr'])$value,
+               			Sinit = melt(exfit[,,'y0[1]'])$value,
+               			Iinit = melt(exfit[,,'y0[2]'])$value,
+               			Rinit = melt(exfit[,,'y0[3]'])$value )
+```
+
+The runtime retrieved again using R's `system.time()` shows
+
+```{r}
+hmctime
+```
+
+which is significantly slower than either the custom IF2 algorithm or the POMP implementation.
+
+The MLE parameter estimates, taken to be the means of the samples in the chain were
+
+```{r}
+hmcmeans <- colMeans(paramdata[c("R0","r","Iinit","sigma","eta","berr")])
+names(hmcmeans) <- c("R0","r","I0","sigma","eta","berr")
+hmcmeans
+```
+
+giving a relative error of
+
+```{r}
+truevals <- c( pars_true[c("R0","r")], I0 = i_infec, sigma = sigma, pars_true[c("eta","berr")])
+relerrs <- (hmcmeans - truevals) / truevals
+relerrs
+```
+
+
+# HMC kernels
+
+The densities produced by Stan's HMC implementation are shown below:
+
+```{r}
+library(gridExtra)
+
+
+meanval.R0 		<- mean(paramdata$R0)
+meanval.r 		<- mean(paramdata$r)
+meanval.sigma 	<- mean(paramdata$sigma)
+meanval.Iinit 	<- mean(paramdata$Iinit)
+meanval.eta 	<- mean(paramdata$eta)
+meanval.berr 	<- mean(paramdata$berr)
+
+linecolour <- "grey50"
+lineweight <- 0.5
+
+R0kernel <- qplot(paramdata$R0, geom = "density", xlab = expression(R[0]), ylab = "frequency") +
+    			geom_vline(aes(xintercept=pars_true['R0']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.R0), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+rkernel <- qplot(paramdata$r, geom = "density", xlab = "r", ylab = "") +
+    			geom_vline(aes(xintercept=pars_true['r']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.r), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+sigmakernel <- qplot(paramdata$sigma, geom = "density", xlab = expression(sigma), ylab = "") +
+    			geom_vline(aes(xintercept=sigma), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.sigma), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+infeckernel <- qplot(paramdata$Iinit, geom = "density", xlab = "Initial Infected", ylab = "frequency") +
+    			geom_vline(aes(xintercept=i_infec), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.Iinit), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+etakernel <- qplot(paramdata$eta, geom = "density", xlab = expression(eta), ylab = "") +
+    			geom_vline(aes(xintercept=pars_true['eta']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.eta), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+berrkernel <- qplot(paramdata$berr, geom = "density", xlab = expression(epsilon[proc]), ylab = "") +
+    			geom_vline(aes(xintercept=pars_true['berr']), linetype="solid", size=lineweight, color=linecolour) +
+    			geom_vline(aes(xintercept=meanval.berr), linetype="dashed", size=lineweight, color=linecolour) +
+				theme_bw()
+
+# show grid
+grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, etakernel, berrkernel, ncol = 3, nrow = 2)
+```
+
+As before the solid grey lines show the true values and the dashed grey lines show the density means.
+
+It is worth noting that the densities shown here represent a "true" MLE density estimate in that they represent HMC's attempt to directly sample from the parameter space according to the likelihood surface, unlike IF2 which is in theory only trying to get a ML point estimate. Further, these densities are much smoother and potentially more robust than those produced by the custom IF2 implementation.
+
+
+# HMC Bootstrapping
+
+Unlike particle particle-filtering-based approaches, HMC does not produce state estimates as a by-product of parameter fitting, and so we must rely on a bootstrap alone to get state estimates. The results of 100 bootstrap trajectories is shown below:
+
+```{r}
+nTraj <- 100
+# sample from parameter distributions
+
+datlen 	<- dim(paramdata)[1]
+inds 	<- sample.int(datlen,nTraj,replace = TRUE)
+params 	<- paramdata[inds,]
+
+#nTraj
+#datlen
+#inds
+#params
+
+bootstrapdata <- matrix(NA, nrow = nTraj, ncol = T+1)
+
+for (i in 1:nTraj) {
+
+	init_cond <- c(S = params$Sinit[i],
+	               I = params$Iinit[i],
+	               R = params$Rinit[i])
+	pars <- c(R0 = params$R0[i],
+	          r = params$r[i],
+	          N = 500.0,
+	          eta = params$eta[i],
+	          berr = params$berr[i])
+
+	sdeout <- StocSIR(init_cond, pars, T, steps)
+	colnames(sdeout) <- c('S','I','R','B')
+
+	bootstrapdata[i,] <- sdeout[,'I']
+
+}
+
+#bootstrapdata
+meanTraj 	<- colMeans(bootstrapdata, na.rm = FALSE)
+#meanTraj 	<- ifelse(meanTraj < 0, 0, meanTraj)
+quantTraj 	<- t( apply(bootstrapdata, 2, quantile, probs = c(0.025,0.975), na.rm = FALSE) )
+
+#meanTraj
+#quantTraj
+
+#if (FALSE) {
+
+colnames(quantTraj) <- c("025","975")
+
+qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
+	geom_line(aes(y = meanTraj), linetype = "dashed") +
+	geom_point(aes(y = datapart)) +
+    geom_line(aes(y = avTraj), linetype = "dotted") +
+	theme_bw()
+
+#}
+```
+
+As before the solid line shows the true states, the dots show the data, the dotted line shows the average system behaviour, the dashed line shows the bootstrap mean, and the grey ribbon shows the centre 95th quantile of the bootstrap trajectories.

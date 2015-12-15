@@ -69,9 +69,9 @@ trueTraj <- odeout[,3]
 plotdata <- data.frame(times=1:(T+1),true=trueTraj,est=meanTraj,quants=t(quantTraj),datapart=c(datapart,rep(NA,T-Tlim+1)))
 
 g <- ggplot(plotdata, aes(times)) +
-		geom_ribbon(aes(ymin = quants.2.5., ymax=quants.97.5.), alpha=0.1) +
+		#geom_ribbon(aes(ymin = quants.2.5., ymax=quants.97.5.), alpha=0.1) +
         geom_line(aes(y = true, colour = "True")) + 
-        geom_line(aes(y = est, colour = "IF2")) +
+        #geom_line(aes(y = est, colour = "IF2")) +
         geom_point(aes(y = datapart, color = "Data")) +
         labs(x = "Time", y = "Infection count", color = "") +
         scale_color_brewer(palette="Paired") +
