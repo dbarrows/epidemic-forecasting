@@ -86,6 +86,7 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 	NumericMatrix paramdata(NP, 8);
 	NumericMatrix means(nPasses, 8);
 	NumericMatrix statemeans(T, 3);
+	NumericMatrix statedata(NP, 4);
 
 	srand(time(NULL));		// Seed PRNG with system time
 
@@ -269,9 +270,21 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 
 	}
 
+	for (int n = 0; n < NP; n++) {
+
+		statedata(n, 0) = particles[n].S;
+		statedata(n, 1) = particles[n].I;
+		statedata(n, 2) = particles[n].R;
+		statedata(n, 3) = particles[n].B;
+
+	}
+
+
+
 	return Rcpp::List::create(	Rcpp::Named("paramdata") = paramdata, 
                              	Rcpp::Named("means") = means,
-                             	Rcpp::Named("statemeans") = statemeans);
+                             	Rcpp::Named("statemeans") = statemeans,
+                             	Rcpp::Named("statedata") = statedata);
 
 }
 
