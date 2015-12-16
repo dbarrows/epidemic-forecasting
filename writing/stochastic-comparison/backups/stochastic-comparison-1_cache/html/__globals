@@ -1,0 +1,29 @@
+seed	set.seed
+unnamed-chunk-1	[<-	exp	expression	for	library	log	numeric	qplot	rnorm	theme_bw
+unnamed-chunk-2	[<-	B0	berr	c	exp	expression	for	log	qplot	rnorm	scale_y_continuous	T	theme_bw
+unnamed-chunk-3	B	c	qplot	scale_x_continuous	theme_bw
+unnamed-chunk-4	[<-	B0	berr	c	exp	expression	for	log	qplot	rnorm	scale_y_continuous	T	theme_bw
+unnamed-chunk-5	B	c	qplot	scale_x_continuous	theme_bw
+unnamed-chunk-6	[[	[<-	<	==	aes	c	colnames<-	exp	for	geom_point	if	ifelse	log	matrix	qplot	rep	return	rnorm	set.seed	theme_bw
+unnamed-chunk-7	[<-	aes	c	colnames<-	for	geom_line	I	library	matrix	melt	names<-	pars_true	qplot	sdeout_true	steps	StocSIR	T	theme_bw	time	traj	true_init_cond
+unnamed-chunk-8	[<-	aes	apply	c	colMeans	colnames<-	for	geom_line	geom_ribbon	I	matrix	pars_true	plotdata	qplot	quantile	steps	StocSIR	t	T	theme_bw	time	traj	true_init_cond
+if2_fit	$	c	data.frame	getwd	if2	infec_counts	library	N	names<-	paste	sourceCpp	system.time	Tlim
+unnamed-chunk-9	if2time
+unnamed-chunk-10	c	colMeans	names<-	paramdata
+unnamed-chunk-11	c	i_infec	if2means	pars_true	sigma
+unnamed-chunk-12	aes	geom_line	geom_point	infec_counts	qplot	sdeout_true	statedata	T	theme_bw
+unnamed-chunk-13	$	aes	convergedata	dim	expression	geom_hline	grid.arrange	i_infec	library	mean	paramdata	pars_true	qplot	sigma	theme_bw
+unnamed-chunk-14	$	aes	expression	geom_vline	grid.arrange	i_infec	library	mean	paramdata	pars_true	qplot	sigma	theme_bw
+unnamed-chunk-15	[<-	$	aes	apply	avTraj	c	colMeans	colnames<-	datapart	dim	for	geom_line	geom_point	geom_ribbon	matrix	paramdata	qplot	quantile	sample.int	sdeout_true	steps	StocSIR	t	T	theme_bw
+pomp_fit	[<-	^	c	Csnippet	data.frame	euler.sim	exp	expit	infec_counts	library	log	logit	mif2	options	pomp	return	rw.sd	steps	system.time	T
+unnamed-chunk-16	pomptime
+unnamed-chunk-17	coef	m1
+unnamed-chunk-18	c	i_infec	pars_true	pompmeans	sigma
+unnamed-chunk-19	m1	plot
+unnamed-chunk-20	$	aes	as	geom_line	geom_point	infec_counts	m1	qplot	sdeout_true	T	theme_bw
+hmc_fit	[<-	$	as.vector	chains	data.frame	extract	getwd	infec_counts	iter	library	list	matrix	melt	paste	rstan_options	stan	steps	system.time	t	T	thin	warmup	with
+unnamed-chunk-21	hmctime
+unnamed-chunk-22	c	colMeans	names<-	paramdata
+unnamed-chunk-23	c	hmcmeans	i_infec	pars_true	sigma
+unnamed-chunk-24	$	aes	expression	geom_vline	grid.arrange	i_infec	library	mean	paramdata	pars_true	qplot	sigma	theme_bw
+unnamed-chunk-25	[<-	$	aes	apply	avTraj	c	colMeans	colnames<-	complete.cases	datapart	dim	for	geom_line	geom_point	geom_ribbon	matrix	paramdata	qplot	quantile	sample.int	sdeout_true	steps	StocSIR	t	T	theme_bw
