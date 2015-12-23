@@ -56,7 +56,7 @@ struct ParticleInfo {
 	double rmean;		double rsd;
 	double sigmamean;	double sigmasd;
 	double etamean;		double etasd;
-	double berrmean;		double berrsd;
+	double berrmean;	double berrsd;
 	double Sinitmean; 	double Sinitsd;
 	double Iinitmean;	double Iinitsd;
 	double Rinitmean;	double Rinitsd;

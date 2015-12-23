@@ -1,0 +1,249 @@
+# Truncation vs. Error
+
+Of course the above mini-comparison only shows one truncation value for one trajectory. Really, we need to know how each method performs on average given different trajectories and truncation amounts.
+
+We can fit the model to successively smaller (or larger) time series to see the effect of truncation on forecast SSE. This was done below, with several *(2 right now, I'll run this for a larger number of trials in the future)* new trajectories drawn for each of the desired lengths.
+
+```{r if2_trunc_data}
+
+NP          <- 10000
+nPasses     <- 10
+coolrate    <- 0.8
+
+nTraj 		<- 100
+
+maxTrunc 	<- 40
+nTrials     <- 3
+
+# storage for results
+
+SSEs <- matrix(NA, ncol = nTrials, nrow = maxTrunc)
+goodbootsize <- rep(NA, maxTrunc)
+
+# compile executable
+
+if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
+
+sourceCpp(if2file)
+
+
+for(trunc in 1:maxTrunc) {
+    
+    for(trial in 1:nTrials) {
+
+    	# setup
+    
+    	Tlim <- T - trunc
+    
+    	sdeout_true <- StocSIR(true_init_cond, pars_true, T, steps)
+    	colnames(sdeout_true) <- c('S','I','R','B')
+    
+    	infec_counts_raw <- sdeout_true[,'I'] + rnorm(T+1, 0, sigma)
+    	infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
+    
+    	datapart <- c(infec_counts[1:(Tlim+1)],rep(NA,T-Tlim))
+    
+    	# do IF2 fitting
+    
+    	if2time <- system.time( if2data <- if2(datapart, Tlim+1, N, NP, nPasses, coolrate) )
+    
+    	paramdata <- data.frame( if2data$paramdata )
+    	names(paramdata) <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
+    
+    	finalstates <- data.frame( if2data$statedata )
+    	names(finalstates) <- c("S","I","R","B")
+    
+    	# bootstrap to get estimates
+    	
+    	bootstrapdata <- matrix(NA, nrow = nTraj, ncol = T-Tlim+1)
+    
+    	datlen 	<- dim(paramdata)[1]
+    	inds 	<- sample.int(datlen,nTraj,replace = TRUE)
+    	params 	<- paramdata[inds,]
+    	states 	<- finalstates[inds,]
+    
+    	for (i in 1:nTraj) {
+    
+    		init_cond <- c(S = states$S[i],
+    		               I = states$I[i],
+    		               R = states$R[i])
+    		pars <- c(R0 = params$R0[i],
+    		          r = params$r[i],
+    		          N = 500.0,
+    		          eta = params$eta[i],
+    		          berr = params$berr[i])
+    
+    		sdeout <- StocSIR(init_cond, pars, T-Tlim, steps)
+    		colnames(sdeout) <- c('S','I','R','B')
+    
+    		bootstrapdata[i,] <- sdeout[,'I']
+    
+    	}
+    
+    	# in case of explosion
+    	bootstrapdata <- bootstrapdata[complete.cases(bootstrapdata),]
+    	goodbootsize[trunc] <- dim(bootstrapdata)[1]
+    
+    	meanTraj 	<- colMeans(bootstrapdata)
+    
+    	truefuture  <- sdeout_true[(Tlim+1):T,'I']
+    	estfuture   <- meanTraj[-1]
+    	err <- estfuture - truefuture
+    	sse <- sum(err^2)
+    	
+    	SSEs[trunc,trial] <- sse
+    	
+    }
+	
+}
+```
+
+```{r}
+normsse     <- rowMeans(SSEs) / (1:maxTrunc)
+if2lognormsse  <- log(normsse)
+qplot(1:maxTrunc, if2lognormsse, geom = "line", xlab = "Truncation",
+        ylab = expression( log(SSE[norm]) )  ) +
+    theme_bw()
+```
+
+This clearly shows a drastic increase in forecast error the more the data is truncated.
+
+We can repeat the process to obtain a similar plot for HMC, below.
+
+```{r hmc_trunc_data, results = 'hide'}
+
+nTraj 		<- 100
+
+maxTrunc 	<- 40
+nTrials     <- 3
+
+# storage for results
+
+SSEs <- matrix(NA, ncol = nTrials, nrow = maxTrunc)
+goodbootsize <- rep(NA, maxTrunc)
+
+# compile executable
+
+stan_options <- list(   chains = 1,    		# number of chains
+                        iter   = 5000, 		# iterations per chain
+                        warmup = 1000, 		# warmup interations
+                        thin   = 10)   		# thinning number
+
+rstan_options(auto_write = TRUE)
+
+hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
+
+
+for(trunc in 1:maxTrunc) {
+    
+    for(trial in 1:nTrials) {
+
+    	# setup
+    
+    	Tlim <- T - trunc
+    
+    	sdeout_true <- StocSIR(true_init_cond, pars_true, T, steps)
+    	colnames(sdeout_true) <- c('S','I','R','B')
+    
+    	infec_counts_raw <- sdeout_true[,'I'] + rnorm(T+1, 0, sigma)
+    	infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
+    
+    	datapart <- c(infec_counts[1:(Tlim+1)],rep(NA,T-Tlim))
+    
+    	# do HMC fitting
+    
+    	datlen <- Tlim*7 + 1
+
+		data <- matrix(data = -1, nrow = Tlim+1, ncol = steps)
+		data[,1] <- infec_counts[1:(Tlim+1)]
+		standata <- as.vector(t(data))[1:datlen]
+
+		sir_data <- list( T = datlen,   	# simulation time
+		                  y = standata, 	# infection count data
+		                  N = 500,      	# population size
+		                  h = 1/steps )   	# step size per day
+
+		stan_options <- list(   chains = 1,    		# number of chains
+		                        iter   = 5000, 		# iterations per chain
+		                        warmup = 1000, 		# warmup interations
+		                        thin   = 10)   		# thinning number
+
+		hmctime <- system.time(fit <- with(stan_options,
+				            	stan(file  	= hmcfile,
+						            data    = sir_data,
+						            chains  = chains,
+						            iter    = iter,
+						            warmup  = warmup,
+						            thin    = thin)
+				        		)
+					)
+
+		exfit <- extract(fit, permuted = FALSE, inc_warmup = FALSE)
+		paramdata <- data.frame(R0 = melt(exfit[,,'R0'])$value,
+		               			r = melt(exfit[,,'r'])$value,
+		               			sigma = melt(exfit[,,'sigma'])$value,
+		               			eta = melt(exfit[,,'eta'])$value,
+		               			berr = melt(exfit[,,'berr'])$value,
+		               			Sinit = melt(exfit[,,'y0[1]'])$value,
+		               			Iinit = melt(exfit[,,'y0[2]'])$value,
+		               			Rinit = melt(exfit[,,'y0[3]'])$value )
+    
+    	# bootstrap to get estimates
+    	
+    	bootstrapdata <- matrix(NA, nrow = nTraj, ncol = (T+1) )
+    
+    	datlen 	<- dim(paramdata)[1]
+    	inds 	<- sample.int(datlen,nTraj,replace = TRUE)
+    	params 	<- paramdata[inds,]
+    	states 	<- finalstates[inds,]
+    
+    	for (i in 1:nTraj) {
+    
+    		init_cond <- c(S = params$Sinit[i],
+    		               I = params$Iinit[i],
+    		               R = params$Rinit[i])
+    		pars <- c(R0 = params$R0[i],
+    		          r = params$r[i],
+    		          N = 500.0,
+    		          eta = params$eta[i],
+    		          berr = params$berr[i])
+    
+    		sdeout <- StocSIR(init_cond, pars, T, steps)
+    		colnames(sdeout) <- c('S','I','R','B')
+    
+    		bootstrapdata[i,] <- sdeout[,'I']
+    
+    	}
+    
+    	# in case of explosion
+    	bootstrapdata <- bootstrapdata[complete.cases(bootstrapdata),]
+    	goodbootsize[trunc] <- dim(bootstrapdata)[1]
+    
+    	meanTraj 	<- colMeans(bootstrapdata)
+    
+    	truefuture  <- sdeout_true[(Tlim+1):T,'I']
+		estfuture   <- meanTraj[(Tlim+1):T]
+    	err <- estfuture - truefuture
+    	sse <- sum(err^2)
+    	
+    	SSEs[trunc,trial] <- sse
+    	
+    }
+	
+}
+```
+
+```{r}
+normsse     <- rowMeans(SSEs) / (1:maxTrunc)
+hmclognormsse  <- log(normsse)
+qplot(1:maxTrunc, hmclognormsse, geom = "line", xlab = "Truncation", ylab = expression( log(SSE[norm]) )  ) +
+    theme_bw()
+```
+
+If we overlay the plot data on top of one another we get
+
+```{r}
+qplot(1:maxTrunc, if2lognormsse, geom = "line", xlab = "Truncation", ylab = expression( log(SSE[norm]) )  ) +
+	geom_line(aes(y = hmclognormsse), linetype = "dashed") +
+    theme_bw()
+```

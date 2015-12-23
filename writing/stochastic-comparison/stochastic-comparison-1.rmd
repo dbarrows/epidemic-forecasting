@@ -3,12 +3,12 @@ title: "Stochastic SIR Forecasting Showdown Part 1: Parameter Fitting"
 author: "Dexter Barrows"
 date: "`r format(Sys.time(), '%H:%M %d %B %Y')`"
 #bibliography: bibliography.bib
-#output: 
-#  html_document: 
-#    fig_width: 9.5
-output: pdf_document 
-fig_width: 9.5
-fontsize: 12pt
+output: 
+  html_document: 
+    fig_width: 9.5
+#output: pdf_document 
+#fig_width: 9.5
+#fontsize: 12pt
 ---
 
 ```{r setup, include=FALSE}
@@ -185,7 +185,7 @@ infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
 
 datapart <- c(infec_counts[1:(Tlim+1)],rep(NA,T-Tlim))
 
-qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
 	geom_point(aes(y = datapart)) +
 	theme_bw()
 ```
@@ -205,8 +205,9 @@ for(i in 1:numtraj) {
 
 plotdata <- melt(trajData_save)
 names(plotdata) <- c("traj","time","I")
+plotdata[,'time'] <- plotdata[,'time'] - 1
 
-qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
 	geom_line(data = plotdata, aes(x = time, y = I, group = traj)) +
 	theme_bw()
 ```
@@ -228,7 +229,7 @@ avTraj      <- meanTraj
 quantTraj 	<- t(apply(trajData, 2, quantile, probs = c(0.025,0.975)))
 colnames(quantTraj) <- c("025","975")
 
-qplot(1:(T+1), meanTraj, geom = "line", xlab = "Time", ylab = "Infection count") +
+qplot(0:T, meanTraj, geom = "line", xlab = "Time", ylab = "Infection count") +
 	geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
 	geom_line(data = plotdata, aes(x = time, y = I, group = traj), linetype = "dotted") +
 	theme_bw()
@@ -236,9 +237,45 @@ qplot(1:(T+1), meanTraj, geom = "line", xlab = "Time", ylab = "Infection count")
 
 Here the solid line is the mean behaviour, the dotted lines are the sample trajectories from the previous plot, and the grey ribbon is centre 95th quantile.
 
+
 ***
 
-# IF2 fitting
+# Calibrating Samples
+
+In order to compare HMCMC and IF2 we need to set up a fair and theoretically justified way to select the number of samples to draw form the HMCMC iterations and the number of particles to use for IF2. We assume that we are working with a problem that has an unknown real solution, so we use the Monte Carlo Standard Error (MCSE).
+
+Suppose we are using a Monte-Carlo based method to obtain an estimate $\hat{\mu}_{n}$ for a quantity $\mu$, where $n$ is the number of samples. Then the Law of Large Numbers says that $\hat{\mu}_{n} \rightarrow \mu$ as $n \rightarrow \infty$. Further, the Central Limit Theorem says that the error $\hat{\mu}_{n} - \mu$ should shrink with number of samples such that $\sqrt{n} (\hat{\mu}_{n} - \mu) \rightarrow \mathcal{N}(0,\sigma^2)$ as $n \rightarrow \infty$, where $\sigma^2$ is the variance of the samples drawn.
+
+We of course do not know $\mu$, but the above allows us to obtain an estimate $\hat{\sigma}_n$ for $\sigma$ given a number of samples $n$ as
+
+$$
+\hat{\sigma}_n = \sqrt{\frac{1}{n} \sum_{i=1}^{n} (X_i - \hat{\mu}) }
+$$
+
+which is known as the Monte Carlo Standard Error.
+
+We can modify this formula to account for multiple variables by replacing the single variance measure sum by
+
+$$
+\Theta^* V (\Theta^*)^T
+$$
+
+where $\Theta^*$ is a row vector containing the reciprocals of the means of the parameters of interest, and $V$ is the variance-covariance matrix with respect to the same parameters. This in effect scales the variances with respect to their magnitudes and accounts for covariation between parameters in one fell swoop. We also divide by the number of parameters, yielding
+
+$$
+\hat{\sigma}_n = \sqrt{\frac{1}{n} \frac{1}{P} \Theta^* V (\Theta^*)^T }
+$$
+
+where $P$ is the number of particles.
+
+The goal here is to then pick the number of HMCMC samples and IF2 particles to yield similar MCSE values. To do this we picked a combination of parameters for RStan that yielded decent results when applied to the stochastic SIR model specified above, calculated the resulting mean MCSE across several model fits, and isolated the expected number of IF2 particles needed to obtain the same value. This was used as a starting value to "titrate" the IF2 iterations to the same point.
+
+The resulting values were 1000 HMCMC warm-up iterations with 2000 samples drawn post-warm-up, and 2000 IF2 particles sent through 15 passes, each method giving an approximate MCSE of 0.006.
+
+
+***
+
+# IF2 Fitting
 
 Now we will use an implementation of the IF2 algorithm to attempt to fit the stochastic SIR model to the data from Figure [?]. The goal here is just parameter inference, but since IF2 works by applying a series on particle filters we essentially get the average system state estimates for a very small additional computational cost. Hence, we will will also look at that estimated behaviour in addition the the parameter estimates.
 
@@ -247,9 +284,9 @@ The code used here is a mix of R and C++ implemented using RCpp. The fitting was
 ```{r if2_fit}
 library(Rcpp)
 
-NP          <- 10000
-nPasses     <- 10
-coolrate    <- 0.8
+NP          <- 2000
+nPasses     <- 15
+coolrate    <- 0.95
 
 if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
 
@@ -292,7 +329,7 @@ relerrs
 From last IF2 particle filtering iteration, the mean state values from the particle swarm at each time step are shown with the true underlying state and data in the plot below
 
 ```{r}
-qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection counts") +
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection counts") +
 	geom_point(aes(y = infec_counts)) +
 	geom_line(aes(y = statedata[,'I']), linetype = "dashed") +
 	theme_bw()
@@ -352,7 +389,7 @@ grid.arrange(R0converge, rconverge, sigmaconverge, infecconverge, etaconverge, b
 
 The horizontal axis shows the IF2 pass number. The solid black lines show the evolution of the ML estimates, the solid grey lines show the true value, and the dashed grey lines show the mean parameter estimates from the particle swarm after the final pass. 
 
-# IF2 density plots
+# IF2 Densities
 
 Of particular importance are the densities of the parameter estimates given by the final parameter swarm. These are shown below.
 
@@ -407,195 +444,9 @@ grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, etakernel, berrkernel,
 As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. It is worth noting that the IF2 parameters chosen were in part chosen so as to not artificially narrow these densities; a more aggressive cooling schedule and/or an increased number of passes would have resulted in much narrower densities, and indeed have the potential to collapse them to point estimates.
 
 
-# IF2 bootstrapping
+# HMC Fitting
 
-We can now use the parameter estimate densities to perform bootstrapping. Here we have drawn 100 parameter estimates randomly from the final particle swarm, run a single trajectory from each of them, and plotted the results below:
-
-```{r}
-nTraj 		<- 100 	# trajectories for both bootstrapping runs
-
-datlen 	<- dim(paramdata)[1]
-inds 	<- sample.int(datlen,nTraj,replace = TRUE)
-params 	<- paramdata[inds,]
-
-bootstrapdata <- matrix(NA, nrow = nTraj, ncol = T+1)
-
-for (i in 1:nTraj) {
-
-	init_cond <- c(S = params$Sinit[i],
-	               I = params$Iinit[i],
-	               R = params$Rinit[i])
-	pars <- c(R0 = params$R0[i],
-	          r = params$r[i],
-	          N = 500.0,
-	          eta = params$eta[i],
-	          berr = params$berr[i])
-
-	sdeout <- StocSIR(init_cond, pars, T, steps)
-	colnames(sdeout) <- c('S','I','R','B')
-
-	bootstrapdata[i,] <- sdeout[,'I']
-
-}
-
-meanTraj 	<- colMeans(bootstrapdata)
-quantTraj 	<- t(apply(bootstrapdata, 2, quantile, probs = c(0.025,0.975)))
-colnames(quantTraj) <- c("025","975")
-
-qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
-	geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
-	geom_line(aes(y = meanTraj), linetype = "dashed") +
-	geom_point(aes(y = datapart)) +
-    geom_line(aes(y = avTraj), linetype = "dotted") + 
-	theme_bw()
-```
-
-Here the solid line shows the true system states at each time, the dots show the data, the dotted line shows the mean system behaviour from Figure [?], the dashed line is the bootstrap mean, and the grey ribbon shows the centre 95th quantile of the bootstrap results.
-
-Note that the bootstrap mean is less critical now as we are working with "complete" data over the infection cycle and thus the particle filter state estimates provide more easily obtained and arguably better information, but will become more important in the context of forecasting, to be shown in the next section.
-
-
-# POMP fitting
-
-Given that the previous IF2 fitting was carried out using a (slightly) customised IF2 implementation, it is prudent to compare these results to that produced by the `official' IF2 implementation in the POMP package. All IF2 parameters were chosen so as to match the ones chosen previously as closely as possible.
-
-```{r pomp_fit}
-library(pomp)
-
-data <- data.frame(time = 0:T, y = infec_counts)
-
-sir_step <- Csnippet("
-    B = exp( log(B) + eta*(log(R0*r/500.0) - log(B)) + rnorm(0, berr) );
-	double dS = - B*S*I;
-	double dI = B*S*I - r*I;
-	double dR = r*I;
-	S += dt*dS;
-	I += dt*dI;
-	R += dt*dR;
-")
-
-sir_init <- Csnippet("
-	S = 500.0 - I0;
-	I = I0;
-	R = 0;
-	B = R0*r/500.0;
-")
-
-dmeas <- Csnippet('
-  	lik = dnorm(y, I, sigma, give_log);
-')
-
-rmeas <- Csnippet('
-  	y = rnorm(I, sigma);
-')
-
-logtrans <- Csnippet("
-	TR0 = log(R0);
-	Tr = log(r);
-	Tsigma = log(sigma);
-	Teta = logit(eta);
-	Tberr = log(berr);
-	TI0 = log(I0);
-")
-
-exptrans <- Csnippet("
-	TR0 = exp(R0);
-	Tr = exp(r);
-	Tsigma = exp(sigma);
-	Teta = expit(eta);
-	Tberr = exp(berr);
-	TI0 = exp(I0);
-")
-
-options(verbose=FALSE) 
-sir <- pomp(data = data,
-            time = "time",
-            t0 = 0,
-            initializer = sir_init,
-            rprocess = euler.sim(step.fun = sir_step,
-                                 delta.t = 1.0/steps),
-            dmeasure = dmeas,
-            rmeasure = rmeas,
-            statenames = c("S","I","R","B"),
-            paramnames = c("R0","r","I0","sigma","eta","berr"),
-            toEstimationScale = logtrans,
-            fromEstimationScale = exptrans)
-
-#simStates <- simulate(sir,nsim=1,params=c(R0 = 3.0, r = 0.1, I0 = 5.0, sigma = 10.0, eta = 0.5, berr = 0.3),
-#                      states = TRUE, obvs = TRUE, include = FALSE, as = TRUE)
-
-transfun <- function(params,...) {
-    params[c("R0","r","I0","sigma","berr")] <- exp(params[c("R0","r","I0","sigma", "berr")])
-    params["eta"] <- expit(params["eta"])
-    return(params)
-}
-
-transfun_inv <- function(params,...) {
-    params[c("R0","r","I0","sigma", "berr")] <- log(params[c("R0","r","I0","sigma", "berr")])
-    params["eta"] <- logit(params["eta"])
-    return(params)
-}
-
-pomptime <- system.time(
-				m1 <- mif2(sir,
-					      Nmif = 10,
-					      start = c(R0 = 3.0, r = 0.1, I0 = 5.0, sigma = 10.0, eta = 0.5, berr = 0.5),
-					      rw.sd = rw.sd(R0 = 0.3, r = 0.01, I0 = 0.5, sigma = 1.0, eta = 0.05, berr = 0.05),
-					      cooling.fraction.50 = (0.8)^50,
-					      Np = 10000,
-					      toEstimationScale = transfun,
-				          fromEstimationScale = transfun_inv,
-					      transform = TRUE
-					      )
-			)
-```
-
-The POMP fitting runtime, again determined using R's `system.time()` function was
-
-```{r}
-pomptime
-```
-
-The MLE for the parameters after the final pass was
-
-```{r}
-pompmeans <- coef(m1)
-pompmeans
-```
-
-giving a relative error of
-
-```{r}
-truevals <- c( pars_true[c("R0","r")], I0 = i_infec, sigma = sigma, pars_true[c("eta","berr")])
-relerrs <- (pompmeans - truevals) / truevals
-relerrs
-```
-
-POMP's built-in diagnostic plots show the following
-
-```{r}
-plot(m1)
-```
-
-As before, we can extract the system state estimates at each time step form the last IF2 pass and plot it as below:
-
-```{r}
-m1data <- as(m1, "data.frame")
-
-qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
-    geom_point(aes(y = infec_counts)) +
-    geom_line(aes(y = m1data$filter.mean.I), linetype = "dashed") +
-	theme_bw()
-```
-
-Here again the solid line shows the true states, the points show the data, and the dashed line shows the filter mean states.
-
-
-***
-
-# HMC fitting
-
-We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 5000 iterations with 100 warm-up iterations and a tinning value of 10.
+We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 3000 iterations with 1000 of those being warm-up iterations and a tinning value of 5.
 
 ```{r hmc_fit, results = 'hide'}
 library(rstan)
@@ -615,9 +466,9 @@ sir_data <- list( T = datlen,   	# simulation time
 rstan_options(auto_write = TRUE)
 
 stan_options <- list(   chains = 1,    		# number of chains
-                        iter   = 5000, 		# iterations per chain
+                        iter   = 3000, 		# iterations per chain
                         warmup = 1000, 		# warmup interations
-                        thin   = 10)   		# thinning number
+                        thin   = 5)   		# thinning number
 
 hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
 
@@ -640,6 +491,11 @@ paramdata <- data.frame(R0 = melt(exfit[,,'R0'])$value,
                			Sinit = melt(exfit[,,'y0[1]'])$value,
                			Iinit = melt(exfit[,,'y0[2]'])$value,
                			Rinit = melt(exfit[,,'y0[3]'])$value )
+
+for (j in 1:datlen) {
+	varname <- paste('Bnoise[', j, ']', sep = '')
+	paramdata[[varname]] <- melt( exfit[,,varname] )$value
+}
 ```
 
 The runtime retrieved again using R's `system.time()` shows
@@ -667,7 +523,7 @@ relerrs
 ```
 
 
-# HMC kernels
+# HMC Densities
 
 The densities produced by Stan's HMC implementation are shown below:
 
@@ -725,30 +581,83 @@ It is worth noting that the densities shown here represent a "true" MLE density 
 
 # HMC Bootstrapping
 
-Unlike particle particle-filtering-based approaches, HMC does not produce state estimates as a by-product of parameter fitting, and so we must rely on a bootstrap alone to get state estimates. The results of 100 bootstrap trajectories is shown below:
+Unlike particle particle-filtering-based approaches, HMC does not produce state estimates as a by-product of parameter fitting, but we can use information about the stochastic nodes related to the noise in the $\beta$ geometric random walk to reconstruct state estimates. The results of 100 bootstrap trajectories is shown below:
 
 ```{r}
+StocSIRstan <- function(y, pars, T, steps, berrvec) {
+
+	out <- matrix(NA, nrow = (T+1), ncol = 4)
+
+	R0 <- pars[['R0']]
+	r <- pars[['r']]
+	N <- pars[['N']]
+	eta <- pars[['eta']]
+	#berr <- pars[['berr']]
+
+	S <- y[['S']]
+	I <- y[['I']]
+	R <- y[['R']]
+
+	B0 <- R0 * r / N
+	B <- B0
+
+	out[1,] <- c(S,I,R,B)
+
+	h <- 1 / steps
+
+	for ( i in 1:(T*steps) ) {
+
+		B <- exp( log(B) + eta*(log(B0) - log(B)) + berrvec[i])
+
+		BSI <- B*S*I
+		rI <- r*I
+
+		dS <- -BSI
+		dI <- BSI - rI
+		dR <- rI
+
+		S <- S + h*dS  #newInf
+		I <- I + h*dI  #newInf - h*dR
+		R <- R + h*dR  #h*dR
+
+		if (i %% steps == 0)
+			out[i/steps+1,] <- c(S,I,R,B)
+
+	}
+
+	return(out)
+
+}
+
 nTraj <- 100
 # sample from parameter distributions
 
-datlen 	<- dim(paramdata)[1]
-inds 	<- sample.int(datlen,nTraj,replace = TRUE)
-params 	<- paramdata[inds,]
+pardatlen 	<- dim(paramdata)[1]
+inds 	    <- sample.int(pardatlen,nTraj,replace = TRUE)
+params 	    <- paramdata[inds,]
 
 bootstrapdata <- matrix(NA, nrow = nTraj, ncol = T+1)
 
 for (i in 1:nTraj) {
 
-	init_cond <- c(S = params$Sinit[i],
-	               I = params$Iinit[i],
-	               R = params$Rinit[i])
-	pars <- c(R0 = params$R0[i],
-	          r = params$r[i],
-	          N = 500.0,
-	          eta = params$eta[i],
-	          berr = params$berr[i])
+	paramset <- params[i,]
 
-	sdeout <- StocSIR(init_cond, pars, T, steps)
+	init_cond <- c(S = paramset$Sinit,
+	               I = paramset$Iinit,
+	               R = paramset$Rinit)
+	pars <- c(R0 = paramset$R0,
+	          r = paramset$r,
+	          N = 500.0,
+	          eta = paramset$eta,
+	          berr = paramset$berr)
+
+	berrvec <- numeric(datlen)
+	for (j in 1:datlen) {
+		varname <- paste("Bnoise[", j, "]", sep = "")
+		berrvec[j] <- paramset[[varname]]
+	}
+
+	sdeout <- StocSIRstan(init_cond, pars, T, steps, berrvec)
 	colnames(sdeout) <- c('S','I','R','B')
 
 	bootstrapdata[i,] <- sdeout[,'I']
@@ -763,7 +672,7 @@ quantTraj 	<- t( apply(bootstrapdata, 2, quantile, probs = c(0.025,0.975), na.rm
 
 colnames(quantTraj) <- c("025","975")
 
-qplot(1:(T+1), sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
 	geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
 	geom_line(aes(y = meanTraj), linetype = "dashed") +
 	geom_point(aes(y = datapart)) +
