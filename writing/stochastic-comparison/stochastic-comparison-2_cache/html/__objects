@@ -10,7 +10,7 @@ unnamed-chunk-7	bootstrapdata	i	init_cond	meanTraj	meanTrajpart	nTraj	pars	quant
 unnamed-chunk-8	
 unnamed-chunk-9	err	estfuture	sse	truefuture
 unnamed-chunk-10	if2estfull
-hmc_fit	data	datlen	exfit	fit	hmcfile	hmctime	j	paramdata	sir_data	stan_options	standata	varname	.__C__Rcpp_stan_fit4model21dc108b26f_sirode_euler	.__global__	.requireCachedGenerics
+hmc_fit	data	datlen	exfit	fit	hmcfile	hmctime	j	paramdata	sir_data	stan_options	standata	varname	.__C__Rcpp_stan_fit4model3bb928f5c95a_sirode_euler	.__global__	.requireCachedGenerics
 unnamed-chunk-11	
 unnamed-chunk-12	berrvec	bootstrapdata	i	inds	init_cond	j	meanTraj	nTraj	params	paramset	pardatlen	pars	quantTraj	sdeout	StocSIRstan	varname
 unnamed-chunk-13	

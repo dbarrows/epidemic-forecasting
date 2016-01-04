@@ -12,7 +12,7 @@ output:
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+knitr::opts_chunk$set(cache = TRUE, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 ```{r seed, include = FALSE}
@@ -41,9 +41,9 @@ $$
 \beta_{t+1} = \exp \left( \log(\beta_{t}) + \eta (\log(\bar{\beta}) - \log(\beta_{t})) + \epsilon_{t} \right).
 $$
 
-We will take $\epsilon_{t}$ to be normally distributed with variance $\rho$ such that $\epsilon_{t} \sim \mathcal{N}(0,\rho)$. The geometric attraction term constrains the random walk, the force of which is $\eta \in [0,1]$. If we take $\eta = 0$ then the walk will be unconstrained; if we let $\eta = 1$ then all values of $\beta_t$ will be independent from the previous value (and consequently all other values in the sequence).
+We will take $\epsilon_{t}$ to be normally distributed with standard deviation $\rho^2$ such that $\epsilon_{t} \sim \mathcal{N}(0,\rho^2)$. The geometric attraction term constrains the random walk, the force of which is $\eta \in [0,1]$. If we take $\eta = 0$ then the walk will be unconstrained; if we let $\eta = 1$ then all values of $\beta_t$ will be independent from the previous value (and consequently all other values in the sequence).
 
-We can observe the effect of $\eta$ visually by setting $\eta$ to each extreme value and then to an intermediate value and plotting the results. The anchoring value $\beta_0$ was set to $\beta_0 = R_0 \cdot r / N$ where $R_0 = 3.0$, $r = 0.1$ and $N = 500$, giving $B_0 = 6 \times 10^{-4}$. The noise parameter $\rho$ was set to $0.5$.
+We can observe the effect of $\eta$ visually by setting $\eta$ to each extreme value and then to an intermediate value and plotting the results. The anchoring value $\beta_0$ was set to $\beta_0 = R_0 \cdot r / N$ where $R_0 = 3.0$, $r = 0.1$ and $N = 500$, giving $B_0 = 6 \times 10^{-4}$. The noise parameter $\rho^2$ was set to $0.5$.
 
 For $\eta = 0$ we have
 
@@ -85,6 +85,36 @@ qplot(B, geom = "density", xlab = "B", ylab = "frequency") +
 
 Notice that we have frequent oscillations between smaller and larger values within only a few time steps, but the range of values is desirable.
 
+We arrive at a mean of
+
+```{r}
+mean(B)
+```
+
+and standard deviation of
+
+```{r}
+sd(B)
+```
+
+Note that when $\eta = 1$ we have $\beta_t = \exp( \log(\bar{\beta}) + \epsilon_t )$, constituting a log-normal distribution with location $\mu = log(\bar{\beta})$ and scale $\sigma = \rho$. The resulting distribution has a theoretical mean of $\exp(\mu + \sigma^2/2)$ which evaluates to
+
+```{r}
+mu <- log(3*0.1/500)
+sigma <- 0.5
+mean <- exp(mu + sigma^2/2)
+mean
+```
+
+and a theoretical standard deviation of $\sqrt{ (exp(\sigma^2) - 1) \cdot exp(2\mu + \sigma^2)}$ which evaluates to
+
+```{r}
+sd <- sqrt( (exp(sigma^2) - 1) * exp(2*mu + sigma^2) )
+sd
+```
+
+And we can see these values are very close to the experimentally determined ones.
+
 Finally choosing an intermediate value of $\eta = 0.5$ gives us
 
 ```{r}
@@ -106,6 +136,42 @@ qplot(B, geom = "density", xlab = "B", ylab = "frequency") +
 ```
 
 Now we see a density plot similar in shape to the desired density, but now the geometric random walk displays dependence on previous values.
+
+We arrive at a mean of
+
+```{r}
+mean(B)
+```
+
+and standard deviation of
+
+```{r}
+sd(B)
+```
+
+Note that when $\eta \in (0,1)$, we have an autoregressive process of order 1 on the logarithmic scale of the form
+
+$$
+X_{t+1} = c + \rho X_t + \epsilon_t
+$$
+
+where $\epsilon_t$ is normally distributed noise with mean 0 and standard deviation $\sigma_E$. This process has a theoretical expected mean of $\mu = c / (1 - \rho)$ and variance $\sigma = \sigma_E^2 / (1 - \rho^2)$. For the resulting log-normal distribution these yield a mean of
+
+```{r}
+
+mean <- exp(mu + sigma^2/2)
+mean
+```
+
+and standard deviation
+
+```{r}
+var <- sqrt( sigma^2 / (1-(1-eta)^2) )
+sd <- sqrt( (exp(var^2) - 1) * exp(2*mu + var^2) )
+sd
+```
+
+Which are again very close to the experimentally determined values.
 
 If we take the full stochastic SIR system and evolve it using an Euler stepping scheme with a step size of $h = 1/7$, for 1 step per day, we obtain the following plot
 
@@ -302,6 +368,9 @@ names(convergedata) <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "R
 
 statedata <- data.frame( if2data$statemeans )
 names(statedata) <- c("S","I","R")
+
+sdsdata <- data.frame( if2data$sds )
+names(sdsdata) <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
 ```
 
 The total runtime for the fitting was determined using the R `system.time()` function, and yielded
@@ -339,7 +408,7 @@ where the solid line shows the true states, the points are the data, and the das
 
 # IF2 convergence plots
 
-Since IF2 is an iterative algorithm where each pass through he data is expected to push the parameter estimates towards the MLE, we can see the evolution of these estimates as a function of the pass number. Plots showing this evolution are shown below for the six most critical parameters
+Since IF2 is an iterative algorithm where each pass through he data is expected to push the parameter estimates towards the MLE, we can see the evolution of these estimates as a function of the pass number. Plots showing evolution of the mean estimates are shown below for the six most critical parameters.
 
 ```{r}
 library(gridExtra)
@@ -388,6 +457,45 @@ grid.arrange(R0converge, rconverge, sigmaconverge, infecconverge, etaconverge, b
 ```
 
 The horizontal axis shows the IF2 pass number. The solid black lines show the evolution of the ML estimates, the solid grey lines show the true value, and the dashed grey lines show the mean parameter estimates from the particle swarm after the final pass. 
+
+Similarly, we can look at the evolution of the standard deviations of the parameter estimates from the particle swarm as a function of the pass number, shown below.
+
+```{r}
+library(gridExtra)
+
+meanval.R0 		<- mean(paramdata$R0)
+meanval.r 		<- mean(paramdata$r)
+meanval.sigma 	<- mean(paramdata$sigma)
+meanval.Iinit 	<- mean(paramdata$Iinit)
+meanval.eta 	<- mean(paramdata$eta)
+meanval.berr 	<- mean(paramdata$berr)
+
+linecolour <- "grey50"
+lineweight <- 0.5
+
+R0sds <- qplot(1:dim(sdsdata)[1], sdsdata$R0, geom = "line", xlab = "", ylab = expression(R[0])) +
+				theme_bw()
+
+rsds <- qplot(1:dim(sdsdata)[1], sdsdata$r, geom = "line", xlab = "", ylab = "r") +
+				theme_bw()
+
+sigmasds <- qplot(1:dim(sdsdata)[1], sdsdata$sigma, geom = "line", xlab = "", ylab = expression(sigma)) +
+				theme_bw()
+
+infecsds <- qplot(1:dim(sdsdata)[1], sdsdata$Iinit, geom = "line", xlab = "", ylab = "Initial Infected") +
+				theme_bw()
+
+etasds <- qplot(1:dim(sdsdata)[1], sdsdata$eta, geom = "line", xlab = "", ylab = expression(eta)) +
+				theme_bw()
+
+berrsds <- qplot(1:dim(sdsdata)[1], sdsdata$berr, geom = "line", xlab = "", ylab = expression(epsilon[proc])) +
+				theme_bw()
+
+grid.arrange(R0sds, rsds, sigmasds, infecsds, etasds, berrsds, ncol = 3, nrow = 2)
+```
+
+The horizontal axis shows the IF2 pass number and the solid black lines show the evolution of the standard deviations of the particle swarm values. As expected there is a downward trend in all plots, with a very strong trend in all but two of them.
+
 
 # IF2 Densities
 
