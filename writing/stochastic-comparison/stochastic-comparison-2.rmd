@@ -14,11 +14,11 @@ output:
 ***
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(cache = TRUE, autodep = TRUE, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+knitr::opts_chunk$set(cache = TRUE, autodep = FALSE, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE)
 ```
 
 ```{r seed, include = FALSE}
-set.seed(1024)
+set.seed(10245)
 ```
 
 # Forecasting Setup
@@ -74,7 +74,7 @@ StocSIR <- function(y, pars, T, steps) {
 
 }
 
-set.seed(1024)
+set.seed(10245)
 
 T 		<- 60
 i_infec <- 5
@@ -893,3 +893,6 @@ If we overlay the plot data on top of one another we get
 qplot(1:maxTrunc, if2lognormsse, geom = "line", xlab = "Truncation", ylab = expression( log(SSE[norm]) )  ) +
 	geom_line(aes(y = hmclognormsse), linetype = "dashed") +
     theme_bw()
+```
+
+Here the solid line shows the IF2 truncation normalized SSEs and the dashed line shows the HMCMC normalized SSEs
