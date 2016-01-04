@@ -85,6 +85,7 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 
 	NumericMatrix paramdata(NP, 8);
 	NumericMatrix means(nPasses, 8);
+	NumericMatrix sds(nPasses, 8);
 	NumericMatrix statemeans(T, 3);
 	NumericMatrix statedata(NP, 4);
 
@@ -231,6 +232,15 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 		means(pass, 6) = pInfo.Iinitmean;
 		means(pass, 7) = pInfo.Rinitmean;
 
+		sds(pass, 0) = pInfo.R0sd;
+		sds(pass, 1) = pInfo.rsd;
+		sds(pass, 2) = pInfo.sigmasd;
+		sds(pass, 3) = pInfo.etasd;
+		sds(pass, 4) = pInfo.berrsd;
+		sds(pass, 5) = pInfo.Sinitsd;
+		sds(pass, 6) = pInfo.Iinitsd;
+		sds(pass, 7) = pInfo.Rinitsd;
+
 		// between-pass perturbations, not after last pass
 		if (pass < (nPasses + 1))
 		    perturbParticles(particles, N, NP, pass, coolrate);
@@ -284,7 +294,8 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 	return Rcpp::List::create(	Rcpp::Named("paramdata") = paramdata, 
                              	Rcpp::Named("means") = means,
                              	Rcpp::Named("statemeans") = statemeans,
-                             	Rcpp::Named("statedata") = statedata);
+                             	Rcpp::Named("statedata") = statedata,
+                             	Rcpp::Named("sds") = sds);
 
 }
 
