@@ -2,13 +2,9 @@
 title: "Stochastic SIR Forecasting Showdown Part 1: Parameter Fitting"
 author: "Dexter Barrows"
 date: "`r format(Sys.time(), '%H:%M %d %B %Y')`"
-#bibliography: bibliography.bib
 output: 
   html_document: 
     fig_width: 9.5
-#output: pdf_document 
-#fig_width: 9.5
-#fontsize: 12pt
 ---
 
 ```{r setup, include=FALSE}
@@ -43,81 +39,16 @@ $$
 
 We will take $\epsilon_{t}$ to be normally distributed with standard deviation $\rho^2$ such that $\epsilon_{t} \sim \mathcal{N}(0,\rho^2)$. The geometric attraction term constrains the random walk, the force of which is $\eta \in [0,1]$. If we take $\eta = 0$ then the walk will be unconstrained; if we let $\eta = 1$ then all values of $\beta_t$ will be independent from the previous value (and consequently all other values in the sequence).
 
-We can observe the effect of $\eta$ visually by setting $\eta$ to each extreme value and then to an intermediate value and plotting the results. The anchoring value $\beta_0$ was set to $\beta_0 = R_0 \cdot r / N$ where $R_0 = 3.0$, $r = 0.1$ and $N = 500$, giving $B_0 = 6 \times 10^{-4}$. The noise parameter $\rho^2$ was set to $0.5$.
-
-For $\eta = 0$ we have
+Choosing an intermediate value of $\eta = 0.5$ gives us
 
 ```{r}
 library(ggplot2)
-library(RColorBrewer)
+
 T <- 7*60
 berr <- 0.5
 B <- numeric(T)
 B0 <- 3.0 * 0.1 / 500;
 B[1] <- B0
-eta <- 0
-for (t in 2:T) {
-	B[t] <- exp( log(B[t-1]) + eta*(log(B0) - log(B[t-1])) + rnorm(1,0,berr) )
-}
-qplot(1:T, B, geom = "line", xlab = "Time", ylab = expression(beta)) + theme_bw()
-```
-Here we can see how the unconstrained walk allows the sequence to climb several orders of magnitude higher than the starting value, which is undesirable for the model formulation and unrealistic from a biological perspective.
-
-Now if we set $\eta = 1$ we have
-
-```{r}
-eta <- 1
-for (t in 2:T) {
-	B[t] <- exp( log(B[t-1]) + eta*(log(B0) - log(B[t-1])) + rnorm(1,0,berr) )
-}
-qplot(1:T, B, geom = "line", xlab = "Time", ylab = expression(beta)) +
-	scale_y_continuous(limits=c(0, 0.002)) +
-	theme_bw()
-```
-
-and corresponding density plot
-
-```{r}
-qplot(B, geom = "density", xlab = "B", ylab = "frequency") +
-	scale_x_continuous(limits=c(0, 0.002)) +
-	theme_bw()
-```
-
-Notice that we have frequent oscillations between smaller and larger values within only a few time steps, but the range of values is desirable.
-
-We arrive at a mean of
-
-```{r}
-mean(B)
-```
-
-and standard deviation of
-
-```{r}
-sd(B)
-```
-
-Note that when $\eta = 1$ we have $\beta_t = \exp( \log(\bar{\beta}) + \epsilon_t )$, constituting a log-normal distribution with location $\mu = log(\bar{\beta})$ and scale $\sigma = \rho$. The resulting distribution has a theoretical mean of $\exp(\mu + \sigma^2/2)$ which evaluates to
-
-```{r}
-mu <- log(3*0.1/500)
-sigma <- 0.5
-mean <- exp(mu + sigma^2/2)
-mean
-```
-
-and a theoretical standard deviation of $\sqrt{ (exp(\sigma^2) - 1) \cdot exp(2\mu + \sigma^2)}$ which evaluates to
-
-```{r}
-sd <- sqrt( (exp(sigma^2) - 1) * exp(2*mu + sigma^2) )
-sd
-```
-
-And we can see these values are very close to the experimentally determined ones.
-
-Finally choosing an intermediate value of $\eta = 0.5$ gives us
-
-```{r}
 eta <- 0.5
 for (t in 2:T) {
 	B[t] <- exp( log(B[t-1]) + eta*(log(B0) - log(B[t-1])) + rnorm(1,0,berr) )
@@ -135,7 +66,7 @@ qplot(B, geom = "density", xlab = "B", ylab = "frequency") +
 	theme_bw()
 ```
 
-Now we see a density plot similar in shape to the desired density, but now the geometric random walk displays dependence on previous values.
+We see a density plot similar in shape to the desired density, and the geometric random walk displays dependence on previous values.
 
 We arrive at a mean of
 
@@ -158,7 +89,8 @@ $$
 where $\epsilon_t$ is normally distributed noise with mean 0 and standard deviation $\sigma_E$. This process has a theoretical expected mean of $\mu = c / (1 - \rho)$ and variance $\sigma = \sigma_E^2 / (1 - \rho^2)$. For the resulting log-normal distribution these yield a mean of
 
 ```{r}
-
+mu <- log(3*0.1/500)
+sigma <- 0.5
 mean <- exp(mu + sigma^2/2)
 mean
 ```
@@ -251,57 +183,28 @@ infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
 
 datapart <- c(infec_counts[1:(Tlim+1)],rep(NA,T-Tlim))
 
-qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
-	geom_point(aes(y = datapart)) +
-	theme_bw()
-```
-
-where the solid line is the true trajectory and the dots show the data points obtained by adding in observation error defined as $\epsilon_{obvs} = \mathcal{N}(0,10)$. Note that this is only one possible realization of the system, and that different random numbers drawn from the system's random number generator will produce varying results. The plot below shows 9 additional example trajectories in addition to the one shown in the previous plot
-
-```{r}
-library(reshape2)
-numtraj <- 9
-
-trajData_save <- matrix(NA, nrow = numtraj, ncol = (T+1))
-for(i in 1:numtraj) {
-	sdeout <- StocSIR(true_init_cond, pars_true, T, steps)
-	colnames(sdeout) <- c('S','I','R','B')
-	trajData_save[i,] <- sdeout[,'I']
-}
-
-plotdata <- melt(trajData_save)
-names(plotdata) <- c("traj","time","I")
-plotdata[,'time'] <- plotdata[,'time'] - 1
-
-qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
-	geom_line(data = plotdata, aes(x = time, y = I, group = traj)) +
-	theme_bw()
-```
-
-We can see the average behaviour of the system by taking the average over 100 trajectories. This is shown below with the 10 sample trajectories from the previous plot overlayed.
-
-```{r}
 numtraj <- 100
 
 trajData <- matrix(NA, nrow = numtraj, ncol = (T+1))
 for(i in 1:numtraj) {
-	sdeout <- StocSIR(true_init_cond, pars_true, T, steps)
-	colnames(sdeout) <- c('S','I','R','B')
-	trajData[i,] <- sdeout[,'I']
+    sdeout <- StocSIR(true_init_cond, pars_true, T, steps)
+    colnames(sdeout) <- c('S','I','R','B')
+    trajData[i,] <- sdeout[,'I']
 }
 
-meanTraj 	<- colMeans(trajData)
+meanTraj    <- colMeans(trajData)
 avTraj      <- meanTraj
-quantTraj 	<- t(apply(trajData, 2, quantile, probs = c(0.025,0.975)))
+quantTraj   <- t(apply(trajData, 2, quantile, probs = c(0.025,0.975)))
 colnames(quantTraj) <- c("025","975")
 
-qplot(0:T, meanTraj, geom = "line", xlab = "Time", ylab = "Infection count") +
-	geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
-	geom_line(data = plotdata, aes(x = time, y = I, group = traj), linetype = "dotted") +
-	theme_bw()
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+    geom_line(aes(x = 0:T, y = meanTraj), linetype = "dotted") +
+    geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
+    geom_point(aes(y = datapart)) +
+    theme_bw()
 ```
 
-Here the solid line is the mean behaviour, the dotted lines are the sample trajectories from the previous plot, and the grey ribbon is centre 95th quantile.
+Here the solid line is a single random trajectory, the dots show the data points obtained by adding in observation error defined as $\epsilon_{obvs} = \mathcal{N}(0,10)$, and the grey ribbon is centre 95th quantile from 100 random trajectories.
 
 
 ***
@@ -336,23 +239,23 @@ where $P$ is the number of particles.
 
 The goal here is to then pick the number of HMCMC samples and IF2 particles to yield similar MCSE values. To do this we picked a combination of parameters for RStan that yielded decent results when applied to the stochastic SIR model specified above, calculated the resulting mean MCSE across several model fits, and isolated the expected number of IF2 particles needed to obtain the same value. This was used as a starting value to "titrate" the IF2 iterations to the same point.
 
-The resulting values were 1000 HMCMC warm-up iterations with 2000 samples drawn post-warm-up, and 2000 IF2 particles sent through 15 passes, each method giving an approximate MCSE of 0.006.
+The resulting values were 1000 HMCMC warm-up iterations with 2000 samples drawn post-warm-up, and 3000 IF2 particles sent through 50 passes, each method giving an approximate MCSE of 0.006.
 
 
 ***
 
 # IF2 Fitting
 
-Now we will use an implementation of the IF2 algorithm to attempt to fit the stochastic SIR model to the data from Figure [?]. The goal here is just parameter inference, but since IF2 works by applying a series on particle filters we essentially get the average system state estimates for a very small additional computational cost. Hence, we will will also look at that estimated behaviour in addition the the parameter estimates.
+Now we will use an implementation of the IF2 algorithm to attempt to fit the stochastic SIR model to the previous data. The goal here is just parameter inference, but since IF2 works by applying a series on particle filters we essentially get the average system state estimates for a very small additional computational cost. Hence, we will will also look at that estimated behaviour in addition the the parameter estimates.
 
-The code used here is a mix of R and C++ implemented using RCpp. The fitting was undertaken using $10^4$ particles with 10 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.8^{p}$, where p is the pass number starting with 0.
+The code used here is a mix of R and C++ implemented using RCpp. The fitting was undertaken using $3000$ particles with 50 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.975^{p}$, where p is the pass number starting with 0.
 
 ```{r if2_fit}
 library(Rcpp)
 
-NP          <- 2000
-nPasses     <- 15
-coolrate    <- 0.95
+NP          <- 3000
+nPasses     <- 50
+coolrate    <- 0.975
 
 if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
 
@@ -379,7 +282,7 @@ The total runtime for the fitting was determined using the R `system.time()` fun
 if2time
 ```
 
-The MLE parameter estimates, taken to be the mean of the particle swarm values after the final pass was
+The MLE parameter estimates, taken to be the mean of the particle swarm values after the final pass, were
 
 ```{r}
 if2means <- colMeans(paramdata[c("R0","r","Iinit","sigma","eta","berr")])
