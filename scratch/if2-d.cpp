@@ -95,7 +95,7 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 	Particle particles[NP]; 	// particle estimates for current step
 	Particle particles_old[NP]; // intermediate particle states for resampling
 
-	printf("Initializing particle states\n");
+	//printf("Initializing particle states\n");
 
 	// initialize particle parameter states (seeding)
 	for (int n = 0; n < NP; n++) {
@@ -140,14 +140,14 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 
 	// START PASSES THROUGH DATA
 
-	printf("Starting filter\n");
-	printf("---------------\n");
-	printf("Pass\n");
+	//printf("Starting filter\n");
+	//printf("---------------\n");
+	//printf("Pass\n");
 
 
 	for (int pass = 0; pass < nPasses; pass++) {
 
-		printf("...%d / %d\n", pass, nPasses);
+		//printf("...%d / %d\n", pass, nPasses);
 
 		// reset particle system evolution states
 		for (int n = 0; n < NP; n++) {
@@ -240,6 +240,8 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 	ParticleInfo pInfo;
 	particleDiagnostics(&pInfo, particles, NP);
 
+    /*
+
 	printf("Parameter results (mean | sd)\n");
 	printf("-----------------------------\n");
 	printf("R0        %f %f\n", pInfo.R0mean, pInfo.R0sd);
@@ -252,6 +254,8 @@ Rcpp::List if2(NumericVector data, int T, int N, int NP, int nPasses, double coo
 	printf("R_init    %f %f\n", pInfo.Rinitmean, pInfo.Rinitsd);
 
 	printf("\n");
+
+    */
 
 
 

@@ -1,9 +1,10 @@
 library(reshape2)
 library(rstan)
-library(shinystan)
+#library(shinystan)
 library(foreach)
 library(parallel)
 library(doParallel)
+library(Rcpp)
 
 StocSIR <- function(y, pars, T, steps) {
 
@@ -122,13 +123,61 @@ true_init_cond <- c(S = N - i_infec,
 
 # setup cluster
 numCores <- detectCores()
+numCores
 cl <- makeCluster(numCores)
 registerDoParallel(cl)
 
+## STAN 
+##################################################################################################
 
-hmcvals <- numeric(10)
 
-for (i in 1:10) {
+# options
+stan_options <- list(   chains = 1,  # number of chains
+                        iter   = 3000,      # iterations per chain, including warmup
+                        warmup = 1000,      # warmup interations
+                        thin   = 5)         # thinning number
+
+
+## fit once to compile
+##
+
+# get raw data
+sdeout_true <- StocSIR(true_init_cond, pars_true, T, steps)
+colnames(sdeout_true) <- c('S','I','R','B')
+
+infec_counts_raw <- sdeout_true[,'I'] + rnorm(T+1, 0, sigma)
+infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
+
+# conform data to stan's required format
+datlen <- T*7 + 1
+
+data <- matrix(data = -1, nrow = T+1, ncol = steps)
+data[,1] <- infec_counts
+standata <- as.vector(t(data))[1:datlen]
+
+#options
+sir_data <- list( T = datlen,       # simulation time
+                  y = standata,     # infection count data
+                  N = 500,          # population size
+                  h = 1/steps )     # step size per day
+
+hmcfile <- "sirode_euler.stan"
+
+# fit!
+initialfit <- with(stan_options,
+                stan(file   = hmcfile,
+                    data    = sir_data,
+                    chains  = chains,
+                    iter    = iter,
+                    warmup  = warmup,
+                    thin    = thin)
+                )
+
+#hmcvals <- numeric(10)
+
+## get new data and refit in parallel
+##
+hmcvals <- foreach (i = 1:10, .combine = cbind, .packages = c("rstan","reshape2")) %dopar% {
 
 	sdeout_true <- StocSIR(true_init_cond, pars_true, T, steps)
 	colnames(sdeout_true) <- c('S','I','R','B')
@@ -151,18 +200,12 @@ for (i in 1:10) {
 	                  N = 500,      	# population size
 	                  h = 1/steps )   	# step size per day 
 	                    
-	rstan_options(auto_write = TRUE)
-	options(mc.cores = numCores)
-
-	stan_options <- list(   chains = 1,  # number of chains
-	                        iter   = 3000, 		# iterations per chain, including warmup
-	                        warmup = 1000, 		# warmup interations
-	                        thin   = 5)   		# thinning number
-
-	hmcfile <- "sirode_euler.stan"
+	#rstan_options(auto_write = TRUE)
+	#options(mc.cores = numCores)
 
 	hmctime <- system.time(fit <- with(stan_options,
-			            	stan(file  	= hmcfile,
+			            	stan(#file  	= hmcfile,
+                                 fit = initialfit,
 					            data    = sir_data,
 					            chains  = chains,
 					            iter    = iter,
@@ -194,30 +237,32 @@ for (i in 1:10) {
 	res <- t(1 / as.matrix(parmeans)) %*% parvars %*% (1 / as.matrix(parmeans))
 	val <- sqrt( res / ( (stan_options$iter - stan_options$warmup) / stan_options$thin * length(parmeans)) )
 
-	hmcvals[i] <- val
+	#hmcvals[i] <- val
+
+    return(val)
 
 }
 
 target_err <- mean(hmcvals)
 
+##################################################################################################
 
 
-## IF2 stuff
-##
 
-library(Rcpp)
+## IF2 
+##################################################################################################
 
 NP          <- 10000
 nPasses     <- 10
 coolrate    <- 0.8
 
 if2file <- paste(getwd(),"if2-d.cpp",sep="/")
-sourceCpp(if2file)
 
-if2vals <- numeric(10)
-if2res <- numeric(10)
 
-for(i in 1:10) {
+#if2vals <- numeric(10)
+#if2res <- numeric(10)
+
+if2mat <- foreach (i = 1:10, .combine = rbind, .packages = "Rcpp") %dopar% {
 
 	sdeout_true <- StocSIR(true_init_cond, pars_true, T, steps)
 	colnames(sdeout_true) <- c('S','I','R','B')
@@ -225,6 +270,7 @@ for(i in 1:10) {
 	infec_counts_raw <- sdeout_true[,'I'] + rnorm(T+1, 0, sigma)
 	infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
 
+    sourceCpp(if2file)
 	if2time <- system.time( if2data <- if2(infec_counts[1:(Tlim+1)], Tlim+1, N, NP, nPasses, coolrate) )
 
 	paramdata <- data.frame( if2data$paramdata )
@@ -237,31 +283,34 @@ for(i in 1:10) {
 	res <- t(1 / as.matrix(parmeans)) %*% parvars %*% (1 / as.matrix(parmeans))
 	val <- sqrt( res / ( (NP) * length(parmeans)) )
 
-	if2vals[i] <- val
-	if2res[i] <- res
+	#if2vals[i] <- val
+	#if2res[i] <- res
+
+    return( c(val,res) )
 
 }
 
-target_particles <- mean(if2res) / (target_err^2 * length(parmeans))
+colnames(if2mat) <- c("vals","res")
+if2vals <- if2mat[,'vals']
+if2res  <- if2mat[,'res']
+
+target_particles <- mean(if2res) / (target_err^2 * 6)
 target_particles
 
-save.image(file = "mchammererror.RData")
 
-
-## Re-run PF stuff with traget number of particles
+## Re-run PF stuff with target number of particles
 ##
 
 NP          <- target_particles
 nPasses     <- 15
-coolrate    <- 0.95
+coolrate    <- 0.90
 
 if2file <- paste(getwd(),"if2-d.cpp",sep="/")
-sourceCpp(if2file)
 
-if2vals <- numeric(10)
-if2res <- numeric(10)
+#if2vals <- numeric(10)
+#if2res <- numeric(10)
 
-for(i in 1:10) {
+if2mat <- foreach (i = 1:10, .combine = rbind, .packages = "Rcpp") %dopar% {
 
 	sdeout_true <- StocSIR(true_init_cond, pars_true, T, steps)
 	colnames(sdeout_true) <- c('S','I','R','B')
@@ -269,6 +318,7 @@ for(i in 1:10) {
 	infec_counts_raw <- sdeout_true[,'I'] + rnorm(T+1, 0, sigma)
 	infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
 
+    sourceCpp(if2file)
 	if2time <- system.time( if2data <- if2(infec_counts[1:(Tlim+1)], Tlim+1, N, NP, nPasses, coolrate) )
 
 	paramdata <- data.frame( if2data$paramdata )
@@ -281,43 +331,21 @@ for(i in 1:10) {
 	res <- t(1 / as.matrix(parmeans)) %*% parvars %*% (1 / as.matrix(parmeans))
 	val <- sqrt( res / ( (NP) * length(parmeans)) )
 
-	if2vals[i] <- val
-	if2res[i] <- res
+	#if2vals[i] <- val
+	#if2res[i] <- res
+    return( c(val,res) )
 
 }
+
+colnames(if2mat) <- c("vals","res")
+if2vals <- if2mat[,'vals']
+if2res  <- if2mat[,'res']
 
 if2_err <- mean(if2vals)
 if2_err
 
 
+##################################################################################################
 
-if (FALSE) {
-
-	paramset <- paramdata[1,]
-
-	init_cond <- c(S = paramset$Sinit,
-	               I = paramset$Iinit,
-	               R = paramset$Rinit)
-	pars <- c(R0 = paramset$R0,
-	          r = paramset$r,
-	          N = 500.0,
-	          eta = paramset$eta,
-	          berr = paramset$berr)
-
-	berrvec <- numeric(datlen)
-	for (i in 1:datlen) {
-		varname <- paste("Bnoise[", i, "]", sep = "")
-		berrvec[i] <- paramset[[varname]]
-	}
-
-	sdeout <- StocSIRstan(init_cond, pars, T, steps, berrvec)
-	colnames(sdeout) <- c('S','I','R','B')
-
-}
-
-
-if (FALSE) {
-	# Shiny Stan!!!
-	sso <- as.shinystan(fit)
-	sso <- launch_shinystan(sso)
-}
+# save everything
+save.image(file = "mchammererror.RData")
