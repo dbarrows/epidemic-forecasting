@@ -1,152 +1,61 @@
-library(deSolve)
-library(ggplot2)
-library(RColorBrewer)
 library(pracma)
 
-# base simulation ODE RHS function
+smap <- function(data, E, theta, stepsAhead) {
 
-SIR <- function(Time, State, Pars) {
-    
-    with(as.list(c(State, Pars)), {
-        
-        B   <- R0*r/N
-        BSI <- B*S*I
-        rI  <- r*I
-        
-        dS = -BSI
-        dI = BSI - rI
-        dR = rI
-        
-        return(list(c(dS, dI, dR)))
-        
-    })
-    
-}
+    # construct library
+    tseries <- as.vector(data)
+    liblen  <- length(tseries) - E + 1 - stepsAhead
+    lib     <- matrix(NA, liblen, E)
 
-# parameters
+    for (i in 1:E) {
+        lib[,i] <- tseries[(E-i+1):(liblen+E-i)]
+    }
 
-T 		<- 100
-N 		<- 500
-sigma 	<- 10
-i_infec <- 1
-replicates <- 5
+    # predict from the last index
+    tslen <- length(tseries)
+    predictee <- rev(t(as.matrix(tseries[(tslen-E+1):tslen])))
+    predictions <- numeric(stepsAhead)
 
-# get true underlying states
+    #allPredictees <- matrix(NA, stepsAhead, E)
 
-true_init_cond <- c(S = N - i_infec,
-                    I = i_infec,
-                    R = 0)
+    # for each prediction index (number of steps ahead)
+    for(i in 1:stepsAhead) {
 
-true_pars <- c(R0 = 3.0,
-               r = 0.1,
-               N = 500.0)
+        # set up weight calculation
+        predmat <- repmat(predictee, liblen, 1)
+        distances <- sqrt( rowSums( abs(lib - predmat)^2 ) )
+        meanDist <- mean(distances)
 
-odeout <- ode(true_init_cond, 0:(T-1), SIR, true_pars)
-trueTraj <- odeout[,3]
+        # calculate weights
+        weights <- exp( - (theta * distances) / meanDist )
 
-# replicate to mimic cycles
+        # construct A, B
 
-multiTrueTraj <- repmat(trueTraj, 1, replicates)
+        preds <- tseries[(E+i):(liblen+E+i-1)]
 
-# perturb with normally distributed noise
+        A <- cbind( rep(1.0, liblen), lib ) * repmat(as.matrix(weights), 1, E+1)
+        B <- as.matrix(preds * weights)
 
-set.seed(1000)
+        # solve system for C
 
-infec_counts_raw <- multiTrueTraj + rnorm(replicates*T, 0, sigma)
-infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
+        Asvd <- svd(A)
+        C <- Asvd$v %*% diag(1/Asvd$d) %*% t(Asvd$u) %*% B
 
-# plot data and true states
+        # get prediction
 
-plotdata <- data.frame(times = 1:(replicates*T),
-                       true = t(multiTrueTraj),
-                       data = t(infec_counts) )
+        predsum <- sum(C * c(1,predictee))
 
-g <- ggplot(plotdata, aes(times)) +
-        geom_line(aes(y = true, colour = "True")) +
-        geom_point(aes(y = data, color = "Data")) +
-        labs(x = "Time", y = "Infection count", color = "") +
-        scale_color_brewer(palette="Paired") +
-        theme(panel.background = element_rect(fill = "#F0F0F0"))
+        # save
 
-print(g)
+        predictions[i] <- predsum
 
+        # next predictee
 
-## SMAP
+        #predictee <- c( predsum, predictee[-E] )
+        #allPredictees[i,] <- predictee
 
-# trim off a bit of the time series - TEMPORARY
-lim <- length(as.vector(infec_counts)) - 24
-infec_counts <- as.vector(infec_counts)[1:lim]
+    }
 
-E <- 10
-theta <- 10
-stepsAhead <- 200
-
-# construct library
-tseries <- as.vector(infec_counts)
-liblen 	<- length(tseries) - E + 1 - stepsAhead
-lib 	<- matrix(NA, liblen, E)
-
-for (i in 1:E) {
-	lib[,i] <- tseries[(E-i+1):(liblen+E-i)]
-}
-
-# predict from the last index
-tslen <- length(tseries)
-predictee <- rev(t(as.matrix(tseries[(tslen-E+1):tslen])))
-predictions <- numeric(stepsAhead)
-
-#allPredictees <- matrix(NA, stepsAhead, E)
-
-# for each prediction index (number of steps ahead)
-for(i in 1:stepsAhead) {
-
-	# set up weight calculation
-	predmat <- repmat(predictee, liblen, 1)
-	distances <- sqrt( rowSums( abs(lib - predmat)^2 ) )
-	meanDist <- mean(distances)
-
-	# calculate weights
-	weights <- exp( - (theta * distances) / meanDist )
-
-	# construct A, B
-
-	preds <- tseries[(E+i):(liblen+E+i-1)]
-
-	A <- cbind( rep(1.0, liblen), lib ) * repmat(as.matrix(weights), 1, E+1)
-	B <- as.matrix(preds * weights)
-
-	# solve system for C
-
-	Asvd <- svd(A)
-	C <- Asvd$v %*% diag(1/Asvd$d) %*% t(Asvd$u) %*% B
-
-	# get prediction
-
-	predsum <- sum(C * c(1,predictee))
-
-	# save
-
-	predictions[i] <- predsum
-
-	# next predictee
-
-	#predictee <- c( predsum, predictee[-E] )
-	#allPredictees[i,] <- predictee
+    return(predictions)
 
 }
-
-plotdata <- data.frame(times = 1:(length(tseries)+stepsAhead),
-                       tseries = c(tseries, rep(NA,stepsAhead) ),
-                       predictions = c( rep(NA,length(tseries)), predictions),
-                       predictee = c(rep(NA,length(tseries)-E),rev(predictee),rep(NA,stepsAhead)) )
-
-
-p <- ggplot(plotdata, aes(times)) +
-        geom_line(aes(y = tseries, colour = "Data")) +
-        geom_line(aes(y = predictions, color = "Predictions")) +
-        geom_point(aes(y = predictee, color = "Predictee")) +
-        labs(x = "Time", y = "Infection count", color = "") +
-        scale_color_brewer(palette="Paired") +
-        theme(panel.background = element_rect(fill = "#F0F0F0"))
-
-print(p)
