@@ -81,7 +81,7 @@ registerDoParallel(cl)
 ## Re-run PF stuff with target number of particles
 ##
 
-NP          <- 3000
+NP          <- 2500
 nPasses     <- 50
 coolrate    <- 0.975
 

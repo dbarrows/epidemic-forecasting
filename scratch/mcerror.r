@@ -133,9 +133,9 @@ registerDoParallel(cl)
 
 # options
 stan_options <- list(   chains = 1,  # number of chains
-                        iter   = 3000,      # iterations per chain, including warmup
+                        iter   = 2000,      # iterations per chain, including warmup
                         warmup = 1000,      # warmup interations
-                        thin   = 5)         # thinning number
+                        thin   = 1)         # thinning number
 
 
 ## fit once to compile
@@ -243,7 +243,13 @@ hmcvals <- foreach (i = 1:10, .combine = cbind, .packages = c("rstan","reshape2"
 
 }
 
+print("hmcvals")
+hmcvals
+
 target_err <- mean(hmcvals)
+
+print("target_error")
+target_err
 
 ##################################################################################################
 
@@ -252,9 +258,9 @@ target_err <- mean(hmcvals)
 ## IF2 
 ##################################################################################################
 
-NP          <- 10000
-nPasses     <- 10
-coolrate    <- 0.8
+NP          <- 3000
+nPasses     <- 50
+coolrate    <- 0.975
 
 if2file <- paste(getwd(),"if2-d.cpp",sep="/")
 
