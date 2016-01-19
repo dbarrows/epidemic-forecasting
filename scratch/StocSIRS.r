@@ -1,7 +1,7 @@
 library(ggplot2)
 library(reshape2)
 
-StocSIR <- function(y, pars, T, steps) {
+StocSIRS <- function(y, pars, T, steps) {
 
 	out <- matrix(NA, nrow = (T+1), ncol = 4)
 
@@ -71,15 +71,15 @@ true_init_cond <- c(S = N - i_infec,
 					I = i_infec,
 					R = 0)
 
-sdeout <- StocSIR(true_init_cond, pars, T, steps)
+sdeout <- StocSIRS(true_init_cond, pars, T, steps)
 colnames(sdeout) <- c('S','I','R','B')
 
 long = melt(data.frame(t = 0:T, sdeout[,c("S","I","R")]), "t")
 
-quartz()
-ggplot(data = long, aes (t, value, color = variable)) +
-    geom_line() +
-    theme_bw()
+#quartz()
+#ggplot(data = long, aes (t, value, color = variable)) +
+#    geom_line() +
+#    theme_bw()
 
 infec_counts_raw <- sdeout[,'I'] + rnorm(T+1, 0, sigma)
 infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
