@@ -1,7 +1,7 @@
 ---
 title: "Stochastic SIR Forecasting Showdown Part 1: Parameter Fitting"
 author: "Dexter Barrows"
-date: "10:13 12 January 2016"
+date: "23:51 18 January 2016"
 output: 
   html_document: 
     fig_width: 9.5
@@ -120,7 +120,7 @@ where $P$ is the number of particles.
 
 The goal here is to then pick the number of HMCMC samples and IF2 particles to yield similar MCSE values. To do this we picked a combination of parameters for RStan that yielded decent results when applied to the stochastic SIR model specified above, calculated the resulting mean MCSE across several model fits, and isolated the expected number of IF2 particles needed to obtain the same value. This was used as a starting value to "titrate" the IF2 iterations to the same point.
 
-The resulting values were 1000 HMCMC warm-up iterations with 2000 samples drawn post-warm-up, and 3000 IF2 particles sent through 50 passes, each method giving an approximate MCSE of 0.006.
+The resulting values were 1000 HMCMC warm-up iterations with 1000 samples drawn post-warm-up, and 2500 IF2 particles sent through 50 passes, each method giving an approximate MCSE of 0.0065.
 
 
 ***
@@ -129,7 +129,7 @@ The resulting values were 1000 HMCMC warm-up iterations with 2000 samples drawn 
 
 Now we will use an implementation of the IF2 algorithm to attempt to fit the stochastic SIR model to the previous data. The goal here is just parameter inference, but since IF2 works by applying a series on particle filters we essentially get the average system state estimates for a very small additional computational cost. Hence, we will will also look at that estimated behaviour in addition the the parameter estimates.
 
-The code used here is a mix of R and C++ implemented using RCpp. The fitting was undertaken using $3000$ particles with 50 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.975^{p}$, where p is the pass number starting with 0.
+The code used here is a mix of R and C++ implemented using RCpp. The fitting was undertaken using $2500$ particles with 50 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.975^{p}$, where p is the pass number starting with 0.
 
 
 
@@ -138,7 +138,7 @@ The total runtime for the fitting was determined using the R `system.time()` fun
 
 ```
 ##    user  system elapsed 
-##  23.548   0.302  25.501
+##  18.355   0.271  19.438
 ```
 
 The MLE parameter estimates, taken to be the mean of the particle swarm values after the final pass, were
@@ -146,7 +146,7 @@ The MLE parameter estimates, taken to be the mean of the particle swarm values a
 
 ```
 ##        R0         r        I0     sigma       eta      berr 
-## 3.4341486 0.1032024 7.4768355 8.8667696 0.6209699 0.1381593
+## 3.3106324 0.1031366 7.2199345 8.8893661 0.7614133 0.1133775
 ```
 
 giving a relative error of
@@ -154,7 +154,7 @@ giving a relative error of
 
 ```
 ##          R0           r          I0       sigma         eta        berr 
-##  0.14471621  0.03202397  0.49536709 -0.11332304  0.24193983 -0.72368145
+##  0.10354413  0.03136561  0.44398689 -0.11106339  0.52282669 -0.77324503
 ```
 
 From last IF2 particle filtering iteration, the mean state values from the particle swarm at each time step are shown with the true underlying state and data in the plot below
@@ -189,7 +189,7 @@ As before, the solid grey lines show the true parameter values and the dashed gr
 
 # HMC Fitting
 
-We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 3000 iterations with 1000 of those being warm-up iterations and a tinning value of 5.
+We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 2500 iterations with 1000 of those being warm-up iterations and a tinning value of 5.
 
 
 
@@ -198,7 +198,7 @@ The runtime retrieved again using R's `system.time()` shows
 
 ```
 ##    user  system elapsed 
-## 126.567   3.789 133.272
+##  98.152   3.932 106.127
 ```
 
 which is significantly slower than either the custom IF2 algorithm or the POMP implementation.
@@ -208,17 +208,17 @@ The MLE parameter estimates, taken to be the means of the samples in the chain w
 
 ```
 ##         R0          r         I0      sigma        eta       berr 
-## 3.28920563 0.09978996 6.71287897 8.43986764 0.43367068 0.19521585
+## 3.31518747 0.09992437 6.64178678 8.49567589 0.45861340 0.16024089
 ```
 
 giving a relative error of
 
 
 ```
-##           R0            r           I0        sigma          eta 
-##  0.096401876 -0.002100362  0.342575794 -0.156013236 -0.132658641 
-##         berr 
-## -0.609568304
+##            R0             r            I0         sigma           eta 
+##  0.1050624905 -0.0007562921  0.3283573555 -0.1504324110 -0.0827732048 
+##          berr 
+## -0.6795182175
 ```
 
 
@@ -243,7 +243,7 @@ As before the solid line shows the true states, the dots show the data, the dott
 
 ***
 
-# Multi-trajectory parameter estimation
+# Multi-trajectory Parameter Estimation
 
 Here we fit the stochastic SIR model to 1000 _(enough?)_ random independent trajectories using each method and examine the density of the estimates.
 
@@ -255,14 +255,14 @@ First, the average running time over all trajectories for IF2 was
 
 
 ```
-## [1] 56.5193
+## [1] 46.00429
 ```
 
 And the average running time for the RStan HMCMC fits was
 
 
 ```
-## [1] 231.0163
+## [1] 249.633
 ```
 
 
@@ -275,7 +275,7 @@ The density plots for the centre 95% quantiles of IF2 parameters fits are shown 
 Here the solid grey lines are the true values, and the dashed grey lines are the density means.
 
 
-Similarly, the density plots for the centre 95% quantiles of RStan HMCMC parameters fits are shown below.
+Similarly, the density plots for the centre 95\% quantiles of RStan HMCMC parameters fits are shown below.
 
 ![plot of chunk unnamed-chunk-26](figure/unnamed-chunk-26-1.png) 
 
