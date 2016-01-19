@@ -239,7 +239,7 @@ where $P$ is the number of particles.
 
 The goal here is to then pick the number of HMCMC samples and IF2 particles to yield similar MCSE values. To do this we picked a combination of parameters for RStan that yielded decent results when applied to the stochastic SIR model specified above, calculated the resulting mean MCSE across several model fits, and isolated the expected number of IF2 particles needed to obtain the same value. This was used as a starting value to "titrate" the IF2 iterations to the same point.
 
-The resulting values were 1000 HMCMC warm-up iterations with 2000 samples drawn post-warm-up, and 3000 IF2 particles sent through 50 passes, each method giving an approximate MCSE of 0.006.
+The resulting values were 1000 HMCMC warm-up iterations with 1000 samples drawn post-warm-up, and 2500 IF2 particles sent through 50 passes, each method giving an approximate MCSE of 0.0065.
 
 
 ***
@@ -248,12 +248,12 @@ The resulting values were 1000 HMCMC warm-up iterations with 2000 samples drawn 
 
 Now we will use an implementation of the IF2 algorithm to attempt to fit the stochastic SIR model to the previous data. The goal here is just parameter inference, but since IF2 works by applying a series on particle filters we essentially get the average system state estimates for a very small additional computational cost. Hence, we will will also look at that estimated behaviour in addition the the parameter estimates.
 
-The code used here is a mix of R and C++ implemented using RCpp. The fitting was undertaken using $3000$ particles with 50 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.975^{p}$, where p is the pass number starting with 0.
+The code used here is a mix of R and C++ implemented using RCpp. The fitting was undertaken using $2500$ particles with 50 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.975^{p}$, where p is the pass number starting with 0.
 
 ```{r if2_fit}
 library(Rcpp)
 
-NP          <- 3000
+NP          <- 2500
 nPasses     <- 50
 coolrate    <- 0.975
 
@@ -457,7 +457,7 @@ As before, the solid grey lines show the true parameter values and the dashed gr
 
 # HMC Fitting
 
-We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 3000 iterations with 1000 of those being warm-up iterations and a tinning value of 5.
+We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 2500 iterations with 1000 of those being warm-up iterations and a tinning value of 5.
 
 ```{r hmc_fit, results = 'hide'}
 library(rstan)
@@ -477,9 +477,9 @@ sir_data <- list( T = datlen,   	# simulation time
 rstan_options(auto_write = TRUE)
 
 stan_options <- list(   chains = 1,    		# number of chains
-                        iter   = 3000, 		# iterations per chain
+                        iter   = 2000, 		# iterations per chain
                         warmup = 1000, 		# warmup interations
-                        thin   = 5)   		# thinning number
+                        thin   = 1)   		# thinning number
 
 hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
 
@@ -758,7 +758,7 @@ linecolour <- "grey50"
 lineweight <- 0.5
 ```
 
-The density plots for the centre 95% quantiles of IF2 parameters fits are shown below.
+The density plots for the centre 95\% quantiles of IF2 parameters fits are shown below.
 
 ```{r}
 ## if2 density plots
@@ -801,7 +801,7 @@ grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, etakernel, berrkernel,
 Here the solid grey lines are the true values, and the dashed grey lines are the density means.
 
 
-Similarly, the density plots for the centre 95% quantiles of RStan HMCMC parameters fits are shown below.
+Similarly, the density plots for the centre 95\% quantiles of RStan HMCMC parameters fits are shown below.
 
 ```{r}
 ## hmc density plots
