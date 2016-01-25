@@ -88,7 +88,7 @@ trajectories <- foreach( i = 1:nTrials, .combine = rbind, .packages = "Rcpp") %d
 	# draw new data from fitted means + normal sigma noise (obs noise)
 	est_counts_raw <- fitdatainfec + rnorm(length(fitdatainfec), 0, parmeans[['sigma']])
 	#est_counts_raw     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
-    est_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
+    est_counts     <- ifelse(est_counts_raw < 0, 0, est_counts_raw)
 
     # refit using new data
     rm(if2) # because stupid things get done in packages
