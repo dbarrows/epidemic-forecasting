@@ -257,7 +257,7 @@ NP          <- 2500
 nPasses     <- 50
 coolrate    <- 0.975
 
-if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
+if2file <- paste(getwd(),"../../code/if2", "if2.cpp", sep="/")
 
 sourceCpp(if2file)
 
@@ -481,7 +481,7 @@ stan_options <- list(   chains = 1,    		# number of chains
                         warmup = 1000, 		# warmup interations
                         thin   = 1)   		# thinning number
 
-hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
+hmcfile <- paste(getwd(), "../../code/hmc", "sirode_euler.stan", sep="/")
 
 hmctime <- system.time(fit <- with(stan_options,
 		            	stan(file  	= hmcfile,

@@ -121,7 +121,7 @@ NP <- 30000
 nPasses <- 10
 coolrate <- 0.9
 
-sourceCpp(paste(getwd(),"if2-d.cpp",sep="/"))
+sourceCpp(paste(getwd(),"if2.cpp",sep="/"))
 
 if2data <- if2(infec_counts[1:(Tlim+1)], Tlim+1, N, NP, nPasses, coolrate)
 

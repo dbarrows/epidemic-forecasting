@@ -95,8 +95,8 @@ registerDoParallel(cl)
 
 ## external files
 
-if2file <- paste(getwd(),"../../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
-hmcfile <- paste(getwd(), "../../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
+if2file <- paste(getwd(),"../../if2", "if2.cpp", sep="/")
+hmcfile <- paste(getwd(), "../../hmc", "sirode_euler.stan", sep="/")
 
 ## IF2 settings
 

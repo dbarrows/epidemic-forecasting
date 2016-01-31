@@ -127,7 +127,7 @@ NP          <- 2500
 nPasses     <- 50
 coolrate    <- 0.975
 
-if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
+if2file <- paste(getwd(),"../../code/if2", "if2-d.cpp", sep="/")
 
 sourceCpp(if2file)
 
@@ -263,7 +263,7 @@ stan_options <- list(   chains = 1,    		# number of chains
                         warmup = 1000, 		# warmup interations
                         thin   = 5)   		# thinning number
 
-hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
+hmcfile <- paste(getwd(), "../../code/hmc", "sirode_euler.stan", sep="/")
 
 hmctime <- system.time(fit <- with(stan_options,
 		            	stan(file  	= hmcfile,
@@ -443,7 +443,7 @@ nTraj 	<- 100 	# trajectories for both bootstrapping runs
 
 if2sses <- numeric(nTrials)
 
-if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
+#if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
 sourceCpp(if2file)
 
 for(i in 1:nTrials) {
@@ -540,7 +540,7 @@ for(i in 1:nTrials) {
 	                  N = 500,      	# population size
 	                  h = 1/steps )   	# step size per day 
 
-	hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
+	#hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
 
 	hmctime <- system.time(fit <- with(stan_options,
 			            	stan(file  	= hmcfile,
@@ -646,7 +646,7 @@ goodbootsize <- rep(NA, maxTrunc)
 
 # compile executable
 
-if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
+#if2file <- paste(getwd(),"../../code/stochastic-comparison/if2/if2-d.cpp",sep="/")
 
 sourceCpp(if2file)
 
@@ -750,7 +750,7 @@ goodbootsize <- rep(NA, maxTrunc)
 
 #rstan_options(auto_write = TRUE)
 
-hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
+#hmcfile <- paste(getwd(), "../../code/stochastic-comparison/hmc", "sirode_euler.stan", sep="/")
 
 
 for(trunc in 1:maxTrunc) {

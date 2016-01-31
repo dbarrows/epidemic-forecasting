@@ -1,7 +1,6 @@
 # Dexter Barrows
-# run with:
 #
-# Rscript if2-paraboot.r > if2-paraboot.log 2>&1
+# run: Rscript if2-paraboot.r > if2-paraboot.log 2>&1
 
 library(foreach)
 library(parallel)
@@ -9,9 +8,9 @@ library(doParallel)
 library(ggplot2)
 library(Rcpp)
 
-source(paste(getwd(),"../../sir-functions/StocSIR.r", sep = "/"))
+source(paste(getwd(),"../../sir-functions", "StocSIR.r", sep = "/"))
 
-set.seed(1004)
+set.seed(112358)
 
 
 ## data params
@@ -61,7 +60,7 @@ coolrate    <- 0.975
 
 ## initial fit
 ##
-if2file <- paste(getwd(),"../if2/if2-d.cpp",sep="/")
+if2file <- paste(getwd(),"../../if2", "if2.cpp", sep="/")
 
 #if (FALSE) {
 sourceCpp(if2file)
