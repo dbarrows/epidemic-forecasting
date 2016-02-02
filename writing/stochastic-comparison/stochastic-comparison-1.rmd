@@ -457,7 +457,7 @@ As before, the solid grey lines show the true parameter values and the dashed gr
 
 # HMC Fitting
 
-We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 2500 iterations with 1000 of those being warm-up iterations and a tinning value of 5.
+We can use the Hamiltonian Monte Carlo algorithm implemented in the `Rstan` package to fit the stochastic SIR model as above. This was done with a single HMC chain of 2000 iterations with 1000 of those being warm-up iterations.
 
 ```{r hmc_fit, results = 'hide'}
 library(rstan)

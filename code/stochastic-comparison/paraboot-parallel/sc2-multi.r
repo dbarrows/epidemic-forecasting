@@ -65,7 +65,7 @@ hmcfile 	<- paste(getwd(), "../../hmc", "sirode_euler.stan", sep="/")
 
 ## IF2 settings
 
-NP          <- 3000
+NP          <- 2500
 nPasses     <- 50
 coolrate    <- 0.975
 
@@ -90,10 +90,10 @@ standata <- as.vector(t(data))[1:datlen]
 #options
 rstan_options(auto_write = TRUE)
 
-stan_options <- list(   chains = 1,         # number of chains
-                        iter   = 3000,      # iterations per chain
-                        warmup = 1000,      # warmup interations
-                        thin   = 5)         # thinning number
+stan_options <- list(   chains = 1,    		# number of chains
+                        iter   = 2000, 		# iterations per chain
+                        warmup = 1000, 		# warmup interations
+                        thin   = 1)   		# thinning number
 
 # data
 sir_data <- list( T = datlen,       # simulation time
