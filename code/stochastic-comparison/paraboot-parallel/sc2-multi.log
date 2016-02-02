@@ -1,0 +1,251 @@
+Loading required package: iterators
+Loading required package: ggplot2
+rstan (Version 2.9.0, packaged: 2016-01-05 16:17:47 UTC, GitRev: 05c3d0058b6a)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+Warning messages:
+1: package ‘rstan’ was built under R version 3.2.3 
+2: package ‘ggplot2’ was built under R version 3.2.3 
+Warning message:
+package ‘Rcpp’ was built under R version 3.2.3 
+
+SAMPLING FOR MODEL 'sirode_euler' NOW (CHAIN 1).
+
+Chain 1, Iteration:    1 / 3000 [  0%]  (Warmup)
+Chain 1, Iteration:  300 / 3000 [ 10%]  (Warmup)
+Chain 1, Iteration:  600 / 3000 [ 20%]  (Warmup)
+Chain 1, Iteration:  900 / 3000 [ 30%]  (Warmup)
+Chain 1, Iteration: 1001 / 3000 [ 33%]  (Sampling)
+Chain 1, Iteration: 1300 / 3000 [ 43%]  (Sampling)
+Chain 1, Iteration: 1600 / 3000 [ 53%]  (Sampling)
+Chain 1, Iteration: 1900 / 3000 [ 63%]  (Sampling)
+Chain 1, Iteration: 2200 / 3000 [ 73%]  (Sampling)
+Chain 1, Iteration: 2500 / 3000 [ 83%]  (Sampling)
+Chain 1, Iteration: 2800 / 3000 [ 93%]  (Sampling)
+Chain 1, Iteration: 3000 / 3000 [100%]  (Sampling)# 
+#  Elapsed Time: 35.2297 seconds (Warm-up)
+#                34.0601 seconds (Sampling)
+#                69.2897 seconds (Total)
+# 
+The following numerical problems occured the indicated number of times after warmup on chain 1
+                                                                                         count
+Exception thrown at line 54: normal_log: Location parameter is nan, but must be finite!     28
+Exception thrown at line 54: normal_log: Location parameter is -inf, but must be finite!     7
+When a numerical problem occurs, the Metropolis proposal gets rejected.
+However, by design Metropolis proposals sometimes get rejected even when there are no numerical problems.
+Thus, if the number in the 'count' column is small, do not ask about this message on stan-users.
+Initializing particle states
+Starting filter
+---------------
+Pass
+...0 / 50
+...1 / 50
+...2 / 50
+...3 / 50
+...4 / 50
+...5 / 50
+...6 / 50
+...7 / 50
+...8 / 50
+...9 / 50
+...10 / 50
+...11 / 50
+...12 / 50
+...13 / 50
+...14 / 50
+...15 / 50
+...16 / 50
+...17 / 50
+...18 / 50
+...19 / 50
+...20 / 50
+...21 / 50
+...22 / 50
+...23 / 50
+...24 / 50
+...25 / 50
+...26 / 50
+...27 / 50
+...28 / 50
+...29 / 50
+...30 / 50
+...31 / 50
+...32 / 50
+...33 / 50
+...34 / 50
+...35 / 50
+...36 / 50
+...37 / 50
+...38 / 50
+...39 / 50
+...40 / 50
+...41 / 50
+...42 / 50
+...43 / 50
+...44 / 50
+...45 / 50
+...46 / 50
+...47 / 50
+...48 / 50
+...49 / 50
+Parameter results (mean | sd)
+-----------------------------
+R0        3.147588 0.356019
+r         0.095529 0.000157
+sigma     9.569114 2.760909
+eta       0.375202 0.004183
+berr    0.271238 0.016102
+S_init  493.047068 2.185536
+I_init    6.952932 2.185536
+R_init    0.000000 0.000000
+
+Initializing particle states
+Starting filter
+---------------
+Pass
+...0 / 50
+...1 / 50
+...2 / 50
+...3 / 50
+...4 / 50
+...5 / 50
+...6 / 50
+...7 / 50
+...8 / 50
+...9 / 50
+...10 / 50
+...11 / 50
+...12 / 50
+...13 / 50
+...14 / 50
+...15 / 50
+...16 / 50
+...17 / 50
+...18 / 50
+...19 / 50
+...20 / 50
+...21 / 50
+...22 / 50
+...23 / 50
+...24 / 50
+...25 / 50
+...26 / 50
+...27 / 50
+...28 / 50
+...29 / 50
+...30 / 50
+...31 / 50
+...32 / 50
+...33 / 50
+...34 / 50
+...35 / 50
+...36 / 50
+...37 / 50
+...38 / 50
+...39 / 50
+...40 / 50
+...41 / 50
+...42 / 50
+...43 / 50
+...44 / 50
+...45 / 50
+...46 / 50
+...47 / 50
+...48 / 50
+...49 / 50
+Parameter results (mean | sd)
+-----------------------------
+R0        3.438626 0.345088
+r         0.098742 0.000156
+sigma     8.717554 1.754757
+eta       0.598228 0.010553
+berr    0.137352 0.008131
+S_init  491.242818 1.641099
+I_init    8.757182 1.641099
+R_init    0.000000 0.000000
+
+Initializing particle states
+Starting filter
+---------------
+Initializing particle states
+Starting filter
+---------------
+Pass
+...0 / 50
+...1 / 50
+...2 / 50
+...3 / 50
+...4 / 50
+...5 / 50
+...6 / 50
+...7 / 50
+...8 / 50
+...9 / 50
+...10 / 50
+...11 / 50
+...12 / 50
+...13 / 50
+...14 / 50
+...15 / 50
+...16 / 50
+...17 / 50
+...18 / 50
+...19 / 50
+...20 / 50
+...21 / 50
+...22 / 50
+...23 / 50
+...24 / 50
+...25 / 50
+...26 / 50
+...27 / 50
+...28 / 50
+...29 / 50
+...30 / 50
+...31 / 50
+...32 / 50
+...33 / 50
+...34 / 50
+...35 / 50
+...36 / 50
+...37 / 50
+...38 / 50
+...39 / 50
+...40 / 50
+...41 / 50
+...42 / 50
+...43 / 50
+...44 / 50
+...45 / 50
+...46 / 50
+...47 / 50
+...48 / 50
+...49 / 50
+Parameter results (mean | sd)
+-----------------------------
+R0        3.384586 0.295847
+r         0.103999 0.000153
+sigma     9.671348 1.849973
+eta       0.627994 0.021723
+berr    0.089403 0.003417
+S_init  489.251244 1.906077
+I_init    10.748756 1.906077
+R_init    0.000000 0.000000
+
+Initializing particle states
+Starting filter
+---------------
+The following numerical problems occured the indicated number of times after warmup on chain 1
+                                                                                         count
+Exception thrown at line 54: normal_log: Location parameter is nan, but must be finite!      8
+Exception thrown at line 54: normal_log: Location parameter is -inf, but must be finite!     1
+When a numerical problem occurs, the Metropolis proposal gets rejected.
+However, by design Metropolis proposals sometimes get rejected even when there are no numerical problems.
+Thus, if the number in the 'count' column is small, do not ask about this message on stan-users.
+Warning messages:
+1: package ‘Rcpp’ was built under R version 3.2.3 
+2: package ‘rstan’ was built under R version 3.2.3 
+3: package ‘ggplot2’ was built under R version 3.2.3 
+4: In rm(if2) : object 'if2' not found
+5: In rm(if2) : object 'if2' not found
