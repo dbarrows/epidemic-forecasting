@@ -26,7 +26,7 @@ if2_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, if2_s_fil
 
 	## use parametric bootstrapping to generate forcasts
 	##
-	trajectories <- foreach( i = 1:nTrials, .combine = rbind, .packages = "Rcpp") %do% {
+	trajectories <- foreach( i = 1:nTrials, .combine = rbind, .packages = "Rcpp") %dopar% {
 
 		source(stoc_sir_file)
 
