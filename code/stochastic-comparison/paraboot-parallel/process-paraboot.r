@@ -4,7 +4,7 @@ library(ggplot2)
 load("if2-paraboot.RData")
 
 ## this has pretty much everything
-parabootdata <- data.frame(trajectories)
+parabootdata <- data.frame(if2_paraboot_data)
 
 ## get param star data
 paramnames <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
@@ -29,11 +29,11 @@ colnames(obsquants) <- c("025","975")
 
 qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
 	geom_point( aes( y = c(infec_counts[1:(Tlim+1)], rep(NA,T-Tlim)) ) ) +
-	geom_line(aes(y = c(rep(NA,Tlim+1), countmeans)), linetype = "dotted") +
-	geom_ribbon(aes(ymin = c(rep(NA,Tlim+1), countquants[,'025']),
-        	    	ymax = c(rep(NA,Tlim+1), countquants[,'975'])),
+	geom_line(aes(y = c(rep(NA,Tlim), countmeans)), linetype = "dotted") +
+	geom_ribbon(aes(ymin = c(rep(NA,Tlim), countquants[,'025']),
+        	    	ymax = c(rep(NA,Tlim), countquants[,'975'])),
 					alpha=0.15) +
-	geom_ribbon(aes(ymin = c(rep(NA,Tlim+1), obsquants[,'025']),
-	            	ymax = c(rep(NA,Tlim+1), obsquants[,'975'])),
+	geom_ribbon(aes(ymin = c(rep(NA,Tlim), obsquants[,'025']),
+	            	ymax = c(rep(NA,Tlim), obsquants[,'975'])),
 					alpha=0.1) +
 	theme_bw()
