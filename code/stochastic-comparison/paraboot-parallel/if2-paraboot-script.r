@@ -26,7 +26,7 @@ i_infec <- 5
 steps   <- 7
 N       <- 500
 sigma   <- 10
-Tlim    <- round(T * 2/3)
+Tlim    <- round(T * 1/2)
 
 ## Generate true trajecory and synthetic data
 ##
@@ -52,7 +52,7 @@ infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
 ## parallel setup
 ##
 
-nTrials <- 2
+nTrials <- 10
 
 numCores <- detectCores()
 cl <- makeCluster(min(numCores, nTrials))
