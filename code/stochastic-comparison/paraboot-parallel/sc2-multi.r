@@ -253,7 +253,7 @@ SSEmat <- foreach ( trunc = 1:maxTrunc, .combine = rbind, .packages = c("Rcpp","
 
 	}
 
-	return( c(mean(if2SSEs), mean(hmcSSEs)) )
+	return( c(if2SSEs, hmcSSEs) )
 
 }
 
