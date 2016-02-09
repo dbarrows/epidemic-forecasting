@@ -42,3 +42,17 @@ StocSIR <- function(y, pars, T, steps) {
     return(out)
 
 }
+
+### Suggested parameters
+#
+# T       <- 60
+# i_infec <- 5
+# steps   <- 7
+# N       <- 500
+# sigma   <- 10
+#
+# pars <- c(R0 = 3.0,     # new infected people per infected person
+#           r = 0.1,      # recovery rate
+#           N = 500,      # population size
+#           eta = 0.5,    # geometric random walk
+#           berr = 0.5)   # Beta geometric walk noise
