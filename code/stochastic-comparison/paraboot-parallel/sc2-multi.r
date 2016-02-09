@@ -44,7 +44,7 @@ true_init_cond <- c(S = N - i_infec,
 
 nTrials <- 10
 maxTrunc <- 40
-nTraj <- 10
+nTraj <- 200
 
 numCores <- detectCores()
 cl <- makeCluster(numCores)
