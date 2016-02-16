@@ -62,4 +62,4 @@ StocSIRS <- function(y, pars, T, steps) {
 #		    N = 500,    # population size
 #		    eta = 0.5, 	# geometric random walk
 #		    berr = 0.5, # Beta geometric walk noise
-#           re = 0.05)  # resuceptibility rate
+#           re = 2)  	# resuceptibility rate
