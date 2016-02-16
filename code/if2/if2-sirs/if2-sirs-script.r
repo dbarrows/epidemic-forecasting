@@ -16,7 +16,7 @@ true_pars <- c(R0 = 3.0,  	# new infected people per infected person
 		  	   N = 500,    	# population size
 		  	   eta = 0.5, 	# geometric random walk
 		  	   berr = 0.5, 	# Beta geometric walk noise
-          	   re = 0.05)    # resuceptibility rate
+          	   re = 2)    # resuceptibility rate
 
 true_init_cond <- c(S = N - i_infec,
 					I = i_infec,
