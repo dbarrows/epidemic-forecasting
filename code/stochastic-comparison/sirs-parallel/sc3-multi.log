@@ -1,0 +1,15 @@
+Loading required package: iterators
+Loading required package: ggplot2
+rstan (Version 2.9.0, packaged: 2016-01-05 16:17:47 UTC, GitRev: 05c3d0058b6a)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+Warning messages:
+1: package ‘rstan’ was built under R version 3.2.3 
+2: package ‘ggplot2’ was built under R version 3.2.3 
+Warning message:
+package ‘Rcpp’ was built under R version 3.2.3 
+
+SAMPLING FOR MODEL 'sirs-euler' NOW (CHAIN 1).
+
+Chain 1, Iteration:    1 / 2000 [  0%]  (Warmup)
