@@ -5,7 +5,7 @@ source(paste(getwd(), "../../sir-functions", "StocSSIR.r", sep = "/"))
 T 		<- 60
 N 		<- 500
 i_infec <- 5
-nloc  	<- 10
+nloc  	<- 5
 steps   <- 7
 sigma   <- 10
 
@@ -40,7 +40,7 @@ ssdeout <- StocSSIR(initcond, pars, T, steps, neinum, neibmat)
 infec_counts <- ssdeout[,'I',] + matrix(rnorm(nloc*(T+1), 0, sigma), nloc, T+1)
 infec_counts <- ifelse(infec_counts < 0, 0, infec_counts)
 
-NP <- 2500*nloc
+NP <- 2500*nloc*2
 nPasses <- 50
 coolrate <- 0.975
 
