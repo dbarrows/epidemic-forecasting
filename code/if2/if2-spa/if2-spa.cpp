@@ -255,7 +255,7 @@ void exp_euler_SSIR(double h, double t0, double tn, int N, Particle * particle,
 
         	double nBIsum = 0.0;
         	for (int j = 0; j < n; j++)
-        		nBIsum += B[(int) neibmat[j] - 1] * I[(int) neibmat[j] - 1];
+        		nBIsum += B[(int) neibmat(loc, j) - 1] * I[(int) neibmat(loc, j) - 1];
 
         	double BSI = S[loc]*( sphi*B[loc]*I[loc] + ophi*nBIsum );
         	double rI  = r*I[loc];
