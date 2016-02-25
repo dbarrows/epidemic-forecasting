@@ -47,3 +47,9 @@ coolrate <- 0.975
 if2_spa_file <- paste(getwd(), "if2-spa.cpp", sep = "/")
 sourceCpp(if2_spa_file)
 if2data <- if2_spa(infec_counts, T, N, NP, nPasses, coolrate, neinum, neibmat, nloc)
+
+paramdata <- data.frame(if2data$paramdata)
+names(paramdata) <- c('R0','r','sigma','eta','berr','phi')
+parmeans <- colMeans(paramdata)
+print(parmeans)
+
