@@ -39,7 +39,7 @@ odeout <- ode(y_ini, times, SIR, pars)
 
 set.seed(1001)
 sigma <- 10
-infec_counts_raw <- odeout[,3] + rnorm(101, 0, sigma)
+infec_counts_raw <- odeout[,3] + rnorm(T+1, 0, sigma)
 infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
 
 g <- qplot(0:T, odeout[,3], geom = "line", xlab = "Time (weeks)", ylab = "Infection Count") +
