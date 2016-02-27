@@ -94,7 +94,7 @@
     keywordstyle=\color{RoyalBlue},     % keyword style
     commentstyle=\color{YellowGreen},   % comment style
     stringstyle=\color{ForestGreen},    % string literal style
-    literate={<-}{{$\gets$}}1,           % prettier assignment arrows
+    %literate={<-}{{$\gets$}}1,           % prettier assignment arrows
     xleftmargin=4.0ex,
     deletekeywords={T}
 }
@@ -102,6 +102,8 @@
 \lstnewenvironment{Stan}
 {\lstset{style=Stansty}}
 {}
+
+\renewcommand{\arraystretch}{2}
 
 \begin{document}
 
@@ -154,7 +156,7 @@ Dexter Barrows\\
         \item \textit{Aperiodic} The chain must be able to explore the parameter space without becoming trapped in a cycle
     \end{itemize}
 
-    Note that MCMC sampling generates a Markov chain $(\theta^{(1)}, \theta^{(2)},..., \theta^{(N)})$ that does indeed satisfy these conditions, and uses the chain's equilibrium distribution to approximate the posterior of the parameter space.    
+    Note that MCMC sampling generates a Markov chain $(\theta^{(1)}, \theta^{(2)},..., \theta^{(N)})$ that does indeed satisfy these conditions, and uses the chain's equilibrium distribution to approximate the posterior distribution of the parameter space.    
 
 
 \section{Likelihood}
@@ -165,19 +167,19 @@ Dexter Barrows\\
         \mathcal{L}(\theta) \propto P(D|\theta).
     $$
 
-    In the standard Maximum Likelihood approaches, $\mathcal{L}(\theta)$ is searched to find a value of $\theta$ that maximizes $\mathcal{L}(\theta)$, then this $\theta$ is taken to be the most likely true value. Here our aim is to not just maximize the likelihood, but to also explore the area around it.
+    In standard Maximum Likelihood approaches, $\mathcal{L}(\theta)$ is searched to find a value of $\theta$ that maximizes $\mathcal{L}(\theta)$, then this $\theta$ is taken to be the most likely true value. Here our aim is to not just maximize the likelihood but to also explore the area around it.
 
 
 \section{Prior distribution}
 
     Another significant component of MCMC is the user-specified prior distribution for $\theta$ or distributions for the individual components of $\theta$ (Priors). Priors serve as a way for us to tell the MCMC algorithm what we think consist of good values for the parameters.
 
-    Note that if very little is known about the parameters, or we are worried about biasing our estimate of the posterior, we can simply use a a wide uniform distribution. However this handicaps the algorithm in the sense that convergence of the chain may become exceedingly slow, and more pressure is put on the likelihood to be as good as possible as it will now be the only thing informing the algorithm of what constitutes a ``good'' set of parameters, and what should be considered poor.
+    Note that if very little is known about the parameters, or we are worried about biasing our estimate of the posterior, we can simply use a a wide uniform distribution. However, this handicaps the algorithm in two ways: convergence of the chain may become exceedingly slow, and more pressure is put on the likelihood function to be as good as possible -- it will now be the only thing informing the algorithm of what constitutes a ``good'' set of parameters, and what should be considered poor.
 
 
 \section{Proposal distribution}
 
-    As part of the MCMC algorithm, when we find a state in the parameter space that is accepted as part of the Markov chain being constructed, we need a good way of generating a good next step to try. Unlike basic rejection sampling in which we would simply just randomly sample from our prior distribution, MCMC attempts to optimise our choices by choosing a step that is close enough to the last accepted step so as to stand a decent chance of also being accepted, but far enough away that it doesn't get ``trapped'' in a particular region of the parameter space.
+    As part of the MCMC algorithm, when we find a state in the parameter space that is accepted as part of the Markov chain construction process, we need a good way of generating a good next step to try. Unlike basic rejection sampling in which we would just randomly sample from our prior distribution, MCMC attempts to optimise our choices by choosing a step that is close enough to the last accepted step so as to stand a decent chance of also being accepted, but far enough away that it doesn't get ``trapped'' in a particular region of the parameter space.
 
     This is done through the use of a proposal or candidate distribution. This will usually be a distribution centred around our last accepted step and with a dispersion potential narrower than that of out prior distribution.
 
@@ -186,7 +188,7 @@ Dexter Barrows\\
 
 \section{Algorithm}
 
-    Now that we have all the pieces necessary, we can discuss the MCMC algorithm itself.
+    Now that we have all the pieces necessary, we can discuss the details of the MCMC algorithm.
 
     We will denote the previously discussed quantities as
 
@@ -211,7 +213,7 @@ Dexter Barrows\\
         r = \frac{\mathcal{L}(\theta^*)p(\theta^*)}{\mathcal{L}(\theta)p(\theta)}.
     $$
 
-    Thus, we can now examine the Metropolis-Hastings MCMC algorithm.
+    Thus, the MCMC algorithm is as follows.
 
     \iffalse
     \begin{algorithm}
@@ -291,13 +293,13 @@ Dexter Barrows\\
     \end{algorithm}
     
 
-    In this way we are ensuring that steps that lead to better likelihood outcomes are likely to be accepted, but steps that do not will not be accepted as frequently. Note that these less ``advantageous'' moves will still occur, but this is by design - it ensures that as much of the parameter space as possible will be explored, but in an efficient way.
+    In this way we are ensuring that steps that lead to better likelihood outcomes are likely to be accepted, but steps that do not will not be accepted as frequently. Note that these less ``advantageous'' moves will still occur but that this is by design -- it ensures that as much of the parameter space as possible will be explored but more efficiently than using pure brute force.
 
 \section{Burn-in}
 
     One critical aspect of MCMC-based algorithms has yet to be discussed. The algorithm requires an initial starting point $\theta$ to be selected, but as the proposal distribution is supposed to restrict moves to an area close to the last accepted state, then the posterior distribution will be biased towards this starting point. This issue is avoided through the use of a Burn-in period.
 
-    Burning in a chain is simply the act of running the MCMC algorithm normally, but discarding the first $M$ samples. As we are seeking a chain of length $N$, then the total computational time will that of running a chain for length $M+N$.
+    Burning in a chain is the act of running the MCMC algorithm normally without saving first $M$ samples. As we are seeking a chain of length $N$, the total computation will be equivalent to generating a chain of length $M+N$.
 
 \section{Thinning}
 
@@ -305,7 +307,7 @@ Dexter Barrows\\
 
 \section{Hamiltonian Monte Carlo}
 
-    The Metropolis-Hastings has a primary drawback in that the parameter space may not be explored efficiently - a consequence of the crude proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a decrease in overall computational complexity.
+    The Metropolis-Hastings algorithm has a primary drawback in that the parameter space may not be explored efficiently -- a consequence of the rudimentary proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a decrease in overall computational complexity.
 
     From physics, we will borrow the ideas of potential and kinetic energy. Here potential energy is analogous to the negative log likelihood of the parameter selection given the data, formally
 
@@ -327,12 +329,13 @@ Dexter Barrows\\
         H(\theta,r) = U(\theta) + K(r),
     \end{equation}
 
-    Where the Hamiltonian dynamics of the system can be simulated using the following system.
+    Where the Hamiltonian dynamics of the combined system can be simulated using the following system of ODEs.
 
     \begin{equation}
         \begin{array}{rl}
-            \frac{d\theta}{dt} & = M^{-1} r \\
-            \frac{dr}{dt} & = - \nabla U(\theta)
+        \displaystyle
+            \dfrac{d\theta}{dt} & = M^{-1} r \\
+            \dfrac{dr}{dt} & = - \nabla U(\theta)
         \end{array}
     \end{equation}.
 
@@ -430,9 +433,9 @@ Dexter Barrows\\
 
     \begin{equation}
         \begin{array}{rl}
-            \frac{dS}{dt} & = - \beta I S \\
-            \frac{dI}{dt} & = \beta I S - rI  \\
-            \frac{dR}{dt} & = rI
+            \dfrac{dS}{dt} & = - \beta I S \\
+            \dfrac{dI}{dt} & = \beta I S - rI  \\
+            \dfrac{dR}{dt} & = rI
         \end{array}
     \end{equation}
 
@@ -505,16 +508,11 @@ Dexter Barrows\\
     Plotting the data using the \verb|ggplot2| package by
 
     \begin{R}
-    plotdata <- data.frame(times=1:(T+1),true=odeout[,3],data=infec_counts)
+	g <- qplot(0:T, odeout[,3], geom = "line", xlab = "Time (weeks)", ylab = "Infection Count") +
+		geom_point(aes(y = infec_counts)) +
+		theme_bw()
 
-    g <- ggplot(plotdata, aes(times)) +
-            geom_line(aes(y = true, colour = "True")) + 
-            geom_point(aes(y = data, colour = "Data")) +
-            labs(x = "Time", y = "Infection count", color = "") +
-            scale_color_brewer(palette="Paired") +
-            theme(panel.background = element_rect(fill = "#F0F0F0"))
-
-    print(g)
+	print(g)
     \end{R}
 
     we obtain
@@ -558,19 +556,19 @@ Dexter Barrows\\
     Now we call the Stan fitting function
 
     \begin{R}
-    stan_options <- list( chains = 10,   # number of chains
-                         iter   = 5000, # iterations per chain
-                         warmup = 1000, # warmup interations
-                         thin   = 10)   # thinning number
-    fit <- stan( file    = "sirode_euler.stan",
-                data    = sir_data,
-                chains  = stan_options$chains,
-                iter    = stan_options$iter,
-                warmup  = stan_options$warmup,
-                thin    = stan_options$thin )
+	stan_options <- list(	  chains = 4,    # number of chains
+                        	iter   = 2000, # iterations per chain
+                        	warmup = 1000, # warmup interations
+                        	thin   = 2 )   # thinning number
+	fit <- stan( file    = "d_sirode_euler.stan",
+            	data    = sir_data,
+            	chains  = stan_options$chains,
+            	iter    = stan_options$iter,
+            	warmup  = stan_options$warmup,
+            	thin    = stan_options$thin )
     \end{R}
 
-    which fits the model in the file \verb|sirode_euler.stan| to the data passed in through \verb|sir_data|. The options here specify that 10 chains will be run, each with a burn in period of 1000 steps, with 5000 steps to sample over, and only sampling every 10th step. Options are saved so they can be accessed later.
+    which fits the model in the file \verb|d_sirode_euler.stan| to the data passed in through \verb|sir_data|. The options here specify that 10 chains will be run, each with a burn in period of 1000 steps, with 5000 steps to sample over, and only sampling every 10th step. Options are saved so they can be accessed later.
 
     The Stan file contains three blocks that together specify the model. First, the data block specifies the information the model expects to be given. Here, this is
 
@@ -655,7 +653,7 @@ Dexter Barrows\\
         \label{traceplot2}
     \end{figure}
 
-    Now if we look at the kernel density estimates for each of the model parameters and the initial number of cases, we see that while the estimates are note perfect, they are fairly decent. This is shown below in Figure \ref{kernels}.
+    Now if we look at the kernel density estimates for each of the model parameters and the initial number of cases, we see that while the estimates are not perfect, they are fairly decent. This is shown below in Figure \ref{kernels}.
 
     \begin{figure}[H]
     \centering
@@ -696,13 +694,13 @@ Dexter Barrows\\
 
     This code will run all the indicated analysis and produce all plots.
 
-    \lstinputlisting[style=Rsty]{../../Rstan_stuff/sir_stan.r}
+    \lstinputlisting[style=Rsty]{../../code/hmc/d_sir_stan.r}
 
     \section{Full Stan code}
 
     Stan model code to be used with the preceding R code.
 
-    \lstinputlisting[style=Stansty]{../../Rstan_stuff/sirode_euler.stan}
+    \lstinputlisting[style=Stansty]{../../code/hmc/d_sirode_euler.stan}
 
 \end{appendices}
 
