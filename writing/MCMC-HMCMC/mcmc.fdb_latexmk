@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1456607876 "mcmc.tex" "mcmc.pdf" "mcmc" 1456607880
-  "../../code/hmc/d_sir_stan.r" 1456607244 4472 18e325d4aa626d50c129b22ccd60beb5 ""
-  "../../code/hmc/d_sirode_euler.stan" 1456606052 1077 8f1b760b07a558502c07d74a7963353e ""
+["pdflatex"] 1456609929 "mcmc.tex" "mcmc.pdf" "mcmc" 1456609932
+  "../../code/hmc/d_sir_stan.r" 1456607980 4471 c1e043db2acb0fefc73ed07f69422f6c ""
+  "../../code/hmc/d_sirode_euler.stan" 1456607977 1127 9620205d222a4986c6d185560e57b8fb ""
   "./images/dataplot.pdf" 1456606071 6207 57d275774b44bdafb820dcc8534018dd ""
   "./images/finitemachine.pdf" 1445887563 51290 c120647be74ae10d80b2d83e9a83713e ""
   "./images/kernelR0.pdf" 1456606304 8488 1c8f60d2b56ac57c754228658b7b6d1d ""
@@ -10,7 +10,7 @@
   "./images/kernelsigma.pdf" 1456606305 8763 d5d053185134529c79654a9cc8bc1f69 ""
   "./images/traceplotR0.pdf" 1456607037 15884 fc411b46e026a4212798e902577bf685 ""
   "./images/traceplotR0_inc.pdf" 1456607038 24489 f8880d3e0d6d7ca2d064dcbb5c5cc4f5 ""
-  "./mcmc.out" 1456607880 663 8946d9d29081aa31d392cc08e4918b05 ""
+  "./mcmc.out" 1456609932 663 8946d9d29081aa31d392cc08e4918b05 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/inconsolata/i4-ot1-0.enc" 1372376023 2322 d1baca6ee8cac0831588a03d5afd1210 ""
   "/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/inconsolata/i4-ts1.enc" 1392592533 9451 78d1dacaaea38f9eae8be6de6552d353 ""
@@ -136,11 +136,11 @@
   "images/kernelsigma.pdf" 1456606305 8763 d5d053185134529c79654a9cc8bc1f69 ""
   "images/traceplotR0.pdf" 1456607037 15884 fc411b46e026a4212798e902577bf685 ""
   "images/traceplotR0_inc.pdf" 1456607038 24489 f8880d3e0d6d7ca2d064dcbb5c5cc4f5 ""
-  "mcmc.aux" 1456607880 3849 eeeae4fbcdbfd735dc15260193f8ff76 ""
-  "mcmc.out" 1456607880 663 8946d9d29081aa31d392cc08e4918b05 ""
-  "mcmc.tex" 1456607874 30905 e95bdc645d8c3f4fbfadab72ca0f13ef ""
+  "mcmc.aux" 1456609932 3849 eeeae4fbcdbfd735dc15260193f8ff76 ""
+  "mcmc.out" 1456609932 663 8946d9d29081aa31d392cc08e4918b05 ""
+  "mcmc.tex" 1456609922 30969 c0ca8da25f1c22d38ef9333b5ae63524 ""
   (generated)
-  "mcmc.pdf"
-  "mcmc.out"
-  "mcmc.log"
   "mcmc.aux"
+  "mcmc.pdf"
+  "mcmc.log"
+  "mcmc.out"
