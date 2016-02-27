@@ -19,6 +19,9 @@
 \usepackage{lstbayes}
 
 \usepackage[usenames,dvipsnames]{color}
+\definecolor{DGrey}{gray}{0.25}
+\definecolor{MGrey}{gray}{0.50}
+\definecolor{LGrey}{gray}{0.75}
 
 %\usepackage{algorithm}
 %\usepackage{algpseudocode}
@@ -47,7 +50,7 @@
     language=R,                         % the language of the code
     basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
     numbers=left,                       % where to put the line-numbers
-    numberstyle=\footnotesize\color{Blue},      % the style that is used for the line-numbers
+    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
     stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
                                         % will be numbered
     numbersep=5pt,                      % how far the line-numbers are from the code
@@ -55,15 +58,15 @@
     showspaces=false,                   % show spaces adding particular underscores
     showstringspaces=false,             % underline spaces within strings
     showtabs=false,                     % show tabs within strings adding particular underscores
-    %frame=single,                       % adds a frame around the code
+    frame=single,                       % adds a frame around the code
     rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-    tabsize=4,                          % sets default tabsize to 2 spaces
+    tabsize=2,                          % sets default tabsize to 2 spaces
     captionpos=b,                       % sets the caption-position to bottom
     breaklines=true,                    % sets automatic line breaking
     breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
-    keywordstyle=\color{RoyalBlue},     % keyword style
-    commentstyle=\color{YellowGreen},   % comment style
-    stringstyle=\color{ForestGreen},    % string literal style
+    keywordstyle=\color{DGrey},     % keyword style
+    commentstyle=\color{LGrey},   % comment style
+    stringstyle=\color{MGrey},    % string literal style
     literate={<-}{{$\gets$}}1,           % prettier assignment arrows
     xleftmargin=4.0ex,
     deletekeywords={I,density,rect,_,palette,data,scale,panel,R,frame,labels,options}
@@ -78,7 +81,7 @@
     language=C++,                         % the language of the code
     basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
     numbers=left,                       % where to put the line-numbers
-    numberstyle=\footnotesize\color{Blue},      % the style that is used for the line-numbers
+    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
     stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
                                         % will be numbered
     numbersep=5pt,                      % how far the line-numbers are from the code
@@ -86,16 +89,16 @@
     showspaces=false,                   % show spaces adding particular underscores
     showstringspaces=false,             % underline spaces within strings
     showtabs=false,                     % show tabs within strings adding particular underscores
-    %frame=single,                       % adds a frame around the code
+    frame=single,                       % adds a frame around the code
     rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
     tabsize=4,                          % sets default tabsize to 2 spaces
     captionpos=b,                       % sets the caption-position to bottom
     breaklines=true,                    % sets automatic line breaking
     breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
-    keywordstyle=\color{RoyalBlue},     % keyword style
-    commentstyle=\color{YellowGreen},   % comment style
-    stringstyle=\color{ForestGreen},    % string literal style
-    literate={<-}{{$\gets$}}1,           % prettier assignment arrows
+    keywordstyle=\color{DGrey},     % keyword style
+    commentstyle=\color{LGrey},   % comment style
+    stringstyle=\color{MGrey},    % string literal style
+    %literate={<-}{{$\gets$}}1,           % prettier assignment arrows
     xleftmargin=4.0ex,
     deletekeywords={T}
 }
@@ -103,6 +106,8 @@
 \lstnewenvironment{Stan}
 {\lstset{style=Stansty}}
 {}
+
+\renewcommand{\arraystretch}{2}
 
 \begin{document}
 
@@ -139,7 +144,7 @@ Dexter Barrows\\
 
 \section{Algorithm}
 
-    Now we can formalize the particle filter.
+    Now we will formalize the particle filter.
 
     We will denote each particle $p^{(j)}$ as the $j^{th}$ particle consisting of a state estimate at time $t$, $X_t^{(j)}$, a parameter set $\theta^{(j)}$, and a weight $w^{(j)}$. Note that the state estimates will evolve with the system as the cohort traverses the data.
 
@@ -205,13 +210,13 @@ Dexter Barrows\\
 
 \section{Particle Collapse}
 
-	Not uncommonly, a situation may arise in which a single particle gets assigned a normalized weight very close to 1 and all the other particles have weights very close to 0. When this occurs, the next generation of the cohort will overwhelmingly consist of descendants of the heavily-weighted particle, termed particle collapse or degeneracy.
+	Not uncommonly, a situation may arise in which a single particle is assigned a normalized weight very close to 1 and all the other particles are assigned weights very close to 0. When this occurs, the next generation of the cohort will overwhelmingly consist of descendants of the heavily-weighted particle, termed particle collapse or degeneracy.
 
 	Since the basic SIR particle filter does not perturb either the particle system states or system parameter values, the cohort will quickly consist solely of identical particles, effectively halting further exploration of the parameter space as new data is introduced.
 
 	A similar situation occurs when a small number of particles (but not necessarily a single particle) split almost all of the normalized weight between them, then jointly dominate the resampling process for the remainder of the iterations. This again halts the exploration of the parameter space with new data.
 
-	In either case, the hallmark feature used to detect collapse is the same - at some point the cohort will consist of particles with very similar or identical parameter sets which will consequently result in their assigned weights being extremely close.
+	In either case, the hallmark feature used to detect collapse is the same -- at some point the cohort will consist of particles with very similar or identical parameter sets which will consequently result in their assigned weights being extremely close together.
 
 	Mathematically, we are interested in the number of effective particles, $N_{eff}$, which represents the number of particles that are acceptably dissimilar. This is estimated by evaluating
 
@@ -221,11 +226,9 @@ Dexter Barrows\\
 
 	This can be used to diagnose not only when collapse has occurred, but can also indicate when it is near.
 
-	Diagram!!!!!!
-
 \section{Iterated Filtering and Data Cloning}
 
-	A particle filter hinges on the idea that as it progresses through the data set $D$, its estimate of the the posterior carried in the cohort of particles approaches maximum likelihood. However, this convergence may not converge fast enough that the estimate it produces is of quality before the data runs out. One way around this problem is to ``clone'' the data and make multiple passes through it as if it were a continuation of the original time series. Note that the system state contained in each particle will have to be reset with each pass.
+	A particle filter hinges on the idea that as it progresses through the data set $D$, its estimate of the posterior carried in the cohort of particles approaches maximum likelihood. However, this convergence may not be fast enough so that the estimate it produces is of quality before the data runs out. One way around this problem is to ``clone'' the data and make multiple passes through it as if it were a continuation of the original time series. Note that the system state contained in each particle will have to be reset with each pass.
 
 	Rigorous proofs have been developed (references to Ionides et. al. work) that show that by treating the parameters as stochastic processes instead of fixed values, the multiple passes through the data will indeed force convergence of the process mean toward maximum likelihood, and the process variance toward 0.
 
@@ -235,7 +238,7 @@ Dexter Barrows\\
 
 	It is worth noting that IF2 is not designed to estimate the full posterior distribution, but in practice can be used to do so within reason. Further, IF2 thwarts the problem of particle collapse by keeping at least some perturbation in the system at all times. It is important to note that while true particle collapse will not occur, there is still risk of a pseudo-collapse in which all particles will be extremely close to one another so as to be virtually indistinguishable. However this will only occur with the use of overly-aggressive cooling strategies or by specifying an excessive number of passes through the data.
 
-	An important new quantity is the particle perturbation density denoted $h(\theta|,\sigma)$. Typically this is multi-normal with $\sigma$ being a vector of variances proportional to the expected values of $\theta$. In practice the proportionality can be derived from current means or specified ahead of time. Further, these intensities must decrease over time. This can be done via exponential cooling, a decreasing step function, a combination of these, or some similar way.
+	An important new quantity is the particle perturbation density denoted $h(\theta|,\sigma)$. Typically this is multi-normal with $\sigma$ being a vector of variances proportional to the expected values of $\theta$. In practice the proportionality can be derived from current means or specified ahead of time. Further, these intensities must decrease over time. This can be done via exponential or geometric cooling, a decreasing step function, a combination of these, or though some other similar scheme.
 
 	The algorithm for IF2 can be seen in Algorithm \ref{if2}.\\
 
@@ -337,9 +340,9 @@ Dexter Barrows\\
 
     \begin{equation}
         \begin{array}{rl}
-            \frac{dS}{dt} & = - \beta I S \\
-            \frac{dI}{dt} & = \beta I S - rI  \\
-            \frac{dR}{dt} & = rI
+            \dfrac{dS}{dt} & = - \beta I S \\
+            \dfrac{dI}{dt} & = \beta I S - rI  \\
+            \dfrac{dR}{dt} & = rI
         \end{array}
     \end{equation}
 
@@ -409,7 +412,7 @@ Dexter Barrows\\
     \begin{R}
     plotdata <- data.frame(times=1:T,true=trueTraj,data=infec_counts)
 
-	g <- ggplot(plotdata, aes(times)) +
+	  g <- ggplot(plotdata, aes(times)) +
 	        geom_line(aes(y = true, colour = "True")) +
 	        geom_point(aes(y = data, color = "Data")) +
 	        labs(x = "Time", y = "Infection count", color = "") +
@@ -436,7 +439,7 @@ Dexter Barrows\\
 
     \begin{R}
     paramdata <- data.frame(if2(infec_counts[1:Tlim], Tlim, N))
-	colnames(paramdata) <- c("R0", "r", "sigma", "Sinit", "Iinit", "Rinit")
+	  colnames(paramdata) <- c("R0", "r", "sigma", "Sinit", "Iinit", "Rinit")
     \end{R}
 
     The final kernel estimates for four of the key parameters are shown in Figure \ref{kernelplot}.
@@ -448,16 +451,6 @@ Dexter Barrows\\
         \label{kernelplot}
     \end{figure}
 
-    Bootstrapping from the final particle sample gives us awesome stuff too as we can see in Figure \ref{if2plot}. 
-
-    \begin{figure}[H]
-        \centering
-        \includegraphics[width=\textwidth]{./images/if2plot.pdf}
-        \caption{IF2 estimate of the system state at each time point using bootstrapping. Ribbon shows 2.5\% and 97.5\% quantiles.}
-        \label{if2plot}
-    \end{figure}
-
-
 
 \newpage
 \begin{appendices}
@@ -466,13 +459,13 @@ Dexter Barrows\\
 
     This code will run all the indicated analysis and produce all plots.
 
-    \lstinputlisting[style=Rsty]{../../code/if2/rcpptest/bootstrap.r}
+    \lstinputlisting[style=Rsty]{../../code/if2/d_sir_if2.r}
 
     \section{Full C++ code}
 
     Stan model code to be used with the preceding R code.
 
-    \lstinputlisting[style=Cppsty]{../../code/if2/if2.cpp}
+    \lstinputlisting[style=Cppsty]{../../code/if2/d_if2.cpp}
 
 \end{appendices}
 
