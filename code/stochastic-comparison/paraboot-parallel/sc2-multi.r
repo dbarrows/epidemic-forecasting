@@ -144,7 +144,7 @@ SSEmat <- foreach ( trunc = 1:maxTrunc, .combine = rbind, .packages = c("Rcpp","
 
 	    # IF2 parametric bootstrap
 	    if2_paraboot_data <- if2_paraboot(if2data,
-                                  T, Tlim, steps, N, 2,
+                                  T, Tlim, steps, N, nTraj,
                                   if2file, if2_s_file, stoc_sir_file,
                                   NP, nPasses, coolrate)
 
