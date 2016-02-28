@@ -43,7 +43,6 @@ for TRUNC in $(seq 1 $MAXTRUNC); do
 		cat fsimthread.r | \
 			sed -e "s/TRIAL/$TRIAL/" \
 				-e "s/TRUNC/$TRUNC/" > $srcfile
-		#R CMD BATCH $srcfile $outfile "--args outdir=$rdsdir"
-		sqsub -q serial -o "$soutdir/$filebase.%J.out" --mpp 2.5G -r 5h R CMD BATCH "--args outdir=$rdsdir" $srcfile $outfile
+		sqsub -q serial -o "$soutdir/$filebase.%J.out" --mpp 2.5G -r 5h Rscript $srcfile $rdsdir > $outfile 2>&1
 	done
 done

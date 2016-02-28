@@ -3,6 +3,18 @@
 trunc <- TRUNC
 trial <- TRIAL
 
+## get command line arg
+args = commandArgs(trailingOnly=TRUE)
+if (length(args)==0) {
+  stop("At least one argument must be supplied (output dir).\n")
+} else if (length(args)==1) {
+  outdir <- args[1]
+}
+
+print(outdir)
+rdsfile <- paste(outdir, "/", "thread-", trunc, "-", trial, ".rds", sep = "")
+print(rdsfile)
+
 ##--------------------------------------------------------------------------------------------
 ##--------------------------------------------------------------------------------------------
 
@@ -266,6 +278,4 @@ smapsse <- sum(err^2)
 vecout <- c(trunc = trunc, trial = trial, if2sse = if2sse, hmcsse = hmcsse, smapsse = smapsse,
             if2time = if2time[['user.self']], hmctime = hmctime[['user.self']], smaptime = smaptime[['user.self']])
 
-rdsfile <- paste(outdir, "/", "thread-", trunc, "-", trial, ".rds", sep = "")
-print(rdsfile)
 saveRDS(vecout, rdsfile)
