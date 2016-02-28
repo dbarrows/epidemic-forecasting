@@ -4,3 +4,4 @@ Rcpp
 gridExtra
 rstan
 reshape2
+colorout
