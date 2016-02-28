@@ -63,7 +63,7 @@ img {
 <div id="header">
 <h1 class="title">Stochastic SIR Forecasting Showdown Part 1: Parameter Fitting</h1>
 <h4 class="author"><em>Dexter Barrows</em></h4>
-<h4 class="date"><em>19:16 19 January 2016</em></h4>
+<h4 class="date"><em>18:36 27 February 2016</em></h4>
 </div>
 
 
@@ -163,7 +163,7 @@ X_{t+1} = c + \rho X_t + \epsilon_t
 </div>
 <div id="hmc-fitting" class="section level1">
 <h1>HMC Fitting</h1>
-<p>We can use the Hamiltonian Monte Carlo algorithm implemented in the <code>Rstan</code> package to fit the stochastic SIR model as above. This was done with a single HMC chain of 2500 iterations with 1000 of those being warm-up iterations and a tinning value of 5.</p>
+<p>We can use the Hamiltonian Monte Carlo algorithm implemented in the <code>Rstan</code> package to fit the stochastic SIR model as above. This was done with a single HMC chain of 2000 iterations with 1000 of those being warm-up iterations.</p>
 <p>The runtime retrieved again using R’s <code>system.time()</code> shows</p>
 <pre><code>##    user  system elapsed 
 ##  98.085   3.849 105.778</code></pre>

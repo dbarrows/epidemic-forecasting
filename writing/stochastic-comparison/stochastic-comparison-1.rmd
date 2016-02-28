@@ -2,9 +2,13 @@
 title: "Stochastic SIR Forecasting Showdown Part 1: Parameter Fitting"
 author: "Dexter Barrows"
 date: "`r format(Sys.time(), '%H:%M %d %B %Y')`"
-output: 
-  html_document: 
-    fig_width: 9.5
+#output: 
+#  html_document: 
+#    fig_width: 9.5
+fontsize: 12pt
+output:
+  pdf_document:
+    fig_width: 7
 ---
 
 ```{r setup, include=FALSE}
@@ -103,7 +107,7 @@ sd <- sqrt( (exp(var^2) - 1) * exp(2*mu + var^2) )
 sd
 ```
 
-Which are again very close to the experimentally determined values.
+Which are very close to the experimentally determined values.
 
 If we take the full stochastic SIR system and evolve it using an Euler stepping scheme with a step size of $h = 1/7$, for 1 step per day, we obtain the following plot
 
@@ -211,7 +215,7 @@ Here the solid line is a single random trajectory, the dots show the data points
 
 # Calibrating Samples
 
-In order to compare HMCMC and IF2 we need to set up a fair and theoretically justified way to select the number of samples to draw form the HMCMC iterations and the number of particles to use for IF2. We assume that we are working with a problem that has an unknown real solution, so we use the Monte Carlo Standard Error (MCSE).
+In order to compare HMCMC and IF2 we need to set up a fair and theoretically justified way to select the number of samples to draw for the HMCMC iterations and the number of particles to use for IF2. We assume that we are working with a problem that has an unknown real solution, so we use the Monte Carlo Standard Error (MCSE).
 
 Suppose we are using a Monte-Carlo based method to obtain an estimate $\hat{\mu}_{n}$ for a quantity $\mu$, where $n$ is the number of samples. Then the Law of Large Numbers says that $\hat{\mu}_{n} \rightarrow \mu$ as $n \rightarrow \infty$. Further, the Central Limit Theorem says that the error $\hat{\mu}_{n} - \mu$ should shrink with number of samples such that $\sqrt{n} (\hat{\mu}_{n} - \mu) \rightarrow \mathcal{N}(0,\sigma^2)$ as $n \rightarrow \infty$, where $\sigma^2$ is the variance of the samples drawn.
 
@@ -587,7 +591,7 @@ grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, etakernel, berrkernel,
 
 As before the solid grey lines show the true values and the dashed grey lines show the density means.
 
-It is worth noting that the densities shown here represent a "true" MLE density estimate in that they represent HMC's attempt to directly sample from the parameter space according to the likelihood surface, unlike IF2 which is in theory only trying to get a ML point estimate. Further, these densities are much smoother and potentially more robust than those produced by the custom IF2 implementation.
+It is worth noting that the densities shown here represent a "true" MLE density estimate in that they represent HMC's attempt to directly sample from the parameter space according to the likelihood surface, unlike IF2 which is in theory only trying to get a ML point estimate. Hence, these densities are potentially more robust than those produced by the IF2 implementation.
 
 
 # HMC Bootstrapping
