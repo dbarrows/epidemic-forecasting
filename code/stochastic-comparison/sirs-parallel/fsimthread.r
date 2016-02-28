@@ -8,7 +8,7 @@ trial <- TRIAL
 
 ## number of forcast trajecotries to draw for each method
 ## (if2: parametric bootstrap, hmcmc: bootstrap)
-nTraj <- 1
+nTraj <- 2
 
 ##--------------------------------------------------------------------------------------------
 ##--------------------------------------------------------------------------------------------
@@ -111,9 +111,9 @@ initialfit <- with(stan_options,
 
 Tlim <- T - trunc
 
-if2SSEs  <- numeric(nTrials)
-hmcSSEs  <- numeric(nTrials)
-smapSSEs <- numeric(nTrials)
+#if2SSEs  <- numeric(nTrials)
+#hmcSSEs  <- numeric(nTrials)
+#smapSSEs <- numeric(nTrials)
 
 # get true trajectory
 sdeout_true <- StocSIRS(true_init_cond, pars_true, T, steps)
@@ -131,13 +131,16 @@ datapart <- c(infec_counts[1:(Tlim+1)],rep(NA,T-Tlim))
 
 # initial fit
 sourceCpp(if2file)
-if2time <- system.time( if2data <- if2_sirs(datapart, Tlim+1, N, NP, nPasses, coolrate) )
+if2time1 <- system.time( if2data <- if2_sirs(datapart, Tlim+1, N, NP, nPasses, coolrate) )
 
 # IF2 parametric bootstrap
-if2_paraboot_data <- if2_sirs_paraboot(if2data,
+if2time2 <- system.time(if2_paraboot_data <- if2_sirs_paraboot(if2data,
                           T, Tlim, steps, N, nTraj,
                           if2file, stoc_sirs_file,
                           NP, nPasses, coolrate)
+)
+
+if2time <- if2time1 + if2time2
 
 # get mean of trajectories
 parabootdata <- data.frame(if2_paraboot_data)
@@ -166,15 +169,15 @@ sir_data <- list( T = datlen,       # simulation time
                   N = 500,          # population size
                   h = 1/steps )     # step size per day
 
-hmctime <- system.time(fit <- with(stan_options,
+hmctime1 <- system.time( fit <- with(stan_options,
                         stan( fit = initialfit,
                               data    = sir_data,
                               chains  = chains,
                               iter    = iter,
                               warmup  = warmup,
                               thin    = thin)
-                        )
-            )
+                        	)
+            			)
 
 exfit <- extract(fit, permuted = FALSE, inc_warmup = FALSE)
 
@@ -202,6 +205,7 @@ pardatlen 	<- dim(paramdata)[1]
 inds 	    <- sample.int(pardatlen,nTraj,replace = TRUE)
 params 	    <- paramdata[inds,]
 
+hmctime2 <- system.time(
 for (i in 1:nTraj) {
 
 	paramset <- params[i,]
@@ -228,6 +232,9 @@ for (i in 1:nTraj) {
 	bootstrapdata[i,] <- sdeout[,'I']
 
 }
+)
+
+hmctime <- hmctime1 + hmctime2
 
 # in case of explosion
 bootstrapdata <- bootstrapdata[complete.cases(bootstrapdata),]
@@ -245,7 +252,7 @@ hmcsse <- sum(err^2)
 ##
 
 stepsAhead 	<- trunc
-predictions <- smap(datapart[1:(Tlim+1)], E, theta, stepsAhead)
+smaptime <- system.time( predictions <- smap(datapart[1:(Tlim+1)], E, theta, stepsAhead) )
 
 truefuture  <- sdeout_true[(Tlim+2):(T+1),'I']
 estfuture   <- predictions
@@ -256,7 +263,8 @@ smapsse <- sum(err^2)
 ##--------------------------------------------------------------------------------------------
 ##--------------------------------------------------------------------------------------------
 
-vecout <- c(trunc, trial, if2sse, hmcsse, smapsse)
+vecout <- c(trunc = trunc, trial = trial, if2sse = if2sse, hmcsse = hmcsse, smapsse = smapsse,
+            if2time = if2time[['user.self']], hmctime = hmctime[['user.self']], smaptime = smaptime[['user.self']])
 
 rdsfile <- paste(outdir, "/", "thread-", trunc, "-", trial, ".rds", sep = "")
 print(rdsfile)
