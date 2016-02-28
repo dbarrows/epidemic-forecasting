@@ -280,12 +280,6 @@ sdsdata <- data.frame( if2data$sds )
 names(sdsdata) <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
 ```
 
-The total runtime for the fitting was determined using the R `system.time()` function, and yielded
-
-```{r}
-if2time
-```
-
 The MLE parameter estimates, taken to be the mean of the particle swarm values after the final pass, were
 
 ```{r}
@@ -513,14 +507,6 @@ for (j in 1:datlen) {
 }
 ```
 
-The runtime retrieved again using R's `system.time()` shows
-
-```{r}
-hmctime
-```
-
-which is significantly slower than either the custom IF2 algorithm or the POMP implementation.
-
 The MLE parameter estimates, taken to be the means of the samples in the chain were
 
 ```{r}
@@ -701,9 +687,9 @@ As before the solid line shows the true states, the dots show the data, the dott
 
 # Multi-trajectory Parameter Estimation
 
-Here we fit the stochastic SIR model to 1000 _(enough?)_ random independent trajectories using each method and examine the density of the estimates.
+Here we fit the stochastic SIR model to 200 random independent trajectories using each method and examine the density of the estimates.
 
-```{r}
+```{r, multiload}
 load("sc1-multi-time.RData")
 
 # extract if2 data
@@ -723,25 +709,27 @@ hmctimes <- estmat[,14]
 
 First, the average running time over all trajectories for IF2 was
 
-```{r}
+```{r, multiavtimes}
 # average times
 
 avif2time <- mean(if2times)
 avhmctime <- mean(hmctimes)
 ```
 
-```{r}
+```{r, multiavif2time}
 avif2time
 ```
 
 And the average running time for the RStan HMCMC fits was
 
-```{r}
+```{r, multiavhmctime}
 avhmctime
 ```
 
+It is worth noting that the IF2 implementation is almost 6x the speed of the RStan HMCMC implementation, but we are obtaining less information. This will become important in the next section.
 
-```{r}
+
+```{r, multikernelsetup}
 # sort results
 
 if2sorted <- apply(if2data, 2, sort)
@@ -764,7 +752,7 @@ lineweight <- 0.5
 
 The density plots for the centre 95\% quantiles of IF2 parameters fits are shown below.
 
-```{r}
+```{r, multiif2densities}
 ## if2 density plots
 
 R0kernel <- qplot(if2plotdata$R0, geom = "density", xlab = expression(R[0]), ylab = "frequency") +
@@ -807,7 +795,7 @@ Here the solid grey lines are the true values, and the dashed grey lines are the
 
 Similarly, the density plots for the centre 95\% quantiles of RStan HMCMC parameters fits are shown below.
 
-```{r}
+```{r, multihmcdensities}
 ## hmc density plots
 
 R0kernel <- qplot(hmcplotdata$R0, geom = "density", xlab = expression(R[0]), ylab = "frequency") +
@@ -849,7 +837,7 @@ As before, the solid grey lines are the true values, and the dashed grey lines a
 
 We can overlay the densities to compare average behaviour, shown in the following plot.
 
-```{r}
+```{r, multicombineddensities}
 ## combined plot
 
 ## combined plots
@@ -886,3 +874,5 @@ berrkernel <- qplot(hmcplotdata$berr, geom = "density", xlab = expression(epsilo
 
 grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, etakernel, berrkernel, ncol = 3, nrow = 2)
 ```
+
+Here the HMCMC densities are the solid lines and the IF2 densities are the dashed lines. The densities by and large display similar coverage, with the IF2 densities for $r$ and $\varepsilon_{proc}$ showing slightly wider coverage than the HMCMC densities for the same parameters.
