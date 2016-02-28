@@ -217,36 +217,6 @@ Dexter Barrows\\
     $$
 
     Thus, the MCMC algorithm is as follows.
-
-    \iffalse
-    \begin{algorithm}
-
-        \begin{algorithmic}[1]
-
-            \Comment{comment}
-
-            \Require Initialize $\theta^{(1)}$ by selecting a starting point
-
-            \For{$i$ in $2:N$}
-                \State Sample proposed value $\theta^* \sim q(\cdot|\theta^{(i-1)})$
-                \State Sample $u \sim \mathcal{U}(0,1)$
-                \State Evaluate acceptance ratio $r = \frac{\mathcal{L}(\theta^*)p(\theta^*)}{\mathcal{L}(\theta)p(\theta)}$
-                \If{ $u < \min\left\{ 1 , r \right\}$ }
-                    \State $\theta^{(i)} = \theta^*$
-                \Else{}
-                    \State $\theta^{(i)} = \theta^{(i-1)}$
-                \EndIf
-            \EndFor\label{euclidendwhile}
-
-            \Ensure Chain of samples $(\theta^{(1)},\theta^{(2)},...,\theta^{(N)})$
-
-            \caption{Metropolis-Hastings MCMC}\label{mhmcmc}
-
-        \end{algorithmic}
-
-    \end{algorithm}
-    \fi
-
     
     \begin{algorithm}[H]
 
