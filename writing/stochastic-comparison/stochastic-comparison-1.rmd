@@ -406,7 +406,7 @@ The horizontal axis shows the IF2 pass number and the solid black lines show the
 
 # IF2 Densities
 
-Of particular importance are the densities of the parameter estimates given by the final parameter swarm. These are shown below.
+Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. These are shown below.
 
 ```{r}
 library(gridExtra)
