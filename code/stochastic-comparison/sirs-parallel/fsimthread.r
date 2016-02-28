@@ -20,7 +20,7 @@ print(rdsfile)
 
 ## number of forcast trajecotries to draw for each method
 ## (if2: parametric bootstrap, hmcmc: bootstrap)
-nTraj <- 2
+nTraj <- 200
 
 ##--------------------------------------------------------------------------------------------
 ##--------------------------------------------------------------------------------------------
