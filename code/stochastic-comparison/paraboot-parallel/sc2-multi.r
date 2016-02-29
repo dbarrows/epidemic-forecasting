@@ -115,7 +115,7 @@ initialfit <- with(stan_options,
 ## Run multiple trajectories
 #########################################################################################################
 
-SSEmat <- foreach ( trunc = 1:maxTrunc, .combine = rbind, .packages = c("Rcpp","rstan","reshape2","foreach") ) %dopar% {
+SSEmat <- foreach ( trunc = seq(4,maxTrunc,4), .combine = rbind, .packages = c("Rcpp","rstan","reshape2","foreach") ) %dopar% {
 
 	Tlim <- T - trunc
 
