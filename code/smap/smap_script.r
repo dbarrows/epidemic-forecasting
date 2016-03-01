@@ -99,7 +99,7 @@ plotdata <- data.frame(times = 1:(length(infec_counts)+stepsAhead),             
 
 p <- ggplot(plotdata, aes(times)) +
         geom_line(aes(y = tseries), linetype = "solid") +
-        geom_line(aes(y = predictions), linetype = "twodash") +
+        geom_line(aes(y = predictions), linetype = "dotted") +
         geom_point(aes(y = predictee)) +
         labs(x = "Time", y = "Infection count", color = "") +
         theme_bw()
