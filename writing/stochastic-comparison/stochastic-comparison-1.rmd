@@ -30,7 +30,7 @@ To form such a model, we will take a deterministic SIR ODE model given by
 $$
 \begin{aligned}
 	\frac{dS}{dt} & = - \beta S I  \\
-	\frac{dI}{dt} & = \beta S I - \gamma \\
+	\frac{dI}{dt} & = \beta S I - \gamma I \\
 	\frac{dR}{dt} & = \gamma I,
 \end{aligned}
 $$

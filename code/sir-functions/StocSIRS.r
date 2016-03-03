@@ -44,6 +44,7 @@ StocSIRS <- function(y, pars, T, steps) {
 
 	}
 
+	colnames(out) <- c("S","I","R","B")
 	return(out)
 
 }
@@ -51,15 +52,14 @@ StocSIRS <- function(y, pars, T, steps) {
 ### suggested parameters
 #
 # T 		<- 200
-# i_infec 	<- 5
+# i_infec 	<- 10
 # steps 	<- 7
 # N 		<- 500
 # sigma 	<- 5
 #
 # pars <- c(R0 = 3.0, 	# new infected people per infected person
 #           r = 0.1, 	# recovery rate
-#           gam = 2, 	# new infected shock intensity
 #		    N = 500,    # population size
 #		    eta = 0.5, 	# geometric random walk
 #		    berr = 0.5, # Beta geometric walk noise
-#           re = 2)  	# resuceptibility rate
+#           re = 1)  	# resuceptibility rate
