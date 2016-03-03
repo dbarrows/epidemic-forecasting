@@ -2,8 +2,7 @@
 
 # maximum truncation level and
 # number of trials at each trunction level
-MAXTRUNC=52
-NTRIALS=5
+NTRIALS=8
 
 basedir="/work/barrowdd"
 
@@ -19,10 +18,10 @@ if [ ! -d $outdir ]; then
 	mkdir $outdir
 fi
 
-# output files directory
-rdsdir="$basedir/rds"
-if [ ! -d $rdsdir ]; then
-	mkdir $rdsdir
+# image files directory
+vardir="$basedir/varimages"
+if [ ! -d $varimagesdir ]; then
+	mkdir $varimagesdir
 fi
 
 # sharcnet output files directory
@@ -35,14 +34,10 @@ module unload intel
 module load r
 
 # create source files and submit
-for TRUNC in $(seq 5 5 $MAXTRUNC); do
-	for TRIAL in $(seq 1 $NTRIALS); do
-		filebase="fsim-$TRUNC-$TRIAL"
-		srcfile="$srcdir/$filebase.r"
-		outfile="$outdir/$filebase.Rout"
-		cat fsimthread.r | \
-			sed -e "s/TRIAL/$TRIAL/" \
-				-e "s/TRUNC/$TRUNC/" > $srcfile
-		sqsub -q serial -o "$soutdir/$filebase.%J.out" --mpp 2.5G -r 10h Rscript $srcfile $rdsdir
-	done
+for TRIAL in $(seq 1 $NTRIALS); do
+	filebase="fsim-$TRIAL"
+	srcfile="$srcdir/$filebase.r"
+	outfile="$outdir/$filebase.Rout"
+	cat fsimthread.r | sed -e "s/TRIAL/$TRIAL/" > $srcfile
+	sqsub -q serial -o "$soutdir/$filebase.%J.out" --mpp 2.5G -r 20h Rscript $srcfile $vardir
 done
