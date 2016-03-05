@@ -2,7 +2,8 @@
 
 # maximum truncation level and
 # number of trials at each trunction level
-NTRIALS=8
+TRIALMIN=9
+TRIALMAX=20
 
 basedir="/work/barrowdd"
 
@@ -34,10 +35,10 @@ module unload intel
 module load r
 
 # create source files and submit
-for TRIAL in $(seq 1 $NTRIALS); do
+for TRIAL in $(seq $TRIALMIN $TRIALMAX); do
 	filebase="fsim-$TRIAL"
 	srcfile="$srcdir/$filebase.r"
 	outfile="$outdir/$filebase.Rout"
 	cat fsimthread.r | sed -e "s/TRIAL/$TRIAL/" > $srcfile
-	sqsub -q serial -o "$soutdir/$filebase.%J.out" --mpp 2.5G -r 20h Rscript $srcfile $vardir
+	#sqsub -q serial -o "$soutdir/$filebase.%J.out" --mpp 2.5G -r 20h Rscript $srcfile $vardir
 done
