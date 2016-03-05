@@ -40,5 +40,5 @@ for TRIAL in $(seq $TRIALMIN $TRIALMAX); do
 	srcfile="$srcdir/$filebase.r"
 	outfile="$outdir/$filebase.Rout"
 	cat fsimthread.r | sed -e "s/TRIAL/$TRIAL/" > $srcfile
-	#sqsub -q serial -o "$soutdir/$filebase.%J.out" --mpp 2.5G -r 20h Rscript $srcfile $vardir
+	sqsub -q serial -o "$soutdir/$filebase.%J.out" --mpp 2.5G -r 20h Rscript $srcfile $vardir
 done
