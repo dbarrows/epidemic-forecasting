@@ -68,19 +68,6 @@ if2_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, if2_s_fil
 		## generate the rest of the trajectory
 		##
 
-		# filter over parameter states
-	    #if2_s_file <- paste(getwd(),"../../if2", "if2-s.cpp", sep="/")
-	    #sourceCpp(if2_s_file)
-	    #fixed_params <- parmeans
-	    #if2time <- system.time( if2statedata <- if2_s(counts, Tlim, N, NP, coolrate, fixed_params) )
-
-	    # unpack filter results
-	    #statedata <- data.frame( if2statedata$statedata )
-		#names(statedata) <- c("S","I","R","B")
-		#statemeans <- colMeans(statedata)
-		#names(statemeans) <- c("S","I","R","B")
-
-
 		# pack new parameter estimates
 		pars <- with( 	as.list(parmeans),
 		              c(R0 = R0,

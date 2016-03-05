@@ -433,7 +433,7 @@ The solid line shows the true states, the dots are the data, the dashed line sho
 
 Of course the above mini-comparison only shows one truncation value for one trajectory. Really, we need to know how each method performs on average given different trajectories and truncation amounts.
 
-We can fit the model to successively smaller (or larger) time series to see the effect of truncation on forecast SSE. This was done below, with several *(10 right now, I'll run this for a larger number of trials in the future)* new trajectories drawn for each of the desired lengths.
+We can fit the model to successively smaller (or larger) time series to see the effect of truncation on forecast SSE. This was done below, with 10 new trajectories drawn for each of the desired lengths.
 
 
 
