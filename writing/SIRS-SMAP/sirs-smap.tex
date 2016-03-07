@@ -278,7 +278,16 @@ Dexter Barrows\\
         \label{smap_project}
     \end{figure}
 
-    The parameters used in the S-map algorithm to obtain the forecast used in Figure [\ref{smap_project}] were obtained using a grid search of potential parameters outlined in (Sugihara ref). The script is included in the Appendices.
+    The parameters used in the S-map algorithm to obtain the forecast used in Figure [\ref{smap_project}] were obtained using a grid search of potential parameters outlined in (Sugihara ref). The script is included in the appendices.
+
+
+\section{SIRS Model Forecasting}
+
+	Naturally we wish to compare the efficacy of this comparatively simple technique against the more complex and more computationally taxing frameworks we have established to perform forecasting using IF2 and HMCMC.
+
+	To do this we generated a series of artificial time series of length $260$ meant to represent 5 years of weekly incidence counts and used each method to forecast up to 2 years into the future. Our goal here was to determine how forecast error changed with forecast length; while it is expected that we will see a positive correlation, we wish to determine how the methods stack up against each other.
+
+	
 
 
 \newpage

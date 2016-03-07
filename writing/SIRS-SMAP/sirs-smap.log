@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  2 MAR 2016 18:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  6 MAR 2016 17:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -714,7 +714,7 @@ File: ./images/smap-project.pdf Graphic file (type pdf)
 <use ./images/smap-project.pdf>
 Package pdftex.def Info: ./images/smap-project.pdf used on input line 276.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
- [5 <./images/dataplot.pdf> <./images/smap-project.pdf>] [6]
+ [5 <./images/dataplot.pdf>] [6 <./images/smap-project.pdf>]
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
@@ -760,7 +760,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 321.
 Here is how much of TeX's memory you used:
  13330 strings out of 494501
  198576 string characters out of 6167031
- 564838 words of memory out of 5000000
+ 565071 words of memory out of 5000000
  15474 multiletter control sequences out of 15000+600000
  14495 words of font info for 55 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
@@ -779,7 +779,7 @@ basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2
 015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
 /2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
 live/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on sirs-smap.pdf (24 pages, 251277 bytes).
+Output written on sirs-smap.pdf (24 pages, 251515 bytes).
 PDF statistics:
  1316 PDF objects out of 1440 (max. 8388607)
  1262 compressed objects within 13 object streams
