@@ -1,0 +1,450 @@
+---
+title: "Stochastic SIR Forecasting Showdown Part 2: Producing Forecasts"
+author: "Dexter Barrows"
+date: "`r format(Sys.time(), '%H:%M %d %B %Y')`"
+#bibliography: bibliography.bib
+#output: 
+#  html_document: 
+#    fig_width: 9.5
+fontsize: 12pt
+output:
+  pdf_document:
+    fig_width: 6.5
+---
+
+***
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(cache = TRUE, autodep = FALSE, echo = FALSE, warning = FALSE, message = FALSE, error = FALSE)
+```
+
+```{r seed, include = FALSE}
+set.seed(10245)
+```
+
+# Forecasting Setup
+
+This section will focus on taking the stochastic SIR model from the previous section, truncating the synthetic data output from realizations of that model, and seeing how well IF2 and HMC can reconstruct out-of-sample forecasts.
+
+Below is an example of a simulated system with truncated data
+
+```{r}
+library(ggplot2)
+StocSIR <- function(y, pars, T, steps) {
+
+	out <- matrix(NA, nrow = (T+1), ncol = 4)
+
+	R0 <- pars[['R0']]
+	r <- pars[['r']]
+	N <- pars[['N']]
+	eta <- pars[['eta']]
+	berr <- pars[['berr']]
+
+	S <- y[['S']]
+	I <- y[['I']]
+	R <- y[['R']]
+
+	B0 <- R0 * r / N
+	B <- B0
+
+	out[1,] <- c(S,I,R,B)
+
+	h <- 1 / steps
+
+	for ( i in 1:(T*steps) ) {
+
+		B <- exp( log(B) + eta*(log(B0) - log(B)) + rnorm(1, 0, berr) )
+
+		BSI <- B*S*I
+		rI <- r*I
+
+		dS <- -BSI
+		dI <- BSI - rI
+		dR <- rI
+
+		S <- S + h*dS  #newInf
+		I <- I + h*dI  #newInf - h*dR
+		R <- R + h*dR  #h*dR
+
+		if (i %% steps == 0)
+			out[i/steps+1,] <- c(S,I,R,B)
+
+	}
+
+	return(out)
+
+}
+
+set.seed(10245)
+
+T 		<- 60
+i_infec <- 5
+steps 	<- 7
+N 		<- 500
+sigma 	<- 10
+Tlim 	<- round(T/2)
+
+## Generate true trajectory and synthetic data
+##
+
+pars_true <- c(R0 = 3.0, 	# new infected people per infected person
+          r = 0.1, 		# recovery rate
+		  N = 500, 		# population size
+		  eta = 0.5, 	# geometric random walk
+		  berr = 0.5) 	# Beta geometric walk noise
+
+true_init_cond <- c(S = N - i_infec,
+					I = i_infec,
+					R = 0)
+
+sdeout_true <- StocSIR(true_init_cond, pars_true, T, steps)
+colnames(sdeout_true) <- c('S','I','R','B')
+
+infec_counts_raw <- sdeout_true[,'I'] + rnorm(T+1, 0, sigma)
+infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
+
+datapart <- c(infec_counts[1:(Tlim+1)],rep(NA,T-Tlim))
+```
+
+```{r}
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_point(aes(y = datapart)) +
+	theme_bw()
+```
+
+As before, the solid line shows the true system states, while the dots show the data. In essence we want to be able to give either IF2 of HMC only the data points and have it reconstruct the entirety of the true system states.
+
+
+## IF2
+
+For IF2, we will take advantage of the fact that the particle filter will produce state estimates for every datum in the time series given to it, as well as producing parameter maximum likelihood point estimates. Both of these sources of information will be used to produce forecasts by parametric bootstrapping using the final parameter estimates from the particle swarm after the last IF2 pass, then using the newly generated parameter sets along with the system state point estimates from the first fitting to perform normal bootstrapping into the future of the time series.
+
+We will truncate the data at half the original time series length (to $T = 30$), and fit the model as previously described.
+
+```{r if2_fit}
+library(Rcpp)
+
+NP          <- 2500
+nPasses     <- 50
+coolrate    <- 0.975
+
+if2file <- paste(getwd(),"../../code/if2", "if2.cpp", sep="/")
+
+sourceCpp(if2file)
+
+if2time <- system.time( if2data <- if2(infec_counts[1:(Tlim+1)], Tlim+1, N, NP, nPasses, coolrate) )
+
+paramdata <- data.frame( if2data$paramdata )
+names(paramdata) <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
+
+convergedata <- data.frame( if2data$means )
+names(convergedata) <- c("R0", "r", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
+
+statedata <- data.frame( if2data$statemeans )
+names(statedata) <- c("S","I","R")
+
+finalstates <- data.frame( if2data$statedata )
+names(finalstates) <- c("S","I","R","B")
+```
+
+The total runtime for the fitting was determined using the R `system.time()` function, and yielded
+
+```{r}
+if2time
+```
+
+The MLE parameter estimates, taken to be the mean of the particle swarm values after the final pass was
+
+```{r}
+if2means <- colMeans(paramdata[c("R0","r","Iinit","sigma","eta","berr")])
+names(if2means) <- c("R0","r","I0","sigma","eta","berr")
+if2means
+```
+
+giving a relative error of
+
+```{r}
+truevals <- c( pars_true[c("R0","r")], I0 = i_infec, sigma = sigma, pars_true[c("eta","berr")])
+relerrs <- (if2means - truevals) / truevals
+relerrs
+```
+
+From last IF2 particle filtering iteration, the mean state values from the particle swarm at each time step are shown with the true underlying state and data in the plot below.
+
+```{r}
+statepart <- c(statedata[,'I'],rep(NA,T-Tlim))
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection counts") +
+	geom_point(aes(y = datapart)) +
+	geom_line(aes(y = statepart), linetype = "dashed") +
+	theme_bw()
+```
+
+Now by bootstrapping 100 trajectories from the mean final state using the mean parameter estimates, we obtain the following plot.
+
+```{r, paraboot_fit}
+nTraj 		<- 10 	# trajectories for both bootstrapping runs
+
+if2_paraboot_data <- if2_paraboot(if2data,
+                          T, Tlim, steps, N, nTraj,
+                          if2file, if2_s_file, stoc_sir_file,
+                          NP, nPasses, coolrate)
+
+# get mean of trajectories
+parabootdata <- data.frame(if2_paraboot_data)
+countnames <- paste("counts",1:(dim(parabootdata)[2]-9), sep = "")
+countdata <- parabootdata[,countnames]
+countmeans <- colMeans(countdata)
+```
+
+```{r, plot_paraboot}
+meanTraj 	<- colMeans(parabootdata)
+quantTraj 	<- t(apply(parabootdata, 2, quantile, probs = c(0.025,0.975)))
+colnames(quantTraj) <- c("025","975")
+
+meanTrajpart 	<- c(rep(NA, Tlim), meanTraj)
+quantTrajpart 	<- rbind(matrix(NA, nrow = Tlim, ncol = 2), quantTraj)
+```
+
+```{r}
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_ribbon(aes(ymin = quantTrajpart[,'025'], ymax=quantTrajpart[,'975']), alpha=0.1) +
+	geom_line(aes(y = meanTrajpart), linetype = "dashed") +
+    geom_point(aes(y = datapart)) +
+	geom_line(aes(y = statepart), linetype = "dashed") +
+	theme_bw()
+```
+
+As before, the solid line shows the true system states,the dots show the data, and the dashed line before the data cut-off shows the particle filtering mean state estimates from the last IF2 pass. In addition the dashed line after the data cut-off shows the mean bootstrap values, and the grey ribbon shows the centre 95th quantile of the bootstrap trajectories.
+
+We can define a metric to gauge forecast effectiveness by calculating the SSE. Here the value is
+
+```{r}
+truefuture  <- sdeout_true[(Tlim+2):(T+1),'I']
+estfuture   <- meanTraj[-1]
+err <- estfuture - truefuture
+sse <- sum(err^2) / (T - Tlim)
+sse
+```
+
+```{r, include = FALSE}
+# save if2 stuff for future comparison
+if2estfull <- c(statedata[,'I'],estfuture)
+```
+
+## HMC
+
+For HMC we cannot use final state estimates as in IF2 as we only have the parameter density estimates to work with. Instead we have to rely on a pure bootstrapping approach. As before we fit the stochastic SIR model to the partial data.
+
+```{r hmc_fit, results = 'hide'}
+library(rstan)
+library(reshape2)
+
+datlen <- Tlim*7 + 1
+
+data <- matrix(data = -1, nrow = Tlim+1, ncol = steps)
+data[,1] <- infec_counts[1:(Tlim+1)]
+standata <- as.vector(t(data))[1:datlen]
+
+sir_data <- list( T = datlen,   	# simulation time
+                  y = standata, 	# infection count data
+                  N = 500,      	# population size
+                  h = 1/steps )   	# step size per day 
+                    
+#rstan_options(auto_write = TRUE)
+
+stan_options <- list(   chains = 1,    		# number of chains
+                        iter   = 2000, 		# iterations per chain
+                        warmup = 1000, 		# warmup interations
+                        thin   = 5)   		# thinning number
+
+hmcfile <- paste(getwd(), "../../code/hmc", "sirode_euler.stan", sep="/")
+
+hmctime <- system.time(fit <- with(stan_options,
+		            	stan(file  	= hmcfile,
+				            data    = sir_data,
+				            chains  = chains,
+				            iter    = iter,
+				            warmup  = warmup,
+				            thin    = thin)
+		        		)
+			)
+
+exfit <- extract(fit, permuted = FALSE, inc_warmup = FALSE)
+paramdata <- data.frame(R0 = melt(exfit[,,'R0'])$value,
+               			r = melt(exfit[,,'r'])$value,
+               			sigma = melt(exfit[,,'sigma'])$value,
+               			eta = melt(exfit[,,'eta'])$value,
+               			berr = melt(exfit[,,'berr'])$value,
+               			Sinit = melt(exfit[,,'y0[1]'])$value,
+               			Iinit = melt(exfit[,,'y0[2]'])$value,
+               			Rinit = melt(exfit[,,'y0[3]'])$value )
+
+for (j in 1:datlen) {
+	varname <- paste('Bnoise[', j, ']', sep = '')
+	paramdata[[varname]] <- melt( exfit[,,varname] )$value
+}
+```
+
+The runtime retrieved again using R's `system.time()` shows
+
+```{r}
+hmctime
+```
+
+Now taking 100 samples from the HMC chain, we bootstrap them forward to obtain the following plot.
+
+```{r}
+StocSIRstan <- function(y, pars, T, steps, berrvec, bveclim) {
+
+	out <- matrix(NA, nrow = (T+1), ncol = 4)
+
+	R0 <- pars[['R0']]
+	r <- pars[['r']]
+	N <- pars[['N']]
+	eta <- pars[['eta']]
+	berr <- pars[['berr']]
+
+	S <- y[['S']]
+	I <- y[['I']]
+	R <- y[['R']]
+
+	B0 <- R0 * r / N
+	B <- B0
+
+	out[1,] <- c(S,I,R,B)
+
+	h <- 1 / steps
+
+	for ( i in 1:(T*steps) ) {
+
+	    if (i <= bveclim) {
+		    B <- exp( log(B) + eta*(log(B0) - log(B)) + berrvec[i])
+	    } else {
+	        B <- exp( log(B) + eta*(log(B0) - log(B)) + rnorm(1, 0, berr))
+	    }
+
+		BSI <- B*S*I
+		rI <- r*I
+
+		dS <- -BSI
+		dI <- BSI - rI
+		dR <- rI
+
+		S <- S + h*dS  #newInf
+		I <- I + h*dI  #newInf - h*dR
+		R <- R + h*dR  #h*dR
+
+		if (i %% steps == 0)
+			out[i/steps+1,] <- c(S,I,R,B)
+
+	}
+
+	return(out)
+
+}
+
+nTraj <- 100
+# sample from parameter distributions
+
+pardatlen 	<- dim(paramdata)[1]
+inds 	    <- sample.int(pardatlen,nTraj,replace = TRUE)
+params 	    <- paramdata[inds,]
+
+bootstrapdata <- matrix(NA, nrow = nTraj, ncol = T+1)
+
+for (i in 1:nTraj) {
+
+	paramset <- params[i,]
+
+	init_cond <- c(S = paramset$Sinit,
+	               I = paramset$Iinit,
+	               R = paramset$Rinit)
+	pars <- c(R0 = paramset$R0,
+	          r = paramset$r,
+	          N = 500.0,
+	          eta = paramset$eta,
+	          berr = paramset$berr)
+
+	berrvec <- numeric(datlen)
+	for (j in 1:datlen) {
+		varname <- paste("Bnoise[", j, "]", sep = "")
+		berrvec[j] <- paramset[[varname]]
+	}
+
+	sdeout <- StocSIRstan(init_cond, pars, T, steps, berrvec, datlen)
+	colnames(sdeout) <- c('S','I','R','B')
+
+	bootstrapdata[i,] <- sdeout[,'I']
+
+}
+
+# remove NaN rows (why in the hell are these showing up????)
+bootstrapdata <- bootstrapdata[complete.cases(bootstrapdata),]
+
+meanTraj 	<- colMeans(bootstrapdata, na.rm = FALSE)
+quantTraj 	<- t( apply(bootstrapdata, 2, quantile, probs = c(0.025,0.975), na.rm = FALSE) )
+
+colnames(quantTraj) <- c("025","975")
+```
+
+```{r}
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
+	geom_line(aes(y = meanTraj), linetype = "dashed") +
+	geom_point(aes(y = datapart)) +
+	theme_bw()
+```
+
+The solid line shows the true states, the points are the data, the dashed line shows the bootstrap mean, and the grey ribbon shows the centre 95th quantile of the bootstrap.
+
+As before we can evaluate the SSE of the forecast, giving
+
+```{r}
+truefuture  <- sdeout_true[(Tlim+2):(T+1),'I']
+estfuture   <- meanTraj[(Tlim+2):(T+1)]
+
+err <- estfuture - truefuture
+sse <- sum(err^2) / (T - Tlim)
+sse
+```
+
+```{r, include = FALSE}
+# save if2 stuff for future comparison
+hmcestfull <- meanTraj
+```
+
+# Comparison
+
+This plot showing the forecasted states for each method against the true states and the data
+
+```{r}
+qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+	geom_line(aes(y = if2estfull), linetype = "dashed") +
+	geom_line(aes(y = hmcestfull), linetype = "dotted") +
+	geom_point(aes(y = datapart)) +
+	theme_bw()
+```
+
+The solid line shows the true states, the dots are the data, the dashed line shows the IF2 estimates states, and the dotted line shows the HMC estimated true states
+
+
+***
+
+# Truncation vs. Error
+
+Of course the above mini-comparison only shows one truncation value for one trajectory. Really, we need to know how each method performs on average given different trajectories and truncation amounts.
+
+We can fit the model to successively smaller (or larger) time series to see the effect of truncation on forecast SSE. This was done below, with 10 new trajectories drawn for each of the desired lengths.
+
+
+
+This clearly shows a drastic increase in forecast error the more the data is truncated.
+
+
+We can repeat the process to obtain a similar plot for HMC, below.
+
+
+If we overlay the plot data on top of one another we get
+
+
+Here the solid line shows the IF2 truncation normalized SSEs and the dashed line shows the HMCMC normalized SSEs
