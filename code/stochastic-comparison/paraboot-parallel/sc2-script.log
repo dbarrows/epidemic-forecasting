@@ -1,0 +1,9 @@
+Loading required package: iterators
+Loading required package: ggplot2
+rstan (Version 2.9.0-3, packaged: 2016-02-11 15:54:41 UTC, GitRev: 05c3d0058b6a)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+Error in data[, 1] <- infec_counts[1:fitlim] : 
+  number of items to replace is not a multiple of replacement length
+Execution halted
