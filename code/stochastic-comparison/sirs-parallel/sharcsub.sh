@@ -2,7 +2,7 @@
 
 # maximum truncation level and
 # number of trials at each trunction level
-TRIALMIN=9
+TRIALMIN=1
 TRIALMAX=20
 
 basedir="/work/barrowdd"

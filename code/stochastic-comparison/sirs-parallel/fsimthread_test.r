@@ -1,27 +1,24 @@
 ## expects 'outdir' as argument
-
-outdir <- getwd()
-trunc <- 1
-trial <- 1
+trial <- 0
 
 ## get command line arg
-#args = commandArgs(trailingOnly=TRUE)
-#if (length(args)==0) {
-#  stop("At least one argument must be supplied (output dir).\n")
-#} else if (length(args)==1) {
-#  outdir <- args[1]
-#}
+args = commandArgs(trailingOnly=TRUE)
+if (length(args)==0) {
+  stop("At least one argument must be supplied (output dir).\n")
+} else if (length(args)==1) {
+  outdir <- args[1]
+}
 
 print(outdir)
-rdsfile <- paste(outdir, "/", "thread-", trunc, "-", trial, ".rds", sep = "")
-print(rdsfile)
+imfile <- paste(outdir, "/", "thread-", trial, ".RData", sep = "")
+print(imfile)
 
 ##--------------------------------------------------------------------------------------------
 ##--------------------------------------------------------------------------------------------
 
 ## number of forcast trajecotries to draw for each method
 ## (if2: parametric bootstrap, hmcmc: bootstrap)
-nTraj <- 2
+nTraj <- 10
 
 ##--------------------------------------------------------------------------------------------
 ##--------------------------------------------------------------------------------------------
@@ -30,7 +27,8 @@ library(reshape2)
 library(rstan)
 library(Rcpp)
 
-T       <- 100
+T       <- 7*52 # 7 years of data +  forecast
+Tlim    <- 5*52 # only 5 years of data
 i_infec <- 10
 steps   <- 7
 N       <- 500
@@ -53,18 +51,18 @@ true_init_cond <- c(S = N - i_infec,
 ## external files
 
 # R source files
-stoc_sirs_file 			<- paste(getwd(),"../../sir-functions", "StocSIRS.r", sep = "/")
-stoc_sirs_stan_file 	<- paste(getwd(),"../../sir-functions", "StocSIRSstan.r", sep = "/")
+stoc_sirs_file 			<- paste(getwd(),"../../../sir-functions", "StocSIRS.r", sep = "/")
+stoc_sirs_stan_file 	<- paste(getwd(),"../../../sir-functions", "StocSIRSstan.r", sep = "/")
 if2_sirs_paraboot_file 	<- paste(getwd(), "if2-sirs-paraboot.r", sep = "/")
-smap_file 				<- paste(getwd(), "../../smap", "smap.r", sep = "/")
+smap_file 				<- paste(getwd(), "../../../smap", "smap.r", sep = "/")
 source(stoc_sirs_file)
 source(stoc_sirs_stan_file)
 source(if2_sirs_paraboot_file)
 source(smap_file)
 
 # C++ source files
-if2file 	<- paste(getwd(), "../../if2/if2-sirs", "if2-sirs.cpp", sep="/")
-hmcfile 	<- paste(getwd(), "../../hmc/hmc-sirs", "sirs-euler.stan", sep="/")
+if2file 	<- paste(getwd(), "../../../if2/if2-sirs", "if2-sirs.cpp", sep="/")
+hmcfile 	<- paste(getwd(), "../../../hmc/hmc-sirs", "sirs-euler.stan", sep="/")
 
 ## IF2 settings
 
@@ -74,8 +72,8 @@ coolrate    <- 0.975
 
 ## Smap settings
 
-E 			<- 10
-theta 		<- 10
+E 			<- 14
+theta 		<- 3
 
 # get raw data
 sdeout_true <- StocSIRS(true_init_cond, pars_true, T, steps)
@@ -87,11 +85,12 @@ infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
 ## fit once to compile
 ##
 
-# conform data to stan's required format
-datlen <- T*7 + 1
+# conform data to stan's required format, short data (not full)
+samsize <- 10
+datlen <- (samsize-1)*steps + 1
 
-data <- matrix(data = -1, nrow = T+1, ncol = steps)
-data[,1] <- infec_counts
+data <- matrix(data = -1, nrow = samsize, ncol = steps)
+data[,1] <- infec_counts[1:10]
 standata <- as.vector(t(data))[1:datlen]
 
 #options
@@ -122,12 +121,6 @@ initialfit <- with(stan_options,
 ## Run multiple trajectories
 #########################################################################################################
 
-Tlim <- T - trunc
-
-#if2SSEs  <- numeric(nTrials)
-#hmcSSEs  <- numeric(nTrials)
-#smapSSEs <- numeric(nTrials)
-
 # get true trajectory
 sdeout_true <- StocSIRS(true_init_cond, pars_true, T, steps)
 colnames(sdeout_true) <- c('S','I','R','B')
@@ -136,16 +129,15 @@ colnames(sdeout_true) <- c('S','I','R','B')
 infec_counts_raw <- sdeout_true[,'I'] + rnorm(T+1, 0, sigma)
 infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts_raw)
 
-# truncate data
-datapart <- c(infec_counts[1:(Tlim+1)],rep(NA,T-Tlim))
+datapart <- infec_counts[1:(Tlim+1)]
 
 ## IF2
-##
+################################################################################################
+################################################################################################
 
 # initial fit
 sourceCpp(if2file)
-if2time1 <- system.time( if2data <- if2_sirs(datapart, Tlim+1, N, NP, nPasses, coolrate) )
-print(if2time1)
+if2time1 <- system.time( if2data <- if2_sirs(datapart, Tlim, N, NP, nPasses, coolrate) )
 
 # IF2 parametric bootstrap
 if2time2 <- system.time(if2_paraboot_data <- if2_sirs_paraboot(if2data,
@@ -155,7 +147,6 @@ if2time2 <- system.time(if2_paraboot_data <- if2_sirs_paraboot(if2data,
 )
 
 if2time <- if2time1 + if2time2
-#print(if2time1)
 
 # get mean of trajectories
 parabootdata <- data.frame(if2_paraboot_data)
@@ -169,13 +160,16 @@ estfuture   <- countmeans[-1]
 err <- estfuture - truefuture
 if2sse <- sum(err^2)
 
+if2pred <- estfuture
+
 
 ## HMC fitting with stan
-##
+################################################################################################
+################################################################################################
 
-datlen <- Tlim*7 + 1
+datlen <- Tlim*steps + 1
 
-data <- matrix(data = -1, nrow = T+1, ncol = steps)
+data <- matrix(data = -1, nrow = Tlim+1, ncol = steps)
 data[,1] <- datapart
 standata <- as.vector(t(data))[1:datlen]
 
@@ -262,24 +256,27 @@ estfuture   <- meanTraj[(Tlim+2):(T+1)]
 err <- estfuture - truefuture
 hmcsse <- sum(err^2)
 
-## Smapping
-##
+hmcpred <- estfuture
 
-stepsAhead 	<- trunc
-smaptime <- system.time( predictions <- smap(datapart[1:(Tlim+1)], E, theta, stepsAhead) )
+
+## Smapping
+################################################################################################
+################################################################################################
+
+stepsAhead <- T-Tlim
+smaptime <- system.time( predictions <- smap(datapart, E, theta, stepsAhead) )
 
 truefuture  <- sdeout_true[(Tlim+2):(T+1),'I']
 estfuture   <- predictions
 err <- estfuture - truefuture
 smapsse <- sum(err^2)
 
+smappred <- predictions
 
-##--------------------------------------------------------------------------------------------
-##--------------------------------------------------------------------------------------------
+## Save results
+#########################################################################################################
 
 vecout <- c(trunc = trunc, trial = trial, if2sse = if2sse, hmcsse = hmcsse, smapsse = smapsse,
             if2time = if2time[['user.self']], hmctime = hmctime[['user.self']], smaptime = smaptime[['user.self']])
 
-print(vecout)
-
-saveRDS(vecout, rdsfile)
+save.image(imfile)
