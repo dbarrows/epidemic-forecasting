@@ -18,7 +18,7 @@ print(imfile)
 
 ## number of forcast trajecotries to draw for each method
 ## (if2: parametric bootstrap, hmcmc: bootstrap)
-nTraj <- 10
+nTraj <- 50
 
 ##--------------------------------------------------------------------------------------------
 ##--------------------------------------------------------------------------------------------

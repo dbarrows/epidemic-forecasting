@@ -12,8 +12,9 @@ if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc
 	source(stoc_sir_file)
 	#print(stoc_sir_file)
 
-	if(nTrials < 2)
+	if(nTrials < 2) {
 		nTrials <- 2
+	}
 
 	# unpack if2 first fit data
 	# ...parameters
@@ -27,14 +28,14 @@ if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc
 	statemeans <- colMeans(statedata)
 	names(statemeans) <- c("S","I","R","B")
 
-	print(1:nTrials)
+	#print(1:nTrials)
 
 	## use parametric bootstrapping to generate forcasts
 	##
 	trajectories <- foreach( i = 1:nTrials, .combine = rbind, .packages = "Rcpp") %dopar% {
 
 		source(stoc_sir_file)
-		#print(stoc_sir_file)
+
 		## draw new data
 		##
 
@@ -73,19 +74,6 @@ if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc
 
 		## generate the rest of the trajectory
 		##
-
-		# filter over parameter states
-	    #if2_s_file <- paste(getwd(),"../../if2", "if2-s.cpp", sep="/")
-	    #sourceCpp(if2_s_file)
-	    #fixed_params <- parmeans
-	    #if2time <- system.time( if2statedata <- if2_s(counts, Tlim, N, NP, coolrate, fixed_params) )
-
-	    # unpack filter results
-	    #statedata <- data.frame( if2statedata$statedata )
-		#names(statedata) <- c("S","I","R","B")
-		#statemeans <- colMeans(statedata)
-		#names(statemeans) <- c("S","I","R","B")
-
 
 		# pack new parameter estimates
 		pars <- with( 	as.list(parmeans),
