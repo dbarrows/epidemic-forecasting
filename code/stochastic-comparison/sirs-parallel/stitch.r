@@ -5,7 +5,7 @@ library(RColorBrewer)
 dir <- paste(getwd(), "varimages", sep = "/")
 filelist <- list.files(dir)
 
-nTrials <- length(filelist) - 1
+nTrials <- length(filelist)
 first <- TRUE
 fctr <- 0
 
@@ -17,6 +17,7 @@ for (filenum in 1:length(filelist)) {
 	if (filename != "thread-0.RData") {
 
 		fctr <- fctr + 1
+		print(paste(fctr, filename))
 
 		e <- new.env()
 		load(filepath, e)
@@ -55,14 +56,22 @@ for (filenum in 1:length(filelist)) {
 	}
 }
 
+## trim
+if2traj <- if2traj[1:fctr,]
+hmctraj <- hmctraj[1:fctr,]
+smaptraj <- smaptraj[1:fctr,]
+truetraj <- truetraj[1:fctr,]
+
 if2sse <- colMeans((abs(if2traj - truetraj)^2))
 hmcinds <- complete.cases(hmctraj)
 hmcsse <- colMeans((abs(hmctraj[hmcinds,] - truetraj[hmcinds,])^2))
 smapsse <- colMeans((abs(smaptraj - truetraj)^2))
 
-qplot(1:(T-Tlim), log(if2sse), geom = "line") +
-	geom_line(aes(y = log(hmcsse)), linetype = "dashed") +
-	geom_line(aes(y = log(smapsse)), linetype = "dotted") +
-	theme_bw()
+q <- qplot(1:(T-Tlim), log(if2sse), geom = "line") +
+		geom_line(aes(y = log(hmcsse)), linetype = "dashed") +
+		geom_line(aes(y = log(smapsse)), linetype = "dotted") +
+		theme_bw()
+
+ggsave(q, "sseplot.pdf", width = 6.5, height = 3)
 
 save.image("fsim.RData")
