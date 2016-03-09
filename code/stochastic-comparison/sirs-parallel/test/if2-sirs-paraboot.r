@@ -7,7 +7,7 @@ library(parallel)
 library(doParallel)
 library(Rcpp)
 
-if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc_sir_file, NP, nPasses, coolrate) {
+if2_sirs_paraboot <- function(if2data_parent, T, Tlim, steps, N, nTrials, if2file, stoc_sir_file, NP, nPasses, coolrate) {
 
 	source(stoc_sir_file)
 	#print(stoc_sir_file)
@@ -18,15 +18,15 @@ if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc
 
 	# unpack if2 first fit data
 	# ...parameters
-	paramdata <- data.frame( if2data$paramdata )
-	names(paramdata) <- c("R0", "r", "re", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
-	parmeans <- colMeans(paramdata)
-	names(parmeans) <- c("R0", "r", "re", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
+	paramdata_parent <- data.frame( if2data_parent$paramdata )
+	names(paramdata_parent) <- c("R0", "r", "re", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
+	parmeans_parent <- colMeans(paramdata_parent)
+	names(parmeans_parent) <- c("R0", "r", "re", "sigma", "eta", "berr", "Sinit", "Iinit", "Rinit")
 	# ...states
-	statedata <- data.frame( if2data$statedata )
-	names(statedata) <- c("S","I","R","B")
-	statemeans <- colMeans(statedata)
-	names(statemeans) <- c("S","I","R","B")
+	statedata_parent <- data.frame( if2data_parent$statedata )
+	names(statedata_parent) <- c("S","I","R","B")
+	statemeans_parent <- colMeans(statedata_parent)
+	names(statemeans_parent) <- c("S","I","R","B")
 
 	#print(1:nTrials)
 
@@ -39,7 +39,7 @@ if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc
 		## draw new data
 		##
 
-		pars <- with( as.list(parmeans),
+		pars <- with( as.list(parmeans_parent),
 		              c(R0 = R0,
 	          			r = r,
 	          			re = re,
@@ -47,7 +47,7 @@ if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc
 	          			eta = eta,
 	          			berr = berr) )
 
-		init_cond <- with( as.list(parmeans),
+		init_cond <- with( as.list(parmeans_parent),
 		                   c(S = Sinit,
 	                   		 I = Iinit,
 	                   		 R = Rinit) )
@@ -57,7 +57,7 @@ if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc
 		colnames(sdeout) <- c('S','I','R','B')
 
 		# add noise
-		counts_raw <- sdeout[,'I'] + rnorm(dim(sdeout)[1], 0, parmeans[['sigma']])
+		counts_raw <- sdeout[,'I'] + rnorm(dim(sdeout)[1], 0, parmeans_parent[['sigma']])
 	    counts     <- ifelse(counts_raw < 0, 0, counts_raw)
 
 	    ## refit using new data
@@ -83,9 +83,9 @@ if2_sirs_paraboot <- function(if2data, T, Tlim, steps, N, nTrials, if2file, stoc
 	          			N = N,
 	          			eta = eta,
 	          			berr = berr) )
-		init_cond <- c(S = statemeans[['S']],
-	                   I = statemeans[['I']],
-	                   R = statemeans[['R']])
+		init_cond <- c(S = statemeans_parent[['S']],
+	                   I = statemeans_parent[['I']],
+	                   R = statemeans_parent[['R']])
 
 		# generate remaining trajectory part
 		sdeout_future <- StocSIRS(init_cond, pars, T-Tlim, steps)
