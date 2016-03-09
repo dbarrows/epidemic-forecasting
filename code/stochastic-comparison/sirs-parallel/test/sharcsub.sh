@@ -31,8 +31,8 @@ if [ ! -d $soutdir ]; then
 	mkdir $soutdir
 fi
 
-#module unload intel
-#module load r
+module unload intel
+module load r
 
 # create source files and submit
 for TRIAL in $(seq $TRIALMIN $TRIALMAX); do

@@ -1,0 +1,11 @@
+[1] "./varimages"
+[1] "./varimages/thread-3.RData"
+Loading required package: ggplot2
+rstan (Version 2.9.0, packaged: 2016-01-05 16:17:47 UTC, GitRev: 05c3d0058b6a)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+Loading required package: iterators
+Error in readRDS(file.rda) : error reading from connection
+Calls: with ... eval -> eval -> stan -> stan_model -> is -> readRDS
+Execution halted
