@@ -1,0 +1,21 @@
+rstan (Version 2.9.0-3, packaged: 2016-02-11 15:54:41 UTC, GitRev: 05c3d0058b6a)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+Warning message:
+Removed 30 rows containing missing values (geom_point). 
+Warning messages:
+1: Removed 30 rows containing missing values (geom_point). 
+2: Removed 30 rows containing missing values (geom_path). 
+Warning messages:
+1: Removed 31 rows containing missing values (geom_path). 
+2: Removed 30 rows containing missing values (geom_point). 
+3: Removed 30 rows containing missing values (geom_path). 
+[1] 1.671389
+Warning messages:
+1: Removed 31 rows containing missing values (geom_path). 
+2: Removed 30 rows containing missing values (geom_point). 
+3: Removed 30 rows containing missing values (geom_path). 
+Warning message:
+Removed 30 rows containing missing values (geom_point). 
+[1] 20.26858

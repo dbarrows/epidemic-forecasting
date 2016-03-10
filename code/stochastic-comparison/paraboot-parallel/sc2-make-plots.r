@@ -1,5 +1,6 @@
 library(ggplot2)
 library(reshape2)
+library(rstan)
 
 load(file = "sc2-script.RData")
 
