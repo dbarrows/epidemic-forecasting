@@ -11,11 +11,15 @@ Warning messages:
 1: Removed 31 rows containing missing values (geom_path). 
 2: Removed 30 rows containing missing values (geom_point). 
 3: Removed 30 rows containing missing values (geom_path). 
-[1] 1.671389
+[1] "if2sse : 1.67138932267333"
+Warning messages:
+1: Removed 31 rows containing missing values (geom_path). 
+2: Removed 30 rows containing missing values (geom_point). 
+3: Removed 30 rows containing missing values (geom_path). 
 Warning messages:
 1: Removed 31 rows containing missing values (geom_path). 
 2: Removed 30 rows containing missing values (geom_point). 
 3: Removed 30 rows containing missing values (geom_path). 
 Warning message:
 Removed 30 rows containing missing values (geom_point). 
-[1] 20.26858
+[1] "hmcsse : 20.2685797095841"

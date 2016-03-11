@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  10 MAR 2016 12:56
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  10 MAR 2016 23:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -714,53 +714,56 @@ Overfull \hbox (30.0pt too wide) in paragraph at lines 152--187
 $[]$ 
  []
 
-<./images/if2forecast.pdf, id=65, 469.755pt x 289.08pt>
-File: ./images/if2forecast.pdf Graphic file (type pdf)
 
-<use ./images/if2forecast.pdf>
-Package pdftex.def Info: ./images/if2forecast.pdf used on input line 197.
+LaTeX Warning: Reference `if2forecast' on page 3 undefined on input line 192.
+
+<./images/if2combined.pdf, id=64, 469.755pt x 289.08pt>
+File: ./images/if2combined.pdf Graphic file (type pdf)
+
+<use ./images/if2combined.pdf>
+Package pdftex.def Info: ./images/if2combined.pdf used on input line 197.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
  [3]
-<./images/if2forecast_c.pdf, id=83, 469.755pt x 289.08pt>
-File: ./images/if2forecast_c.pdf Graphic file (type pdf)
 
-<use ./images/if2forecast_c.pdf>
-Package pdftex.def Info: ./images/if2forecast_c.pdf used on input line 207.
-(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
- [4 <./images/if2forecast.pdf>]
-<./images/hmcforecast.pdf, id=100, 469.755pt x 289.08pt>
+LaTeX Warning: Reference `if2forecast' on page 4 undefined on input line 202.
+
+<./images/hmcforecast.pdf, id=80, 469.755pt x 289.08pt>
 File: ./images/hmcforecast.pdf Graphic file (type pdf)
 
 <use ./images/hmcforecast.pdf>
-Package pdftex.def Info: ./images/hmcforecast.pdf used on input line 224.
+Package pdftex.def Info: ./images/hmcforecast.pdf used on input line 216.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
- [5 <./images/if2forecast_c.pdf>]
-<./images/truncation.pdf, id=116, 469.755pt x 289.08pt>
+ [4 <./images/if2combined.pdf>]
+<./images/truncation.pdf, id=98, 469.755pt x 289.08pt>
 File: ./images/truncation.pdf Graphic file (type pdf)
 
 <use ./images/truncation.pdf>
-Package pdftex.def Info: ./images/truncation.pdf used on input line 241.
+Package pdftex.def Info: ./images/truncation.pdf used on input line 233.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
- [6 <./images/hmcforecast.pdf>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 250.
- [7 <./images/truncation.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 250.
+ [5 <./images/hmcforecast.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 242.
+ [6 <./images/truncation.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 242.
  (./sc2.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 250.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 250.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 242.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 242.
 Package rerunfilecheck Info: File `sc2.out' has not changed.
 (rerunfilecheck)             Checksum: 1AC921567FCA4F8DEB77F3C08BE9A8FB;320.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 250.
+
+
+LaTeX Warning: There were undefined references.
+
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 242.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 11077 strings out of 494501
- 168958 string characters out of 6167031
- 284811 words of memory out of 5000000
- 14176 multiletter control sequences out of 15000+600000
+ 11070 strings out of 494501
+ 168794 string characters out of 6167031
+ 285678 words of memory out of 5000000
+ 14172 multiletter control sequences out of 15000+600000
  11267 words of font info for 42 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  36i,12n,38p,588b,2320s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -775,10 +778,10 @@ xmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015basic
 /texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015bas
 ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/201
 5basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on sc2.pdf (7 pages, 140173 bytes).
+Output written on sc2.pdf (6 pages, 134686 bytes).
 PDF statistics:
- 181 PDF objects out of 1000 (max. 8388607)
- 148 compressed objects within 2 object streams
- 27 named destinations out of 1000 (max. 500000)
- 79 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 161 PDF objects out of 1000 (max. 8388607)
+ 131 compressed objects within 2 object streams
+ 25 named destinations out of 1000 (max. 500000)
+ 74 words of extra memory for PDF output out of 10000 (max. 10000000)
 

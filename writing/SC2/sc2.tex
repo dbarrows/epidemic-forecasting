@@ -194,22 +194,14 @@ Dexter Barrows\\
 	\begin{figure}[H]
         \centering
         \captionsetup{width=.8\linewidth}
-        \includegraphics[width=0.8\textwidth]{./images/if2forecast.pdf}
-        \caption{Forecast produced by the IF2 / parametric bootstrapping framework with $M = 200$ trajectories. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the centre 95th quantile.}
-        \label{if2forecast}
+        \includegraphics[width=0.8\textwidth]{./images/if2combined.pdf}
+        \caption{Forecast produced by the IF2 / parametric bootstrapping framework. The dotted line shows the mean estimate of the forecasts, the dark grey ribbon shows the centre 95th quantile of the true state estimates, and the lighter grey ribbon shows the centre 95th quantile of the true state estimates with added observation noise drawn from $\mathcal{N}(0,\sigma)$.}
+        \label{if2combined}
     \end{figure}
 
-    It should be noted that the estimates produced are without added observation noise. We can see a reproduction of the data Figure [\ref{if2forecast}], but with observation noise in Figure [\ref{if2forecast_c}].
+    We can define a metric to gauge forecast effectiveness by calculating the SSE and dividing that value by the number of values predicted to get the average squared error per point. For the data in Figure [\ref{if2forecast}] the value was $\overline{SSE} = 1.67$.
 
-    \begin{figure}[H]
-        \centering
-        \captionsetup{width=.8\linewidth}
-        \includegraphics[width=0.8\textwidth]{./images/if2forecast_c.pdf}
-        \caption{Forecast produced by the IF2 / parametric bootstrapping framework, with added observation noise drawn from the fitted parameter sets. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the centre 95th quantile.}
-        \label{if2forecast_c}
-    \end{figure}
-
-    We can define a metric to gauge forecast effectiveness by calculating the SSE and dividing that value by the number of values predicted to get the average squared error per point. For the data in Figure [\ref{if2forecast}] the value was $\overline{SSE} = 37.005$.
+ 
 
 
 \section{HMCMC}
@@ -226,7 +218,7 @@ Dexter Barrows\\
         \label{hmcforecast}
     \end{figure}
 
-    As before we can evaluate the averaged SSE of the forecast for the data shown, giving $\overline{SSE} = 17.74223$.
+    As before we can evaluate the averaged SSE of the forecast for the data shown, giving $\overline{SSE} = 20.27$.
 
 
 \section{Truncation vs. Error}
@@ -243,7 +235,7 @@ Dexter Barrows\\
         \label{truncation}
     \end{figure}
 
-    Here we have out first real result in this paper. HMCMC consistently outperforms IF2 for truncation levels more than about 8 or 9, and does so by an increasing margin as the truncation level increases.
+    IF2 and HMCMC perform very closely, with IF2 maintaining a small advantage up to a truncation of about 25 data points.
 
 
 

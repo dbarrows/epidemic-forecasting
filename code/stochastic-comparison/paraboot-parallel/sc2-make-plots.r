@@ -2,6 +2,11 @@ library(ggplot2)
 library(reshape2)
 library(rstan)
 
+printvar <- function(v) {
+  	name <- deparse(substitute(v))
+  	print(paste(name, ":", v))
+}
+
 load(file = "sc2-script.RData")
 
 q <- qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infction count") +
@@ -22,7 +27,7 @@ qif2 <- qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infe
 
 ggsave(qif2, filename="if2fit.pdf", height=4, width=6.5)
 
-## Withoug observation noise
+## Without observation noise
 ##
 
 pdata <- data.frame(parabootdata)
@@ -47,8 +52,8 @@ ggsave(qif2forecast, filename="if2forecast.pdf", height=4, width=6.5)
 truefuture  <- sdeout_true[(Tlim+2):(T+1),'I']
 estfuture   <- meanTraj
 err <- estfuture - truefuture
-sse <- sum(err^2) / (T - Tlim)
-sse
+if2sse <- sum(err^2) / (T - Tlim)
+printvar(if2sse)
 
 ## With observation noise
 ##
@@ -79,6 +84,27 @@ qif2forecast_c <- qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", yl
 
 ggsave(qif2forecast_c, filename="if2forecast_c.pdf", height=4, width=6.5)
 
+## Combined
+
+pdata <- data.frame(parabootdata)
+pforecast <- pdata[,paste("counts", 2:(T-Tlim+1), sep = "")]
+
+meanTraj 	<- colMeans(pforecast)
+quantTraj 	<- t(apply(pforecast, 2, quantile, probs = c(0.025,0.975)))
+colnames(quantTraj) <- c("025","975")
+
+meanTrajpart_n 	<- c(rep(NA, Tlim+1), meanTraj)
+quantTrajpart_n 	<- rbind(matrix(NA, nrow = Tlim+1, ncol = 2), quantTraj)
+
+qif2combined <- qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
+					geom_ribbon(aes(ymin = quantTrajpart[,'025'], ymax=quantTrajpart[,'975']), alpha=0.1) +
+					geom_ribbon(aes(ymin = quantTrajpart_n[,'025'], ymax=quantTrajpart_n[,'975']), alpha=0.2) +
+					geom_line(aes(y = meanTrajpart_n), linetype = "dotted") +
+    				geom_point(aes(y = datapart)) +
+					geom_line(aes(y = statepart), linetype = "dashed") +
+					theme_bw()
+
+ggsave(qif2combined, filename="if2combined.pdf", height=4, width=6.5)
 
 
 
@@ -154,5 +180,5 @@ truefuture  <- sdeout_true[(Tlim+2):(T+1),'I']
 estfuture   <- meanTraj[(Tlim+2):(T+1)]
 
 err <- estfuture - truefuture
-sse <- sum(err^2) / (T - Tlim)
-sse
+hmcsse <- sum(err^2) / (T - Tlim)
+printvar(hmcsse)
