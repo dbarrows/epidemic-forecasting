@@ -40,7 +40,7 @@ ssdeout <- StocSSIR(initcond, pars, T, steps, neinum, neibmat)
 infec_counts <- ssdeout[,'I',] + matrix(rnorm(nloc*(T+1), 0, sigma), nloc, T+1)
 infec_counts <- ifelse(infec_counts < 0, 0, infec_counts)
 
-NP <- 2500*nloc*2
+NP <- 2500*2
 nPasses <- 50
 coolrate <- 0.975
 
