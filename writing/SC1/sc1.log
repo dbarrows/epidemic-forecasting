@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  9 MAR 2016 16:16
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  10 MAR 2016 19:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -482,6 +482,26 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 Package: lstbayes 2015/12/22 lstbayes listings language drivers for BUGS, JAGS,
  and Stan
 )
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2005/04/14 v1.61803 publication quality tables
+\heavyrulewidth=\dimen146
+\lightrulewidth=\dimen147
+\cmidrulewidth=\dimen148
+\belowrulesep=\dimen149
+\belowbottomsep=\dimen150
+\aboverulesep=\dimen151
+\abovetopsep=\dimen152
+\cmidrulesep=\dimen153
+\cmidrulekern=\dimen154
+\defaultaddspace=\dimen155
+\@cmidla=\count140
+\@cmidlb=\count141
+\@aboverulesep=\dimen156
+\@belowrulesep=\dimen157
+\@thisruleclass=\count142
+\@lastruleclass=\count143
+\@thisrulewidth=\dimen158
+)
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
 
@@ -495,7 +515,7 @@ File: dvipsnam.def 2014/10/14 v3.0j Driver-dependent file (DPC,SPQR)
 ))
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count140
+\c@AlgoLine=\count144
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
@@ -523,12 +543,12 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \skiplength=\skip58
 \algomargin=\skip59
 \skipalgocfslide=\skip60
-\algowidth=\dimen146
-\inoutsize=\dimen147
-\inoutindent=\dimen148
-\interspacetitleruled=\dimen149
-\interspacealgoruled=\dimen150
-\interspacetitleboxruled=\dimen151
+\algowidth=\dimen159
+\inoutsize=\dimen160
+\inoutindent=\dimen161
+\interspacetitleruled=\dimen162
+\interspacealgoruled=\dimen163
+\interspacetitleboxruled=\dimen164
 \algocf@ruledwidth=\skip61
 \algocf@inoutbox=\box59
 \algocf@inputbox=\box60
@@ -544,9 +564,9 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \algoheightrule=\skip67
 \algotitleheightruledefault=\skip68
 \algotitleheightrule=\skip69
-\c@algocfline=\count141
-\c@algocfproc=\count142
-\c@algocf=\count143
+\c@algocfline=\count145
+\c@algocfproc=\count146
+\c@algocf=\count147
 \algocf@algoframe=\box65
 \algocf@algobox=\box66
 )
@@ -554,7 +574,7 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 Package: inconsolata 2016/02/22 v1.10
 
 `inconsolata-zi4' v1.10, 2016/02/22 Text macros for Inconsolata (msharpe)
-\zifour@ocount=\count144
+\zifour@ocount=\count148
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
@@ -562,40 +582,40 @@ Package: parskip 2001/04/09 non-zero parskip adjustments
 (./sc1.aux)
 \openout1 = `sc1.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 102.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 102.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 103.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 103.
 
  (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 102.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 102.
-LaTeX Font Info:    ... okay on input line 102.
+LaTeX Font Info:    ... okay on input line 103.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 103.
+LaTeX Font Info:    ... okay on input line 103.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count145
-\scratchdimen=\dimen152
+\scratchcounter=\count149
+\scratchdimen=\dimen165
 \scratchbox=\box67
-\nofMPsegments=\count146
-\nofMParguments=\count147
+\nofMPsegments=\count150
+\nofMParguments=\count151
 \everyMPshowfont=\toks30
-\MPscratchCnt=\count148
-\MPscratchDim=\dimen153
-\MPnumerator=\count149
-\makeMPintoPDFobject=\count150
+\MPscratchCnt=\count152
+\MPscratchDim=\dimen166
+\MPnumerator=\count153
+\makeMPintoPDFobject=\count154
 \everyMPtoPDFconversion=\toks31
 ) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -651,9 +671,9 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count151
+\c@lstlisting=\count155
 \AtBeginShipoutBox=\box68
-Package hyperref Info: Link coloring OFF on input line 102.
+Package hyperref Info: Link coloring OFF on input line 103.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -661,11 +681,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 y
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count152
+\c@section@level=\count156
 )
-LaTeX Info: Redefining \ref on input line 102.
-LaTeX Info: Redefining \pageref on input line 102.
-LaTeX Info: Redefining \nameref on input line 102.
+LaTeX Info: Redefining \ref on input line 103.
+LaTeX Info: Redefining \pageref on input line 103.
+LaTeX Info: Redefining \nameref on input line 103.
  (./sc1.out) (./sc1.out)
 \@outlinefile=\write4
 \openout4 = `sc1.out'.
@@ -675,62 +695,135 @@ LaTeX Info: Redefining \nameref on input line 102.
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-Underfull \hbox (badness 10000) in paragraph at lines 104--109
+Underfull \hbox (badness 10000) in paragraph at lines 105--110
 
  []
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 116.
+LaTeX Font Info:    Try loading font information for U+msa on input line 117.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 116.
+LaTeX Font Info:    Try loading font information for U+msb on input line 117.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-<./images/betaplot.pdf, id=9, 469.755pt x 289.08pt>
+) [1
+
+{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+<./images/betaplot.pdf, id=57, 469.755pt x 289.08pt>
 File: ./images/betaplot.pdf Graphic file (type pdf)
 
 <use ./images/betaplot.pdf>
-Package pdftex.def Info: ./images/betaplot.pdf used on input line 137.
+Package pdftex.def Info: ./images/betaplot.pdf used on input line 146.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
- [1
 
-{/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 144.
+<./images/betadensity.pdf, id=62, 469.755pt x 289.08pt>
+File: ./images/betadensity.pdf Graphic file (type pdf)
+
+<use ./images/betadensity.pdf>
+Package pdftex.def Info: ./images/betadensity.pdf used on input line 156.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
  [2 <./images/betaplot.pdf>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 144.
+<./images/sirmean.pdf, id=79, 469.755pt x 289.08pt>
+File: ./images/sirmean.pdf Graphic file (type pdf)
+ <use ./images/sirmean.pdf>
+Package pdftex.def Info: ./images/sirmean.pdf used on input line 168.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+
+[3 <./images/betadensity.pdf>] [4 <./images/sirmean.pdf>] [5]
+<./images/if2state.pdf, id=113, 469.755pt x 289.08pt>
+File: ./images/if2state.pdf Graphic file (type pdf)
+
+<use ./images/if2state.pdf>
+Package pdftex.def Info: ./images/if2state.pdf used on input line 238.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [6]
+<./images/if2convergence.pdf, id=123, 469.755pt x 289.08pt>
+File: ./images/if2convergence.pdf Graphic file (type pdf)
+
+<use ./images/if2convergence.pdf>
+Package pdftex.def Info: ./images/if2convergence.pdf used on input line 250.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [7 <./images/if2state.pdf>]
+<./images/if2sdconvergence.pdf, id=137, 469.755pt x 289.08pt>
+File: ./images/if2sdconvergence.pdf Graphic file (type pdf)
+
+<use ./images/if2sdconvergence.pdf>
+Package pdftex.def Info: ./images/if2sdconvergence.pdf used on input line 260.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [8 <./images/if2convergence.pdf>]
+<./images/if2kernels.pdf, id=149, 469.755pt x 289.08pt>
+File: ./images/if2kernels.pdf Graphic file (type pdf)
+
+<use ./images/if2kernels.pdf>
+Package pdftex.def Info: ./images/if2kernels.pdf used on input line 275.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [9 <./images/if2sdconvergence.pdf>]
+<./images/hmckernels.pdf, id=163, 469.755pt x 289.08pt>
+File: ./images/hmckernels.pdf Graphic file (type pdf)
+
+<use ./images/hmckernels.pdf>
+Package pdftex.def Info: ./images/hmckernels.pdf used on input line 296.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [10 <./images/if2kernels.pdf>]
+<./images/hmcboot.pdf, id=177, 469.755pt x 289.08pt>
+File: ./images/hmcboot.pdf Graphic file (type pdf)
+
+<use ./images/hmcboot.pdf>
+Package pdftex.def Info: ./images/hmcboot.pdf used on input line 311.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [11 <./images/hmckernels.pdf>]
+<./images/combined-multi.pdf, id=189, 469.755pt x 289.08pt>
+File: ./images/combined-multi.pdf Graphic file (type pdf)
+
+<use ./images/combined-multi.pdf>
+Package pdftex.def Info: ./images/combined-multi.pdf used on input line 324.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [12 <./images/hmcboot.pdf>]
+<./images/timeplot.pdf, id=204, 469.755pt x 289.08pt>
+File: ./images/timeplot.pdf Graphic file (type pdf)
+
+<use ./images/timeplot.pdf>
+Package pdftex.def Info: ./images/timeplot.pdf used on input line 336.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [13 <./images/combined-multi.pdf>]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 345.
+ [14 <./images/timeplot.pdf>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 345.
  (./sc1.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 144.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 144.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 345.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 345.
 Package rerunfilecheck Info: File `sc1.out' has not changed.
-(rerunfilecheck)             Checksum: 25BCB5C27814C37F90B968A8B0809C7E;48.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 144.
+(rerunfilecheck)             Checksum: 26061E35DE6CB7C5641599DE751A1951;474.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 345.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 10992 strings out of 494501
- 167512 string characters out of 6167031
- 283367 words of memory out of 5000000
- 14122 multiletter control sequences out of 15000+600000
- 9497 words of font info for 36 fonts, out of 8000000 for 9000
+ 11160 strings out of 494501
+ 170287 string characters out of 6167031
+ 287248 words of memory out of 5000000
+ 14241 multiletter control sequences out of 15000+600000
+ 11045 words of font info for 42 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 36i,7n,38p,461b,2208s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,10n,38p,534b,2211s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmbx12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmex10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015basic/texmf-dist/font
-s/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015basic/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on sc1.pdf (2 pages, 77793 bytes).
+blic/amsfonts/cm/cmmi10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type
+1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015basic/texmf-dist/fon
+ts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015basic/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2015basic/texmf-di
+st/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/2015basic/texmf-
+dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texlive/2015basic/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on sc1.pdf (14 pages, 296167 bytes).
 PDF statistics:
- 63 PDF objects out of 1000 (max. 8388607)
- 49 compressed objects within 1 object stream
- 7 named destinations out of 1000 (max. 500000)
- 14 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 275 PDF objects out of 1000 (max. 8388607)
+ 222 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
+ 128 words of extra memory for PDF output out of 10000 (max. 10000000)
 
