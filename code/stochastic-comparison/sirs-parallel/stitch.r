@@ -72,6 +72,6 @@ q <- qplot(1:(T-Tlim), log(if2sse), geom = "line") +
 		geom_line(aes(y = log(smapsse)), linetype = "dotted") +
 		theme_bw()
 
-ggsave(q, "sseplot.pdf", width = 6.5, height = 3)
+ggsave(q, filename = "sseplot.pdf", width = 6.5, height = 3)
 
 save.image("fsim.RData")
