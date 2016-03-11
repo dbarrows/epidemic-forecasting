@@ -64,14 +64,62 @@ Pass
 ...49 / 50
 Parameter results (mean | sd)
 -----------------------------
-R0        3.372431 0.274262
-r         0.102781 0.000148
-sigma     8.695207 1.738159
-eta       0.436208 0.005847
-berr    0.139176 0.006667
-S_init  493.429987 2.815913
-I_init    6.570013 2.815913
+R0        3.272442 0.284893
+r         0.103610 0.000167
+sigma     8.845410 1.826889
+eta       0.586737 0.013965
+berr    0.163455 0.004231
+S_init  492.102888 1.799224
+I_init    7.897112 1.799224
 R_init    0.000000 0.000000
 
+[1] "if2means : 3.27244186321046"  "if2means : 0.103610304764355"
+[3] "if2means : 7.8971121600325"   "if2means : 8.84540968562412" 
+[5] "if2means : 0.586736727282992" "if2means : 0.163454754773347"
+[1] "relerrs : 0.0908139544034866" "relerrs : 0.0361030476435506"
+[3] "relerrs : 0.5794224320065"    "relerrs : -0.115459031437588"
+[5] "relerrs : 0.173473454565983"  "relerrs : -0.673090490453305"
+null device 
+          1 
+null device 
+          1 
+null device 
+          1 
 
+SAMPLING FOR MODEL 'sirode_euler' NOW (CHAIN 1).
+
+Chain 1, Iteration:    1 / 2000 [  0%]  (Warmup)
+Chain 1, Iteration:  200 / 2000 [ 10%]  (Warmup)
+Chain 1, Iteration:  400 / 2000 [ 20%]  (Warmup)
+Chain 1, Iteration:  600 / 2000 [ 30%]  (Warmup)
+Chain 1, Iteration:  800 / 2000 [ 40%]  (Warmup)
+Chain 1, Iteration: 1000 / 2000 [ 50%]  (Warmup)
+Chain 1, Iteration: 1001 / 2000 [ 50%]  (Sampling)
+Chain 1, Iteration: 1200 / 2000 [ 60%]  (Sampling)
+Chain 1, Iteration: 1400 / 2000 [ 70%]  (Sampling)
+Chain 1, Iteration: 1600 / 2000 [ 80%]  (Sampling)
+Chain 1, Iteration: 1800 / 2000 [ 90%]  (Sampling)
+Chain 1, Iteration: 2000 / 2000 [100%]  (Sampling)# 
+#  Elapsed Time: 31.1635 seconds (Warm-up)
+#                22.0987 seconds (Sampling)
+#                53.2621 seconds (Total)
+# 
+The following numerical problems occured the indicated number of times after warmup on chain 1
+                                                                                         count
+Exception thrown at line 54: normal_log: Location parameter is nan, but must be finite!      9
+Exception thrown at line 54: normal_log: Location parameter is -inf, but must be finite!     2
+When a numerical problem occurs, the Metropolis proposal gets rejected.
+However, by design Metropolis proposals sometimes get rejected even when there are no numerical problems.
+Thus, if the number in the 'count' column is small, do not ask about this message on stan-users.
+[1] "hmcmeans : 3.31518747155527"   "hmcmeans : 0.0999243707900018"
+[3] "hmcmeans : 6.64178677728278"   "hmcmeans : 8.49567588955979"  
+[5] "hmcmeans : 0.458613397610064"  "hmcmeans : 0.160240891231949" 
+[1] "relerrs : 0.105062490518422"     "relerrs : -0.000756292099982347"
+[3] "relerrs : 0.328357355456557"     "relerrs : -0.150432411044021"   
+[5] "relerrs : -0.0827732047798714"   "relerrs : -0.679518217536102"   
+null device 
+          1 
+Error in `$<-.data.frame`(`*tmp*`, "variable", value = integer(0)) : 
+  replacement has 0 rows, data has 200
+Calls: $<- -> $<-.data.frame
 Execution halted
