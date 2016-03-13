@@ -7,7 +7,7 @@
 ## neibmat: Contains lists of neighbors for each location
 #			- rows are parent locations (nodes)
 # 			- columns are locations each parent is attached to (edges)
-StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
+StocSSIRstan <- function(ymat, pars, T, steps, neinum, neibmat, berrmat, bmatlim) {
 
 	## number of locations
     nloc <- dim(ymat)[1]
@@ -43,7 +43,12 @@ StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
 
     for ( i in 1:(T*steps) ) {
 
-        B <- exp( log(B) + eta*(log(B0) - log(B)) + rnorm(nloc, 0, berr) )
+    	if (i <= bmatlim) {
+		    B <- exp( log(B) + eta*(log(B0) - log(B)) + berrmat[,i])
+	    } else {
+	        B <- exp( log(B) + eta*(log(B0) - log(B)) + rnorm(nloc, 0, berr) )
+	    }
+        
 
         for (loc in 1:nloc) {
         	n <- neinum[loc]
@@ -66,9 +71,8 @@ StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
         I <- I + h*dI
         R <- R + h*dR
 
-        if (i %% steps == 0) {
+        if (i %% steps == 0)
             out[,,i/steps+1] <- cbind(S,I,R,B)
-        }
 
     }
 
@@ -90,4 +94,5 @@ StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
 #           r = 0.1,      # recovery rate
 #           N = 500,      # population size
 #           eta = 0.5,    # geometric random walk
-#           berr = 0.5)   # Beta geometric walk noise
+#           berr = 0.5,   # Beta geometric walk noise
+# 			phi = 0.5 )	  # interconnectivity degree
