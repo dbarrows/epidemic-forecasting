@@ -75,6 +75,7 @@ Rcpp::List if2_spa(NumericMatrix data, int T, int N, int NP, int nPasses, double
 	initializeParticles(&particles, NP, nloc, N);
 	initializeParticles(&particles_old, NP, nloc, N);
 
+	/*
 	// copy particle test
 	copyParticle(&particles[0], &particles_old[0], nloc);
 
@@ -94,6 +95,7 @@ Rcpp::List if2_spa(NumericMatrix data, int T, int N, int NP, int nPasses, double
 	printf("Before S:%f | I:%f | R:%f\n", particles[0].S[0], particles[0].I[0], particles[0].R[0]);
 	exp_euler_SSIR(1.0/7.0, 0.0, 1.0, N, &particles[0], neinum, neibmat, nloc);
 	printf("After S:%f | I:%f | R:%f\n", particles[0].S[0], particles[0].I[0], particles[0].R[0]);
+	*/
 
 	// START PASSES THROUGH DATA
 
@@ -116,15 +118,16 @@ Rcpp::List if2_spa(NumericMatrix data, int T, int N, int NP, int nPasses, double
 			}
 		}
 
-		/*
 		if (pass == (nPasses-1)) {
-			State sMeans;
-			getStateMeans(&sMeans, particles, NP);
-			statemeans(0,0) = sMeans.S;
-			statemeans(0,1) = sMeans.I;
-			statemeans(0,2) = sMeans.R;
+			double means[nloc];
+			for (int loc = 0; loc < nloc; loc++) {
+				means[loc] = 0.0;
+				for (int n = 0; n < NP; n++) {
+					means[loc] += particles[n].I[loc] / NP;	
+				}
+				infecmeans(loc, 0) = means[loc];
+			}
 		}
-		*/
 
 		for (int t = 1; t < T; t++) {
 
@@ -171,15 +174,16 @@ Rcpp::List if2_spa(NumericMatrix data, int T, int N, int NP, int nPasses, double
 			if (t < (T-1))
 			    perturbParticles(particles, N, NP, nloc, pass, coolrate);
 
-			/*
 			if (pass == (nPasses-1)) {
-				State sMeans;
-				getStateMeans(&sMeans, particles, NP);
-				statemeans(t,0) = sMeans.S;
-				statemeans(t,1) = sMeans.I;
-				statemeans(t,2) = sMeans.R;
+				double means[nloc];
+				for (int loc = 0; loc < nloc; loc++) {
+					means[loc] = 0.0;
+					for (int n = 0; n < NP; n++) {
+						means[loc] += particles[n].I[loc] / NP;	
+					}
+					infecmeans(loc, t) = means[loc];
+				}
 			}
-			*/
 
 		}
 
@@ -206,6 +210,26 @@ Rcpp::List if2_spa(NumericMatrix data, int T, int N, int NP, int nPasses, double
 		}
 	}
 
+	// Pack final state means data
+	double Smeans[nloc], Imeans[nloc], Rmeans[nloc], Bmeans[nloc];
+	for (int loc = 0; loc < nloc; loc++) {
+		Smeans[loc] = 0.0;
+		Imeans[loc] = 0.0;
+		Rmeans[loc] = 0.0;
+		Bmeans[loc] = 0.0;
+		for (int n = 0; n < NP; n++) {
+			Smeans[loc] += particles[n].S[loc] / NP;
+			Imeans[loc] += particles[n].I[loc] / NP;
+			Rmeans[loc] += particles[n].R[loc] / NP;
+			Bmeans[loc] += particles[n].B[loc] / NP;
+		}
+		finalstate(loc, 0) = Smeans[loc];
+		finalstate(loc, 1) = Imeans[loc];
+		finalstate(loc, 2) = Rmeans[loc];
+		finalstate(loc, 3) = Bmeans[loc];
+	}
+
+
 	return Rcpp::List::create(	Rcpp::Named("paramdata") = paramdata,
 	                          	Rcpp::Named("initInfec") = initInfec,
                              	Rcpp::Named("infecmeans") = infecmeans,
@@ -231,6 +255,13 @@ void exp_euler_SSIR(double h, double t0, double tn, int N, Particle * particle,
 	double * S = particle->S;
 	double * I = particle->I;
 	double * R = particle->R;
+	double * B = particle->B;
+
+	// create last state vectors
+	double S_last[nloc];
+	double I_last[nloc];
+	double R_last[nloc];
+	double B_last[nloc];
 
 	double R0 	= particle->R0;
 	double r 	= particle->r;
@@ -239,26 +270,31 @@ void exp_euler_SSIR(double h, double t0, double tn, int N, Particle * particle,
 	double berr = particle->berr;
 	double phi  = particle->phi;
 
-	double * B = particle->B;
-
 	//printf("sphi \t\t| ophi \t\t| BSI \t\t| rI \t\t| dS \t\t| dI \t\t| dR \t\t| S \t\t| I \t\t| R |\n");
 
 	for(int t = 0; t < num_steps; t++) {
 
 		for (int loc = 0; loc < nloc; loc++) {
+			S_last[loc] = S[loc];
+			I_last[loc] = I[loc];
+			R_last[loc] = R[loc];
+			B_last[loc] = B[loc];
+		}
 
-			B[loc] = exp( log(B[loc]) + eta*(log(B0) - log(B[loc])) + berr*randn() );
+		for (int loc = 0; loc < nloc; loc++) {
+
+			B[loc] = exp( log(B_last[loc]) + eta*(log(B0) - log(B_last[loc])) + berr*randn() );
 
 			int n = neinum[loc];
-        	double sphi = 1.0 - phi*((double) n/(n+1.0) );
+        	double sphi = 1.0 - phi*( (double) n/(n+1.0) );
         	double ophi = phi/(n+1.0);
 
         	double nBIsum = 0.0;
         	for (int j = 0; j < n; j++)
-        		nBIsum += B[(int) neibmat(loc, j) - 1] * I[(int) neibmat(loc, j) - 1];
+        		nBIsum += B_last[(int) neibmat(loc, j) - 1] * I_last[(int) neibmat(loc, j) - 1];
 
-        	double BSI = S[loc]*( sphi*B[loc]*I[loc] + ophi*nBIsum );
-        	double rI  = r*I[loc];
+        	double BSI = S_last[loc]*( sphi*B_last[loc]*I_last[loc] + ophi*nBIsum );
+        	double rI  = r*I_last[loc];
 
 			// get derivatives
 			double dS = - BSI;
@@ -335,7 +371,7 @@ void initializeParticles(Particle ** particles, int NP, int nloc, int N) {
 
 		do {
 			phican = phitrue + PSC*phitrue*randn();
-		} while (phican < 0 || phican > 1);
+		} while (phican <= 0 || phican >= 1);
 		(*particles)[n].phi = phican;
 
 		for (int loc = 0; loc < nloc; loc++) {
@@ -396,7 +432,7 @@ void perturbParticles(Particle * particles, int N, int NP, int nloc, int passnum
 
     	do {
     		phican = particles[n].phi + PSC*spreadphi*randn();
-    	} while (phican < 0 || phican > 1);
+    	} while (phican <= 0 || phican >= 1);
     	particles[n].phi = phican;
 
     	for (int loc = 0; loc < nloc; loc++) {
@@ -418,6 +454,7 @@ void copyParticle(Particle * dst, Particle * src, int nloc) {
 	dst->sigma 	= src->sigma;
 	dst->eta 	= src->eta;
 	dst->berr 	= src->berr;
+	dst->phi 	= src->phi;
 
 	for (int n = 0; n < nloc; n++) {
 		dst->S[n]		= src->S[n];
