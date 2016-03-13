@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  6 MAR 2016 17:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  11 MAR 2016 14:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -697,25 +697,39 @@ LaTeX Font Info:    Try loading font information for OT1+zi4 on input line 191.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/inconsolata/ot1zi4.fd
 File: ot1zi4.fd 2014/06/22 OT1/zi4 (Inconsolata)
 )
-Overfull \hbox (30.0pt too wide) in paragraph at lines 183--229
+Overfull \hbox (30.0pt too wide) in paragraph at lines 183--232
 $[]$ 
  []
 
-[2] [3] <./images/dataplot.pdf, id=78, 469.755pt x 289.08pt>
+[2] [3] <./images/dataplot.pdf, id=86, 469.755pt x 289.08pt>
 File: ./images/dataplot.pdf Graphic file (type pdf)
 
 <use ./images/dataplot.pdf>
-Package pdftex.def Info: ./images/dataplot.pdf used on input line 266.
+Package pdftex.def Info: ./images/dataplot.pdf used on input line 269.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
  [4]
-<./images/smap-project.pdf, id=88, 469.755pt x 289.08pt>
+<./images/smap-project.pdf, id=96, 469.755pt x 289.08pt>
 File: ./images/smap-project.pdf Graphic file (type pdf)
 
 <use ./images/smap-project.pdf>
-Package pdftex.def Info: ./images/smap-project.pdf used on input line 276.
+Package pdftex.def Info: ./images/smap-project.pdf used on input line 279.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
- [5 <./images/dataplot.pdf>] [6 <./images/smap-project.pdf>]
-(/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang1.sty
+ [5 <./images/dataplot.pdf>]
+<./images/sseplot.pdf, id=110, 469.755pt x 289.08pt>
+File: ./images/sseplot.pdf Graphic file (type pdf)
+
+<use ./images/sseplot.pdf>
+Package pdftex.def Info: ./images/sseplot.pdf used on input line 298.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [6 <./images/smap-project.pdf>]
+<./images/timeplot.pdf, id=122, 469.755pt x 289.08pt>
+File: ./images/timeplot.pdf Graphic file (type pdf)
+
+<use ./images/timeplot.pdf>
+Package pdftex.def Info: ./images/timeplot.pdf used on input line 310.
+(pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
+ [7 <./images/sseplot.pdf>] [8 <./images/timeplot.pdf>] (/usr/local/texlive/201
+5basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang2.sty
@@ -724,14 +738,14 @@ File: lstlang2.sty 2014/09/06 1.5e listings language file
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2014/09/06 1.5e listings language file
 )
-(../../code/sir-functions/StocSIRS.r [7]) (../../code/smap/smap.r [8]
+(../../code/sir-functions/StocSIRS.r [9]) (../../code/smap/smap.r [10]
 LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 42.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/inconsolata/ts1zi4.fd
 File: ts1zi4.fd 2014/06/22 Fontinst v1.933 font definitions for TS1/zi4.
 ))
-(../../code/smap/smap_opt.r [9] [10]) (../../code/hmc/hmc-sirs/sirs-euler.stan
-[11] [12])
+(../../code/smap/smap_opt.r [11] [12]) (../../code/hmc/hmc-sirs/sirs-euler.stan
+[13] [14])
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
@@ -741,27 +755,27 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstmisc.sty
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 )
-(../../code/if2/if2-sirs/if2-sirs.cpp [13] [14] [15] [16] [17] [18] [19]
-[20] [21] [22] [23])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 321.
- [24]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 321.
+(../../code/if2/if2-sirs/if2-sirs.cpp [15] [16] [17] [18] [19] [20] [21]
+[22] [23] [24] [25])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 358.
+ [26]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 358.
  (./sirs-smap.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 321.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 321.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 358.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 358.
 Package rerunfilecheck Info: File `sirs-smap.out' has not changed.
-(rerunfilecheck)             Checksum: A73D9983728B69B44A89818EA39CFAA5;461.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 321.
+(rerunfilecheck)             Checksum: D43E8D5DDB72594C94B3ED7BF9C69142;519.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 358.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 13330 strings out of 494501
- 198576 string characters out of 6167031
- 565071 words of memory out of 5000000
- 15474 multiletter control sequences out of 15000+600000
+ 13349 strings out of 494501
+ 198898 string characters out of 6167031
+ 565423 words of memory out of 5000000
+ 15485 multiletter control sequences out of 15000+600000
  14495 words of font info for 55 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  39i,15n,68p,1025b,4410s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -769,20 +783,22 @@ Here is how much of TeX's memory you used:
 olata/i4-ts1.enc}{/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/incon
 solata/i4-ot1-0.enc}</usr/local/texlive/2015basic/texmf-dist/fonts/type1/public
 /inconsolata/Inconsolata-zi4r.pfb></usr/local/texlive/2015basic/texmf-dist/font
-s/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015basic/texmf-dist/
-fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2015basic/texmf-di
-st/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015basic/texm
-f-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/2015basic/
-texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/2015bas
-ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015
-basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2
-015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive
-/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
-live/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on sirs-smap.pdf (24 pages, 251515 bytes).
+s/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2015basic/texmf-dist/
+fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2015basic/texmf-d
+ist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/local/texlive/2015basic/texm
+f-dist/fonts/type1/public/amsfonts/cm/cmbx8.pfb></usr/local/texlive/2015basic/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/local/texlive/2015bas
+ic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/local/texlive/201
+5basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/local/texlive/
+2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texli
+ve/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/te
+xlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/
+texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/lo
+cal/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on sirs-smap.pdf (26 pages, 279164 bytes).
 PDF statistics:
- 1316 PDF objects out of 1440 (max. 8388607)
- 1262 compressed objects within 13 object streams
- 938 named destinations out of 1000 (max. 500000)
- 83 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1357 PDF objects out of 1440 (max. 8388607)
+ 1295 compressed objects within 13 object streams
+ 944 named destinations out of 1000 (max. 500000)
+ 101 words of extra memory for PDF output out of 10000 (max. 10000000)
 

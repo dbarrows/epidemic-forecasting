@@ -132,7 +132,7 @@
 \begin{document}
 
 \noindent
-{\LARGE {\bf SMAP and SIRS} }
+{\LARGE {\bf S-map and SIRS} }
 \\\\
 Dexter Barrows\\
 \today
@@ -178,7 +178,7 @@ Dexter Barrows\\
 
 \section{S-map Algorithm}
 
-    The above description can be summarized in algorithm
+    The above description can be summarized in Algorithm [\ref{smap}].
 
     \begin{algorithm}[H]
 
@@ -193,23 +193,26 @@ Dexter Barrows\\
 
         \BlankLine
 
-        \tcc{Construct library}
+        \tcc{Construct library $\{{\mathbf{x_i}}\}$}
         \For{$i = E:T$}{
-        	$\{{\mathbf{x_i}}\}$, $\mathbf{x_i} = (x_i, x_{i-1}, ...,x_{i-E-1})$
+        	$\mathbf{x_i} = (x_i, x_{i-1}, ...,x_{i-E-1})$
         }
 
         \BlankLine
 
+        \tcc{Construct mapping from library vectors to predictions}
         \For{$i = 1:(T_E+1)$}{
-	        $b(i) = w(||\mathbf{x_i} - \mathbf{x_t}||) y_i$ \\
         	\For{$j = 1:E$}{
 	        	$A(i,j) = w(||\mathbf{x_i} - \mathbf{x_t}||) \mathbf{x_i}(j)$
 	        }
         }
+        \For{$i = 1:(T_E+1)$}{
+	        $b(i) = w(||\mathbf{x_i} - \mathbf{x_t}||) y_i$
+        }
 
         \BlankLine
 
-        \tcc{Use SVD to solve Ac = b}
+        \tcc{Use SVD to solve the mapping system, Ac = b}
         $SVD(Ac = b)$
 
         \BlankLine
@@ -285,7 +288,32 @@ Dexter Barrows\\
 
 	Naturally we wish to compare the efficacy of this comparatively simple technique against the more complex and more computationally taxing frameworks we have established to perform forecasting using IF2 and HMCMC.
 
-	To do this we generated a series of artificial time series of length $260$ meant to represent 5 years of weekly incidence counts and used each method to forecast up to 2 years into the future. Our goal here was to determine how forecast error changed with forecast length; while it is expected that we will see a positive correlation, we wish to determine how the methods stack up against each other.
+	To do this we generated a series of artificial time series of length $260$ meant to represent 5 years of weekly incidence counts and used each method to forecast up to 2 years into the future. Our goal here was to determine how forecast error changed with forecast length.
+
+	The results of the simulation are shown in Figure [\ref{sseplot}].
+
+	\begin{figure}[H]
+        \centering
+        \captionsetup{width=.8\linewidth}
+        \includegraphics[width=0.8\textwidth]{./images/sseplot.pdf}
+        \caption{Error as a function of forecast length.}
+        \label{sseplot}
+    \end{figure}
+
+    Interestingly, all methods produce roughly the same result, which is to say the spike in each outbreak cycle are difficult to accurately predict. IF2 produces better results than either HMCMC and the S-map for the majority of forecast lengths, with the S-map producing the poorest results with the exception of the second rise in infection rates in which it outperforms the other methods.
+
+    While the S-map may not provide the same fidelity or forecast as IF2 or HMCMC, it shines when it comes to running time. Figure [\ref{timeplot}] shows the running times over 20 simulations.
+
+    \begin{figure}[H]
+        \centering
+        \captionsetup{width=.8\linewidth}
+        \includegraphics[width=0.8\textwidth]{./images/timeplot.pdf}
+        \caption{Runtimes for producing SIRS forecasts. The box shows the middle 50th quantile, the bold line is the median, and the dots are outliers.}
+        \label{timeplot}
+    \end{figure}
+
+    It is clear from the above figure that the S-map running times are minute compared to the other methods, but to emphasize the degree: The average running time for the S-map is about $1.49 \times 10^{-1}$ seconds, for IF2 it is about $4.70 \times 10^{4}$, and for HMCMC it is about $9.20 \times 10^{3}$. This is a speed-up of over 316,000x compared to IF2 and over 61,800x compared to HMCMC.
+
 
 	
 
