@@ -7,7 +7,18 @@ printvar <- function(v) {
   	print(paste(name, ":", v))
 }
 
-dir <- paste(getwd(), "varimages", sep = "/")
+mine <- function(L){
+    if (length(L) == 2) {
+        ctr <<- ctr + 1
+        masterlist[[ctr]] <<- L[[2]]
+        mine(L[[1]])
+    } else {
+        ctr <<- ctr + 1
+        masterlist[[ctr]] <<- L
+    }
+}
+
+dir <- paste(getwd(), "spatial-varimages", sep = "/")
 filelist <- list.files(dir)
 
 nTrials <- length(filelist)
@@ -16,67 +27,94 @@ fctr <- 0
 
 for (filenum in 1:length(filelist)) {
 
-	filename <- filelist[filenum]
-	filepath <- paste(getwd(), "varimages", filename, sep = "/")
+    filename <- filelist[filenum]
+    filepath <- paste(dir, filename, sep = "/")
 
-	if (filename != "thread-0.RData") {
+    if (filename != "thread-0.RData") {
 
-		fctr <- fctr + 1
-		print(paste(fctr, filename))
+        fctr <- fctr + 1
+        print(paste(fctr, filename))
 
-		e <- new.env()
-		load(filepath, e)
+        e <- new.env()
+        load(filepath, e)
 
-		## get sizing info from first file
-		if (first) {
+        ## get sizing info from first file
+        if (first) {
 
-			stepsAhead <- get("stepsAhead", e)
-			T 		   <- get("T", e)
-			Tlim 	   <- get("Tlim", e)
+            stepsAhead  <- get("stepsAhead", e)
+            T           <- get("T", e)
+            Tlim        <- get("Tlim", e)
+            nloc        <- get("nloc", e)
+            nTraj       <- get("nTraj", e)
 
-			truetraj <- matrix(NA, nrow = nTrials, ncol = stepsAhead)
-			if2traj <- matrix(NA, nrow = nTrials, ncol = stepsAhead)
-			hmctraj <- matrix(NA, nrow = nTrials, ncol = stepsAhead)
-			smaptraj <- matrix(NA, nrow = nTrials, ncol = stepsAhead)
+            truetraj    <- array(NA, c(length(filelist), nloc, stepsAhead) )
+            if2traj     <- array(NA, c(length(filelist), nloc, stepsAhead) )
+            hmctraj     <- array(NA, c(length(filelist), nloc, stepsAhead) )
+            smaptraj    <- array(NA, c(length(filelist), nloc, stepsAhead) )
 
-			if2times 	<- numeric(nTrials)
-			hmctimes 	<- numeric(nTrials)
-			smaptimes 	<- numeric(nTrials)
+            countmeans   <- matrix(NA, nloc, T-Tlim+1)
+            parabootdata <- array(NA, c(nTraj, nloc, T-Tlim+1))
 
-			first <- FALSE
+            if2times    <- numeric(nTrials)
+            hmctimes    <- numeric(nTrials)
+            smaptimes   <- numeric(nTrials)
 
-		}
+            first <- FALSE
 
-		## True trajectory
-		trueproj <- get("sdeout_true", e)[(Tlim+2):(T+1),'I']
-		truetraj[fctr,] <- trueproj
+        }
 
-		## IF2
-		parabootdata <- get("if2_paraboot_data", e)[,paste("counts", 2:(T-Tlim+1), sep = "")]
-		parabootdata <- parabootdata[complete.cases(parabootdata),]
-		if2proj <- apply(parabootdata, 2, mean)
-		if2traj[fctr,] <- if2proj
-		if2times[fctr] <- get("if2time", e)[['user.self']]
+        ## True trajectory
+        trueproj <- get("ssdeout_true", e)[,'I',(Tlim+2):(T+1)]
+        truetraj[fctr,,] <- trueproj
 
-		## HMCMC
-		hmcbootdata <- get("bootstrapdata", e)[,(Tlim+2):(T+1)]
-		hmcproj <- apply(hmcbootdata, 2, mean)
-		hmctraj[fctr,] <- hmcproj
-		hmctimes[fctr] <- get("hmctime", e)[['user.self']]
+        ## IF2 extarct data
+        masterlist <- list()
+        ctr <- 0
+        if2_paraboot_data <- get("if2_paraboot_data", e)
+        mine(if2_paraboot_data)
+        # get mean of trajectories
+        for (i in 1:nTraj) {
+            datalist <- masterlist[[i]]
+            trajectories <- datalist$counts
+            parabootdata[i,,] <- trajectories
+        }
+        for (i in 1:nloc) {
+            locslice <- parabootdata[,i,]
+            locslice <- locslice[complete.cases(locslice),]
+            locslice[locslice < 0] <- 0
+            countmeans[i,] <- colMeans(locslice)
+        }
+        if2traj[fctr,,] <- countmeans[,-1]
+        if2times[fctr] <- get("if2time", e)[['user.self']]
 
-		## S-map
-		smapproj <- get("predictions", e)
-		smaptraj[fctr,] <- smapproj
-		smaptimes[fctr] <- get("smaptime", e)[['user.self']]
-		
-	}
+        ## HMCMC
+        hmcbootdata <- get("bootstrapdata", e)[,,(Tlim+2):(T+1)]
+        meanTraj <- matrix(NA, nloc, T-Tlim)
+        # in case of explosion
+        for (loc in 1:nloc) {
+            locdata <- hmcbootdata[,loc,]
+            locdata <- locdata[complete.cases(locdata),]
+            locdata[locdata < 0] <- 0
+            meanTraj[loc,] <- colMeans(locdata)
+        }
+        hmctraj[fctr,,] <- meanTraj
+        hmctimes[fctr] <- get("hmctime", e)[['user.self']]
+
+        ## S-map
+        smapproj <- get("predictions", e)
+        smapproj[smapproj < 0] <- 0
+        smaptraj[fctr,,] <- smapproj
+        smaptimes[fctr] <- get("smaptime", e)[['user.self']]
+        
+    }
 }
 
+
 ## trim
-if2traj   <- if2traj[1:fctr,]
-hmctraj   <- hmctraj[1:fctr,]
-smaptraj  <- smaptraj[1:fctr,]
-truetraj  <- truetraj[1:fctr,]
+if2traj   <- if2traj[1:fctr,,]
+hmctraj   <- hmctraj[1:fctr,,]
+smaptraj  <- smaptraj[1:fctr,,]
+truetraj  <- truetraj[1:fctr,,]
 if2times  <- if2times[1:fctr]
 hmctimes  <- hmctimes[1:fctr]
 smaptimes <- smaptimes[1:fctr]
@@ -90,16 +128,25 @@ printvar( if2meantime )
 printvar( hmcmeantime )
 printvar( smapmeantime )
 
-if2sse <- colMeans((abs(if2traj - truetraj)^2))
-hmcinds <- complete.cases(hmctraj)
-hmcsse <- colMeans((abs(hmctraj[hmcinds,] - truetraj[hmcinds,])^2))
-smapsse <- colMeans((abs(smaptraj - truetraj)^2))
+if2sses <- matrix(NA, nloc, stepsAhead)
+hmcsses <- matrix(NA, nloc, stepsAhead)
+smapsses <- matrix(NA, nloc, stepsAhead)
 
+for (loc in 1:nloc) {
+    if2sses[loc,] <- colMeans((abs(if2traj[,loc,] - truetraj[,loc,])^2))
+    hmcinds <- complete.cases(hmctraj[,loc,])
+    hmcsses[loc,] <- colMeans((abs(hmctraj[hmcinds,loc,] - truetraj[hmcinds,loc,])^2))
+    smapsses[loc,] <- colMeans((abs(smaptraj[,loc,] - truetraj[,loc,])^2))
+}
+
+if2ssecollapse <- colMeans(if2sses)
+hmcssecollapse <- colMeans(hmcsses)
+smapssecollapse <- colMeans(smapsses)
 
 ## SSE plot
 ##########################################################################################
 
-df <- data.frame(time = 1:(T-Tlim), if2 = log(if2sse), hmc = log(hmcsse), smap = log(smapsse))
+df <- data.frame(time = 1:(T-Tlim), if2 = log(if2ssecollapse), hmc = log(hmcssecollapse), smap = log(smapssecollapse))
 plotdata <- melt(df, id = "time")
 
 q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable, xlab = "Weeks ahead", ylab = "Average error (log)") +
@@ -124,4 +171,4 @@ ggsave(timeplot, filename = "timeplot.pdf", width = 6.5, height = 4)
 
 
 
-save.image("fsim.RData")
+#save.image("fsim.RData")

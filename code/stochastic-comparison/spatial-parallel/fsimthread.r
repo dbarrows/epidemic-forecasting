@@ -22,7 +22,7 @@ print(imfile)
 
 ## number of forcast trajecotries to draw for each method
 ## (if2: parametric bootstrap, hmcmc: bootstrap)
-nTraj <- 200
+nTraj <- 50
 
 ##--------------------------------------------------------------------------------------------
 ##--------------------------------------------------------------------------------------------
@@ -30,7 +30,7 @@ nTraj <- 200
 T 		<- 60
 N 		<- 500
 i_infec <- 5
-nloc  	<- 5
+nloc  	<- 10
 steps   <- 7
 sigma   <- 10
 Tlim 	<- 50
@@ -152,6 +152,7 @@ datapart <- infec_counts[,1:(Tlim+1)]
 ################################################################################################
 
 # initial fit
+sourceCpp(if2file)
 if2time1 <- system.time( if2data <- if2_spa(datapart, Tlim+1, N, NP, nPasses, coolrate, neinum, neibmat, nloc) )
 
 # IF2 parametric bootstrap
@@ -165,29 +166,48 @@ if2time2 <- system.time(if2_paraboot_data <- if2_spa_paraboot(if2data,
 
 if2time <- if2time1 + if2time2
 
-countmeans <- matrix(NA, nloc, T-Tlim+1)
-parabootdata <- array(NA, c(nTraj, nloc, T-Tlim+1))
+if (FALSE) { 
 
-# get mean of trajectories
-for (i in 1:nTraj) {
-	datalist <- if2_paraboot_data[[i]]
-	trajectories <- datalist$counts
-	parabootdata[i,,] <- trajectories
+	countmeans <- matrix(NA, nloc, T-Tlim+1)
+	parabootdata <- array(NA, c(nTraj, nloc, T-Tlim+1))
+
+	parbootlist <- list()
+
+	good <- TRUE
+
+	# get mean of trajectories
+	for (i in 1:nTraj) {
+		datalist <- if2_paraboot_data[[i]]
+		parbootlist[i] <- datalist
+		trajectories <- datalist$counts
+		if (length(dim(trajectories)) == length(dim(parabootdata[i,,]))) {
+			if (all(dim(trajectories) == dim(parabootdata[i,,]))) {
+				parabootdata[i,,] <- trajectories
+			} else {
+				good <- FALSE
+			}
+		} else {
+			good <- FALSE
+		}
+	}
+
+	if (good) {
+		for (i in 1:nloc) {
+			locslice <- parabootdata[,i,]
+			countmeans[i,] <- colMeans(locslice)
+		}
+
+		# get SSE, save
+		truefuture  <- ssdeout_true[,'I',(Tlim+2):(T+1)]
+		estfuture   <- countmeans[,-1]
+		err <- estfuture - truefuture
+		if2sse <- sum(err^2)
+		if2normsse <- if2sse / (nloc*T-Tlim)
+
+		if2pred <- estfuture
+	}
+
 }
-for (i in 1:nloc) {
-	locslice <- parabootdata[,i,]
-	countmeans[i,] <- colMeans(locslice)
-}
-
-# get SSE, save
-truefuture  <- ssdeout_true[,'I',(Tlim+2):(T+1)]
-estfuture   <- countmeans[,-1]
-err <- estfuture - truefuture
-if2sse <- sum(err^2)
-if2normsse <- if2sse / (nloc*T-Tlim)
-
-if2pred <- estfuture
-
 
 ## HMC fitting with stan
 ################################################################################################
@@ -283,31 +303,35 @@ for (i in 1:nTraj) {
 	ssdeout <- StocSSIRstan(init_cond, pars, T, steps, neinum, neibmat, berrmat, datlen)
 	colnames(ssdeout) <- c('S','I','R','B')
 
-	bootstrapdata[,i,] <- ssdeout[,'I',]
+	bootstrapdata[i,,] <- ssdeout[,'I',]
 
 }
 )
 
 hmctime <- hmctime1 + hmctime2
 
-meanTraj <- matrix(NA, nloc, T+1)
+if (FALSE) {
 
-# in case of explosion
-for (loc in 1:nloc) {
-	locdata <- bootstrapdata[loc,,]
-	locdata <- locdata[complete.cases(locdata),]
-	meanTraj[loc,] <- colMeans(locdata)
+	meanTraj <- matrix(NA, nloc, T+1)
+
+	# in case of explosion
+	for (loc in 1:nloc) {
+		locdata <- bootstrapdata[,loc,]
+		locdata <- locdata[complete.cases(locdata),]
+		meanTraj[loc,] <- colMeans(locdata)
+	}
+
+	meanTraj 	<- colMeans(bootstrapdata)
+
+	truefuture  <- ssdeout_true[,'I',(Tlim+2):(T+1)]
+	estfuture   <- meanTraj[,(Tlim+2):(T+1)]
+	err <- estfuture - truefuture
+	hmcsse <- sum(err^2)
+	hmcnormsse <- hmcsse / (nloc*(T-Tlim))
+
+	hmcpred <- estfuture
+
 }
-
-meanTraj 	<- colMeans(bootstrapdata)
-
-truefuture  <- ssdeout_true[,'I',(Tlim+2):(T+1)]
-estfuture   <- meanTraj[,(Tlim+2):(T+1)]
-err <- estfuture - truefuture
-hmcsse <- sum(err^2)
-hmcnormsse <- hmcsse / (nloc*(T-Tlim))
-
-hmcpred <- estfuture
 
 
 ## Smapping
