@@ -124,4 +124,4 @@ ggsave(timeplot, filename = "timeplot.pdf", width = 6.5, height = 4)
 
 
 
-save.image("fsim.RData")
+#save.image("fsim.RData")
