@@ -18,7 +18,7 @@ mine <- function(L){
     }
 }
 
-dir <- paste(getwd(), "spatial-varimages", sep = "/")
+dir <- paste(getwd(), "../../../../Thesis_data/spatial-varimages", sep = "/")
 filelist <- list.files(dir)
 
 nTrials <- length(filelist)
