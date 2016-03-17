@@ -18,6 +18,10 @@ mine <- function(L){
     }
 }
 
+## to write out
+writefile <- source(paste(getwd(), "../../cuIF2", "writedata.r", sep = "/"))
+datdir <- paste("../../cuIF2/data")
+
 dir <- paste(getwd(), "../../../../Thesis_data/spatial-varimages", sep = "/")
 filelist <- list.files(dir)
 
@@ -67,7 +71,15 @@ for (filenum in 1:length(filelist)) {
         trueproj <- get("ssdeout_true", e)[,'I',(Tlim+2):(T+1)]
         truetraj[fctr,,] <- trueproj
 
-        ## IF2 extarct data
+        # write data out for cuIF2
+        data <- get("ssdeout_true", e)[,'I',1:(Tlim+1)]
+        neinum <- get("neinum", e)
+        neibmat <- get("neibmat", e)
+        print(neibmat)
+        trial <- get("trial", e)
+        writedata(data, neinum, t(neibmat), datdir, trial)
+
+        ## IF2 extract data
         masterlist <- list()
         ctr <- 0
         if2_paraboot_data <- get("if2_paraboot_data", e)
@@ -168,7 +180,6 @@ timeplot <- ggplot(timedata, aes(factor(variable, ordered = TRUE), value)) +
 				theme_bw()
 
 ggsave(timeplot, filename = "timeplot.pdf", width = 6.5, height = 4)
-
 
 
 #save.image("fsim.RData")
