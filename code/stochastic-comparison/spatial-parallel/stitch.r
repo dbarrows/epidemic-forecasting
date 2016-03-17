@@ -76,7 +76,7 @@ for (filenum in 1:length(filelist)) {
         neinum <- get("neinum", e)
         neibmat <- get("neibmat", e)
         trial <- get("trial", e)
-        writedata(data, neinum, t(neibmat), datdir, trial)
+        writedata(data, neinum, neibmat, datdir, trial)
 
         ## IF2 extract data
         masterlist <- list()
