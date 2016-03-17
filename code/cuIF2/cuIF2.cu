@@ -553,7 +553,7 @@ __device__ void exp_euler_SSIR(float h, float t0, float tn, Particle * particle,
 
         	float nBIsum = 0.0;
         	for (int j = 0; j < n; j++)
-        		nBIsum += B_last[neibmat[nloc*loc + j]] * I_last[neibmat[nloc*loc + j]];
+        		nBIsum += B_last[neibmat[nloc*loc + j]-1] * I_last[neibmat[nloc*loc + j]-1];
 
         	float BSI = S_last[loc]*( sphi*B_last[loc]*I_last[loc] + ophi*nBIsum );
         	float rI  = r*I_last[loc];
