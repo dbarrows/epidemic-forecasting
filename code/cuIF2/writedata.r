@@ -2,7 +2,7 @@
 writedata <- function(data, neinum, neibmat, outdir, thread) {
 
 	datafile <- paste(outdir, "/", "data-", thread, ".txt", sep = "")
-	write(data, file = datafile, ncolumns = dim(data)[2])
+	write(format(data, scientific = FALSE), file = datafile, ncolumns = dim(data)[2])
 
 	neinumfile <- paste(outdir, "/", "neinum-", thread, ".txt", sep = "")
 	write(neinum, file = neinumfile, ncolumns = 1)

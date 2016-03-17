@@ -75,7 +75,6 @@ for (filenum in 1:length(filelist)) {
         data <- get("ssdeout_true", e)[,'I',1:(Tlim+1)]
         neinum <- get("neinum", e)
         neibmat <- get("neibmat", e)
-        print(neibmat)
         trial <- get("trial", e)
         writedata(data, neinum, t(neibmat), datdir, trial)
 
