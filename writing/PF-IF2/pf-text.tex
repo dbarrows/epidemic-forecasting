@@ -1,125 +1,10 @@
-\documentclass[12pt]{article}
-
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage[pdftex]{graphicx}
-\usepackage{setspace}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{float}
-\usepackage[margin=1in]{geometry}
-\usepackage{listings}
-\usepackage{textcomp}
-\usepackage{multicol}
-\usepackage[toc,page]{appendix}
-\usepackage{listings}
-\usepackage{fancyvrb}
-\usepackage{hyperref}
-\usepackage{lstbayes}
-
-\usepackage[usenames,dvipsnames]{color}
-\definecolor{DGrey}{gray}{0.25}
-\definecolor{MGrey}{gray}{0.50}
-\definecolor{LGrey}{gray}{0.75}
-
-%\usepackage{algorithm}
-%\usepackage{algpseudocode}
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{Gray}{#1}}
-\SetCommentSty{mycommfont}
-%\floatname{algorithm}{Procedure}
-%\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-%\renewcommand{\algorithmicensure}{\textbf{Output:}}
-%\makeatletter
-%\def\therule{%
-%  \makebox[\algorithmicindent][l]{%
-%    \hspace*{.5em}\vrule height .75\baselineskip depth .25\baselineskip}}%
-
-\usepackage{inconsolata}
-
-\usepackage[parfill]{parskip}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{\baselineskip}
-
-\newcommand{\et}{e^{i\theta}}
-\newcommand{\oo}{\mathcal{O}}
-\newcommand{\skipline}{\bigskip\bigskip\bigskip}
-
-\lstdefinestyle{Rsty} { 
-    language=R,                         % the language of the code
-    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
-    numbers=left,                       % where to put the line-numbers
-    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
-    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
-                                        % will be numbered
-    numbersep=5pt,                      % how far the line-numbers are from the code
-    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
-    showspaces=false,                   % show spaces adding particular underscores
-    showstringspaces=false,             % underline spaces within strings
-    showtabs=false,                     % show tabs within strings adding particular underscores
-    frame=single,                       % adds a frame around the code
-    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-    tabsize=2,                          % sets default tabsize to 2 spaces
-    captionpos=b,                       % sets the caption-position to bottom
-    breaklines=true,                    % sets automatic line breaking
-    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
-    keywordstyle=\color{DGrey},     % keyword style
-    commentstyle=\color{LGrey},   % comment style
-    stringstyle=\color{MGrey},    % string literal style
-    literate={<-}{{$\gets$}}1,           % prettier assignment arrows
-    xleftmargin=4.0ex,
-    deletekeywords={I,density,rect,_,palette,data,scale,panel,R,frame,labels,options}
-}
-
-\lstnewenvironment{R}
-{\lstset{style=Rsty}}
-{}
-
-
-\lstdefinestyle{Cppsty} { 
-    language=C++,                         % the language of the code
-    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
-    numbers=left,                       % where to put the line-numbers
-    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
-    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
-                                        % will be numbered
-    numbersep=5pt,                      % how far the line-numbers are from the code
-    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
-    showspaces=false,                   % show spaces adding particular underscores
-    showstringspaces=false,             % underline spaces within strings
-    showtabs=false,                     % show tabs within strings adding particular underscores
-    frame=single,                       % adds a frame around the code
-    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-    tabsize=4,                          % sets default tabsize to 2 spaces
-    captionpos=b,                       % sets the caption-position to bottom
-    breaklines=true,                    % sets automatic line breaking
-    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
-    keywordstyle=\color{DGrey},     % keyword style
-    commentstyle=\color{LGrey},   % comment style
-    stringstyle=\color{MGrey},    % string literal style
-    %literate={<-}{{$\gets$}}1,           % prettier assignment arrows
-    xleftmargin=4.0ex,
-    deletekeywords={T}
-}
-
-\lstnewenvironment{CPP}
-{\lstset{style=Cppsty}}
-{}
-
-\renewcommand{\arraystretch}{2}
-
-\begin{document}
-
-\noindent
-{\LARGE {\bf Particle Filters} }
-\\\\
-Dexter Barrows\\
-\today
+%% Dexter Barrows, 2016
+%% dbarrows.github.io
 
 \section{Intro}
 
 	Particle filters are similar to MCMC-based methods in that they attempt to draw samples from an approximation of the posterior distribution of model parameters $\theta$ given observed data $D$. Instead of constructing a Markov chain and approximating its stationary distribution, a cohort of ``particles'' are used to move through the data in an on-line (sequential) fashion with the cohort being culled of poorly-performing particles at each iteration via importance sampling. If the culled particles are not replenished, this will be a Sequential Importance Sampling (SIS) particle filter. If the culled particles are replenished from surviving particles, in a sense setting up a process not dissimilar from Darwinian selection, then this will be a Sequential Importance Resampling (SIR) particle filter.
+
 
 \section{Formulation}
 
@@ -226,11 +111,13 @@ Dexter Barrows\\
 
 	This can be used to diagnose not only when collapse has occurred, but can also indicate when it is near.
 
+
 \section{Iterated Filtering and Data Cloning}
 
 	A particle filter hinges on the idea that as it progresses through the data set $D$, its estimate of the posterior carried in the cohort of particles approaches maximum likelihood. However, this convergence may not be fast enough so that the estimate it produces is of quality before the data runs out. One way around this problem is to ``clone'' the data and make multiple passes through it as if it were a continuation of the original time series. Note that the system state contained in each particle will have to be reset with each pass.
 
 	Rigorous proofs have been developed (references to Ionides et. al. work) that show that by treating the parameters as stochastic processes instead of fixed values, the multiple passes through the data will indeed force convergence of the process mean toward maximum likelihood, and the process variance toward 0.
+
 
 \section{IF2}
 
@@ -329,7 +216,6 @@ Dexter Barrows\\
         \caption{IF2}\label{if2}
 
     \end{algorithm}
-
 
 
 \section{Fitting an SIR Model to Synthetic Epidemic Data with IF2}
@@ -450,29 +336,3 @@ Dexter Barrows\\
         \caption{Kernel estimates for four essential system parameters. True values are indicated by solid vertical lines, sample means by dashed lines.}
         \label{kernelplot}
     \end{figure}
-
-
-\newpage
-\begin{appendices}
-
-	\section{Full R code}
-
-    This code will run all the indicated analysis and produce all plots.
-
-    \lstinputlisting[style=Rsty]{../../code/if2/d_sir_if2.r}
-
-    \section{Full C++ code}
-
-    Stan model code to be used with the preceding R code.
-
-    \lstinputlisting[style=Cppsty]{../../code/if2/d_if2.cpp}
-
-\end{appendices}
-
-
-
-
-
-
-
-\end{document}
