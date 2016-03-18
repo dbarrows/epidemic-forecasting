@@ -26,6 +26,7 @@
 #include <curand_kernel.h>
 #include <string>
 #include <sstream>
+#include <cmath>
 
 #include "timer.h"
 #include "rand.h"
@@ -33,18 +34,15 @@
 
 #define NP 			(2*2500) 	// number of particles
 #define N 			500.0		// population size
-#define Treal 		100			// time to simulate over
 #define R0true 		3.0			// infectiousness
 #define rtrue 		0.1			// recovery rate
-#define Nreal 		500.0 		// population size
 #define etatrue 	0.5			// real drift attraction strength
 #define berrtrue	0.5			// real beta drift noise
 #define phitrue 	0.5 		// real connectivity strength
 #define merr 		10.0  		// expected measurement error
 #define I0 			5.0			// Initial infected individuals
 #define PSC 		0.5 		// sensitive parameter perturbation scaling
-
-#define RB_DIM 	1 				// size of the reduction blocks
+#define NLOC 		10
 
 #define PI 		3.141592654f
 
@@ -62,11 +60,18 @@ typedef struct {
 	float eta;
 	float berr;
 	float phi;
+	/*
 	float * S;
 	float * I;
 	float * R;
 	float * B;
 	float * Iinit;
+	*/
+	float S[NLOC];
+	float I[NLOC];
+	float R[NLOC];
+	float B[NLOC];
+	float Iinit[NLOC];
 	curandState randState; 	// PRNG state
 } Particle;
 
@@ -83,60 +88,96 @@ __global__ void initializeParticles (Particle * particles, int nloc) {
 
 	int id 	= blockIdx.x*blockDim.x + threadIdx.x;	// global thread ID
 
-	// initialize PRNG state
-	curandState state;
-	curand_init(id, 0, 0, &state);
-	
-	// allocate space for arays inside particle
-	particles[id].S = (float*) malloc(nloc*sizeof(float));
-	particles[id].I = (float*) malloc(nloc*sizeof(float));
-	particles[id].R = (float*) malloc(nloc*sizeof(float));
-	particles[id].B = (float*) malloc(nloc*sizeof(float));
-	particles[id].Iinit = (float*) malloc(nloc*sizeof(float));
+	if (id < NP) {
 
-	// initialize all parameters
+		// initialize PRNG state
+		curandState state;
+		curand_init(id, 0, 0, &state);
+		
+		// allocate space for arays inside particle
+		//particles[id].S = (float*) malloc(nloc*sizeof(float));
+		//particles[id].I = (float*) malloc(nloc*sizeof(float));
+		//particles[id].R = (float*) malloc(nloc*sizeof(float));
+		//particles[id].B = (float*) malloc(nloc*sizeof(float));
+		//particles[id].Iinit = (float*) malloc(nloc*sizeof(float));
 
-	float R0can, rcan, sigmacan, Iinitcan, etacan, berrcan, phican;
+		// initialize all parameters
 
-	do {
-		R0can = R0true + R0true*curand_normal(&state);
-	} while (R0can < 0);
-	particles[id].R0 = R0can;
+		float R0can, rcan, sigmacan, Iinitcan, etacan, berrcan, phican;
 
-	do {
-		rcan = rtrue + rtrue*curand_normal(&state);
-	} while (rcan < 0);
-	particles[id].r = rcan;
+		do {
+			R0can = R0true + R0true*curand_normal(&state);
+		} while (R0can < 0);
+		particles[id].R0 = R0can;
 
-	for (int loc = 0; loc < nloc; loc++)
-		particles[id].B[loc] = (float) R0can * rcan / N;
+		do {
+			rcan = rtrue + rtrue*curand_normal(&state);
+		} while (rcan < 0);
+		particles[id].r = rcan;
 
-	do {
-		sigmacan = merr + merr*curand_normal(&state);
-	} while (sigmacan < 0);
-	particles[id].sigma = sigmacan;
+		for (int loc = 0; loc < nloc; loc++)
+			particles[id].B[loc] = (float) R0can * rcan / N;
 
-	do {
-		etacan = etatrue + PSC*etatrue*curand_normal(&state);
-	} while (etacan < 0 || etacan > 1);
-	particles[id].eta = etacan;
+		do {
+			sigmacan = merr + merr*curand_normal(&state);
+		} while (sigmacan < 0);
+		particles[id].sigma = sigmacan;
 
-	do {
-		berrcan = berrtrue + PSC*berrtrue*curand_normal(&state);
-	} while (berrcan < 0);
-	particles[id].berr = berrcan;
+		do {
+			etacan = etatrue + PSC*etatrue*curand_normal(&state);
+		} while (etacan < 0 || etacan > 1);
+		particles[id].eta = etacan;
 
-	do {
-		phican = phitrue + PSC*phitrue*curand_normal(&state);
-	} while (phican <= 0 || phican >= 1);
-	particles[id].phi = phican;
+		do {
+			berrcan = berrtrue + PSC*berrtrue*curand_normal(&state);
+		} while (berrcan < 0);
+		particles[id].berr = berrcan;
+
+		do {
+			phican = phitrue + PSC*phitrue*curand_normal(&state);
+		} while (phican <= 0 || phican >= 1);
+		particles[id].phi = phican;
+
+		for (int loc = 0; loc < nloc; loc++) {
+			do {
+				Iinitcan = I0 + I0*curand_normal(&state);
+			} while (Iinitcan < 0 || N < Iinitcan);
+			particles[id].Iinit[loc] = Iinitcan;
+		}
+
+		particles[id].randState = state;
+
+	}
+
+}
+
+__global__ void resetStates (Particle * particles, int nloc) {
+
+	int id 	= blockIdx.x*blockDim.x + threadIdx.x;	// global thread ID
 
 	for (int loc = 0; loc < nloc; loc++) {
-		do {
-			Iinitcan = I0 + I0*curand_normal(&state);
-		} while (Iinitcan < 0 || N < Iinitcan);
-		particles[id].Iinit[loc] = Iinitcan;
+		particles[id].S[loc] = N - particles[id].Iinit[loc];
+		particles[id].I[loc] = particles[id].Iinit[loc];
+		particles[id].R[loc] = 0.0;
 	}
+
+}
+
+__global__ void clobberParams (Particle * particles, int nloc) {
+
+	int id 	= blockIdx.x*blockDim.x + threadIdx.x;	// global thread ID
+
+	particles[id].R0 = R0true;
+	particles[id].r = rtrue;
+	particles[id].sigma = merr;
+	particles[id].eta = etatrue;
+	particles[id].berr = berrtrue;
+	particles[id].phi = phitrue;
+
+	for (int loc = 0; loc < nloc; loc++) {
+		particles[id].Iinit[loc] = I0;
+	}
+
 
 }
 
@@ -144,28 +185,46 @@ __global__ void initializeParticles (Particle * particles, int nloc) {
 /* 	Project particles forward, perturb, and save weight based on data
 	int t - time step number (1,...,T)
 	*/
-__global__ void project (int * data, int t, int T, Particle * particles, Particle * particles_old, float * w,
-						 int * neinum, int * neibmat, int nloc) {
+__global__ void project (Particle * particles, int * neinum, int * neibmat, int nloc) {
 
 	int id = blockIdx.x*blockDim.x + threadIdx.x;	// global id
 
-	// project forward
-	//exp_euler_SIR(1.0/10, 0.0, 1.0, particles, id, &E[t*nCells], Beta_last, adjMat, nNeibVec, cID);
-	exp_euler_SSIR(1.0/7.0, 0.0, 1.0, &particles[id], neinum, neibmat, nloc);
-	//exp_euler_SSIR(float h, float t0, float tn, int N, Particle * particle, int * neinum, int * neibmat, int nloc);
-
-
-	float merr_par = particles[id].sigma;
-
-	// Get weight and save
-	w[id] = 1.0;
-	for (int loc = 0; loc < nloc; loc++) {
-		float y_diff = data[nloc*T + t] - particles[id].I[loc];
-		w[id] *= 1.0/(merr_par*sqrt(2.0*PI)) * exp( - y_diff*y_diff / (2.0*merr_par*merr_par) );
+	if (id < NP) {
+		// project forward
+		exp_euler_SSIR(1.0/7.0, 0.0, 1.0, &particles[id], neinum, neibmat, nloc);
 	}
 
-	// COPY PARTICLE
-	copyParticle(&particles_old[id], &particles_old[id], nloc);
+}
+
+__global__ void weight(float * data, Particle * particles, double * w, int t, int T, int nloc) {
+
+	int id = blockIdx.x*blockDim.x + threadIdx.x;	// global id
+
+	if (id < NP) {
+
+		float merr_par = particles[id].sigma;
+
+		// Get weight and save
+		double w_local = 1.0;
+		for (int loc = 0; loc < nloc; loc++) {
+			float y_diff = data[loc*T + t] - particles[id].I[loc];
+			w_local *= 1.0/(merr_par*sqrt(2.0*PI)) * exp( - y_diff*y_diff / (2.0*merr_par*merr_par) );
+		}
+
+		w[id] = w_local;
+
+	}
+
+}
+
+__global__ void stashParticles (Particle * particles, Particle * particles_old, int nloc) {
+
+	int id = blockIdx.x*blockDim.x + threadIdx.x;	// global id
+	
+	if (id < NP) {
+		// COPY PARTICLE
+		copyParticle(&particles_old[id], &particles[id], nloc);
+	}
 
 }
 
@@ -173,7 +232,7 @@ __global__ void project (int * data, int t, int T, Particle * particles, Particl
 /* 	The 0th thread will perform cumulative sum on the weights.
 	There may be a faster way to do this, will investigate.
 	*/
-__global__ void cumsumWeights (float * w, int nCells) {
+__global__ void cumsumWeights (double * w) {
 
 	int id 	= blockIdx.x*blockDim.x + threadIdx.x;	// global thread ID
 
@@ -188,22 +247,105 @@ __global__ void cumsumWeights (float * w, int nCells) {
 
 /* 	Resample from all particle states within cell
 	*/
-__global__ void resample (Particle * particles, Particle * particles_old, float * w, int nloc) {
+__global__ void resample (Particle * particles, Particle * particles_old, double * w, int nloc) {
 
 	int id 	= blockIdx.x*blockDim.x + threadIdx.x;
 
-	// resampling proportional to weights
-	float w_r = curand_uniform(&particles[id].randState) * w[NP-1];
-	int i = 0;
-	while (w_r > w[i]) {
-		i++;
-	}	
+	if (id < NP) {
 
-	// i is now the index of the particle to copy from
-	copyParticle(&particles[id], &particles_old[i], nloc);
+		// resampling proportional to weights
+		double w_r = curand_uniform(&particles[id].randState) * w[NP-1];
+		int i = 0;
+		while (w_r > w[i]) {
+			i++;
+		}	
+
+		// i is now the index of the particle to copy from
+		copyParticle(&particles[id], &particles_old[i], nloc);
+
+	}
 
 }
 
+// launch this with probably just nloc threads... block structure/size probably not important
+__global__ void reduceStates (Particle * particles, float * countmeans, int t, int T, int nloc) {
+
+	int id 	= blockIdx.x*blockDim.x + threadIdx.x;
+
+	if (id < nloc) {
+
+		int loc = id;
+
+		double countmean_local = 0.0;
+		for (int n = 0; n < NP; n++) {
+			countmean_local += particles[n].I[loc] / NP;
+		}
+
+		countmeans[loc*T + t] = (float) countmean_local;
+
+	}
+
+}
+
+__global__ void perturbParticles(Particle * particles, int nloc, int passnum, double coolrate) {
+
+	//double coolcoef = exp( - (double) passnum / coolrate );
+	double coolcoef = pow(coolrate, passnum);
+	
+    double spreadR0 	= coolcoef * R0true / 10.0;
+    double spreadr 		= coolcoef * rtrue / 10.0;
+    double spreadsigma 	= coolcoef * merr / 10.0;
+    double spreadIinit 	= coolcoef * I0 / 10.0;
+    double spreadeta 	= coolcoef * etatrue / 10.0;
+    double spreadberr 	= coolcoef * berrtrue / 10.0;
+    double spreadphi 	= coolcoef * phitrue / 10.0;
+
+    double R0can, rcan, sigmacan, Iinitcan, etacan, berrcan, phican;
+
+    int id 	= blockIdx.x*blockDim.x + threadIdx.x;
+
+    if (id < NP) {
+
+		do {
+			R0can = particles[id].R0 + spreadR0*curand_normal(&particles[id].randState);
+		} while (R0can < 0);
+		particles[id].R0 = R0can;
+
+		do {
+			rcan = particles[id].r + spreadr*curand_normal(&particles[id].randState);
+		} while (rcan < 0);
+		particles[id].r = rcan;
+
+		do {
+			sigmacan = particles[id].sigma + spreadsigma*curand_normal(&particles[id].randState);
+		} while (sigmacan < 0);
+		particles[id].sigma = sigmacan;
+
+		do {
+			etacan = particles[id].eta + PSC*spreadeta*curand_normal(&particles[id].randState);
+		} while (etacan < 0 || etacan > 1);
+		particles[id].eta = etacan;
+
+		do {
+			berrcan = particles[id].berr + PSC*spreadberr*curand_normal(&particles[id].randState);
+		} while (berrcan < 0);
+		particles[id].berr = berrcan;
+
+		do {
+			phican = particles[id].phi + PSC*spreadphi*curand_normal(&particles[id].randState);
+		} while (phican <= 0 || phican >= 1);
+		particles[id].phi = phican;
+
+		for (int loc = 0; loc < nloc; loc++) {
+	    	do {
+	    		Iinitcan = particles[id].Iinit[loc] + spreadIinit*curand_normal(&particles[id].randState);
+	    	} while (Iinitcan < 0 || Iinitcan > 500);
+	    	particles[id].Iinit[loc] = Iinitcan;
+	    }
+
+	}
+
+}
 
 
 int main (int argc, char *argv[]) {
@@ -213,6 +355,8 @@ int main (int argc, char *argv[]) {
 
 	double restime;
 	struct timeval tdr0, tdr1, tdrMaster;
+
+	gettimeofday (&tdr0, NULL);
 
 
 	// Parse arguments **********************************************
@@ -227,14 +371,11 @@ int main (int argc, char *argv[]) {
 	std::string arg3(argv[3]);	// neighbour indices
 
 	std::cout << "Arguments:" << std::endl;
-	std::cout << "Infection data: 	 [1]" << arg1 << std::endl;
-	std::cout << "Neighbour counts:  [2]" << arg2 << std::endl;
-	std::cout << "Neighbour indices: [3]" << arg3 << std::endl;
+	std::cout << "Infection data: 	 " << arg1 << std::endl;
+	std::cout << "Neighbour counts:  " << arg2 << std::endl;
+	std::cout << "Neighbour indices: " << arg3 << std::endl;
 
 	// **************************************************************
-
-
-	exit(EXIT_SUCCESS);
 
 
 	// Read count data **********************************************
@@ -269,26 +410,29 @@ int main (int argc, char *argv[]) {
 
 	// *****************************************************************************************************
 
-
 	// CUDA data ****************************************************
 
 	std::cout << "Allocating device storage" << std::endl;
 
 	gettimeofday (&tdr0, NULL);
 
-	int 		* d_data;			// device copy of data
+	float 		* d_data;			// device copy of data
 	Particle 	* particles;		// particles
 	Particle 	* particles_old; 	// intermediate particle states
-	float 		* w;				// weights
+	double 		* w;				// weights
 	int         * d_neinum; 		// device copy of adjacency matrix
 	int 		* d_neibmat; 		// device copy of neighbour counts matrix
+	float 		* countmeans; 		// host copy of reduced infection count means from last pass
+	float 		* d_countmeans; 	// device copy of reduced infection count means from last pass
 
 	CUDA_CALL( cudaMalloc( (void**) &d_data 		, datasize )			);
 	CUDA_CALL( cudaMalloc( (void**) &particles 		, NP*sizeof(Particle)) 	);
 	CUDA_CALL( cudaMalloc( (void**) &particles_old 	, NP*sizeof(Particle)) 	);
-	CUDA_CALL( cudaMalloc( (void**) &w 				, NP*sizeof(float)) 	);
+	CUDA_CALL( cudaMalloc( (void**) &w 				, NP*sizeof(double)) 	);
 	CUDA_CALL( cudaMalloc( (void**) &d_neinum 		, neinumsize) 			);
 	CUDA_CALL( cudaMalloc( (void**) &d_neibmat 		, neibmatsize) 			);
+	CUDA_CALL( cudaMalloc( (void**) &d_countmeans 	, nloc*T*sizeof(float)) );
+
 
 	gettimeofday (&tdr1, NULL);
     timeval_subtract (&restime, &tdr1, &tdr0);
@@ -317,16 +461,20 @@ int main (int argc, char *argv[]) {
 	// **************************************************************
 
 
+
 	// Initialize particles *****************************************
 
 	std::cout << "Initializing particles" << std::endl;
 
 	gettimeofday (&tdr0, NULL);
 
-	int nThreads 	= 256;
-	int nBlocks 	= (NP / nThreads) + (NP % nThreads);
+	int nThreads 	= 32;
+	int nBlocks 	= ceil( (float) NP / nThreads);
 
 	initializeParticles <<< nBlocks, nThreads >>> (particles, nloc);
+	CUDA_CALL( cudaGetLastError() );
+	CUDA_CALL( cudaDeviceSynchronize() );
+
 	initializeParticles <<< nBlocks, nThreads >>> (particles_old, nloc);
 	CUDA_CALL( cudaGetLastError() );
 	CUDA_CALL( cudaDeviceSynchronize() );
@@ -336,169 +484,232 @@ int main (int argc, char *argv[]) {
 
     std::cout << "\t" << getHRtime(restime) << std::endl;
 
-	// **************************************************************
-
-
-	// Initial estimate by reduction ********************************
-
-    /*
-	nThreads 	= RB_DIM;
-	nBlocks 	= nCells;
-
-	reduce <<< nBlocks, nThreads >>> (d_E, 0, particles, Beta_last, nCells);
-	CUDA_CALL( cudaGetLastError() );
-	CUDA_CALL( cudaDeviceSynchronize() );
-
-	float * h_E;
-	cudaMallocHost( (void**) &h_E, nCells*T*sizeof(float) );
-	cudaMemcpy(h_E, d_E, nCells*T*sizeof(float), cudaMemcpyDeviceToHost);
-	*/
-
-		/*std::cout << "======" << std::endl;
-		std::cout << "T = " << 0 << std::endl;
-		std::cout << "------" << std::endl;
-		for(int i = 0; i < nCells; i++) {
-			std::cout << i << " | " << data[i] << "\t" << h_E[i] << std::endl;
-		}*/
+    cudaMemGetInfo( &avail, &total );
+	used = total - avail;
+	std::cout << "\t[" << getHRmemsize(used) << "] used of [" << getHRmemsize(total) << "]" <<std::endl;
 
 	// **************************************************************
-
 
 	// Starting filtering *******************************************
 
-	std::cout << "Filtering over [1," << T << "]"<< std::endl;
+	for (int pass = 0; pass < 50; pass++) {
 
+		std::cout << "pass = " << pass << std::endl;
 
-	gettimeofday (&tdrMaster, NULL);
+		// ** TEMP **
+		//clobberParams <<< nBlocks, nThreads >>> (particles, nloc);
+		// ** TEMP **
 
-	int T_lim = T;
-
-	for (int t = 1; t < T_lim; t++) {
-
-		// Projection ************************************************
-
-		nThreads 	= 256;
-		nBlocks 	= (NP / nThreads) + (NP % nThreads);
-
-		if (t == 1)
-			gettimeofday (&tdr0, NULL);
-
-		//project <<< nBlocks, nThreads >>> (d_data, particles, particles_old, w, d_E, Beta_last, d_adjMat, d_nNeibVec, t-1, nCells);
-		project <<< nBlocks, nThreads >>> (d_data, t, T, particles, particles_old, w, d_neinum, d_neibmat, nloc);
-		CUDA_CALL( cudaGetLastError() );
-		CUDA_CALL( cudaDeviceSynchronize() );
-
-		if (t == 1) {
-			gettimeofday (&tdr1, NULL);
-	    	timeval_subtract (&restime, &tdr1, &tdr0);
-	    	std::cout << "Projection       " << getHRtime(restime) << std::endl;
-	    }
-
-	    // Cumulative sum ********************************************
-
-	    /*
 		nThreads 	= 32;
-		nBlocks 	= nCells / nThreads + ( nCells % nThreads );
+		nBlocks 	= ceil( (float) NP / nThreads);
 
-		if (t == 1)
-			gettimeofday (&tdr0, NULL);
-
-		cumsumWeights <<< nBlocks, nThreads >>> (w, nCells);
+		resetStates <<< nBlocks, nThreads >>> (particles, nloc);
 		CUDA_CALL( cudaGetLastError() );
 		CUDA_CALL( cudaDeviceSynchronize() );
 
-		if (t == 1) {
-			gettimeofday (&tdr1, NULL);
-	    	timeval_subtract (&restime, &tdr1, &tdr0);
-	    	std::cout << "Cumulative sum   " << getHRtime(restime) << std::endl;
-	    } */
+		std::cout << "Filtering over [1," << Tlim << "]"<< std::endl;
 
-	    // Resampling *************************************************
+		gettimeofday (&tdrMaster, NULL);
 
-		nThreads 	= 256;
-		nBlocks 	= (NP/ nThreads) + (NP % nThreads);
+		gettimeofday (&tdr0, NULL);
 
-		if (t == 1)
-			gettimeofday (&tdr0, NULL);
+		nThreads = 1;
+		nBlocks  = 10;
 
-		resample <<< nBlocks, nThreads >>> (particles, particles_old, w, nloc);
-		CUDA_CALL( cudaGetLastError() );
-		CUDA_CALL( cudaDeviceSynchronize() );
-
-		if (t == 1) {
-			gettimeofday (&tdr1, NULL);
-	    	timeval_subtract (&restime, &tdr1, &tdr0);
-	    	std::cout << "Resampling       " << getHRtime(restime) << std::endl;
-	    }
-
-	    // Reduction **************************************************
-
-		/*
-		nThreads 	= RB_DIM;
-		nBlocks 	= nCells;
-
-		if (t == 1)
-			gettimeofday (&tdr0, NULL);
-
-		reduce <<< nBlocks, nThreads >>> (d_E, t, particles, Beta_last, nCells);
-		CUDA_CALL( cudaGetLastError() );
-		CUDA_CALL( cudaDeviceSynchronize() );
-
-		if (t == 1) {
-			gettimeofday (&tdr1, NULL);
-	    	timeval_subtract (&restime, &tdr1, &tdr0);
-	    	std::cout << "Reduction        " << getHRtime(restime) << std::endl;
-	    }
-	    */
-
-	    // Output *****************************************************
-
-	    /*
-		if (t == T_lim/2) {
-
-			cudaMemcpy(h_E, d_E, nCells*T*sizeof(float), cudaMemcpyDeviceToHost);
-
-			std::string filename = "cuSPF.dat";
-
-			std::cout << "Writing results to file '" << filename << "' ..." << std::endl;
-
-			std::ofstream outfile;
-			outfile.open(filename.c_str());
-
-			for (int i = 0; i < nCells; i++) {
-				outfile << trueCounts[t*nCells + i];
-				if (i % dim == 0)
-					outfile << std::endl;
-				else
-					outfile << " ";
-			}
-			
-			for (int i = 0; i < nCells; i++) {
-				outfile << data[t*nCells + i];
-				if (i % dim == 0)
-					outfile << std::endl;
-				else
-					outfile << " ";
-			}
-
-			for (int i = 0; i < nCells; i++) {
-				outfile << h_E[t*nCells + i];
-				if (i % dim == 0)
-					outfile << std::endl;
-				else
-					outfile << " ";
-			}
-
-			outfile.close();
-			
+		if (pass == 49) {
+			reduceStates <<< nBlocks, nThreads >>> (particles, d_countmeans, 0, T, nloc);
+			CUDA_CALL( cudaGetLastError() );
+			CUDA_CALL( cudaDeviceSynchronize() );
 		}
-		*/
 
+		gettimeofday (&tdr1, NULL);
+		timeval_subtract (&restime, &tdr1, &tdr0);
+		std::cout << "Reduction        " << getHRtime(restime) << std::endl;
+
+		int Tlim = T;
+
+		for (int t = 1; t < Tlim; t++) {
+
+			// Projection ************************************************
+
+			nThreads 	= 32;
+			nBlocks 	= ceil( (float) NP / nThreads);
+
+			//if (t == 1)
+			//	gettimeofday (&tdr0, NULL);
+
+			project <<< nBlocks, nThreads >>> (particles, d_neinum, d_neibmat, nloc);
+			CUDA_CALL( cudaGetLastError() );
+			CUDA_CALL( cudaDeviceSynchronize() );
+
+			//if (t == 1) {
+			//	gettimeofday (&tdr1, NULL);
+		    //	timeval_subtract (&restime, &tdr1, &tdr0);
+		    //	std::cout << "\tProjection " << getHRtime(restime) << std::endl;
+		    //}
+
+		    // Weighting *************************************************
+
+			nThreads 	= 32;
+			nBlocks 	= ceil( (float) NP / nThreads);
+
+			weight <<< nBlocks, nThreads >>>(d_data, particles, w, t, T, nloc);
+			CUDA_CALL( cudaGetLastError() );
+			CUDA_CALL( cudaDeviceSynchronize() );
+
+		    // Cumulative sum ********************************************
+
+			nThreads 	= 1;
+			nBlocks 	= 1;
+
+			if (t == 1)
+				gettimeofday (&tdr0, NULL);
+
+			cumsumWeights <<< nBlocks, nThreads >>> (w);
+			CUDA_CALL( cudaGetLastError() );
+			CUDA_CALL( cudaDeviceSynchronize() );
+
+			if (t == 1) {
+				gettimeofday (&tdr1, NULL);
+		    	timeval_subtract (&restime, &tdr1, &tdr0);
+		    	std::cout << "Cumulative sum   " << getHRtime(restime) << std::endl;
+		    }
+
+		    // Save particles for resampling from *************************
+
+		    nThreads 	= 32;
+			nBlocks 	= ceil( (float) NP / nThreads);
+
+			stashParticles <<< nBlocks, nThreads >>> (particles, particles_old, nloc); 
+			CUDA_CALL( cudaGetLastError() );
+			CUDA_CALL( cudaDeviceSynchronize() );
+
+
+		    // Resampling *************************************************
+
+			nThreads 	= 32;
+			nBlocks 	= ceil( (float) NP/ nThreads);
+
+			if (t == 1)
+				gettimeofday (&tdr0, NULL);
+
+			resample <<< nBlocks, nThreads >>> (particles, particles_old, w, nloc);
+			CUDA_CALL( cudaGetLastError() );
+			CUDA_CALL( cudaDeviceSynchronize() );
+
+			if (t == 1) {
+				gettimeofday (&tdr1, NULL);
+		    	timeval_subtract (&restime, &tdr1, &tdr0);
+		    	std::cout << "\tResampling " << getHRtime(restime) << std::endl;
+		    }
+
+		    // Reduction **************************************************
+
+		    //if (t == (Tlim-1)) {
+
+		    if (pass == 49) {
+
+		    	if (t == 1)
+					gettimeofday (&tdr0, NULL);
+
+		    	nThreads = 1;
+		    	nBlocks  = 10;
+
+		    	reduceStates <<< nBlocks, nThreads >>> (particles, d_countmeans, t, T, nloc);
+		    	CUDA_CALL( cudaGetLastError() );
+				CUDA_CALL( cudaDeviceSynchronize() );
+
+				if (t == 1) {
+					gettimeofday (&tdr1, NULL);
+			    	timeval_subtract (&restime, &tdr1, &tdr0);
+			    	std::cout << "Reduction        " << getHRtime(restime) << std::endl;
+			    }
+
+			}
+
+		    // Perturb particles ******************************************
+
+		    nThreads 	= 32;
+			nBlocks 	= ceil( (float) NP/ nThreads);
+
+		    perturbParticles <<< nBlocks, nThreads >>> (particles, nloc, pass, 0.975);
+		    CUDA_CALL( cudaGetLastError() );
+			CUDA_CALL( cudaDeviceSynchronize() );
+
+		    //}
+			/*
+			nThreads 	= RB_DIM;
+			nBlocks 	= nCells;
+
+			
+
+			reduce <<< nBlocks, nThreads >>> (d_E, t, particles, Beta_last, nCells);
+			CUDA_CALL( cudaGetLastError() );
+			CUDA_CALL( cudaDeviceSynchronize() );
+
+			if (t == 1) {
+				gettimeofday (&tdr1, NULL);
+		    	timeval_subtract (&restime, &tdr1, &tdr0);
+		    	std::cout << "Reduction        " << getHRtime(restime) << std::endl;
+		    }
+		    */
+
+
+		} // end time
+
+	} // end pass
+
+	std::cout.precision(10);
+
+	countmeans = (float*) malloc (nloc*T*sizeof(float));
+	cudaMemcpy(countmeans, d_countmeans, nloc*T*sizeof(float), cudaMemcpyDeviceToHost);
+
+	std::string filename = "cuIF2states.dat";
+
+	std::cout << "Writing results to file '" << filename << "' ..." << std::endl;
+
+	std::ofstream outfile;
+	outfile.open(filename.c_str());
+
+	for(int loc = 0; loc < nloc; loc++) {
+		for (int t = 0; t < T; t++) {
+			outfile << countmeans[loc*T + t] << " ";
+		}
+		outfile << std::endl;
 	}
+
+	/*
+	double * h_w = (double*) malloc (NP*sizeof(double));
+	cudaMemcpy(h_w, w, NP*sizeof(double), cudaMemcpyDeviceToHost);
+
+	for (int n = 0; n < NP; n++) {
+		std::cout << h_w[n] << " ";
+	}
+	*/
+
+	/*
+	for (int i = 0; i < nCells; i++) {
+		outfile << trueCounts[t*nCells + i];
+		if (i % dim == 0)
+			outfile << std::endl;
+		else
+			outfile << " ";
+	}
+	*/
+
+	outfile.close();
 
 	gettimeofday (&tdr1, NULL);
 	timeval_subtract (&restime, &tdr1, &tdrMaster);
 	std::cout << "Total PF time (excluding setup) " << getHRtime(restime) << std::endl;
+
+	cudaFree(d_data);
+	cudaFree(particles);
+	cudaFree(particles_old);
+	cudaFree(w);
+	cudaFree(d_neinum);
+	cudaFree(d_neibmat);
+	cudaFree(d_countmeans);
 
 	exit (EXIT_SUCCESS);
 
@@ -521,7 +732,6 @@ __device__ void exp_euler_SSIR(float h, float t0, float tn, Particle * particle,
 	float * B = particle->B;
 
 	// create last state vectors
-	//float S_last[nloc];
 	float * S_last = (float*) malloc (nloc*sizeof(float));
 	float * I_last = (float*) malloc (nloc*sizeof(float));
 	float * R_last = (float*) malloc (nloc*sizeof(float));
@@ -531,8 +741,8 @@ __device__ void exp_euler_SSIR(float h, float t0, float tn, Particle * particle,
 	float r 	= particle->r;
 	float B0 	= R0 * r / N;
 	float eta 	= particle->eta;
-	float berr = particle->berr;
-	float phi  = particle->phi;
+	float berr  = particle->berr;
+	float phi   = particle->phi;
 
 	for(int t = 0; t < num_steps; t++) {
 
@@ -571,6 +781,11 @@ __device__ void exp_euler_SSIR(float h, float t0, float tn, Particle * particle,
 		}
 
 	}
+
+	free(S_last);
+	free(I_last);
+	free(R_last);
+	free(B_last);
 
 }
 

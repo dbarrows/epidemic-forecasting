@@ -83,7 +83,7 @@ int * getDataInt(string filename, int * xdim, int * ydim) {
 }
 
 
-int * getDataFloat(string filename, int * xdim, int * ydim) {
+float * getDataFloat(string filename, int * xdim, int * ydim) {
 
 	int xlen, ylen;
 	int dctr = 0;
@@ -93,14 +93,14 @@ int * getDataFloat(string filename, int * xdim, int * ydim) {
 
 	getline(fileStream, line);
 
-	xlen = getDim(line);
+	//xlen = getDim(line);
 	ylen = getNumLines(filename);
 
-	int memsize = xlen*ylen*sizeof(int);
+	int memsize = xlen*ylen*sizeof(float);
 
-	int * data = (int *) malloc (memsize);
+	float * data = (float *) malloc (memsize);
 
-	int val;
+	float val;
 
 	// process first line
 	stringstream lineStream(line);
@@ -108,6 +108,8 @@ int * getDataFloat(string filename, int * xdim, int * ydim) {
         data[dctr] = val;
         dctr++;
     }
+
+    xlen = dctr;
 
     // process remaining lines
     while( getline(fileStream, line) ) {
@@ -125,6 +127,9 @@ int * getDataFloat(string filename, int * xdim, int * ydim) {
 	    *xdim = xlen;
 		*ydim = ylen;
 	}
+
+	std::cout << "xlen " << xlen << std::endl;
+	std::cout << "ylen " << ylen << std::endl;
 
     return data;
 
