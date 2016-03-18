@@ -1,112 +1,5 @@
-\documentclass[12pt]{article}
-
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage[pdftex]{graphicx}
-\usepackage{setspace}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{float}
-\usepackage[margin=1in]{geometry}
-\usepackage{listings}
-\usepackage{textcomp}
-\usepackage{multicol}
-\usepackage[toc,page]{appendix}
-\usepackage{listings}
-\usepackage{fancyvrb}
-\usepackage{hyperref}
-\usepackage{lstbayes}
-\usepackage{booktabs}
-
-\usepackage[usenames,dvipsnames]{color}
-\definecolor{DGrey}{gray}{0.25}
-\definecolor{MGrey}{gray}{0.50}
-\definecolor{LGrey}{gray}{0.75}
-
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{Gray}{#1}}
-\SetCommentSty{mycommfont}
-
-\usepackage{inconsolata}
-
-\usepackage[parfill]{parskip}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{\baselineskip}
-
-\newcommand{\et}{e^{i\theta}}
-\newcommand{\oo}{\mathcal{O}}
-\newcommand{\skipline}{\bigskip\bigskip\bigskip}
-
-\lstdefinestyle{Rsty} { 
-    language=R,                         % the language of the code
-    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
-    numbers=left,                       % where to put the line-numbers
-    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
-    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
-                                        % will be numbered
-    numbersep=5pt,                      % how far the line-numbers are from the code
-    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
-    showspaces=false,                   % show spaces adding particular underscores
-    showstringspaces=false,             % underline spaces within strings
-    showtabs=false,                     % show tabs within strings adding particular underscores
-    frame=single,                       % adds a frame around the code
-    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-    tabsize=2,                          % sets default tabsize to 2 spaces
-    captionpos=b,                       % sets the caption-position to bottom
-    breaklines=true,                    % sets automatic line breaking
-    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
-    keywordstyle=\color{DGrey},     % keyword style
-    commentstyle=\color{LGrey},   % comment style
-    stringstyle=\color{MGrey},    % string literal style
-    literate={<-}{{$\gets$}}1,           % prettier assignment arrows
-    xleftmargin=4.0ex,
-    deletekeywords={I,density,rect,_,palette,data,scale,panel,R,frame,labels,options}
-}
-
-\lstnewenvironment{R}
-{\lstset{style=Rsty}}
-{}
-
-\lstdefinestyle{Stansty} { 
-    language=Stan,                         % the language of the code
-    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
-    numbers=left,                       % where to put the line-numbers
-    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
-    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
-                                        % will be numbered
-    numbersep=5pt,                      % how far the line-numbers are from the code
-    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
-    showspaces=false,                   % show spaces adding particular underscores
-    showstringspaces=false,             % underline spaces within strings
-    showtabs=false,                     % show tabs within strings adding particular underscores
-    frame=single,                       % adds a frame around the code
-    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-    tabsize=2,                          % sets default tabsize to 2 spaces
-    captionpos=b,                       % sets the caption-position to bottom
-    breaklines=true,                    % sets automatic line breaking
-    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
-    keywordstyle=\color{DGrey},     % keyword style
-    commentstyle=\color{LGrey},   % comment style
-    stringstyle=\color{MGrey},    % string literal style
-    %literate={<-}{{$\gets$}}1,           % prettier assignment arrows
-    xleftmargin=4.0ex,
-    deletekeywords={T}
-}
-
-\lstnewenvironment{Stan}
-{\lstset{style=Stansty}}
-{}
-
-\renewcommand{\arraystretch}{2}
-
-\begin{document}
-
-\noindent
-{\LARGE {\bf Parameter Fitting} }
-\\\\
-Dexter Barrows\\
-\today
+%% Dexter Barrows, 2016
+%% dbarrows.github.io
 
 \section{Fitting Setup}
 
@@ -170,6 +63,7 @@ Dexter Barrows\\
         \label{sirmean}
     \end{figure}
 
+
 \section{Calibrating Samples}
 
 	In order to compare HMCMC and IF2 we need to set up a fair and theoretically justified way to select the number of samples to draw for the HMCMC iterations and the number of particles to use for IF2. We assume that we are working with a problem that has an unknown real solution, so we use the Monte Carlo Standard Error (MCSE).
@@ -201,6 +95,7 @@ Dexter Barrows\\
 	The goal here is to then pick the number of HMCMC samples and IF2 particles to yield similar MCSE values. To do this we picked a combination of parameters for RStan that yielded decent results when applied to the stochastic SIR model specified above, calculated the resulting mean MCSE across several model fits, and isolated the expected number of IF2 particles needed to obtain the same value. This was used as a starting value to ``titrate'' the IF2 iterations to the same point.
 
 	The resulting values were 1000 HMCMC warm-up iterations with 1000 samples drawn post-warm-up, and 2500 IF2 particles sent through 50 passes, each method giving an approximate MCSE of 0.0065.
+
 
 \section{IF2 Fitting}
 
@@ -240,6 +135,7 @@ Dexter Barrows\\
         \label{if2state}
     \end{figure}
 
+
 \section{IF2 Convergence}
 
 	Since IF2 is an iterative algorithm where each pass through he data is expected to push the parameter estimates towards the MLE, we can see the evolution of these estimates as a function of the pass number. Plots showing evolution of the mean estimates are shown if Figure [\ref{if2convergence}] for the six most critical parameters.
@@ -278,6 +174,7 @@ Dexter Barrows\\
     \end{figure}
 
     It is worth noting that the IF2 parameters chosen were in part chosen so as to not artificially narrow these densities; a more aggressive cooling schedule and/or an increased number of passes would have resulted in much narrower densities, and indeed have the potential to collapse them to point estimates.
+
 
 \section{HMCMC Fitting}
 
@@ -339,7 +236,3 @@ Dexter Barrows\\
     \end{figure}
 
     The average running times were approximately 45.5 seconds and 257.4 seconds for IF2 and HMCMC respectively, representing a 5.7x speedup for IF2 over HMCMC. While IF2 may be able to fit the model to data faster than HMCMC, we are obtaining less information; this will become important in the next section. Further, the results in Figure [\ref{timeplot}] show that while the running time for IF2 is relatively fixed, the times for HMCMC are anything but, showing a wide spread of potential times.
-
-
-
-\end{document}
