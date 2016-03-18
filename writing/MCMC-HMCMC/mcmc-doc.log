@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  2 MAR 2016 18:40
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  18 MAR 2016 17:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**mcmc.tex
-(./mcmc.tex
+**mcmc-doc.tex
+(./mcmc-doc.tex
 LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 21 languages loaded.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/article.cls
@@ -559,8 +559,8 @@ Package: inconsolata 2016/02/22 v1.10
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
 )
-(./mcmc.aux)
-\openout1 = `mcmc.aux'.
+(./mcmc-doc.aux)
+\openout1 = `mcmc-doc.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 111.
 LaTeX Font Info:    ... okay on input line 111.
@@ -577,12 +577,14 @@ LaTeX Font Info:    ... okay on input line 111.
 LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 111.
 LaTeX Font Info:    Try loading font information for TS1+cmr on input line 111.
 
- (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ts1cmr.fd
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    ... okay on input line 111.
 LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 111.
 LaTeX Font Info:    ... okay on input line 111.
+
 (/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count145
@@ -665,9 +667,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 111.
 LaTeX Info: Redefining \pageref on input line 111.
 LaTeX Info: Redefining \nameref on input line 111.
- (./mcmc.out) (./mcmc.out)
+ (./mcmc-doc.out) (./mcmc-doc.out)
 \@outlinefile=\write4
-\openout4 = `mcmc.out'.
+\openout4 = `mcmc-doc.out'.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/upquote/upquote.sty
@@ -678,11 +680,13 @@ Underfull \hbox (badness 10000) in paragraph at lines 113--118
 
  []
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 121.
+(./mcmc-text.tex
+LaTeX Font Info:    Try loading font information for U+msa on input line 6.
+
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 121.
+LaTeX Font Info:    Try loading font information for U+msb on input line 6.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -691,34 +695,34 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: ./images/finitemachine.pdf Graphic file (type pdf)
 
 <use ./images/finitemachine.pdf>
-Package pdftex.def Info: ./images/finitemachine.pdf used on input line 130.
+Package pdftex.def Info: ./images/finitemachine.pdf used on input line 15.
 (pdftex.def)             Requested size: 234.8775pt x 215.87627pt.
  [1
 
 {/usr/local/texlive/2015basic/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./
 images/finitemachine.pdf>] [2] [3]
-LaTeX Font Info:    Try loading font information for OT1+zi4 on input line 229.
+LaTeX Font Info:    Try loading font information for OT1+zi4 on input line 114.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/inconsolata/ot1zi4.fd
 File: ot1zi4.fd 2014/06/22 OT1/zi4 (Inconsolata)
 )
-Overfull \hbox (30.0pt too wide) in paragraph at lines 221--266
+Overfull \hbox (30.0pt too wide) in paragraph at lines 106--151
 $[]$ 
  []
 
 [4] [5] [6]
-Overfull \hbox (30.0pt too wide) in paragraph at lines 327--397
+Overfull \hbox (30.0pt too wide) in paragraph at lines 215--285
 $[]$ 
  []
 
 [7]
-Overfull \hbox (12.24263pt too wide) in paragraph at lines 401--401
+Overfull \hbox (12.24263pt too wide) in paragraph at lines 290--290
 []\OT1/cmr/bx/n/17.28 Fitting an SIR Model to Syn-thetic Epi-demic Data 
  []
 
 
-Overfull \hbox (1.78879pt too wide) in paragraph at lines 403--404
+Overfull \hbox (1.78879pt too wide) in paragraph at lines 292--293
 \OT1/cmr/m/n/12 Here we will ex-am-ine a test case in which Hamil-to-nian MCMC 
 will be used to fit a Susceptible-
  []
@@ -736,10 +740,10 @@ File: lstlang3.sty 2014/09/06 1.5e listings language file
 File: ./images/dataplot.pdf Graphic file (type pdf)
 
 <use ./images/dataplot.pdf>
-Package pdftex.def Info: ./images/dataplot.pdf used on input line 495.
+Package pdftex.def Info: ./images/dataplot.pdf used on input line 384.
 (pdftex.def)             Requested size: 469.75502pt x 289.07928pt.
  [10] [11 <./images/dataplot.pdf>]
-LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 538.
+LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 427.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/inconsolata/ts1zi4.fd
@@ -749,69 +753,69 @@ File: ts1zi4.fd 2014/06/22 Fontinst v1.933 font definitions for TS1/zi4.
 File: ./images/traceplotR0.pdf Graphic file (type pdf)
 
 <use ./images/traceplotR0.pdf>
-Package pdftex.def Info: ./images/traceplotR0.pdf used on input line 615.
+Package pdftex.def Info: ./images/traceplotR0.pdf used on input line 504.
 (pdftex.def)             Requested size: 469.75502pt x 289.07928pt.
  [13]
 <./images/traceplotR0_inc.pdf, id=342, 469.755pt x 289.08pt>
 File: ./images/traceplotR0_inc.pdf Graphic file (type pdf)
 
 <use ./images/traceplotR0_inc.pdf>
-Package pdftex.def Info: ./images/traceplotR0_inc.pdf used on input line 624.
+Package pdftex.def Info: ./images/traceplotR0_inc.pdf used on input line 513.
 (pdftex.def)             Requested size: 469.75502pt x 289.07928pt.
  [14 <./images/traceplotR0.pdf>]
 <./images/kernelR0.pdf, id=354, 234.8775pt x 216.81pt>
 File: ./images/kernelR0.pdf Graphic file (type pdf)
 
 <use ./images/kernelR0.pdf>
-Package pdftex.def Info: ./images/kernelR0.pdf used on input line 634.
+Package pdftex.def Info: ./images/kernelR0.pdf used on input line 523.
 (pdftex.def)             Requested size: 230.18253pt x 212.47565pt.
 
 <./images/kernelr.pdf, id=355, 234.8775pt x 216.81pt>
 File: ./images/kernelr.pdf Graphic file (type pdf)
 
 <use ./images/kernelr.pdf>
-Package pdftex.def Info: ./images/kernelr.pdf used on input line 638.
+Package pdftex.def Info: ./images/kernelr.pdf used on input line 527.
 (pdftex.def)             Requested size: 230.18253pt x 212.47565pt.
 
 <./images/kernelsigma.pdf, id=356, 234.8775pt x 216.81pt>
 File: ./images/kernelsigma.pdf Graphic file (type pdf)
 
 <use ./images/kernelsigma.pdf>
-Package pdftex.def Info: ./images/kernelsigma.pdf used on input line 642.
+Package pdftex.def Info: ./images/kernelsigma.pdf used on input line 531.
 (pdftex.def)             Requested size: 230.18253pt x 212.47565pt.
 
 <./images/kernelinfec.pdf, id=357, 234.8775pt x 216.81pt>
 File: ./images/kernelinfec.pdf Graphic file (type pdf)
 
 <use ./images/kernelinfec.pdf>
-Package pdftex.def Info: ./images/kernelinfec.pdf used on input line 646.
+Package pdftex.def Info: ./images/kernelinfec.pdf used on input line 535.
 (pdftex.def)             Requested size: 230.18253pt x 212.47565pt.
- [15 <./images/traceplotR0_inc.pdf>] [16 <./images/kernelR0.pdf> <./images/kern
-elr.pdf> <./images/kernelsigma.pdf> <./images/kernelinfec.pdf>] (../../code/hmc
-/d_sir_stan.r [17] [18]) [19]
-(../../code/hmc/d_sirode_euler.stan [20])
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 686.
+) [15 <./images/traceplotR0_inc.pdf>] [16 <./images/kernelR0.pdf> <./images/ker
+nelr.pdf> <./images/kernelsigma.pdf> <./images/kernelinfec.pdf>] (./mcmc-append
+ix.tex (../../code/hmc/d_sir_stan.r [17] [18])
+[19] (../../code/hmc/d_sirode_euler.stan [20]))
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 129.
  [21]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 686.
- (./mcmc.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 686.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 686.
-Package rerunfilecheck Info: File `mcmc.out' has not changed.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 129.
+ (./mcmc-doc.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 129.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 129.
+Package rerunfilecheck Info: File `mcmc-doc.out' has not changed.
 (rerunfilecheck)             Checksum: 8946D9D29081AA31D392CC08E4918B05;663.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 686.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 129.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 12794 strings out of 494501
- 192758 string characters out of 6167031
- 551826 words of memory out of 5000000
+ 12800 strings out of 494501
+ 192896 string characters out of 6167031
+ 551824 words of memory out of 5000000
  15505 multiletter control sequences out of 15000+600000
  13795 words of font info for 53 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 36i,15n,48p,659b,3753s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,15n,48p,683b,3753s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/incons
 olata/i4-ts1.enc}{/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/incon
 solata/i4-ot1-0.enc} </Users/dexter/Library/texlive/2015basic/texmf-var/fonts/p
@@ -830,7 +834,7 @@ sr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/
 cmti12.pfb>
-Output written on mcmc.pdf (21 pages, 363176 bytes).
+Output written on mcmc-doc.pdf (21 pages, 363177 bytes).
 PDF statistics:
  743 PDF objects out of 1000 (max. 8388607)
  674 compressed objects within 7 object streams

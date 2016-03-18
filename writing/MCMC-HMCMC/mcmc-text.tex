@@ -1,120 +1,5 @@
-\documentclass[12pt]{article}
-
-\usepackage{amsmath}
-\usepackage{amssymb}
-\usepackage{amsthm}
-\usepackage[pdftex]{graphicx}
-\usepackage{setspace}
-\usepackage{caption}
-\usepackage{subcaption}
-\usepackage{float}
-\usepackage[margin=1in]{geometry}
-\usepackage{listings}
-\usepackage{textcomp}
-\usepackage{multicol}
-\usepackage[toc,page]{appendix}
-\usepackage{listings}
-\usepackage{fancyvrb}
-\usepackage{hyperref}
-\usepackage{lstbayes}
-
-\usepackage[usenames,dvipsnames]{color}
-\definecolor{DGrey}{gray}{0.25}
-\definecolor{MGrey}{gray}{0.50}
-\definecolor{LGrey}{gray}{0.75}
-
-%\usepackage{algorithm}
-%\usepackage{algpseudocode}
-\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{Gray}{#1}}
-\SetCommentSty{mycommfont}
-%\floatname{algorithm}{Procedure}
-%\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-%\renewcommand{\algorithmicensure}{\textbf{Output:}}
-%\makeatletter
-%\def\therule{%
-%  \makebox[\algorithmicindent][l]{%
-%    \hspace*{.5em}\vrule height .75\baselineskip depth .25\baselineskip}}%
-
-\usepackage{inconsolata}
-
-\usepackage[parfill]{parskip}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{\baselineskip}
-
-\newcommand{\et}{e^{i\theta}}
-\newcommand{\oo}{\mathcal{O}}
-\newcommand{\skipline}{\bigskip\bigskip\bigskip}
-
-\lstdefinestyle{Rsty} { 
-    language=R,                         % the language of the code
-    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
-    numbers=left,                       % where to put the line-numbers
-    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
-    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
-                                        % will be numbered
-    numbersep=5pt,                      % how far the line-numbers are from the code
-    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
-    showspaces=false,                   % show spaces adding particular underscores
-    showstringspaces=false,             % underline spaces within strings
-    showtabs=false,                     % show tabs within strings adding particular underscores
-    frame=single,                       % adds a frame around the code
-    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-    tabsize=2,                          % sets default tabsize to 2 spaces
-    captionpos=b,                       % sets the caption-position to bottom
-    breaklines=true,                    % sets automatic line breaking
-    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
-    keywordstyle=\color{DGrey},     % keyword style
-    commentstyle=\color{LGrey},   % comment style
-    stringstyle=\color{MGrey},    % string literal style
-    literate={<-}{{$\gets$}}1,           % prettier assignment arrows
-    xleftmargin=4.0ex,
-    deletekeywords={I,density,rect,_,palette,data,scale,panel,R,frame,labels,options}
-}
-
-\lstnewenvironment{R}
-{\lstset{style=Rsty}}
-{}
-
-\lstdefinestyle{Stansty} { 
-    language=Stan,                         % the language of the code
-    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
-    numbers=left,                       % where to put the line-numbers
-    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
-    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
-                                        % will be numbered
-    numbersep=5pt,                      % how far the line-numbers are from the code
-    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
-    showspaces=false,                   % show spaces adding particular underscores
-    showstringspaces=false,             % underline spaces within strings
-    showtabs=false,                     % show tabs within strings adding particular underscores
-    frame=single,                       % adds a frame around the code
-    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
-    tabsize=2,                          % sets default tabsize to 2 spaces
-    captionpos=b,                       % sets the caption-position to bottom
-    breaklines=true,                    % sets automatic line breaking
-    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
-    keywordstyle=\color{DGrey},     % keyword style
-    commentstyle=\color{LGrey},   % comment style
-    stringstyle=\color{MGrey},    % string literal style
-    %literate={<-}{{$\gets$}}1,           % prettier assignment arrows
-    xleftmargin=4.0ex,
-    deletekeywords={T}
-}
-
-\lstnewenvironment{Stan}
-{\lstset{style=Stansty}}
-{}
-
-\renewcommand{\arraystretch}{2}
-
-\begin{document}
-
-\noindent
-{\LARGE {\bf MCMC} }
-\\\\
-Dexter Barrows\\
-\today
+%% Dexter Barrows, 2016
+%% dbarrows.github.io
 
 \section{Intro}
 
@@ -268,15 +153,18 @@ Dexter Barrows\\
 
     In this way we are ensuring that steps that lead to better likelihood outcomes are likely to be accepted, but steps that do not will not be accepted as frequently. Note that these less ``advantageous'' moves will still occur but that this is by design -- it ensures that as much of the parameter space as possible will be explored but more efficiently than using pure brute force.
 
+
 \section{Burn-in}
 
     One critical aspect of MCMC-based algorithms has yet to be discussed. The algorithm requires an initial starting point $\theta$ to be selected, but as the proposal distribution is supposed to restrict moves to an area close to the last accepted state, then the posterior distribution will be biased towards this starting point. This issue is avoided through the use of a Burn-in period.
 
     Burning in a chain is the act of running the MCMC algorithm normally without saving first $M$ samples. As we are seeking a chain of length $N$, the total computation will be equivalent to generating a chain of length $M+N$.
 
+
 \section{Thinning}
 
     Some models will require very long chains to get a good approximation of the posterior, which will consequently require a non-trivial amount of computer storage. One way to reduce the burden of storing so many samples is by thinning. This involves saving only every $n^{th}$ step, which should still give a decent approximate of the posterior (since the chain has time to explore a large portion of the parameter space), but require less room to store.
+
 
 \section{Hamiltonian Monte Carlo}
 
@@ -398,6 +286,7 @@ Dexter Barrows\\
 
     Note that the parameters $\varepsilon$ and $L$ have to be tuned in order to maintain stability and maximize efficiency, a sometimes non-trivial process.
     
+
 \section{Fitting an SIR Model to Synthetic Epidemic Data}
 
     Here we will examine a test case in which Hamiltonian MCMC will be used to fit a Susceptible-Infected-Removed (SIR) epidemic model to mock infectious count data.
@@ -649,38 +538,3 @@ Dexter Barrows\\
         \caption{Kernel density estimates produced by Stan}
         \label{kernels}
     \end{figure}
-
-
-
-
-    \skipline
-    \skipline
-    \skipline
-
-    
-
-
-\newpage
-\begin{appendices}
-
-	\section{Full R code}
-
-    This code will run all the indicated analysis and produce all plots.
-
-    \lstinputlisting[style=Rsty]{../../code/hmc/d_sir_stan.r}
-
-    \section{Full Stan code}
-
-    Stan model code to be used with the preceding R code.
-
-    \lstinputlisting[style=Stansty]{../../code/hmc/d_sirode_euler.stan}
-
-\end{appendices}
-
-
-
-
-
-
-
-\end{document}
