@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  16 MAR 2016 23:58
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  18 MAR 2016 18:46
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**spatial.tex
-(./spatial.tex
+**spatial-doc.tex
+(./spatial-doc.tex
 LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 21 languages loaded.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/article.cls
@@ -559,8 +559,8 @@ Package: inconsolata 2016/02/22 v1.10
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
 )
-(./spatial.aux)
-\openout1 = `spatial.aux'.
+(./spatial-doc.aux)
+\openout1 = `spatial-doc.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 132.
 LaTeX Font Info:    ... okay on input line 132.
@@ -667,24 +667,26 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 LaTeX Info: Redefining \ref on input line 132.
 LaTeX Info: Redefining \pageref on input line 132.
 LaTeX Info: Redefining \nameref on input line 132.
- (./spatial.out) (./spatial.out)
+ (./spatial-doc.out) (./spatial-doc.out)
 \@outlinefile=\write4
-\openout4 = `spatial.out'.
+\openout4 = `spatial-doc.out'.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
 tim
 )
-Underfull \hbox (badness 10000) in paragraph at lines 134--139
+Underfull \hbox (badness 10000) in paragraph at lines 135--140
 
  []
 
-LaTeX Font Info:    Try loading font information for U+msa on input line 144.
+(./spatial-text.tex
+LaTeX Font Info:    Try loading font information for U+msa on input line 8.
+
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Try loading font information for U+msb on input line 144.
+LaTeX Font Info:    Try loading font information for U+msb on input line 8.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -695,31 +697,32 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 File: ./images/dataplot.pdf Graphic file (type pdf)
 
 <use ./images/dataplot.pdf>
-Package pdftex.def Info: ./images/dataplot.pdf used on input line 169.
+Package pdftex.def Info: ./images/dataplot.pdf used on input line 33.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
 
 <./images/dataplot2.pdf, id=51, 469.755pt x 289.08pt>
 File: ./images/dataplot2.pdf Graphic file (type pdf)
 
 <use ./images/dataplot2.pdf>
-Package pdftex.def Info: ./images/dataplot2.pdf used on input line 179.
+Package pdftex.def Info: ./images/dataplot2.pdf used on input line 43.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
  [2 <./images/dataplot.pdf>] [3 <./images/dataplot2.pdf>] <./images/sseplot.pdf
 , id=75, 469.755pt x 289.08pt>
 File: ./images/sseplot.pdf Graphic file (type pdf)
 
 <use ./images/sseplot.pdf>
-Package pdftex.def Info: ./images/sseplot.pdf used on input line 204.
+Package pdftex.def Info: ./images/sseplot.pdf used on input line 67.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
 
 <./images/timeplot.pdf, id=77, 469.755pt x 289.08pt>
 File: ./images/timeplot.pdf Graphic file (type pdf)
 
 <use ./images/timeplot.pdf>
-Package pdftex.def Info: ./images/timeplot.pdf used on input line 216.
+Package pdftex.def Info: ./images/timeplot.pdf used on input line 79.
 (pdftex.def)             Requested size: 375.80544pt x 231.2643pt.
- [4 <./images/sseplot.pdf>] [5 <./images/timeplot.pdf>] (/usr/local/texlive/201
-5basic/texmf-dist/tex/latex/listings/lstlang1.sty
+ [4 <./images/sseplot.pdf>]) [5 <./images/timeplot.pdf>] (./spatial-appendix.te
+x
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang2.sty
@@ -728,8 +731,7 @@ File: lstlang2.sty 2014/09/06 1.5e listings language file
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2014/09/06 1.5e listings language file
 )
-LaTeX Font Info:    Try loading font information for OT1+zi4 on input line 237.
-
+LaTeX Font Info:    Try loading font information for OT1+zi4 on input line 8.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/inconsolata/ot1zi4.fd
 File: ot1zi4.fd 2014/06/22 OT1/zi4 (Inconsolata)
@@ -746,29 +748,29 @@ File: lstlang1.sty 2014/09/06 1.5e listings language file
 File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 )
 (../../code/if2/if2-spa/if2-spa.cpp [9] [10] [11] [12] [13] [14] [15] [16]
-[17] [18]) [19]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 255.
+[17] [18]) [19])
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 151.
  [20]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 255.
- (./spatial.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 255.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 255.
-Package rerunfilecheck Info: File `spatial.out' has not changed.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 151.
+ (./spatial-doc.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 151.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 151.
+Package rerunfilecheck Info: File `spatial-doc.out' has not changed.
 (rerunfilecheck)             Checksum: FD48CB934C624DD3DF7B444AB7D9F9AF;388.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 255.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 151.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 13004 strings out of 494501
- 194144 string characters out of 6167031
- 556584 words of memory out of 5000000
+ 13010 strings out of 494501
+ 194300 string characters out of 6167031
+ 556604 words of memory out of 5000000
  15372 multiletter control sequences out of 15000+600000
  12004 words of font info for 47 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 39i,8n,68p,833b,4411s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 41i,8n,68p,860b,4411s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/incons
 olata/i4-ot1-0.enc}</usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/
 inconsolata/Inconsolata-zi4r.pfb></usr/local/texlive/2015basic/texmf-dist/fonts
@@ -781,7 +783,7 @@ c/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2015b
 asic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/20
 15basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/texlive/
 2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb>
-Output written on spatial.pdf (20 pages, 230220 bytes).
+Output written on spatial-doc.pdf (20 pages, 230220 bytes).
 PDF statistics:
  1053 PDF objects out of 1200 (max. 8388607)
  1001 compressed objects within 11 object streams
