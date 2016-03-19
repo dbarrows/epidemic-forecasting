@@ -33,34 +33,31 @@
 
 	Simulating the process in Equation [\ref{betaautoreg}] with $\eta = 0.5$ gives us the plot in Figure [\ref{betaplot}] below.
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/betaplot.pdf}
-        \caption{Simulated geometric autoregressive process show in Equation [\ref{betaautoreg}].}
-        \label{betaplot}
+        \caption{Simulated geometric autoregressive process show in Equation [\ref{betaautoreg}]. \label{betaplot}}
     \end{figure}
 
     We can obtain the corresponding density plot of the values in Figure [\ref{betaplot}], shown in Figure [\ref{betadensity}].
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/betadensity.pdf}
-        \caption{Density plot of values shown if Figure[\ref{betaplot}].}
-        \label{betadensity}
+        \caption{Density plot of values shown if Figure[\ref{betaplot}]. \label{betadensity}}
     \end{figure}
 
     We see a density plot similar in shape to the desired density, and the geometric random walk displays dependence on previous values. Further the mean of this distribution was calculated to be $6.92 \times 10^{-4}$ and standard the deviation to be $3.99 \times 10^{-4}$, which are very close to the theoretical values.
 
     If we take the full stochastic SIR system and evolve it using an Euler stepping scheme with a step size of $h = 1/7$, for 1 step per day, we obtain the plot in Figure [\ref{sirmean}].
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/sirmean.pdf}
-        \caption{Stochastic SIR model simulated using an explicit Euler stepping scheme. The solid line is a single random trajectory, the dots show the data points obtained by adding in observation error defined as $\epsilon_{obvs} = \mathcal{N}(0,10)$, and the grey ribbon is centre 95th quantile from 100 random trajectories.}
-        \label{sirmean}
+        \caption{Stochastic SIR model simulated using an explicit Euler stepping scheme. The solid line is a single random trajectory, the dots show the data points obtained by adding in observation error defined as $\epsilon_{obvs} = \mathcal{N}(0,10)$, and the grey ribbon is centre 95th quantile from 100 random trajectories. \label{sirmean}}
     \end{figure}
 
 
@@ -120,19 +117,17 @@
 			$\eta$ 				& $5 \times 10^{-1}$ & $5.87 \times 10^{-1}$ 	& $1.73 \times 10^{-1}$ 	& $4.57 \times 10^{-1}$ & $-8.27 \times 10^{-2}$ 	\\
 			$\varepsilon_{err}$ & $5 \times 10^{-1}$ & $1.63 \times 10^{-1}$ 	& $-6.73 \times 10^{-1}$ 	& $1.60 \times10^{-1}$  & $-6.80 \times 10^{-1}$
 		\end{tabular}}
-	    \caption{Fitting errors.}
-        \label{fiterror}
+	    \caption{Fitting errors. \label{fiterror}}
     \end{figure}
 
 
 	From last IF2 particle filtering iteration, the mean state values from the particle swarm at each time step are shown with the true underlying state and data in the plot in Figure [\ref{if2state}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2state.pdf}
-        \caption{True system trajectory (solid line), observed data (dots), and IF2 estimated real state (dashed line).}
-        \label{if2state}
+        \caption{True system trajectory (solid line), observed data (dots), and IF2 estimated real state (dashed line). \label{if2state}}
     \end{figure}
 
 
@@ -140,22 +135,20 @@
 
 	Since IF2 is an iterative algorithm where each pass through he data is expected to push the parameter estimates towards the MLE, we can see the evolution of these estimates as a function of the pass number. Plots showing evolution of the mean estimates are shown if Figure [\ref{if2convergence}] for the six most critical parameters.
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2convergence.pdf}
-        \caption{The horizontal axis shows the IF2 pass number. The solid black lines show the evolution of the ML estimates, the solid grey lines show the true value, and the dashed grey lines show the mean parameter estimates from the particle swarm after the final pass.}
-        \label{if2convergence}
+        \caption{The horizontal axis shows the IF2 pass number. The solid black lines show the evolution of the ML estimates, the solid grey lines show the true value, and the dashed grey lines show the mean parameter estimates from the particle swarm after the final pass. \label{if2convergence}}
     \end{figure}
 
     Similarly, we can look at the evolution of the standard deviations of the parameter estimates from the particle swarm as a function of the pass number, shown in Figure [\ref{if2sdconvergence}] below.
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2sdconvergence.pdf}
-        \caption{The horizontal axis shows the IF2 pass number and the solid black lines show the evolution of the standard deviations of the particle swarm values.}
-        \label{if2sdconvergence}
+        \caption{The horizontal axis shows the IF2 pass number and the solid black lines show the evolution of the standard deviations of the particle swarm values. \label{if2sdconvergence}}
     \end{figure}
 
     As expected there is a downward trend in all plots, with a very strong trend in all but two of them.
@@ -163,14 +156,13 @@
 
 \section{IF2 Densities}
 
-	Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. These are shown below if Figure [].
+	Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. These are shown below if Figure [\ref{if2kernels}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2kernels.pdf}
-        \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means.}
-        \label{if2kernels}
+        \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \label{if2kernels}}
     \end{figure}
 
     It is worth noting that the IF2 parameters chosen were in part chosen so as to not artificially narrow these densities; a more aggressive cooling schedule and/or an increased number of passes would have resulted in much narrower densities, and indeed have the potential to collapse them to point estimates.
@@ -187,12 +179,11 @@
 
 	The parameter estimation densities from the Stan HMCMC fitting are shown in Figure [\ref{hmckernels}] below.
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/hmckernels.pdf}
-        \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means.}
-        \label{hmckernels}
+        \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \label{hmckernels}}
     \end{figure}
 
     the densities shown here represent a ``true'' MLE density estimate in that they represent HMC's attempt to directly sample from the parameter space according to the likelihood surface, unlike IF2 which is in theory only trying to get a ML point estimate. Hence, these densities are potentially more robust than those produced by the IF2 implementation.
@@ -202,12 +193,11 @@
 
 	Unlike particle particle-filtering-based approaches, HMC does not produce state estimates as a by-product of parameter fitting, but we can use information about the stochastic nodes related to the noise in the $\beta$ geometric random walk to reconstruct state estimates. The results of 100 bootstrap trajectories is shown in Figure [\ref{hmcboot}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/hmcboot.pdf}
-        \caption{Result from 100 HMCMC bootstrap trajectories. The solid line shows the true states, the dots show the data, the dotted line shows the average system behaviour, the dashed line shows the bootstrap mean, and the grey ribbon shows the centre 95th quantile of the bootstrap trajectories.}
-        \label{hmcboot}
+        \caption{Result from 100 HMCMC bootstrap trajectories. The solid line shows the true states, the dots show the data, the dotted line shows the average system behaviour, the dashed line shows the bootstrap mean, and the grey ribbon shows the centre 95th quantile of the bootstrap trajectories. \label{hmcboot}}
     \end{figure}
 
 
@@ -215,24 +205,22 @@
 
 	Here we fit the stochastic SIR model to 200 random independent trajectories using each method and examine the density of the point estimates produced. 
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/combined-multi.pdf}
-        \caption{IF2 point estimate densities are shown in black and HMCMC point estimate densities are shown in grey. The vertical black lines show the true parameter values.}
-        \label{combinedmulti}
+        \caption{IF2 point estimate densities are shown in black and HMCMC point estimate densities are shown in grey. The vertical black lines show the true parameter values. \label{combinedmulti}}
     \end{figure}
 
     The densities by and large display similar coverage, with the IF2 densities for $r$ and $\varepsilon_{proc}$ showing slightly wider coverage than the HMCMC densities for the same parameters.
 
     The running times for each algorithm are summarized in Figure [\ref{timeplot}] below.
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/timeplot.pdf}
-        \caption{Fitting times for IF2 and HMCMC, in seconds. The centre box in each plot shows the centre 50th quantile, with the bold centre line showing the median.}
-        \label{timeplot}
+        \caption{Fitting times for IF2 and HMCMC, in seconds. The centre box in each plot shows the centre 50th quantile, with the bold centre line showing the median. \label{timeplot}}
     \end{figure}
 
     The average running times were approximately 45.5 seconds and 257.4 seconds for IF2 and HMCMC respectively, representing a 5.7x speedup for IF2 over HMCMC. While IF2 may be able to fit the model to data faster than HMCMC, we are obtaining less information; this will become important in the next section. Further, the results in Figure [\ref{timeplot}] show that while the running time for IF2 is relatively fixed, the times for HMCMC are anything but, showing a wide spread of potential times.

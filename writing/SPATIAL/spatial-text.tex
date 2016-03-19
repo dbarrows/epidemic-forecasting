@@ -27,22 +27,20 @@
 
 	If we imagine a circular topology in which each of $10$ locations is connected to exactly two neighbours (i.e. location $1$ is connected to locations $N$ and $2$, location $2$ is connected to locations $1$ and $3$, etc.), and we start each location with completely susceptible populations except for a handful of infected individuals in one of the locations, we obtain a plot of the outbreak progression in Figure [\ref{dataplot}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/dataplot.pdf}
-        \caption{Evolution of a spatial epidemic in a ring topology. The outbreak was started with 5 cases in Location 2. Parameters were $R_0 = 3.0$, $\gamma = 0.1$, $\eta = 0.5$, $\sigma_{err} = 0.5$, and $\phi = 0.5$.}
-        \label{dataplot}
+        \caption{Evolution of a spatial epidemic in a ring topology. The outbreak was started with 5 cases in Location 2. Parameters were $R_0 = 3.0$, $\gamma = 0.1$, $\eta = 0.5$, $\sigma_{err} = 0.5$, and $\phi = 0.5$. \label{dataplot}}
     \end{figure}
 
     If we add noise to the data from Figure [\ref{dataplot}], we obtain Figure [\ref{dataplot2}], below.
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/dataplot2.pdf}
-        \caption{Evolution of a spatial epidemic as in Figure [\ref{dataplot}], with added observation noise drawn from $\mathcal{N}(0,10)$.}
-        \label{dataplot2}
+        \caption{Evolution of a spatial epidemic as in Figure [\ref{dataplot}], with added observation noise drawn from $\mathcal{N}(0,10)$. \label{dataplot2}}
     \end{figure}
 
 
@@ -61,24 +59,22 @@
 
 	The results are shown in Figure [\ref{sseplot}]. 
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/sseplot.pdf}
-        \caption{Average SSE (log scale) across each location and all trials as a function  of the number of weeks ahead in the forecast.}
-        \label{sseplot}
+        \caption{Average SSE (log scale) across each location and all trials as a function  of the number of weeks ahead in the forecast. \label{sseplot}}
     \end{figure}
 
     The results show a clear delineation in forecast fidelity between methods. IF2 maintains an advantage regardless of how long the forecast produced. Interestingly, Dewdrop Regression with S-mapping performs almost as well as IF2, and outperforms HMCMC. HMCMC lags behind both methods by a healthy margin.
 
     If we examine the runtimes for each forecast framework, we obtain the data in Figure [\ref{timeplot}].
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/timeplot.pdf}
-        \caption{Runtimes for producing spatial SIR forecasts. The box shows the middle 50th quantile, the bold line is the median, and the dots are outliers.}
-        \label{timeplot}
+        \caption{Runtimes for producing spatial SIR forecasts. The box shows the middle 50th quantile, the bold line is the median, and the dots are outliers. \label{timeplot}}
     \end{figure}
 
     As before, the S-map with Dewdrop Regression runs faster than the other two methods with a huge margin. It is again hard to see exactly how large the margin is from the figure due to the scale, but we can examine the average values: the average running time for S-mapping with Dewdrop Regression was about $249$ seconds, whereas the average times for IF2 and HMCMC were about $2.90 \times 10^4$ and $3.88 \times 10^4$, respectively. This is a speed-up of just over 116x over IF2 and 156x over HMCMC.

@@ -8,13 +8,12 @@
 
 \section{Markov Chains}
 
-    Consider a finite state machine with 3 states $S = \{x_1, x_2, x_3\}$, where the probability of transitioning from one particular state to another is shown as a transition graph in Figure (\ref{fsm}) below. 
+    Consider a finite state machine with 3 states $S = \{x_1, x_2, x_3\}$, where the probability of transitioning from one particular state to another is shown as a transition graph in Figure [\ref{fsm}]. 
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \includegraphics[width=0.5\textwidth]{./images/finitemachine.pdf}
-        \caption{Finite state machine \textit{(Andrieu et al., 2003)}}
-        \label{fsm}
+        \caption{Finite state machine. \textit{(Andrieu et al., 2003)} \label{fsm}}
     \end{figure}
 
     The transition probabilities can be summarized as a matrix as
@@ -103,7 +102,7 @@
 
     Thus, the MCMC algorithm is as follows.
     
-    \begin{algorithm}[H]
+    \begin{algorithm}
 
         \BlankLine
 
@@ -146,7 +145,7 @@
 
         \BlankLine
 
-        \caption{Metropolis-Hastings MCMC}\label{mhmcmc}
+        \caption{Metropolis-Hastings MCMC \label{mhmcmc}}
 
     \end{algorithm}
     
@@ -212,7 +211,7 @@
 
     Together, we have Algorithm \ref{hmcmc}.
 
-    \begin{algorithm}[H]
+    \begin{algorithm}
 
         \BlankLine
 
@@ -280,7 +279,7 @@
 
         \BlankLine
 
-        \caption{Hamiltonian MCMC}\label{hmcmc}
+        \caption{Hamiltonian MCMC \label{hmcmc}}
 
     \end{algorithm}
 
@@ -497,27 +496,25 @@
     }
     \end{Stan}
 
-    Examining the traceplot for the the post-warmup chain data returned by the \verb|stan()| function in the \verb|fit| object, we see that the chains are mixing well and convergence has likely been reached. This is shown below in Figure \ref{traceplot}.
+    Examining the traceplot for the the post-warmup chain data returned by the \verb|stan()| function in the \verb|fit| object, we see that the chains are mixing well and convergence has likely been reached. This is shown below in Figure [\ref{traceplot}].
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \includegraphics[width=\textwidth]{./images/traceplotR0.pdf}
-        \caption{Traceplot of samples drawn for parameter $R_0$, excluding warmup}
-        \label{traceplot}
+        \caption{Traceplot of samples drawn for parameter $R_0$, excluding warmup \label{traceplot}}
     \end{figure}
 
-    Further, if we look at the chain data including the warmup samples in Figure \ref{traceplot2}, we can see why is is wise to discard these samples (note the scale).
+    Further, if we look at the chain data including the warmup samples in Figure [\ref{traceplot2}], we can see why is is wise to discard these samples (note the scale).
 
-    \begin{figure}[H]
+    \begin{figure}
         \centering
         \includegraphics[width=\textwidth]{./images/traceplotR0_inc.pdf}
-        \caption{Traceplot of samples drawn for parameter $R_0$, including warmup}
-        \label{traceplot2}
+        \caption{Traceplot of samples drawn for parameter $R_0$, including warmup. \label{traceplot2}}
     \end{figure}
 
-    Now if we look at the kernel density estimates for each of the model parameters and the initial number of cases, we see that while the estimates are not perfect, they are fairly decent. This is shown below in Figure \ref{kernels}.
+    Now if we look at the kernel density estimates for each of the model parameters and the initial number of cases, we see that while the estimates are not perfect, they are fairly decent. This is shown below in Figure [\ref{kernels}].
 
-    \begin{figure}[H]
+    \begin{figure}
     \centering
         \begin{subfigure}[tl]{0.49\textwidth}
             \includegraphics[width=\textwidth]{./images/kernelR0.pdf}
@@ -535,6 +532,5 @@
             \includegraphics[width=\textwidth]{./images/kernelinfec.pdf}
             %\label{fig:mouse2}
         \end{subfigure}
-        \caption{Kernel density estimates produced by Stan}
-        \label{kernels}
+        \caption{Kernel density estimates produced by Stan \label{kernels}}
     \end{figure}

@@ -5,14 +5,13 @@
 
 	This section will focus on taking the stochastic SIR model from the previous section, truncating the synthetic data output from realizations of that model, and seeing how well IF2 and HMCMC can reconstruct out-of-sample forecasts.
 
-	An example of a simulated system with truncated data can be seen in Figure [\ref{dataplot}] below.
+	An example of a simulated system with truncated data can be seen in Figure [\ref{dataplot}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/dataplot.pdf}
-        \caption{Infection count data truncated at $T = 30$. The solid line shows the true underlying system states, and the dots show those states with added observation noise. Parameters used were $R_0 = 3.0$, $r = 0.1$, $\eta = .05$, $\sigma_{proc} = 0.5$, and additive observation noise was drawn from $\mathcal{N}(0,10)$.}
-        \label{dataplot}
+        \caption{Infection count data truncated at $T = 30$. The solid line shows the true underlying system states, and the dots show those states with added observation noise. Parameters used were $R_0 = 3.0$, $r = 0.1$, $\eta = .05$, $\sigma_{proc} = 0.5$, and additive observation noise was drawn from $\mathcal{N}(0,10)$. \label{dataplot}}
     \end{figure}
 
 	In essence we want to be able to give either IF2 of HMCMC only the data points and have it reconstruct the entirety of the true system states.
@@ -24,14 +23,13 @@
 
 	We will truncate the data at half the original time series length (to $T = 30$), and fit the model as previously described.
 
-	First, we can see the state estimates for each time point produced by the last IF2 pass in Figure [\ref{if2fit}] below.
+	First, we can see the state estimates for each time point produced by the last IF2 pass in Figure [\ref{if2fit}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2fit.pdf}
-        \caption{Infection count data truncated at $T = 30$ from Figure [\ref{dataplot}] above. The dashed line shows IF2's attempt to reconstruct the true underlying state from the observed data points.}
-        \label{if2fit}
+        \caption{Infection count data truncated at $T = 30$ from Figure [\ref{dataplot}] above. The dashed line shows IF2's attempt to reconstruct the true underlying state from the observed data points. \label{if2fit}}
     \end{figure}
 
     Recall that IF2 is not trying to generate parameter estimation densities, but rather produce a point estimate. Since we wish to determine the approximate distribution of each of the parameters in addition to the point estimate, we must turn to another method, parametric bootstrapping.
@@ -45,7 +43,7 @@
 
 	An algorithm for parametric bootstrapping using IF2 and our stochastic SIR model is shown in Algorithm [\ref{paraboot}].
 
-	\begin{algorithm}[H]
+	\begin{algorithm}
 
         \BlankLine
 
@@ -78,7 +76,7 @@
 
         \Output{Distribution samples $\theta_1, \theta_2, ..., \theta_M$}
 
-        \caption{Parametric Bootstrap}\label{paraboot}
+        \caption{Parametric Bootstrap \label{paraboot}}
 
     \end{algorithm}
 	
@@ -87,12 +85,11 @@
 
 	Using the parameter sets $\theta_1, \theta_2, ..., \theta_M$ and the point estimate of the state provided by the initial IF2 fit, we can use a normal bootstrap to produce estimates of the future state. A plot showing a projection of the data from the previous plots can be seen in Figure [\ref{if2combined}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2combined.pdf}
-        \caption{Forecast produced by the IF2 / parametric bootstrapping framework. The dotted line shows the mean estimate of the forecasts, the dark grey ribbon shows the centre 95th quantile of the true state estimates, and the lighter grey ribbon shows the centre 95th quantile of the true state estimates with added observation noise drawn from $\mathcal{N}(0,\sigma)$.}
-        \label{if2combined}
+        \caption{Forecast produced by the IF2 / parametric bootstrapping framework. The dotted line shows the mean estimate of the forecasts, the dark grey ribbon shows the centre 95th quantile of the true state estimates, and the lighter grey ribbon shows the centre 95th quantile of the true state estimates with added observation noise drawn from $\mathcal{N}(0,\sigma)$. \label{if2combined}}
     \end{figure}
 
     We can define a metric to gauge forecast effectiveness by calculating the SSE and dividing that value by the number of values predicted to get the average squared error per point. For the data in Figure [\ref{if2combined}] the value was $\overline{SSE} = 1.67$.
@@ -104,12 +101,11 @@
 
 	As before we fit the stochastic SIR model to the partial data, but now perform bootstrapping as described above, and obtain the plot in Figure [\ref{hmcforecast}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/hmcforecast.pdf}
-        \caption{Forecast produced by the HMCMC / bootstrapping framework with $M = 200$ trajectories. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the centre 95th quantile.}
-        \label{hmcforecast}
+        \caption{Forecast produced by the HMCMC / bootstrapping framework with $M = 200$ trajectories. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the centre 95th quantile. \label{hmcforecast}}
     \end{figure}
 
     And as before we can evaluate the averaged SSE of the forecast for the data shown, giving $\overline{SSE} = 20.27$.
@@ -121,12 +117,11 @@
 
 	Using each method, we can fit the stochastic SIR model to successively smaller time series to see the effect of truncation on forecast averaged SSE. This was performed with 10 new trajectories drawn for each of the desired lengths. The results are shown in Figure [\ref{truncation}].
 
-	\begin{figure}[H]
+	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/truncation.pdf}
-        \caption{Error growth as a function of data truncation amount. Both methods used 200 bootstrap trajectories. Note that the y-axis shows the natural log of the averaged SSE, not the total SSE.}
-        \label{truncation}
+        \caption{Error growth as a function of data truncation amount. Both methods used 200 bootstrap trajectories. Note that the y-axis shows the natural log of the averaged SSE, not the total SSE. \label{truncation}}
     \end{figure}
 
     IF2 and HMCMC perform very closely, with IF2 maintaining a small advantage up to a truncation of about 25-30 data points.
