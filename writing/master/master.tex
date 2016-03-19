@@ -1,0 +1,256 @@
+\documentclass[12pt, twoside]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage[pdftex]{graphicx}
+\usepackage{setspace}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{float}
+\usepackage[margin=1.3in]{geometry}
+\usepackage{listings}
+\usepackage{textcomp}
+\usepackage{multicol}
+\usepackage[toc,page]{appendix}
+\usepackage{listings}
+\usepackage{fancyvrb}
+\usepackage{hyperref}
+\usepackage{lstbayes}
+\usepackage{subfiles}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[LE,RO]{\nouppercase{\leftmark}}
+\fancyhead[LO,RE]{Dexter Barrows}
+\fancyfoot{}
+\fancyfoot[C]{\thepage}
+%\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
+
+\setlength{\belowcaptionskip}{-10pt}
+
+\usepackage[usenames,dvipsnames]{color}
+\definecolor{DGrey}{gray}{0.25}
+\definecolor{MGrey}{gray}{0.50}
+\definecolor{LGrey}{gray}{0.75}
+
+\usepackage[ruled,vlined,linesnumbered]{algorithm2e}
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{Gray}{#1}}
+\SetCommentSty{mycommfont}
+
+\usepackage{inconsolata}
+
+\usepackage[parfill]{parskip}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{\baselineskip}
+
+\newcommand{\et}{e^{i\theta}}
+\newcommand{\oo}{\mathcal{O}}
+\newcommand{\skipline}{\bigskip\bigskip\bigskip}
+
+\lstdefinestyle{Rsty} { 
+    language=R,                         % the language of the code
+    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
+    numbers=left,                       % where to put the line-numbers
+    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
+    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
+                                        % will be numbered
+    numbersep=5pt,                      % how far the line-numbers are from the code
+    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+    showspaces=false,                   % show spaces adding particular underscores
+    showstringspaces=false,             % underline spaces within strings
+    showtabs=false,                     % show tabs within strings adding particular underscores
+    frame=single,                       % adds a frame around the code
+    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+    tabsize=2,                          % sets default tabsize to 2 spaces
+    captionpos=b,                       % sets the caption-position to bottom
+    breaklines=true,                    % sets automatic line breaking
+    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
+    keywordstyle=\color{DGrey},     % keyword style
+    commentstyle=\color{LGrey},   % comment style
+    stringstyle=\color{MGrey},    % string literal style
+    literate={<-}{{$\gets$}}1,           % prettier assignment arrows
+    xleftmargin=4.0ex,
+    deletekeywords={I,density,rect,_,palette,data,scale,panel,R,frame,labels,options}
+}
+
+\lstnewenvironment{R}
+{\lstset{style=Rsty}}
+{}
+
+\lstdefinestyle{Stansty} { 
+    language=Stan,                         % the language of the code
+    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
+    numbers=left,                       % where to put the line-numbers
+    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
+    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
+                                        % will be numbered
+    numbersep=5pt,                      % how far the line-numbers are from the code
+    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+    showspaces=false,                   % show spaces adding particular underscores
+    showstringspaces=false,             % underline spaces within strings
+    showtabs=false,                     % show tabs within strings adding particular underscores
+    frame=single,                       % adds a frame around the code
+    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+    tabsize=2,                          % sets default tabsize to 2 spaces
+    captionpos=b,                       % sets the caption-position to bottom
+    breaklines=true,                    % sets automatic line breaking
+    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
+    keywordstyle=\color{DGrey},     % keyword style
+    commentstyle=\color{LGrey},   % comment style
+    stringstyle=\color{MGrey},    % string literal style
+    %literate={<-}{{$\gets$}}1,           % prettier assignment arrows
+    xleftmargin=4.0ex,
+    deletekeywords={T}
+}
+
+\lstnewenvironment{Stan}
+{\lstset{style=Stansty}}
+{}
+
+\lstdefinestyle{Cppsty} { 
+    language=C++,                         % the language of the code
+    basicstyle=\footnotesize\ttfamily,  % the size of the fonts that are used for the code
+    numbers=left,                       % where to put the line-numbers
+    numberstyle=\footnotesize\color{LGrey},      % the style that is used for the line-numbers
+    stepnumber=1,                       % the step between two line-numbers. If it is 1, each line
+                                        % will be numbered
+    numbersep=5pt,                      % how far the line-numbers are from the code
+    backgroundcolor=\color{white},      % choose the background color. You must add \usepackage{color}
+    showspaces=false,                   % show spaces adding particular underscores
+    showstringspaces=false,             % underline spaces within strings
+    showtabs=false,                     % show tabs within strings adding particular underscores
+    frame=single,                       % adds a frame around the code
+    rulecolor=\color{black},            % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+    tabsize=4,                          % sets default tabsize to 2 spaces
+    captionpos=b,                       % sets the caption-position to bottom
+    breaklines=true,                    % sets automatic line breaking
+    breakatwhitespace=false,            % sets if automatic breaks should only happen at whitespace
+    keywordstyle=\color{DGrey},     % keyword style
+    commentstyle=\color{LGrey},   % comment style
+    stringstyle=\color{MGrey},    % string literal style
+    %literate={<-}{{$\gets$}}1,           % prettier assignment arrows
+    xleftmargin=4.0ex,
+    deletekeywords={T}
+}
+
+\lstnewenvironment{CPP}
+{\lstset{style=Cppsty}}
+{}
+
+\makeatletter
+\let\org@subfile\subfile
+\renewcommand*{\subfile}[1]{%
+  \filename@parse{#1}% LaTeX's file name parser
+  \expandafter
+  \graphicspath\expandafter{\expandafter{\filename@area}}%
+  \org@subfile{#1}%
+}
+\makeatother
+
+\renewcommand{\arraystretch}{2}
+
+
+
+\begin{document}
+
+	%% --------------------------------------------------------------------
+	%% --------------------------------------------------------------------
+
+	\subfile{titlepage2}
+
+	%% --------------------------------------------------------------------
+	%% --------------------------------------------------------------------
+
+	\newpage
+	\pagenumbering{roman}
+
+	\chapter*{Abstract}
+
+		\lipsum[1]
+
+	\chapter*{Dedication}
+
+		To Mom and Dad
+
+	\chapter*{Acknowledgements}
+
+		Sooooooo many people
+
+	\tableofcontents
+
+	\listoffigures
+
+	%% --------------------------------------------------------------------
+	%% --------------------------------------------------------------------
+
+	\newpage
+	\pagenumbering{arabic}
+
+	\chapter{Introduction}
+
+		\lipsum[2-4]
+
+	\chapter{Hamiltonian MCMC}
+
+		\subfile{../MCMC-HMCMC/mcmc-text}
+
+	\chapter{Iterated Filtering}
+
+		\graphicspath{{../PF-IF2/}}
+		\input{../PF-IF2/pf-text}
+
+	\chapter{Parameter Fitting}
+
+		\graphicspath{{../SC1/}}
+		\input{../SC1/sc1-text}
+
+	\chapter{Forecasting Frameworks}
+
+		\subfile{../SC2/sc2-text}
+
+	\chapter{S-map and SIRS}
+
+		\subfile{../sirs-smap/sirs-smap-text}
+
+	\chapter{Spatial Epidemics}
+
+		\subfile{../spatial/spatial-text}
+	
+
+	%% --------------------------------------------------------------------
+	%% --------------------------------------------------------------------
+
+	\appendix
+
+	\chapter{Hamiltonian MCMC}
+
+		\subfile{../MCMC-HMCMC/mcmc-appendix}
+
+	\chapter{Iterated Filtering}
+
+		\subfile{../PF-IF2/pf-appendix}
+
+	\chapter{Parameter Fitting}
+
+		\subfile{../SC1/sc1-appendix}
+
+	\chapter{Forecasting Frameworks}
+
+		\subfile{../SC2/sc2-appendix}
+
+	\chapter{S-map and SIRS}
+
+		\subfile{../sirs-smap/sirs-smap-appendix}
+
+	\chapter{Spatial Epidemics}
+
+		\subfile{../spatial/spatial-appendix}
+	
+
+\end{document}
+
