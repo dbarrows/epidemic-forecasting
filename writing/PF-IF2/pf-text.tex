@@ -33,7 +33,7 @@
 
     We will denote each particle $p^{(j)}$ as the $j^{th}$ particle consisting of a state estimate at time $t$, $X_t^{(j)}$, a parameter set $\theta^{(j)}$, and a weight $w^{(j)}$. Note that the state estimates will evolve with the system as the cohort traverses the data.
 
-    The algorithm for a Sequential Importance Resampling particle is shown in Algorithm \ref{pfsir}.\\
+    The algorithm for a Sequential Importance Resampling particle is shown in Algorithm [\ref{pfsir}].
     
     \begin{algorithm}
 
@@ -127,7 +127,7 @@
 
 	An important new quantity is the particle perturbation density denoted $h(\theta|,\sigma)$. Typically this is multi-normal with $\sigma$ being a vector of variances proportional to the expected values of $\theta$. In practice the proportionality can be derived from current means or specified ahead of time. Further, these intensities must decrease over time. This can be done via exponential or geometric cooling, a decreasing step function, a combination of these, or though some other similar scheme.
 
-	The algorithm for IF2 can be seen in Algorithm \ref{if2}.\\
+	The algorithm for IF2 can be seen in Algorithm [\ref{if2}].\\
 
     \begin{algorithm}
 

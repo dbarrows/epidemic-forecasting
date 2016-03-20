@@ -29,7 +29,7 @@
 		w(d) = \exp \left( \frac{-\theta d}{\bar{d}} \right) ,
 	\end{equation}
 
-	where $d$ is the euclidean distance between the predictor vector and library vectors in Equation (\ref{AB}) and $\bar{d}$ is the average of these distances. We can then see that $\theta$ serves as a way to specify the appropriate level of penalization applied to poorly-matching library vectors -- if $\theta$ is 0 all weights are the same (no penalization), and increasing $\theta$ increases the level of penalization.
+	where $d$ is the euclidean distance between the predictor vector and library vectors in Equation [\ref{AB}] and $\bar{d}$ is the average of these distances. We can then see that $\theta$ serves as a way to specify the appropriate level of penalization applied to poorly-matching library vectors -- if $\theta$ is 0 all weights are the same (no penalization), and increasing $\theta$ increases the level of penalization.
 
 	Now we solve the system $Ac = b$ to obtain the linear weightings used in to generate the forecast according to
 
@@ -173,4 +173,4 @@
         \caption{Runtimes for producing SIRS forecasts. The box shows the middle 50th quantile, the bold line is the median, and the dots are outliers. \label{timeplot}}
     \end{figure}
 
-    It is clear from the above figure that the S-map running times are minute compared to the other methods, but to emphasize the degree: The average running time for the S-map is about $1.49 \times 10^{-1}$ seconds, for IF2 it is about $4.70 \times 10^{4}$, and for HMCMC it is about $9.20 \times 10^{3}$. This is a speed-up of over 316,000x compared to IF2 and over 61,800x compared to HMCMC.
+    It is clear from Figure [\ref{timeplot}] that the S-map running times are minute compared to the other methods, but to emphasize the degree: The average running time for the S-map is about $1.49 \times 10^{-1}$ seconds, for IF2 it is about $4.70 \times 10^{4}$, and for HMCMC it is about $9.20 \times 10^{3}$. This is a speed-up of over 316,000x compared to IF2 and over 61,800x compared to HMCMC.

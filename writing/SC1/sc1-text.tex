@@ -31,7 +31,7 @@
 
 	where $\epsilon_t$ is normally distributed noise with mean 0 and standard deviation $\sigma_E$. This process has a theoretical expected mean of $\mu = c / (1 - \rho)$ and variance $\sigma = \sigma_E^2 / (1 - \rho^2)$. If we choose $\eta = 0.5$, the resulting log-normal distribution has a mean of $6.80 \times 10^{-4}$ and standard deviation of $4.46 \times 10^{-4}$.
 
-	Simulating the process in Equation [\ref{betaautoreg}] with $\eta = 0.5$ gives us the plot in Figure [\ref{betaplot}] below.
+	Simulating the process in Equation [\ref{betaautoreg}] with $\eta = 0.5$ gives us the plot in Figure [\ref{betaplot}].
 
 	\begin{figure}
         \centering
@@ -142,7 +142,7 @@
         \caption{The horizontal axis shows the IF2 pass number. The solid black lines show the evolution of the ML estimates, the solid grey lines show the true value, and the dashed grey lines show the mean parameter estimates from the particle swarm after the final pass. \label{if2convergence}}
     \end{figure}
 
-    Similarly, we can look at the evolution of the standard deviations of the parameter estimates from the particle swarm as a function of the pass number, shown in Figure [\ref{if2sdconvergence}] below.
+    Similarly, we can look at the evolution of the standard deviations of the parameter estimates from the particle swarm as a function of the pass number, shown in Figure [\ref{if2sdconvergence}].
 
     \begin{figure}
         \centering
@@ -156,7 +156,7 @@
 
 \section{IF2 Densities}
 
-	Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. These are shown below if Figure [\ref{if2kernels}].
+	Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. These are shown if Figure [\ref{if2kernels}].
 
 	\begin{figure}
         \centering
@@ -177,7 +177,7 @@
 
 \section{HMCMC Densities}
 
-	The parameter estimation densities from the Stan HMCMC fitting are shown in Figure [\ref{hmckernels}] below.
+	The parameter estimation densities from the Stan HMCMC fitting are shown in Figure [\ref{hmckernels}].
 
 	\begin{figure}
         \centering
@@ -214,7 +214,7 @@
 
     The densities by and large display similar coverage, with the IF2 densities for $r$ and $\varepsilon_{proc}$ showing slightly wider coverage than the HMCMC densities for the same parameters.
 
-    The running times for each algorithm are summarized in Figure [\ref{timeplot}] below.
+    The running times for each algorithm are summarized in Figure [\ref{timeplot}].
 
 	\begin{figure}
         \centering
