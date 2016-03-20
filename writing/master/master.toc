@@ -4,63 +4,63 @@
 \contentsline {section}{\numberline {2.2}Markov Chains}{2}{section.2.2}
 \contentsline {section}{\numberline {2.3}Likelihood}{4}{section.2.3}
 \contentsline {section}{\numberline {2.4}Prior distribution}{4}{section.2.4}
-\contentsline {section}{\numberline {2.5}Proposal distribution}{5}{section.2.5}
+\contentsline {section}{\numberline {2.5}Proposal distribution}{4}{section.2.5}
 \contentsline {section}{\numberline {2.6}Algorithm}{5}{section.2.6}
-\contentsline {section}{\numberline {2.7}Burn-in}{7}{section.2.7}
-\contentsline {section}{\numberline {2.8}Thinning}{7}{section.2.8}
+\contentsline {section}{\numberline {2.7}Burn-in}{6}{section.2.7}
+\contentsline {section}{\numberline {2.8}Thinning}{6}{section.2.8}
 \contentsline {section}{\numberline {2.9}Hamiltonian Monte Carlo}{7}{section.2.9}
-\contentsline {section}{\numberline {2.10}Fitting}{9}{section.2.10}
+\contentsline {section}{\numberline {2.10}Fitting}{8}{section.2.10}
 \contentsline {chapter}{\numberline {3}Iterated Filtering}{18}{chapter.3}
 \contentsline {section}{\numberline {3.1}Intro}{18}{section.3.1}
 \contentsline {section}{\numberline {3.2}Formulation}{18}{section.3.2}
 \contentsline {section}{\numberline {3.3}Algorithm}{19}{section.3.3}
-\contentsline {section}{\numberline {3.4}Particle Collapse}{21}{section.3.4}
+\contentsline {section}{\numberline {3.4}Particle Collapse}{19}{section.3.4}
 \contentsline {section}{\numberline {3.5}Iterated Filtering and Data Cloning}{21}{section.3.5}
 \contentsline {section}{\numberline {3.6}IF2}{22}{section.3.6}
-\contentsline {section}{\numberline {3.7}Fitting}{24}{section.3.7}
+\contentsline {section}{\numberline {3.7}Fitting}{22}{section.3.7}
 \contentsline {chapter}{\numberline {4}Parameter Fitting}{28}{chapter.4}
 \contentsline {section}{\numberline {4.1}Fitting Setup}{28}{section.4.1}
-\contentsline {section}{\numberline {4.2}Calibrating Samples}{30}{section.4.2}
+\contentsline {section}{\numberline {4.2}Calibrating Samples}{31}{section.4.2}
 \contentsline {section}{\numberline {4.3}IF2 Fitting}{32}{section.4.3}
-\contentsline {section}{\numberline {4.4}IF2 Convergence}{34}{section.4.4}
-\contentsline {section}{\numberline {4.5}IF2 Densities}{35}{section.4.5}
+\contentsline {section}{\numberline {4.4}IF2 Convergence}{33}{section.4.4}
+\contentsline {section}{\numberline {4.5}IF2 Densities}{33}{section.4.5}
 \contentsline {section}{\numberline {4.6}HMCMC Fitting}{35}{section.4.6}
-\contentsline {section}{\numberline {4.7}HMCMC Densities}{36}{section.4.7}
+\contentsline {section}{\numberline {4.7}HMCMC Densities}{35}{section.4.7}
 \contentsline {section}{\numberline {4.8}HMCMC and Bootstrapping}{36}{section.4.8}
-\contentsline {section}{\numberline {4.9}Multi-trajectory Parameter Estimation}{38}{section.4.9}
-\contentsline {chapter}{\numberline {5}Forecasting Frameworks}{40}{chapter.5}
-\contentsline {section}{\numberline {5.1}Data Setup}{40}{section.5.1}
-\contentsline {section}{\numberline {5.2}IF2}{40}{section.5.2}
+\contentsline {section}{\numberline {4.9}Multi-trajectory Parameter Estimation}{36}{section.4.9}
+\contentsline {chapter}{\numberline {5}Forecasting Frameworks}{39}{chapter.5}
+\contentsline {section}{\numberline {5.1}Data Setup}{39}{section.5.1}
+\contentsline {section}{\numberline {5.2}IF2}{39}{section.5.2}
 \contentsline {subsection}{\numberline {5.2.1}Parametric Bootstrapping}{41}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}IF2 Forecasts}{42}{subsection.5.2.2}
-\contentsline {section}{\numberline {5.3}HMCMC}{44}{section.5.3}
-\contentsline {section}{\numberline {5.4}Truncation vs. Error}{44}{section.5.4}
-\contentsline {chapter}{\numberline {6}S-map and SIRS}{46}{chapter.6}
-\contentsline {section}{\numberline {6.1}S-maps}{46}{section.6.1}
-\contentsline {section}{\numberline {6.2}S-map Algorithm}{48}{section.6.2}
+\contentsline {subsection}{\numberline {5.2.2}IF2 Forecasts}{41}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}HMCMC}{42}{section.5.3}
+\contentsline {section}{\numberline {5.4}Truncation vs. Error}{43}{section.5.4}
+\contentsline {chapter}{\numberline {6}S-map and SIRS}{45}{chapter.6}
+\contentsline {section}{\numberline {6.1}S-maps}{45}{section.6.1}
+\contentsline {section}{\numberline {6.2}S-map Algorithm}{46}{section.6.2}
 \contentsline {section}{\numberline {6.3}SIRS Model}{48}{section.6.3}
-\contentsline {section}{\numberline {6.4}SIRS Model Forecasting}{51}{section.6.4}
-\contentsline {chapter}{\numberline {7}Spatial Epidemics}{53}{chapter.7}
-\contentsline {section}{\numberline {7.1}Spatial SIR}{53}{section.7.1}
-\contentsline {section}{\numberline {7.2}Dewdrop Regression}{55}{section.7.2}
-\contentsline {section}{\numberline {7.3}Spatial Model Forecasting}{56}{section.7.3}
-\contentsline {chapter}{\numberline {A}Hamiltonian MCMC}{58}{appendix.A}
-\contentsline {section}{\numberline {A.1}Full R code}{58}{section.A.1}
-\contentsline {section}{\numberline {A.2}Full Stan code}{61}{section.A.2}
-\contentsline {chapter}{\numberline {B}Iterated Filtering}{63}{appendix.B}
-\contentsline {section}{\numberline {B.1}Full R code}{63}{section.B.1}
-\contentsline {section}{\numberline {B.2}Full C++ code}{66}{section.B.2}
-\contentsline {chapter}{\numberline {C}Parameter Fitting}{77}{appendix.C}
-\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{78}{appendix.D}
-\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{78}{section.D.1}
-\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{80}{section.D.2}
-\contentsline {chapter}{\numberline {E}S-map and SIRS}{82}{appendix.E}
-\contentsline {section}{\numberline {E.1}SIRS R Function Code}{82}{section.E.1}
-\contentsline {section}{\numberline {E.2}SMAP Code}{83}{section.E.2}
-\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{85}{section.E.3}
-\contentsline {section}{\numberline {E.4}RStan SIRS Code}{87}{section.E.4}
-\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{89}{section.E.5}
-\contentsline {chapter}{\numberline {F}Spatial Epidemics}{102}{appendix.F}
-\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{102}{section.F.1}
-\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{104}{section.F.2}
-\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{106}{section.F.3}
+\contentsline {section}{\numberline {6.4}SIRS Model Forecasting}{50}{section.6.4}
+\contentsline {chapter}{\numberline {7}Spatial Epidemics}{52}{chapter.7}
+\contentsline {section}{\numberline {7.1}Spatial SIR}{52}{section.7.1}
+\contentsline {section}{\numberline {7.2}Dewdrop Regression}{53}{section.7.2}
+\contentsline {section}{\numberline {7.3}Spatial Model Forecasting}{55}{section.7.3}
+\contentsline {chapter}{\numberline {A}Hamiltonian MCMC}{57}{appendix.A}
+\contentsline {section}{\numberline {A.1}Full R code}{57}{section.A.1}
+\contentsline {section}{\numberline {A.2}Full Stan code}{60}{section.A.2}
+\contentsline {chapter}{\numberline {B}Iterated Filtering}{62}{appendix.B}
+\contentsline {section}{\numberline {B.1}Full R code}{62}{section.B.1}
+\contentsline {section}{\numberline {B.2}Full C++ code}{65}{section.B.2}
+\contentsline {chapter}{\numberline {C}Parameter Fitting}{76}{appendix.C}
+\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{77}{appendix.D}
+\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{77}{section.D.1}
+\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{79}{section.D.2}
+\contentsline {chapter}{\numberline {E}S-map and SIRS}{81}{appendix.E}
+\contentsline {section}{\numberline {E.1}SIRS R Function Code}{81}{section.E.1}
+\contentsline {section}{\numberline {E.2}SMAP Code}{82}{section.E.2}
+\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{84}{section.E.3}
+\contentsline {section}{\numberline {E.4}RStan SIRS Code}{86}{section.E.4}
+\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{88}{section.E.5}
+\contentsline {chapter}{\numberline {F}Spatial Epidemics}{101}{appendix.F}
+\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{101}{section.F.1}
+\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{103}{section.F.2}
+\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{105}{section.F.3}
