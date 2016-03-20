@@ -22,6 +22,7 @@
 \usepackage{subfiles}
 \usepackage{fancyhdr}
 \usepackage{booktabs}
+\usepackage[section]{placeins}
 
 \pagestyle{fancy}
 \fancyhead{}
@@ -31,7 +32,7 @@
 \fancyfoot[C]{\thepage}
 %\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
 
-\setlength{\belowcaptionskip}{-10pt}
+%\setlength{\belowcaptionskip}{-10pt}
 
 \usepackage[usenames,dvipsnames]{color}
 \definecolor{DGrey}{gray}{0.25}
@@ -193,7 +194,7 @@
 
 	\chapter{Introduction}
 
-		\lipsum[2-4]
+		\subfile{../introduction/introduction}
 
 	\chapter{Hamiltonian MCMC}
 
@@ -220,6 +221,10 @@
 	\chapter{Spatial Epidemics}
 
 		\subfile{../spatial/spatial-text}
+
+	\chapter{Discussion and Future Directions}
+
+		\subfile{../future-directions/future-directions}
 	
 
 	%% --------------------------------------------------------------------

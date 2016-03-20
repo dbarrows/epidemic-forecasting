@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  19 MAR 2016 20:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  19 MAR 2016 21:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -820,6 +820,9 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \@lastruleclass=\count145
 \@thisrulewidth=\dimen158
 )
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/placeins/placeins.sty
+Package: placeins 2005/04/18  v 2.2
+)
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/color.sty
 Package: color 2014/10/28 v1.1a Standard LaTeX Color (DPC)
 
@@ -897,52 +900,31 @@ Package: inconsolata 2016/02/22 v1.10
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
 )
-(./master.aux
-
-LaTeX Warning: Label `dataplot' multiply defined.
-
-
-LaTeX Warning: Label `dataplot' multiply defined.
-
-
-LaTeX Warning: Label `dataplot' multiply defined.
-
-
-LaTeX Warning: Label `timeplot' multiply defined.
-
-
-LaTeX Warning: Label `dataplot' multiply defined.
-
-
-LaTeX Warning: Label `sseplot' multiply defined.
-
-
-LaTeX Warning: Label `timeplot' multiply defined.
-
-)
+(./master.aux)
 \openout1 = `master.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 159.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 159.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 160.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 160.
 
- (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ts1cmr.fd
+
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 159.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 159.
-LaTeX Font Info:    ... okay on input line 159.
+LaTeX Font Info:    ... okay on input line 160.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 160.
+LaTeX Font Info:    ... okay on input line 160.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -1013,7 +995,7 @@ Package caption Info: End \AtBeginDocument code.
 
 \c@lstlisting=\count157
 \AtBeginShipoutBox=\box68
-Package hyperref Info: Link coloring OFF on input line 159.
+Package hyperref Info: Link coloring OFF on input line 160.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -1023,9 +1005,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count158
 )
-LaTeX Info: Redefining \ref on input line 159.
-LaTeX Info: Redefining \pageref on input line 159.
-LaTeX Info: Redefining \nameref on input line 159.
+LaTeX Info: Redefining \ref on input line 160.
+LaTeX Info: Redefining \pageref on input line 160.
+LaTeX Info: Redefining \nameref on input line 160.
  (./master.out) (./master.out)
 \@outlinefile=\write4
 \openout4 = `master.out'.
@@ -1084,26 +1066,33 @@ Underfull \vbox (badness 4144) has occurred while \output is active []
  [7
 
 ]
+
+LaTeX Warning: Reference `dataplot' on page viii undefined on input line 26.
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8])
+ [8]
+
+LaTeX Warning: Reference `dataplot' on page ix undefined on input line 37.
+
+)
 \tf@lof=\write6
 \openout6 = `master.lof'.
 
-
-[9]
+ [9]
 Chapter 1.
-pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has 
-been already used, duplicate ignored
+(../introduction/introduction.tex)pdfTeX warning (ext4): destination with the s
+ame identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.198 	\chapter
+l.199 	\chapter
                {Hamiltonian MCMC} [1
 
 ]
 Chapter 2.
 (../MCMC-HMCMC/mcmc-text.tex
-<../MCMC-HMCMC/./images/finitemachine.pdf, id=514, 189.09505pt x 173.79831pt>
+<../MCMC-HMCMC/./images/finitemachine.pdf, id=527, 189.09505pt x 173.79831pt>
 File: ../MCMC-HMCMC/./images/finitemachine.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/finitemachine.pdf>
@@ -1113,7 +1102,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/finitemachine.pdf used on input
  [2
 
 ]
-Underfull \vbox (badness 5696) has occurred while \output is active []
+Underfull \vbox (badness 3942) has occurred while \output is active []
 
  [3 <../MCMC-HMCMC/./images/finitemachine.pdf>] [4]
 LaTeX Font Info:    Try loading font information for OT1+zi4 on input line 114.
@@ -1132,18 +1121,14 @@ File: lstlang2.sty 2014/09/06 1.5e listings language file
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2014/09/06 1.5e listings language file
 )
-[10] <../MCMC-HMCMC/./images/dataplot.pdf, id=673, 469.755pt x 289.08pt>
+[10] <../MCMC-HMCMC/./images/dataplot.pdf, id=676, 469.755pt x 289.08pt>
 File: ../MCMC-HMCMC/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/dataplot.pdf>
 Package pdftex.def Info: ../MCMC-HMCMC/./images/dataplot.pdf used on input line
  384.
 (pdftex.def)             Requested size: 426.39256pt x 262.39714pt.
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [11]
-[12 <../MCMC-HMCMC/./images/dataplot.pdf>]
+ [11] [12 <../MCMC-HMCMC/./images/dataplot.pdf>]
 LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 427.
 
 
@@ -1151,7 +1136,7 @@ LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 427.
 File: ts1zi4.fd 2014/06/22 Fontinst v1.933 font definitions for TS1/zi4.
 )
 [13] [14]
-<../MCMC-HMCMC/./images/traceplotR0.pdf, id=790, 469.755pt x 289.08pt>
+<../MCMC-HMCMC/./images/traceplotR0.pdf, id=804, 469.755pt x 289.08pt>
 File: ../MCMC-HMCMC/./images/traceplotR0.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/traceplotR0.pdf>
@@ -1159,7 +1144,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/traceplotR0.pdf used on input l
 ine 505.
 (pdftex.def)             Requested size: 426.39256pt x 262.39714pt.
 
-<../MCMC-HMCMC/./images/traceplotR0_inc.pdf, id=792, 469.755pt x 289.08pt>
+<../MCMC-HMCMC/./images/traceplotR0_inc.pdf, id=806, 469.755pt x 289.08pt>
 File: ../MCMC-HMCMC/./images/traceplotR0_inc.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/traceplotR0_inc.pdf>
@@ -1167,7 +1152,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/traceplotR0_inc.pdf used on inp
 ut line 514.
 (pdftex.def)             Requested size: 426.39256pt x 262.39714pt.
 
-<../MCMC-HMCMC/./images/kernelR0.pdf, id=794, 234.8775pt x 216.81pt>
+<../MCMC-HMCMC/./images/kernelR0.pdf, id=808, 234.8775pt x 216.81pt>
 File: ../MCMC-HMCMC/./images/kernelR0.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/kernelR0.pdf>
@@ -1175,7 +1160,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/kernelR0.pdf used on input line
  524.
 (pdftex.def)             Requested size: 170.55441pt x 157.43298pt.
 
-<../MCMC-HMCMC/./images/kernelr.pdf, id=795, 234.8775pt x 216.81pt>
+<../MCMC-HMCMC/./images/kernelr.pdf, id=809, 234.8775pt x 216.81pt>
 File: ../MCMC-HMCMC/./images/kernelr.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/kernelr.pdf>
@@ -1183,7 +1168,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/kernelr.pdf used on input line
 527.
 (pdftex.def)             Requested size: 170.55441pt x 157.43298pt.
 
-<../MCMC-HMCMC/./images/kernelsigma.pdf, id=796, 234.8775pt x 216.81pt>
+<../MCMC-HMCMC/./images/kernelsigma.pdf, id=810, 234.8775pt x 216.81pt>
 File: ../MCMC-HMCMC/./images/kernelsigma.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/kernelsigma.pdf>
@@ -1191,7 +1176,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/kernelsigma.pdf used on input l
 ine 530.
 (pdftex.def)             Requested size: 170.55441pt x 157.43298pt.
 
-<../MCMC-HMCMC/./images/kernelinfec.pdf, id=797, 234.8775pt x 216.81pt>
+<../MCMC-HMCMC/./images/kernelinfec.pdf, id=811, 234.8775pt x 216.81pt>
 File: ../MCMC-HMCMC/./images/kernelinfec.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/kernelinfec.pdf>
@@ -1205,49 +1190,40 @@ ages/kernelinfec.pdf>]
 Chapter 3.
 (../PF-IF2/pf-text.tex [18
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 36--37
-
- []
-
-[19] [20] [21]
+] [19] [20] [21]
 Underfull \hbox (badness 10000) in paragraph at lines 130--131
 
  []
 
-
-Underfull \vbox (badness 4303) has occurred while \output is active []
-
- [22]
-[23] [24] <../PF-IF2/./images/dataplot.pdf, id=936, 469.755pt x 289.08pt>
+[22] [23] [24] <../PF-IF2/./images/dataplot.pdf, id=944, 469.755pt x 289.08pt>
 File: ../PF-IF2/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../PF-IF2/./images/dataplot.pdf>
 Package pdftex.def Info: ../PF-IF2/./images/dataplot.pdf used on input line 314
 .
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
-
-<../PF-IF2/./images/if2kernels.pdf, id=938, 469.755pt x 469.755pt>
+ [25]
+<../PF-IF2/./images/if2kernels.pdf, id=974, 469.755pt x 469.755pt>
 File: ../PF-IF2/./images/if2kernels.pdf Graphic file (type pdf)
 
 <use ../PF-IF2/./images/if2kernels.pdf>
 Package pdftex.def Info: ../PF-IF2/./images/if2kernels.pdf used on input line 3
 36.
 (pdftex.def)             Requested size: 341.11534pt x 341.112pt.
-) [25] [26 <../PF-IF2/./images/dataplot.pdf>] [27 <../PF-IF2/./images/if2kernel
-s.pdf>]
+) [26 <../PF-IF2/./images/dataplot.pdf>] [27 <../PF-IF2/./images/if2kernels.pdf
+>]
 Chapter 4.
 (../SC1/sc1-text.tex [28
 
 ]
-<../SC1/./images/betaplot.pdf, id=992, 469.755pt x 289.08pt>
+<../SC1/./images/betaplot.pdf, id=1006, 469.755pt x 289.08pt>
 File: ../SC1/./images/betaplot.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/betaplot.pdf>
 Package pdftex.def Info: ../SC1/./images/betaplot.pdf used on input line 39.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/betadensity.pdf, id=997, 469.755pt x 289.08pt>
+<../SC1/./images/betadensity.pdf, id=1011, 469.755pt x 289.08pt>
 File: ../SC1/./images/betadensity.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/betadensity.pdf>
@@ -1255,22 +1231,28 @@ Package pdftex.def Info: ../SC1/./images/betadensity.pdf used on input line 48.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/sirmean.pdf, id=1001, 469.755pt x 289.08pt>
+<../SC1/./images/sirmean.pdf, id=1015, 469.755pt x 289.08pt>
 File: ../SC1/./images/sirmean.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/sirmean.pdf>
 Package pdftex.def Info: ../SC1/./images/sirmean.pdf used on input line 59.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [29 <../SC1/./images/betaplot.pdf>] [30 <../SC1/./images/betadensity.pdf> <../
-SC1/./images/sirmean.pdf>] [31] [32]
-<../SC1/./images/if2state.pdf, id=1047, 469.755pt x 289.08pt>
+SC1/./images/sirmean.pdf>] [31]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [32]
+<../SC1/./images/if2state.pdf, id=1060, 469.755pt x 289.08pt>
 File: ../SC1/./images/if2state.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/if2state.pdf>
 Package pdftex.def Info: ../SC1/./images/if2state.pdf used on input line 129.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/if2convergence.pdf, id=1049, 469.755pt x 289.08pt>
+Underfull \vbox (badness 1226) has occurred while \output is active []
+
+ [33 <../SC1/./images/if2state.pdf>]
+<../SC1/./images/if2convergence.pdf, id=1074, 469.755pt x 289.08pt>
 File: ../SC1/./images/if2convergence.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/if2convergence.pdf>
@@ -1278,39 +1260,38 @@ Package pdftex.def Info: ../SC1/./images/if2convergence.pdf used on input line
 141.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/if2sdconvergence.pdf, id=1051, 469.755pt x 289.08pt>
+<../SC1/./images/if2sdconvergence.pdf, id=1076, 469.755pt x 289.08pt>
 File: ../SC1/./images/if2sdconvergence.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/if2sdconvergence.pdf>
 Package pdftex.def Info: ../SC1/./images/if2sdconvergence.pdf used on input lin
 e 150.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
-
-<../SC1/./images/if2kernels.pdf, id=1053, 469.755pt x 289.08pt>
+ [34 <../SC1/./images/if2convergence.pdf>] <../SC1/./images/if2kernels.pdf, id=
+1088, 469.755pt x 289.08pt>
 File: ../SC1/./images/if2kernels.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/if2kernels.pdf>
 Package pdftex.def Info: ../SC1/./images/if2kernels.pdf used on input line 164.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
- [33 <../SC1/./images/if2state.pdf>]
-[34 <../SC1/./images/if2convergence.pdf> <../SC1/./images/if2sdconvergence.pdf>
-] <../SC1/./images/hmckernels.pdf, id=1083, 469.755pt x 289.08pt>
+ [35 <../SC1/./images/if2sdconvergence.pdf>] <../SC1/./images/hmckernels.pdf, i
+d=1101, 469.755pt x 289.08pt>
 File: ../SC1/./images/hmckernels.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/hmckernels.pdf>
 Package pdftex.def Info: ../SC1/./images/hmckernels.pdf used on input line 185.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
- [35 <../SC1/./images/if2kernels.pdf>]
-<../SC1/./images/hmcboot.pdf, id=1095, 469.755pt x 289.08pt>
+ [36 <../SC1/./images/if2kernels.pdf>]
+<../SC1/./images/hmcboot.pdf, id=1113, 469.755pt x 289.08pt>
 File: ../SC1/./images/hmcboot.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/hmcboot.pdf>
 Package pdftex.def Info: ../SC1/./images/hmcboot.pdf used on input line 199.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
-
-<../SC1/./images/combined-multi.pdf, id=1096, 469.755pt x 289.08pt>
+ [37 <../SC1/./images/hmckernels.pdf>]
+<../SC1/./images/combined-multi.pdf, id=1124, 469.755pt x 289.08pt>
 File: ../SC1/./images/combined-multi.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/combined-multi.pdf>
@@ -1318,66 +1299,73 @@ Package pdftex.def Info: ../SC1/./images/combined-multi.pdf used on input line
 211.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/timeplot.pdf, id=1098, 469.755pt x 289.08pt>
+<../SC1/./images/timeplot.pdf, id=1126, 469.755pt x 289.08pt>
 File: ../SC1/./images/timeplot.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/timeplot.pdf>
 Package pdftex.def Info: ../SC1/./images/timeplot.pdf used on input line 222.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
-) [36 <../SC1/./images/hmckernels.pdf>]
-[37 <../SC1/./images/hmcboot.pdf> <../SC1/./images/combined-multi.pdf>]
-[38 <../SC1/./images/timeplot.pdf>]
+) [38 <../SC1/./images/hmcboot.pdf>] [39 <../SC1/./images/combined-multi.pdf> <
+../SC1/./images/timeplot.pdf>]
 Chapter 5.
 (../SC2/sc2-text.tex
-<../SC2/./images/dataplot.pdf, id=1140, 469.755pt x 289.08pt>
+<../SC2/./images/dataplot.pdf, id=1159, 469.755pt x 289.08pt>
 File: ../SC2/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/dataplot.pdf>
 Package pdftex.def Info: ../SC2/./images/dataplot.pdf used on input line 13.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
+ [40
 
-<../SC2/./images/if2fit.pdf, id=1142, 469.755pt x 289.08pt>
+]
+<../SC2/./images/if2fit.pdf, id=1166, 469.755pt x 289.08pt>
 File: ../SC2/./images/if2fit.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/if2fit.pdf>
 Package pdftex.def Info: ../SC2/./images/if2fit.pdf used on input line 31.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
- [39
 
-] [40 <../SC2/./images/dataplot.pdf> <../SC2/./images/if2fit.pdf>]
-<../SC2/./images/if2combined.pdf, id=1169, 469.755pt x 289.08pt>
+
+LaTeX Warning: Reference `dataplot' on page 41 undefined on input line 32.
+
+
+LaTeX Warning: Reference `dataplot' on page 41 undefined on input line 32.
+
+
+Underfull \vbox (badness 1062) has occurred while \output is active []
+
+ [41 <../SC2/./images/dataplot.pdf>]
+<../SC2/./images/if2combined.pdf, id=1179, 469.755pt x 289.08pt>
 File: ../SC2/./images/if2combined.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/if2combined.pdf>
 Package pdftex.def Info: ../SC2/./images/if2combined.pdf used on input line 91.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
- [41]
-<../SC2/./images/hmcforecast.pdf, id=1184, 469.755pt x 289.08pt>
+ [42 <../SC2/./images/if2fit.pdf>]
+[43 <../SC2/./images/if2combined.pdf>]
+<../SC2/./images/hmcforecast.pdf, id=1214, 469.755pt x 289.08pt>
 File: ../SC2/./images/hmcforecast.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/hmcforecast.pdf>
 Package pdftex.def Info: ../SC2/./images/hmcforecast.pdf used on input line 107
 .
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
-
-Underfull \vbox (badness 3333) has occurred while \output is active []
-
- [42 <../SC2/./images/if2combined.pdf>]
-<../SC2/./images/truncation.pdf, id=1200, 469.755pt x 289.08pt>
+ [44]
+<../SC2/./images/truncation.pdf, id=1220, 469.755pt x 289.08pt>
 File: ../SC2/./images/truncation.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/truncation.pdf>
 Package pdftex.def Info: ../SC2/./images/truncation.pdf used on input line 123.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
-) [43 <../SC2/./images/hmcforecast.pdf>]
-[44 <../SC2/./images/truncation.pdf>]
+) [45 <../SC2/./images/hmcforecast.pdf>]
+[46 <../SC2/./images/truncation.pdf>]
 Chapter 6.
-(../sirs-smap/sirs-smap-text.tex [45
+(../sirs-smap/sirs-smap-text.tex [47
 
-] [46] [47]
-<../sirs-smap/./images/dataplot.pdf, id=1256, 469.755pt x 289.08pt>
+] [48] [49]
+<../sirs-smap/./images/dataplot.pdf, id=1277, 469.755pt x 289.08pt>
 File: ../sirs-smap/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../sirs-smap/./images/dataplot.pdf>
@@ -1385,16 +1373,19 @@ Package pdftex.def Info: ../sirs-smap/./images/dataplot.pdf used on input line
 134.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../sirs-smap/./images/smap-project.pdf, id=1258, 469.755pt x 289.08pt>
+<../sirs-smap/./images/smap-project.pdf, id=1279, 469.755pt x 289.08pt>
 File: ../sirs-smap/./images/smap-project.pdf Graphic file (type pdf)
 
 <use ../sirs-smap/./images/smap-project.pdf>
 Package pdftex.def Info: ../sirs-smap/./images/smap-project.pdf used on input l
 ine 143.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
- [48] [49 <../sirs-smap/./images/dataplot.pdf> <../sirs-smap/./images/smap-proj
-ect.pdf>]
-<../sirs-smap/./images/sseplot.pdf, id=1284, 469.755pt x 289.08pt>
+ [50]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [51 <../sirs-smap/./images/dataplot.pdf> <../sirs-smap/./images/smap-project.p
+df>]
+<../sirs-smap/./images/sseplot.pdf, id=1305, 469.755pt x 289.08pt>
 File: ../sirs-smap/./images/sseplot.pdf Graphic file (type pdf)
 
 <use ../sirs-smap/./images/sseplot.pdf>
@@ -1402,20 +1393,20 @@ Package pdftex.def Info: ../sirs-smap/./images/sseplot.pdf used on input line 1
 61.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../sirs-smap/./images/timeplot.pdf, id=1286, 469.755pt x 289.08pt>
+<../sirs-smap/./images/timeplot.pdf, id=1307, 469.755pt x 289.08pt>
 File: ../sirs-smap/./images/timeplot.pdf Graphic file (type pdf)
 
 <use ../sirs-smap/./images/timeplot.pdf>
 Package pdftex.def Info: ../sirs-smap/./images/timeplot.pdf used on input line 
 172.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
-) [50 <../sirs-smap/./images/sseplot.pdf>] [51 <../sirs-smap/./images/timeplot.
+) [52] [53 <../sirs-smap/./images/sseplot.pdf> <../sirs-smap/./images/timeplot.
 pdf>]
 Chapter 7.
-(../spatial/spatial-text.tex [52
+(../spatial/spatial-text.tex [54
 
 ]
-<../spatial/./images/dataplot.pdf, id=1314, 469.755pt x 289.08pt>
+<../spatial/./images/dataplot.pdf, id=1335, 469.755pt x 289.08pt>
 File: ../spatial/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../spatial/./images/dataplot.pdf>
@@ -1423,18 +1414,25 @@ Package pdftex.def Info: ../spatial/./images/dataplot.pdf used on input line 33
 .
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../spatial/./images/dataplot2.pdf, id=1317, 469.755pt x 289.08pt>
+
+LaTeX Warning: Reference `dataplot' on page 55 undefined on input line 37.
+
+<../spatial/./images/dataplot2.pdf, id=1337, 469.755pt x 289.08pt>
 File: ../spatial/./images/dataplot2.pdf Graphic file (type pdf)
 
 <use ../spatial/./images/dataplot2.pdf>
 Package pdftex.def Info: ../spatial/./images/dataplot2.pdf used on input line 4
 2.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
- [53 <../spatial/./images/dataplot.pdf>]
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [54 <../spatial/./images/dataplot2.pdf>]
-<../spatial/./images/sseplot.pdf, id=1340, 469.755pt x 289.08pt>
+
+LaTeX Warning: Reference `dataplot' on page 55 undefined on input line 43.
+
+
+LaTeX Warning: Reference `dataplot' on page 55 undefined on input line 43.
+
+[55 <../spatial/./images/dataplot.pdf>] [56 <../spatial/./images/dataplot2.pdf>
+] <../spatial/./images/sseplot.pdf, id=1358, 469.755pt x 289.08pt>
 File: ../spatial/./images/sseplot.pdf Graphic file (type pdf)
 
 <use ../spatial/./images/sseplot.pdf>
@@ -1442,33 +1440,41 @@ Package pdftex.def Info: ../spatial/./images/sseplot.pdf used on input line 65.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../spatial/./images/timeplot.pdf, id=1342, 469.755pt x 289.08pt>
+<../spatial/./images/timeplot.pdf, id=1360, 469.755pt x 289.08pt>
 File: ../spatial/./images/timeplot.pdf Graphic file (type pdf)
 
 <use ../spatial/./images/timeplot.pdf>
 Package pdftex.def Info: ../spatial/./images/timeplot.pdf used on input line 76
 .
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
- [55 <../spatial/./images/sseplot.pdf>])
-[56 <../spatial/./images/timeplot.pdf>]
+) [57] [58 <../spatial/./images/sseplot.pdf> <../spatial/./images/timeplot.pdf>
+]
+Chapter 8.
+(../future-directions/future-directions.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [59
+
+])
+[60]
 Appendix A.
-(../MCMC-HMCMC/mcmc-appendix.tex (../../code/hmc/d_sir_stan.r [57
+(../MCMC-HMCMC/mcmc-appendix.tex (../../code/hmc/d_sir_stan.r [61
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [58]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [59])
-(../../code/hmc/d_sirode_euler.stan [60])) [61]
-Appendix B.
-(../PF-IF2/pf-appendix.tex (../../code/if2/d_sir_if2.r [62
-
-]
+ [62]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [63])
+(../../code/hmc/d_sirode_euler.stan [64])) [65]
+Appendix B.
+(../PF-IF2/pf-appendix.tex (../../code/if2/d_sir_if2.r [66
+
+]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [67])
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang1.sty
 File: lstlang1.sty 2014/09/06 1.5e listings language file
 )
@@ -1480,20 +1486,8 @@ File: lstmisc.sty 2014/09/06 1.5e (Carsten Heinz)
 )
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [64]
-(../../code/if2/d_if2.cpp [65]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [66]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [67]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [68]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [69]
+(../../code/if2/d_if2.cpp [69]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [70]
@@ -1508,50 +1502,50 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [73]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [74]))
-[75]
+ [74]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [75]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [76]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [77]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [78]))
+[79]
 Appendix C.
-(../SC1/sc1-appendix.tex) [76
+(../SC1/sc1-appendix.tex) [80
 
 ]
 Appendix D.
 (../SC2/sc2-appendix.tex
-(../../code/stochastic-comparison/paraboot-parallel/if2-paraboot.r [77
+(../../code/stochastic-comparison/paraboot-parallel/if2-paraboot.r [81
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [78])
-(../../code/sir-functions/StocSIRstan.r [79])) [80]
+ [82])
+(../../code/sir-functions/StocSIRstan.r [83])) [84]
 Appendix E.
 (../sirs-smap/sirs-smap-appendix.tex (../../code/sir-functions/StocSIRS.r
-[81
+[85
 
-]) (../../code/smap/smap.r [82]
+]) (../../code/smap/smap.r [86]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [83])
-(../../code/smap/smap_opt.r [84]
+ [87])
+(../../code/smap/smap_opt.r [88]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [85])
-(../../code/hmc/hmc-sirs/sirs-euler.stan [86])
+ [89])
+(../../code/hmc/hmc-sirs/sirs-euler.stan [90])
 Underfull \vbox (badness 2790) has occurred while \output is active []
 
- [87]
-(../../code/if2/if2-sirs/if2-sirs.cpp [88]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [89]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [90]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
  [91]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [92]
+(../../code/if2/if2-sirs/if2-sirs.cpp [92]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [93]
@@ -1572,32 +1566,32 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [98]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [99]))
-[100]
+ [99]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [100]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [101]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [102]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [103]))
+[104]
 Appendix F.
-(../spatial/spatial-appendix.tex (../../code/sir-functions/StocSSIR.r [101
+(../spatial/spatial-appendix.tex (../../code/sir-functions/StocSSIR.r [105
 
 ]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [102])
-(../../code/hmc/hmc-spa/sir-spa-euler.stan [103]
+ [106])
+(../../code/hmc/hmc-spa/sir-spa-euler.stan [107]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [104])
-(../../code/if2/if2-spa/if2-spa.cpp [105]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [106]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [107]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [108]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [109]
+ [108])
+(../../code/if2/if2-spa/if2-spa.cpp [109]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [110]
@@ -1615,34 +1609,46 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
  [114]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [115]))
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 255.
+ [115]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[116]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 255.
+ [116]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [117]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [118]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [119]))
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 260.
+
+[120]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 260.
  (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 255.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 255.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 260.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 260.
 Package rerunfilecheck Info: File `master.out' has not changed.
-(rerunfilecheck)             Checksum: 88EFDE89D9FE316691F26E14B2CA1870;4021.
+(rerunfilecheck)             Checksum: A5E239FFE4045609B95276F96EF587D8;4244.
 
 
-LaTeX Warning: There were multiply-defined labels.
+LaTeX Warning: There were undefined references.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 255.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 260.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 17563 strings out of 494501
- 262065 string characters out of 6167031
- 683901 words of memory out of 5000000
- 17495 multiletter control sequences out of 15000+600000
+ 17605 strings out of 494501
+ 262873 string characters out of 6167031
+ 684303 words of memory out of 5000000
+ 17518 multiletter control sequences out of 15000+600000
  16581 words of font info for 63 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 42i,18n,69p,1007b,4123s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,18n,69p,1007b,4126s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/incons
 olata/i4-ts1.enc}{/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/incon
 solata/i4-ot1-0.enc} </Users/dexter/Library/texlive/2015basic/texmf-var/fonts/p
@@ -1665,10 +1671,10 @@ m/cmr8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts
 onts/cm/cmsy6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/a
 msfonts/cm/cmsy8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/publi
 c/amsfonts/cm/cmti12.pfb>
-Output written on master.pdf (126 pages, 1037007 bytes).
+Output written on master.pdf (130 pages, 1041916 bytes).
 PDF statistics:
- 4820 PDF objects out of 5155 (max. 8388607)
- 4547 compressed objects within 46 object streams
- 3001 named destinations out of 3580 (max. 500000)
- 699 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4848 PDF objects out of 5155 (max. 8388607)
+ 4573 compressed objects within 46 object streams
+ 3008 named destinations out of 3580 (max. 500000)
+ 723 words of extra memory for PDF output out of 10000 (max. 10000000)
 
