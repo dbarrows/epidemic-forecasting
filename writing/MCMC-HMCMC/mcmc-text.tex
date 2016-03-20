@@ -377,13 +377,13 @@
 	print(g)
     \end{R}
 
-    we obtain
+    we obtain Figure [\ref{mcmcdataplot}].
 
     \begin{figure}[H]
         \centering
         \includegraphics[width=\textwidth]{./images/dataplot.pdf}
         \caption{True SIR ODE solution infected counts, and with added observation noise}
-        \label{dataplot}
+        \label{mcmcdataplot}
     \end{figure}
 
     The Hamiltonian MCMC model fitting was done using Stan (\url{http://mc-stan.org/}), a program written in \verb|C++| that does Baysian statistical inference using Hamiltonian MCMC. Stan's R interface (\url{http://mc-stan.org/interfaces/rstan.html}) was used to ease implementation.
@@ -515,7 +515,7 @@
         \caption{Traceplot of samples drawn for parameter $R_0$, including warmup. \label{traceplot2}}
     \end{figure}
 
-    Now if we look at the kernel density estimates for each of the model parameters and the initial number of cases, we see that while the estimates are not perfect, they are fairly decent. This is shown in Figure [\ref{kernels}].
+    Now if we look at the kernel density estimates for each of the model parameters and the initial number of cases, we see that while the estimates are not perfect, they are fairly decent. This is shown in Figure [\ref{hmckernels}].
 
     \begin{figure}
     	\centering
@@ -532,5 +532,5 @@
         \begin{subfigure}[br]{0.4\textwidth}
             \includegraphics[width=\textwidth]{./images/kernelinfec.pdf}
         \end{subfigure}
-        \caption{Kernel density estimates produced by Stan \label{kernels}}
+        \caption{Kernel density estimates produced by Stan \label{hmckernels}}
     \end{figure}

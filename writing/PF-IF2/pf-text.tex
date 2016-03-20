@@ -306,13 +306,13 @@
 	        theme(panel.background = element_rect(fill = "#F0F0F0"))
     \end{R}
 
-    we obtain Figure [\ref{dataplot}].
+    we obtain Figure [\ref{pfdataplot}].
 
     \begin{figure}
         \centering
         \captionsetup{width=0.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/dataplot.pdf}
-        \caption{True SIR ODE solution infected counts, and with added observation noise. \label{dataplot}}
+        \caption{True SIR ODE solution infected counts, and with added observation noise. \label{pfdataplot}}
     \end{figure}
 
     The IF2 algorithm was implemented in C++ for speed, and integrated into the R workflow using the \verb|Rcpp| package. The C++ code is compiled using
@@ -328,11 +328,11 @@
 	  colnames(paramdata) <- c("R0", "r", "sigma", "Sinit", "Iinit", "Rinit")
     \end{R}
 
-    The final kernel estimates for four of the key parameters are shown in Figure [\ref{kernelplot}].
+    The final kernel estimates for four of the key parameters are shown in Figure [\ref{if2kernelplot}].
 
     \begin{figure}
         \centering
         \captionsetup{width=0.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2kernels.pdf}
-        \caption{Kernel estimates for four essential system parameters. True values are indicated by solid vertical lines, sample means by dashed lines. \label{kernelplot}}
+        \caption{Kernel estimates for four essential system parameters. True values are indicated by solid vertical lines, sample means by dashed lines. \label{if2kernelplot}}
     \end{figure}

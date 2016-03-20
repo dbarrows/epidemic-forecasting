@@ -156,13 +156,13 @@
 
 \section{IF2 Densities}
 
-	Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. These are shown if Figure [\ref{if2kernels}].
+	Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. These are shown if Figure [\ref{sc1if2kernels}].
 
 	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2kernels.pdf}
-        \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \label{if2kernels}}
+        \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \label{sc1if2kernels}}
     \end{figure}
 
     It is worth noting that the IF2 parameters chosen were in part chosen so as to not artificially narrow these densities; a more aggressive cooling schedule and/or an increased number of passes would have resulted in much narrower densities, and indeed have the potential to collapse them to point estimates.
@@ -177,13 +177,13 @@
 
 \section{HMCMC Densities}
 
-	The parameter estimation densities from the Stan HMCMC fitting are shown in Figure [\ref{hmckernels}].
+	The parameter estimation densities from the Stan HMCMC fitting are shown in Figure [\ref{sc1hmckernels}].
 
 	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/hmckernels.pdf}
-        \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \label{hmckernels}}
+        \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \label{sc1hmckernels}}
     \end{figure}
 
     the densities shown here represent a ``true'' MLE density estimate in that they represent HMC's attempt to directly sample from the parameter space according to the likelihood surface, unlike IF2 which is in theory only trying to get a ML point estimate. Hence, these densities are potentially more robust than those produced by the IF2 implementation.
