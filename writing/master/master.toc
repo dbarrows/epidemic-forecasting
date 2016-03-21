@@ -46,24 +46,25 @@
 \contentsline {section}{\numberline {7.3}Spatial Model Forecasting}{57}{section.7.3}
 \contentsline {chapter}{\numberline {8}Discussion and Future Directions}{59}{chapter.8}
 \contentsline {section}{\numberline {8.1}Parallel and Distributed Computing}{59}{section.8.1}
-\contentsline {section}{\numberline {8.2}IF2 Forecasting Methodology}{60}{section.8.2}
-\contentsline {chapter}{\numberline {A}Hamiltonian MCMC}{61}{appendix.A}
-\contentsline {section}{\numberline {A.1}Full R code}{61}{section.A.1}
-\contentsline {section}{\numberline {A.2}Full Stan code}{64}{section.A.2}
-\contentsline {chapter}{\numberline {B}Iterated Filtering}{66}{appendix.B}
-\contentsline {section}{\numberline {B.1}Full R code}{66}{section.B.1}
-\contentsline {section}{\numberline {B.2}Full C++ code}{69}{section.B.2}
-\contentsline {chapter}{\numberline {C}Parameter Fitting}{80}{appendix.C}
-\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{81}{appendix.D}
-\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{81}{section.D.1}
-\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{83}{section.D.2}
-\contentsline {chapter}{\numberline {E}S-map and SIRS}{85}{appendix.E}
-\contentsline {section}{\numberline {E.1}SIRS R Function Code}{85}{section.E.1}
-\contentsline {section}{\numberline {E.2}SMAP Code}{86}{section.E.2}
-\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{88}{section.E.3}
-\contentsline {section}{\numberline {E.4}RStan SIRS Code}{90}{section.E.4}
-\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{92}{section.E.5}
-\contentsline {chapter}{\numberline {F}Spatial Epidemics}{105}{appendix.F}
-\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{105}{section.F.1}
-\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{107}{section.F.2}
-\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{109}{section.F.3}
+\contentsline {section}{\numberline {8.2}IF2 Forecasting Methodology}{61}{section.8.2}
+\contentsline {chapter}{\numberline {A}Hamiltonian MCMC}{63}{appendix.A}
+\contentsline {section}{\numberline {A.1}Full R code}{63}{section.A.1}
+\contentsline {section}{\numberline {A.2}Full Stan code}{66}{section.A.2}
+\contentsline {chapter}{\numberline {B}Iterated Filtering}{68}{appendix.B}
+\contentsline {section}{\numberline {B.1}Full R code}{68}{section.B.1}
+\contentsline {section}{\numberline {B.2}Full C++ code}{71}{section.B.2}
+\contentsline {chapter}{\numberline {C}Parameter Fitting}{82}{appendix.C}
+\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{83}{appendix.D}
+\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{83}{section.D.1}
+\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{85}{section.D.2}
+\contentsline {chapter}{\numberline {E}S-map and SIRS}{87}{appendix.E}
+\contentsline {section}{\numberline {E.1}SIRS R Function Code}{87}{section.E.1}
+\contentsline {section}{\numberline {E.2}SMAP Code}{88}{section.E.2}
+\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{90}{section.E.3}
+\contentsline {section}{\numberline {E.4}RStan SIRS Code}{92}{section.E.4}
+\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{94}{section.E.5}
+\contentsline {chapter}{\numberline {F}Spatial Epidemics}{107}{appendix.F}
+\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{107}{section.F.1}
+\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{109}{section.F.2}
+\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{111}{section.F.3}
+\contentsline {section}{\numberline {F.4}CUDA IF2 Spatial Fitting Code}{122}{section.F.4}
