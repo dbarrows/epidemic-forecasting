@@ -19,20 +19,20 @@
 
     The transition probabilities can be summarized as a matrix as
 
-    $$
-    T = 
-    \begin{bmatrix}
-        0 & 1 & 0 \\
-        0 & 0.1 & 0.9 \\
-        0.6 & 0.4 & 0
-    \end{bmatrix}.
-    $$
+    \begin{equation}
+    	T = 
+	    \begin{bmatrix}
+	        0 & 1 & 0 \\
+	        0 & 0.1 & 0.9 \\
+	        0.6 & 0.4 & 0
+	    \end{bmatrix}.
+    \end{equation}
 
     The probability vector $\mu(x^{(1)})$ for a state $x^{(1)}$ can be evolved using $T$ by evaluating $\mu(x^{(1)})T$, then again by evaluating $\mu(x^{(1)})T^2$, and so on. If we take the limit as the number of transitions approaches infinity, we find
 
-    $$
-        \lim_{t \to \infty} \mu(x^{(1)})T^t = (27/122, 50/122, 45/122).
-    $$
+    \begin{equation}
+    	\lim_{t \to \infty} \mu(x^{(1)})T^t = (27/122, 50/122, 45/122).
+    \end{equation}
 
     This indicates that no matter what we pick for the initial probability distribution $\mu(x^{(1)})$, the chain will always stabilize at the equilibrium distribution.
 
@@ -51,9 +51,9 @@
 
     MCMC and similar methods hinge on the idea that the weight or support bestowed upon a particular set of parameters $\theta$ should be proportional to the probability of observing the data $D$ given the model output using that set of parameters $M(\theta)$. In order to do this we need a way to evaluate whether or not $M(\theta)$ is a good fit for $D$; this is done by specifying a likelihood function $\mathcal{L}(\theta)$ such that
 
-    $$
-        \mathcal{L}(\theta) \propto P(D|\theta).
-    $$
+    \begin{equation}
+    	\mathcal{L}(\theta) \propto P(D|\theta).
+    \end{equation}
 
     In standard Maximum Likelihood approaches, $\mathcal{L}(\theta)$ is searched to find a value of $\theta$ that maximizes $\mathcal{L}(\theta)$, then this $\theta$ is taken to be the most likely true value. Here our aim is to not just maximize the likelihood but to also explore the area around it.
 
@@ -89,17 +89,17 @@
 
     and the define the acceptance ratio, $r$, as
 
-    $$
-        r = \frac{\mathcal{L}(\theta^*)p(\theta^*)q(\theta^*|\theta)}{\mathcal{L}(\theta)p(\theta)q(\theta|\theta^*)},
-    $$
+    \begin{equation}
+    	r = \frac{\mathcal{L}(\theta^*)p(\theta^*)q(\theta^*|\theta)}{\mathcal{L}(\theta)p(\theta)q(\theta|\theta^*)},
+    \end{equation}
 
     where $\theta^*$ is the proposed sample to draw from the posterior, and $\theta$ is the last accepted sample.
 
     In the special case of the Metropolis Hastings variation of MCMC, the proposal distribution is symmetric, meaning $q(\theta^*|\theta) = q(\theta|\theta^*)$, and so the acceptance ratio simplifies to
 
-    $$
-        r = \frac{\mathcal{L}(\theta^*)p(\theta^*)}{\mathcal{L}(\theta)p(\theta)}.
-    $$
+    \begin{equation}
+    	r = \frac{\mathcal{L}(\theta^*)p(\theta^*)}{\mathcal{L}(\theta)p(\theta)}.
+    \end{equation}
 
     Thus, the MCMC algorithm shown in Algorithm [\ref{mhmcmc}].
     
