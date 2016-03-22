@@ -18,9 +18,11 @@
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{hyperref}
+\usepackage{etoolbox}
 
-\usepackage[switch, displaymath, mathlines]{lineno}
+\usepackage[switch, displaymath, mathlines, pagewise]{lineno}
 \linenumbers
+\renewcommand\linenumberfont{\normalfont\scriptsize\rmfamily}
 
 \usepackage{lstbayes}
 \usepackage{subfiles}

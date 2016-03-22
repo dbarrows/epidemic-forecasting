@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  22 MAR 2016 02:01
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.3.2)  22 MAR 2016 16:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -776,22 +776,26 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 82.
 )
 \Hy@SectionHShift=\skip51
-) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/lineno/lineno.sty
+) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2015/05/04 v2.2 e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count142
+)
+(/usr/local/texlive/2015basic/texmf-dist/tex/latex/lineno/lineno.sty
 Package: lineno 2005/11/02 line numbers on paragraphs v4.41
-\linenopenalty=\count142
+\linenopenalty=\count143
 \output=\toks32
-\linenoprevgraf=\count143
+\linenoprevgraf=\count144
 \linenumbersep=\dimen146
 \linenumberwidth=\dimen147
-\c@linenumber=\count144
-\c@pagewiselinenumber=\count145
-\c@LN@truepage=\count146
+\c@linenumber=\count145
+\c@pagewiselinenumber=\count146
+\c@LN@truepage=\count147
 
 
 Package lineno Warning: Option [displaymath] is obsolete -- default now!.
 
-\c@internallinenumber=\count147
-\c@internallinenumbers=\count148
+\c@internallinenumber=\count148
+\c@internallinenumbers=\count149
 \quotelinenumbersep=\dimen148
 \bframerule=\dimen149
 \bframesep=\dimen150
@@ -833,12 +837,12 @@ Package: booktabs 2005/04/14 v1.61803 publication quality tables
 \cmidrulesep=\dimen158
 \cmidrulekern=\dimen159
 \defaultaddspace=\dimen160
-\@cmidla=\count149
-\@cmidlb=\count150
+\@cmidla=\count150
+\@cmidlb=\count151
 \@aboverulesep=\dimen161
 \@belowrulesep=\dimen162
-\@thisruleclass=\count151
-\@lastruleclass=\count152
+\@thisruleclass=\count152
+\@lastruleclass=\count153
 \@thisrulewidth=\dimen163
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/placeins/placeins.sty
@@ -864,11 +868,11 @@ Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/graphics/dvipsnam.def
 File: dvipsnam.def 2014/10/14 v3.0j Driver-dependent file (DPC,SPQR)
 ))
-Package hyperref Info: Option `colorlinks' set `false' on input line 49.
+Package hyperref Info: Option `colorlinks' set `false' on input line 51.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Package: algorithm2e 2013/01/06 v5.00 algorithms environments
-\c@AlgoLine=\count153
+\c@AlgoLine=\count154
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
@@ -917,9 +921,9 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 \algoheightrule=\skip76
 \algotitleheightruledefault=\skip77
 \algotitleheightrule=\skip78
-\c@algocfline=\count154
-\c@algocfproc=\count155
-\c@algocf=\count156
+\c@algocfline=\count155
+\c@algocfproc=\count156
+\c@algocf=\count157
 \algocf@algoframe=\box66
 \algocf@algobox=\box67
 )
@@ -927,7 +931,7 @@ subscribe by emailing sympa@lirmm.fr with 'subscribe <list> <firstname name>'
 Package: inconsolata 2016/02/22 v1.10
 
 `inconsolata-zi4' v1.10, 2016/02/22 Text macros for Inconsolata (msharpe)
-\zifour@ocount=\count157
+\zifour@ocount=\count158
 )
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/parskip/parskip.sty
 Package: parskip 2001/04/09 non-zero parskip adjustments
@@ -935,41 +939,41 @@ Package: parskip 2001/04/09 non-zero parskip adjustments
 (./master.aux)
 \openout1 = `master.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 169.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 169.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 171.
+LaTeX Font Info:    ... okay on input line 171.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 171.
+LaTeX Font Info:    ... okay on input line 171.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 171.
+LaTeX Font Info:    ... okay on input line 171.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 171.
+LaTeX Font Info:    ... okay on input line 171.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 171.
+LaTeX Font Info:    ... okay on input line 171.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 171.
+LaTeX Font Info:    ... okay on input line 171.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 171.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 171.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 169.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 169.
-LaTeX Font Info:    ... okay on input line 169.
+LaTeX Font Info:    ... okay on input line 171.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 171.
+LaTeX Font Info:    ... okay on input line 171.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count158
+\scratchcounter=\count159
 \scratchdimen=\dimen170
 \scratchbox=\box68
-\nofMPsegments=\count159
-\nofMParguments=\count160
+\nofMPsegments=\count160
+\nofMParguments=\count161
 \everyMPshowfont=\toks35
-\MPscratchCnt=\count161
+\MPscratchCnt=\count162
 \MPscratchDim=\dimen171
-\MPnumerator=\count162
-\makeMPintoPDFobject=\count163
+\MPnumerator=\count163
+\makeMPintoPDFobject=\count164
 \everyMPtoPDFconversion=\toks36
 ) (/usr/local/texlive/2015basic/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
@@ -1025,9 +1029,9 @@ Package caption Info: End \AtBeginDocument code.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-\c@lstlisting=\count164
+\c@lstlisting=\count165
 \AtBeginShipoutBox=\box69
-Package hyperref Info: Link coloring OFF on input line 169.
+Package hyperref Info: Link coloring OFF on input line 171.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -1035,11 +1039,11 @@ Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 y
 Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
-\c@section@level=\count165
+\c@section@level=\count166
 )
-LaTeX Info: Redefining \ref on input line 169.
-LaTeX Info: Redefining \pageref on input line 169.
-LaTeX Info: Redefining \nameref on input line 169.
+LaTeX Info: Redefining \ref on input line 171.
+LaTeX Info: Redefining \pageref on input line 171.
+LaTeX Info: Redefining \nameref on input line 171.
  (./master.out) (./master.out)
 \@outlinefile=\write4
 \openout4 = `master.out'.
@@ -1123,7 +1127,7 @@ ches are the semi-mechanistic
 [2]) [3]
 Chapter 2.
 (../MCMC-HMCMC/mcmc-text.tex
-<../MCMC-HMCMC/./images/finitemachine.pdf, id=595, 189.09505pt x 173.79831pt>
+<../MCMC-HMCMC/./images/finitemachine.pdf, id=594, 189.09505pt x 173.79831pt>
 File: ../MCMC-HMCMC/./images/finitemachine.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/finitemachine.pdf>
@@ -1152,7 +1156,7 @@ File: lstlang2.sty 2014/09/06 1.5e listings language file
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang3.sty
 File: lstlang3.sty 2014/09/06 1.5e listings language file
 )
-[12] <../MCMC-HMCMC/./images/dataplot.pdf, id=749, 469.755pt x 289.08pt>
+[12] <../MCMC-HMCMC/./images/dataplot.pdf, id=748, 469.755pt x 289.08pt>
 File: ../MCMC-HMCMC/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/dataplot.pdf>
@@ -1167,7 +1171,7 @@ LaTeX Font Info:    Try loading font information for TS1+zi4 on input line 427.
 File: ts1zi4.fd 2014/06/22 Fontinst v1.933 font definitions for TS1/zi4.
 )
 [15] [16]
-<../MCMC-HMCMC/./images/traceplotR0.pdf, id=879, 469.755pt x 289.08pt>
+<../MCMC-HMCMC/./images/traceplotR0.pdf, id=878, 469.755pt x 289.08pt>
 File: ../MCMC-HMCMC/./images/traceplotR0.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/traceplotR0.pdf>
@@ -1175,7 +1179,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/traceplotR0.pdf used on input l
 ine 505.
 (pdftex.def)             Requested size: 426.39256pt x 262.39714pt.
 
-<../MCMC-HMCMC/./images/traceplotR0_inc.pdf, id=881, 469.755pt x 289.08pt>
+<../MCMC-HMCMC/./images/traceplotR0_inc.pdf, id=880, 469.755pt x 289.08pt>
 File: ../MCMC-HMCMC/./images/traceplotR0_inc.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/traceplotR0_inc.pdf>
@@ -1183,7 +1187,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/traceplotR0_inc.pdf used on inp
 ut line 514.
 (pdftex.def)             Requested size: 426.39256pt x 262.39714pt.
 
-<../MCMC-HMCMC/./images/kernelR0.pdf, id=883, 234.8775pt x 216.81pt>
+<../MCMC-HMCMC/./images/kernelR0.pdf, id=882, 234.8775pt x 216.81pt>
 File: ../MCMC-HMCMC/./images/kernelR0.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/kernelR0.pdf>
@@ -1191,7 +1195,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/kernelR0.pdf used on input line
  524.
 (pdftex.def)             Requested size: 170.55441pt x 157.43298pt.
 
-<../MCMC-HMCMC/./images/kernelr.pdf, id=884, 234.8775pt x 216.81pt>
+<../MCMC-HMCMC/./images/kernelr.pdf, id=883, 234.8775pt x 216.81pt>
 File: ../MCMC-HMCMC/./images/kernelr.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/kernelr.pdf>
@@ -1199,7 +1203,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/kernelr.pdf used on input line
 527.
 (pdftex.def)             Requested size: 170.55441pt x 157.43298pt.
 
-<../MCMC-HMCMC/./images/kernelsigma.pdf, id=885, 234.8775pt x 216.81pt>
+<../MCMC-HMCMC/./images/kernelsigma.pdf, id=884, 234.8775pt x 216.81pt>
 File: ../MCMC-HMCMC/./images/kernelsigma.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/kernelsigma.pdf>
@@ -1207,7 +1211,7 @@ Package pdftex.def Info: ../MCMC-HMCMC/./images/kernelsigma.pdf used on input l
 ine 530.
 (pdftex.def)             Requested size: 170.55441pt x 157.43298pt.
 
-<../MCMC-HMCMC/./images/kernelinfec.pdf, id=886, 234.8775pt x 216.81pt>
+<../MCMC-HMCMC/./images/kernelinfec.pdf, id=885, 234.8775pt x 216.81pt>
 File: ../MCMC-HMCMC/./images/kernelinfec.pdf Graphic file (type pdf)
 
 <use ../MCMC-HMCMC/./images/kernelinfec.pdf>
@@ -1227,7 +1231,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 130--131
  []
 
 [24] [25] [26]
-<../PF-IF2/./images/dataplot.pdf, id=1017, 469.755pt x 289.08pt>
+<../PF-IF2/./images/dataplot.pdf, id=1016, 469.755pt x 289.08pt>
 File: ../PF-IF2/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../PF-IF2/./images/dataplot.pdf>
@@ -1235,7 +1239,7 @@ Package pdftex.def Info: ../PF-IF2/./images/dataplot.pdf used on input line 314
 .
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [27]
-<../PF-IF2/./images/if2kernels.pdf, id=1049, 469.755pt x 469.755pt>
+<../PF-IF2/./images/if2kernels.pdf, id=1048, 469.755pt x 469.755pt>
 File: ../PF-IF2/./images/if2kernels.pdf Graphic file (type pdf)
 
 <use ../PF-IF2/./images/if2kernels.pdf>
@@ -1248,14 +1252,14 @@ Chapter 4.
 (../SC1/sc1-text.tex [30
 
 ]
-<../SC1/./images/betaplot.pdf, id=1080, 469.755pt x 289.08pt>
+<../SC1/./images/betaplot.pdf, id=1079, 469.755pt x 289.08pt>
 File: ../SC1/./images/betaplot.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/betaplot.pdf>
 Package pdftex.def Info: ../SC1/./images/betaplot.pdf used on input line 39.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/betadensity.pdf, id=1085, 469.755pt x 289.08pt>
+<../SC1/./images/betadensity.pdf, id=1084, 469.755pt x 289.08pt>
 File: ../SC1/./images/betadensity.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/betadensity.pdf>
@@ -1263,7 +1267,7 @@ Package pdftex.def Info: ../SC1/./images/betadensity.pdf used on input line 48.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/sirmean.pdf, id=1089, 469.755pt x 289.08pt>
+<../SC1/./images/sirmean.pdf, id=1088, 469.755pt x 289.08pt>
 File: ../SC1/./images/sirmean.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/sirmean.pdf>
@@ -1274,7 +1278,7 @@ SC1/./images/sirmean.pdf>] [33]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [34]
-<../SC1/./images/if2state.pdf, id=1134, 469.755pt x 289.08pt>
+<../SC1/./images/if2state.pdf, id=1133, 469.755pt x 289.08pt>
 File: ../SC1/./images/if2state.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/if2state.pdf>
@@ -1284,7 +1288,7 @@ Package pdftex.def Info: ../SC1/./images/if2state.pdf used on input line 129.
 Underfull \vbox (badness 1226) has occurred while \output is active []
 
  [35 <../SC1/./images/if2state.pdf>]
-<../SC1/./images/if2convergence.pdf, id=1147, 469.755pt x 289.08pt>
+<../SC1/./images/if2convergence.pdf, id=1146, 469.755pt x 289.08pt>
 File: ../SC1/./images/if2convergence.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/if2convergence.pdf>
@@ -1292,7 +1296,7 @@ Package pdftex.def Info: ../SC1/./images/if2convergence.pdf used on input line
 141.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/if2sdconvergence.pdf, id=1149, 469.755pt x 289.08pt>
+<../SC1/./images/if2sdconvergence.pdf, id=1148, 469.755pt x 289.08pt>
 File: ../SC1/./images/if2sdconvergence.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/if2sdconvergence.pdf>
@@ -1301,7 +1305,7 @@ e 150.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [36] [37 <../SC1/./images/if2convergence.pdf> <../SC1/./images/if2sdconvergenc
 e.pdf>]
-<../SC1/./images/if2kernels.pdf, id=1172, 469.755pt x 289.08pt>
+<../SC1/./images/if2kernels.pdf, id=1171, 469.755pt x 289.08pt>
 File: ../SC1/./images/if2kernels.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/if2kernels.pdf>
@@ -1309,7 +1313,7 @@ Package pdftex.def Info: ../SC1/./images/if2kernels.pdf used on input line 164.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [38]
-<../SC1/./images/hmckernels.pdf, id=1179, 469.755pt x 289.08pt>
+<../SC1/./images/hmckernels.pdf, id=1178, 469.755pt x 289.08pt>
 File: ../SC1/./images/hmckernels.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/hmckernels.pdf>
@@ -1317,14 +1321,14 @@ Package pdftex.def Info: ../SC1/./images/hmckernels.pdf used on input line 185.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [39 <../SC1/./images/if2kernels.pdf>]
-<../SC1/./images/hmcboot.pdf, id=1192, 469.755pt x 289.08pt>
+<../SC1/./images/hmcboot.pdf, id=1191, 469.755pt x 289.08pt>
 File: ../SC1/./images/hmcboot.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/hmcboot.pdf>
 Package pdftex.def Info: ../SC1/./images/hmcboot.pdf used on input line 199.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [40 <../SC1/./images/hmckernels.pdf>]
-<../SC1/./images/combined-multi.pdf, id=1203, 469.755pt x 289.08pt>
+<../SC1/./images/combined-multi.pdf, id=1202, 469.755pt x 289.08pt>
 File: ../SC1/./images/combined-multi.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/combined-multi.pdf>
@@ -1332,7 +1336,7 @@ Package pdftex.def Info: ../SC1/./images/combined-multi.pdf used on input line
 211.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SC1/./images/timeplot.pdf, id=1205, 469.755pt x 289.08pt>
+<../SC1/./images/timeplot.pdf, id=1204, 469.755pt x 289.08pt>
 File: ../SC1/./images/timeplot.pdf Graphic file (type pdf)
 
 <use ../SC1/./images/timeplot.pdf>
@@ -1342,7 +1346,7 @@ Package pdftex.def Info: ../SC1/./images/timeplot.pdf used on input line 222.
 ../SC1/./images/timeplot.pdf>]
 Chapter 5.
 (../SC2/sc2-text.tex
-<../SC2/./images/dataplot.pdf, id=1237, 469.755pt x 289.08pt>
+<../SC2/./images/dataplot.pdf, id=1236, 469.755pt x 289.08pt>
 File: ../SC2/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/dataplot.pdf>
@@ -1351,7 +1355,7 @@ Package pdftex.def Info: ../SC2/./images/dataplot.pdf used on input line 13.
  [43
 
 ]
-<../SC2/./images/if2fit.pdf, id=1243, 469.755pt x 289.08pt>
+<../SC2/./images/if2fit.pdf, id=1242, 469.755pt x 289.08pt>
 File: ../SC2/./images/if2fit.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/if2fit.pdf>
@@ -1361,7 +1365,7 @@ Package pdftex.def Info: ../SC2/./images/if2fit.pdf used on input line 31.
 Underfull \vbox (badness 1062) has occurred while \output is active []
 
  [44 <../SC2/./images/dataplot.pdf>]
-<../SC2/./images/if2combined.pdf, id=1258, 469.755pt x 289.08pt>
+<../SC2/./images/if2combined.pdf, id=1257, 469.755pt x 289.08pt>
 File: ../SC2/./images/if2combined.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/if2combined.pdf>
@@ -1370,7 +1374,7 @@ Package pdftex.def Info: ../SC2/./images/if2combined.pdf used on input line 91.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [45 <../SC2/./images/if2fit.pdf>]
 [46 <../SC2/./images/if2combined.pdf>]
-<../SC2/./images/hmcforecast.pdf, id=1295, 469.755pt x 289.08pt>
+<../SC2/./images/hmcforecast.pdf, id=1294, 469.755pt x 289.08pt>
 File: ../SC2/./images/hmcforecast.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/hmcforecast.pdf>
@@ -1378,7 +1382,7 @@ Package pdftex.def Info: ../SC2/./images/hmcforecast.pdf used on input line 107
 .
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [47]
-<../SC2/./images/truncation.pdf, id=1301, 469.755pt x 289.08pt>
+<../SC2/./images/truncation.pdf, id=1300, 469.755pt x 289.08pt>
 File: ../SC2/./images/truncation.pdf Graphic file (type pdf)
 
 <use ../SC2/./images/truncation.pdf>
@@ -1391,7 +1395,7 @@ Chapter 6.
 (../SIRS-SMAP/sirs-smap-text.tex [50
 
 ] [51] [52]
-<../SIRS-SMAP/./images/dataplot.pdf, id=1357, 469.755pt x 289.08pt>
+<../SIRS-SMAP/./images/dataplot.pdf, id=1356, 469.755pt x 289.08pt>
 File: ../SIRS-SMAP/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../SIRS-SMAP/./images/dataplot.pdf>
@@ -1399,7 +1403,7 @@ Package pdftex.def Info: ../SIRS-SMAP/./images/dataplot.pdf used on input line
 134.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SIRS-SMAP/./images/smap-project.pdf, id=1359, 469.755pt x 289.08pt>
+<../SIRS-SMAP/./images/smap-project.pdf, id=1358, 469.755pt x 289.08pt>
 File: ../SIRS-SMAP/./images/smap-project.pdf Graphic file (type pdf)
 
 <use ../SIRS-SMAP/./images/smap-project.pdf>
@@ -1411,7 +1415,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [54 <../SIRS-SMAP/./images/dataplot.pdf> <../SIRS-SMAP/./images/smap-project.p
 df>]
-<../SIRS-SMAP/./images/sseplot.pdf, id=1385, 469.755pt x 289.08pt>
+<../SIRS-SMAP/./images/sseplot.pdf, id=1384, 469.755pt x 289.08pt>
 File: ../SIRS-SMAP/./images/sseplot.pdf Graphic file (type pdf)
 
 <use ../SIRS-SMAP/./images/sseplot.pdf>
@@ -1419,7 +1423,7 @@ Package pdftex.def Info: ../SIRS-SMAP/./images/sseplot.pdf used on input line 1
 61.
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SIRS-SMAP/./images/timeplot.pdf, id=1387, 469.755pt x 289.08pt>
+<../SIRS-SMAP/./images/timeplot.pdf, id=1386, 469.755pt x 289.08pt>
 File: ../SIRS-SMAP/./images/timeplot.pdf Graphic file (type pdf)
 
 <use ../SIRS-SMAP/./images/timeplot.pdf>
@@ -1432,7 +1436,7 @@ Chapter 7.
 (../SPATIAL/spatial-text.tex [57
 
 ]
-<../SPATIAL/./images/dataplot.pdf, id=1416, 469.755pt x 289.08pt>
+<../SPATIAL/./images/dataplot.pdf, id=1415, 469.755pt x 289.08pt>
 File: ../SPATIAL/./images/dataplot.pdf Graphic file (type pdf)
 
 <use ../SPATIAL/./images/dataplot.pdf>
@@ -1440,7 +1444,7 @@ Package pdftex.def Info: ../SPATIAL/./images/dataplot.pdf used on input line 33
 .
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SPATIAL/./images/dataplot2.pdf, id=1419, 469.755pt x 289.08pt>
+<../SPATIAL/./images/dataplot2.pdf, id=1418, 469.755pt x 289.08pt>
 File: ../SPATIAL/./images/dataplot2.pdf Graphic file (type pdf)
 
 <use ../SPATIAL/./images/dataplot2.pdf>
@@ -1449,7 +1453,7 @@ Package pdftex.def Info: ../SPATIAL/./images/dataplot2.pdf used on input line 4
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
  [58 <../SPATIAL/./images/dataplot.pdf>] [59 <../SPATIAL/./images/dataplot2.pdf
 >]
-<../SPATIAL/./images/sseplot.pdf, id=1442, 469.755pt x 289.08pt>
+<../SPATIAL/./images/sseplot.pdf, id=1441, 469.755pt x 289.08pt>
 File: ../SPATIAL/./images/sseplot.pdf Graphic file (type pdf)
 
 <use ../SPATIAL/./images/sseplot.pdf>
@@ -1457,7 +1461,7 @@ Package pdftex.def Info: ../SPATIAL/./images/sseplot.pdf used on input line 65.
 
 (pdftex.def)             Requested size: 341.11534pt x 209.91507pt.
 
-<../SPATIAL/./images/timeplot.pdf, id=1444, 469.755pt x 289.08pt>
+<../SPATIAL/./images/timeplot.pdf, id=1443, 469.755pt x 289.08pt>
 File: ../SPATIAL/./images/timeplot.pdf Graphic file (type pdf)
 
 <use ../SPATIAL/./images/timeplot.pdf>
@@ -1728,29 +1732,29 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [144]))
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 274.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 276.
 
 [145]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 274.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 276.
  (./master.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 274.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 274.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 276.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 276.
 Package rerunfilecheck Info: File `master.out' has not changed.
 (rerunfilecheck)             Checksum: BB1EA6CBBF295E1BA1051C494C75D295;4341.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 274.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 276.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 19446 strings out of 494501
- 287866 string characters out of 6167031
- 712807 words of memory out of 5000000
- 18448 multiletter control sequences out of 15000+600000
- 16881 words of font info for 64 fonts, out of 8000000 for 9000
+ 19740 strings out of 494501
+ 291291 string characters out of 6167031
+ 720447 words of memory out of 5000000
+ 18739 multiletter control sequences out of 15000+600000
+ 16581 words of font info for 63 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 42i,18n,69p,1330b,4179s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,18n,69p,1330b,4188s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/incons
 olata/i4-ts1.enc}{/usr/local/texlive/2015basic/texmf-dist/fonts/enc/dvips/incon
 solata/i4-ot1-0.enc} </Users/dexter/Library/texlive/2015basic/texmf-var/fonts/p
@@ -1769,15 +1773,14 @@ fb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmr1
 0.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/cm/c
 mr12.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts/c
 m/cmr8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfonts
-/cm/cmss8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsfo
-nts/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmsy6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmti12.pfb>
-Output written on master.pdf (155 pages, 1196734 bytes).
+/cm/cmsy10.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmsy6.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmsy8.pfb></usr/local/texlive/2015basic/texmf-dist/fonts/type1/publi
+c/amsfonts/cm/cmti12.pfb>
+Output written on master.pdf (155 pages, 1190499 bytes).
 PDF statistics:
- 6083 PDF objects out of 6186 (max. 8388607)
- 5768 compressed objects within 58 object streams
+ 6079 PDF objects out of 6186 (max. 8388607)
+ 5765 compressed objects within 58 object streams
  3905 named destinations out of 4296 (max. 500000)
  731 words of extra memory for PDF output out of 10000 (max. 10000000)
 
