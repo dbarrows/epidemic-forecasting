@@ -23,48 +23,48 @@
 \contentsline {section}{\numberline {4.2}Calibrating Samples}{33}{section.4.2}
 \contentsline {section}{\numberline {4.3}IF2 Fitting}{34}{section.4.3}
 \contentsline {section}{\numberline {4.4}IF2 Convergence}{36}{section.4.4}
-\contentsline {section}{\numberline {4.5}IF2 Densities}{37}{section.4.5}
-\contentsline {section}{\numberline {4.6}HMCMC Fitting}{38}{section.4.6}
-\contentsline {section}{\numberline {4.7}HMCMC Densities}{38}{section.4.7}
-\contentsline {section}{\numberline {4.8}HMCMC and Bootstrapping}{39}{section.4.8}
-\contentsline {section}{\numberline {4.9}Multi-trajectory Parameter Estimation}{40}{section.4.9}
-\contentsline {chapter}{\numberline {5}Forecasting Frameworks}{42}{chapter.5}
-\contentsline {section}{\numberline {5.1}Data Setup}{42}{section.5.1}
-\contentsline {section}{\numberline {5.2}IF2}{43}{section.5.2}
-\contentsline {subsection}{\numberline {5.2.1}Parametric Bootstrapping}{44}{subsection.5.2.1}
-\contentsline {subsection}{\numberline {5.2.2}IF2 Forecasts}{44}{subsection.5.2.2}
-\contentsline {section}{\numberline {5.3}HMCMC}{46}{section.5.3}
-\contentsline {section}{\numberline {5.4}Truncation vs. Error}{47}{section.5.4}
-\contentsline {chapter}{\numberline {6}S-map and SIRS}{49}{chapter.6}
-\contentsline {section}{\numberline {6.1}S-maps}{49}{section.6.1}
-\contentsline {section}{\numberline {6.2}S-map Algorithm}{50}{section.6.2}
-\contentsline {section}{\numberline {6.3}SIRS Model}{52}{section.6.3}
-\contentsline {section}{\numberline {6.4}SIRS Model Forecasting}{54}{section.6.4}
-\contentsline {chapter}{\numberline {7}Spatial Epidemics}{56}{chapter.7}
-\contentsline {section}{\numberline {7.1}Spatial SIR}{56}{section.7.1}
-\contentsline {section}{\numberline {7.2}Dewdrop Regression}{58}{section.7.2}
-\contentsline {section}{\numberline {7.3}Spatial Model Forecasting}{59}{section.7.3}
-\contentsline {chapter}{\numberline {8}Discussion and Future Directions}{61}{chapter.8}
-\contentsline {section}{\numberline {8.1}Parallel and Distributed Computing}{61}{section.8.1}
-\contentsline {section}{\numberline {8.2}IF2, Bootstrapping, and Forecasting Methodology}{64}{section.8.2}
-\contentsline {chapter}{\numberline {A}Hamiltonian MCMC}{65}{appendix.A}
-\contentsline {section}{\numberline {A.1}Full R code}{65}{section.A.1}
-\contentsline {section}{\numberline {A.2}Full Stan code}{68}{section.A.2}
-\contentsline {chapter}{\numberline {B}Iterated Filtering}{70}{appendix.B}
-\contentsline {section}{\numberline {B.1}Full R code}{70}{section.B.1}
-\contentsline {section}{\numberline {B.2}Full C++ code}{73}{section.B.2}
-\contentsline {chapter}{\numberline {C}Parameter Fitting}{84}{appendix.C}
-\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{85}{appendix.D}
-\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{85}{section.D.1}
-\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{87}{section.D.2}
-\contentsline {chapter}{\numberline {E}S-map and SIRS}{89}{appendix.E}
-\contentsline {section}{\numberline {E.1}SIRS R Function Code}{89}{section.E.1}
-\contentsline {section}{\numberline {E.2}SMAP Code}{90}{section.E.2}
-\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{92}{section.E.3}
-\contentsline {section}{\numberline {E.4}RStan SIRS Code}{94}{section.E.4}
-\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{96}{section.E.5}
-\contentsline {chapter}{\numberline {F}Spatial Epidemics}{109}{appendix.F}
-\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{109}{section.F.1}
-\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{111}{section.F.2}
-\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{113}{section.F.3}
-\contentsline {section}{\numberline {F.4}CUDA IF2 Spatial Fitting Code}{124}{section.F.4}
+\contentsline {section}{\numberline {4.5}IF2 Densities}{38}{section.4.5}
+\contentsline {section}{\numberline {4.6}HMCMC Fitting}{39}{section.4.6}
+\contentsline {section}{\numberline {4.7}HMCMC Densities}{39}{section.4.7}
+\contentsline {section}{\numberline {4.8}HMCMC and Bootstrapping}{40}{section.4.8}
+\contentsline {section}{\numberline {4.9}Multi-trajectory Parameter Estimation}{41}{section.4.9}
+\contentsline {chapter}{\numberline {5}Forecasting Frameworks}{43}{chapter.5}
+\contentsline {section}{\numberline {5.1}Data Setup}{43}{section.5.1}
+\contentsline {section}{\numberline {5.2}IF2}{44}{section.5.2}
+\contentsline {subsection}{\numberline {5.2.1}Parametric Bootstrapping}{45}{subsection.5.2.1}
+\contentsline {subsection}{\numberline {5.2.2}IF2 Forecasts}{45}{subsection.5.2.2}
+\contentsline {section}{\numberline {5.3}HMCMC}{47}{section.5.3}
+\contentsline {section}{\numberline {5.4}Truncation vs. Error}{48}{section.5.4}
+\contentsline {chapter}{\numberline {6}S-map and SIRS}{50}{chapter.6}
+\contentsline {section}{\numberline {6.1}S-maps}{50}{section.6.1}
+\contentsline {section}{\numberline {6.2}S-map Algorithm}{51}{section.6.2}
+\contentsline {section}{\numberline {6.3}SIRS Model}{53}{section.6.3}
+\contentsline {section}{\numberline {6.4}SIRS Model Forecasting}{55}{section.6.4}
+\contentsline {chapter}{\numberline {7}Spatial Epidemics}{57}{chapter.7}
+\contentsline {section}{\numberline {7.1}Spatial SIR}{57}{section.7.1}
+\contentsline {section}{\numberline {7.2}Dewdrop Regression}{59}{section.7.2}
+\contentsline {section}{\numberline {7.3}Spatial Model Forecasting}{60}{section.7.3}
+\contentsline {chapter}{\numberline {8}Discussion and Future Directions}{62}{chapter.8}
+\contentsline {section}{\numberline {8.1}Parallel and Distributed Computing}{62}{section.8.1}
+\contentsline {section}{\numberline {8.2}IF2, Bootstrapping, and Forecasting Methodology}{65}{section.8.2}
+\contentsline {chapter}{\numberline {A}Hamiltonian MCMC}{66}{appendix.A}
+\contentsline {section}{\numberline {A.1}Full R code}{66}{section.A.1}
+\contentsline {section}{\numberline {A.2}Full Stan code}{69}{section.A.2}
+\contentsline {chapter}{\numberline {B}Iterated Filtering}{71}{appendix.B}
+\contentsline {section}{\numberline {B.1}Full R code}{71}{section.B.1}
+\contentsline {section}{\numberline {B.2}Full C++ code}{74}{section.B.2}
+\contentsline {chapter}{\numberline {C}Parameter Fitting}{85}{appendix.C}
+\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{86}{appendix.D}
+\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{86}{section.D.1}
+\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{88}{section.D.2}
+\contentsline {chapter}{\numberline {E}S-map and SIRS}{90}{appendix.E}
+\contentsline {section}{\numberline {E.1}SIRS R Function Code}{90}{section.E.1}
+\contentsline {section}{\numberline {E.2}SMAP Code}{91}{section.E.2}
+\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{93}{section.E.3}
+\contentsline {section}{\numberline {E.4}RStan SIRS Code}{95}{section.E.4}
+\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{97}{section.E.5}
+\contentsline {chapter}{\numberline {F}Spatial Epidemics}{110}{appendix.F}
+\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{110}{section.F.1}
+\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{112}{section.F.2}
+\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{114}{section.F.3}
+\contentsline {section}{\numberline {F.4}CUDA IF2 Spatial Fitting Code}{125}{section.F.4}
