@@ -18,6 +18,8 @@
 \usepackage{listings}
 \usepackage{fancyvrb}
 \usepackage{hyperref}
+%\usepackage{xcolor}
+
 \usepackage{lstbayes}
 \usepackage{subfiles}
 \usepackage{fancyhdr}
@@ -34,13 +36,18 @@
 
 %\setlength{\belowcaptionskip}{-10pt}
 
-\usepackage[usenames,dvipsnames]{color}
+\usepackage[dvipsnames]{xcolor}
 \definecolor{DGrey}{gray}{0.25}
 \definecolor{MGrey}{gray}{0.50}
 \definecolor{LGrey}{gray}{0.75}
 
+\hypersetup{%
+  colorlinks=false,
+  linkbordercolor=red
+}
+
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
-\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{Gray}{#1}}
+\newcommand\mycommfont[1]{\footnotesize\ttfamily\textcolor{gray}{#1}}
 \SetCommentSty{mycommfont}
 
 \usepackage{inconsolata}

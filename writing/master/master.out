@@ -46,7 +46,7 @@
 \BOOKMARK [1][-]{section.7.3}{Spatial Model Forecasting}{chapter.7}% 46
 \BOOKMARK [0][-]{chapter.8}{Discussion and Future Directions}{}% 47
 \BOOKMARK [1][-]{section.8.1}{Parallel and Distributed Computing}{chapter.8}% 48
-\BOOKMARK [1][-]{section.8.2}{IF2 Forecasting Methodology}{chapter.8}% 49
+\BOOKMARK [1][-]{section.8.2}{IF2, Bootstrapping, and Forecasting Methodology}{chapter.8}% 49
 \BOOKMARK [0][-]{appendix.A}{Hamiltonian MCMC}{}% 50
 \BOOKMARK [1][-]{section.A.1}{Full R code}{appendix.A}% 51
 \BOOKMARK [1][-]{section.A.2}{Full Stan code}{appendix.A}% 52
