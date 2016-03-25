@@ -1,15 +1,17 @@
+% !TEX root = ../master/master.tex
+
 %% Dexter Barrows, 2016
 %% dbarrows.github.io
 
 
 	Particle filters are similar to MCMC-based methods in that they use likelihoods to evaluate the validity of proposed parameter sets given observed data $D$, but differ in that they are largely trying to produce point estimates of the parameters instead of samples from the posterior distribution.
 
-	Instead of constructing a Markov chain and approximating its stationary distribution, a cohort of ``particles'' are used to move through the data in an on-line (sequential) fashion with the cohort being culled of poorly-performing particles at each iteration via importance sampling. If the culled particles are not replenished, this will be a Sequential Importance Sampling (SIS) particle filter. If the culled particles are replenished from surviving particles, in a sense setting up a process analogous to Darwinian selection, then this will be a Sequential Importance Resampling (SIR) particle filter.
+	Instead of constructing a Markov chain and approximating its stationary distribution, a cohort of ``particles'' are used to move through the data in an on-line (sequential) fashion with the cohort being culled of poorly-performing particles at each iteration via importance sampling. If the culled particles are not replenished, this will be a Sequential Importance Sampling (SIS) particle filter. If the culled particles are replenished from surviving particles, in a sense setting up a process analogous to Darwinian selection, then this will be a Sequential Importance Resampling (SIR) particle filter \cite{Arulampalam2002}.
 
 
 \section{Formulation}
 
-	Particle filters, also called Sequential Monte-Carlo (SMC) filters, feature similar core functionality as the venerable Kalman Filter. As the algorithm moves through the data (sequence of observations), a prediction-update cycle is used to simulate the evolution of the model $M$ with different particular parameter selections, track how closely these predictions approximate the new observed value, and update the current cohort appropriately.
+	Particle filters, also called Sequential Monte-Carlo (SMC) filters, feature similar core functionality as the venerable Kalman Filter. As the algorithm moves through the data (sequence of observations), a prediction-update cycle is used to simulate the evolution of the model $M$ with different particular parameter selections, track how closely these predictions approximate the new observed value, and update the current cohort appropriately \cite{Arulampalam2002}.
 
 	Two separate functions are used to simulate the evolution and observation processes. The ``true'' state evolution is specified by
 
@@ -96,7 +98,7 @@
 
 \section{Particle Collapse}
 
-	Often, a situation may arise in which a single particle is assigned a normalized weight very close to 1 and all the other particles are assigned weights very close to 0. When this occurs, the next generation of the cohort will overwhelmingly consist of descendants of the heavily-weighted particle, termed particle collapse or degeneracy.
+	Often, a situation may arise in which a single particle is assigned a normalized weight very close to 1 and all the other particles are assigned weights very close to 0. When this occurs, the next generation of the cohort will overwhelmingly consist of descendants of the heavily-weighted particle, termed particle collapse or degeneracy \cite{Bengtsson2008}\cite{Arulampalam2002}.
 
 	Since the basic SIR particle filter does not perturb either the particle system states or system parameter values, the cohort will quickly consist solely of identical particles, effectively halting further exploration of the parameter space as new data is introduced.
 
@@ -110,19 +112,19 @@
 		N_{\small\text{eff}} = \frac{1}{\sum_1^J (w^{(j)})^2}.
 	\end{equation}
 
-	This can be used to diagnose not only when collapse has occurred, but can also indicate when it is near.
+	This can be used to diagnose not only when collapse has occurred, but can also indicate when it is near \cite{Arulampalam2002}.
 
 
 \section{Iterated Filtering and Data Cloning}
 
 	A particle filter hinges on the idea that as it progresses through the data set $D$, its estimate of the posterior carried in the cohort of particles approaches maximum likelihood. However, this convergence may not be fast enough so that the estimate it produces is of quality before the data runs out. One way around this problem is to ``clone'' the data and make multiple passes through it as if it were a continuation of the original time series. Note that the system state contained in each particle will have to be reset with each pass.
 
-	Rigorous proofs have been developed [\textit{Ionides ref.}] that show that by treating the parameters as stochastic processes instead of fixed values, the multiple passes through the data will indeed force convergence of the process mean toward maximum likelihood, and the process variance toward 0.
+	Rigorous proofs have been developed \cite{Ionides2006}\cite{Ionides2015} that show that by treating the parameters as stochastic processes instead of fixed values, the multiple passes through the data will indeed force convergence of the process mean toward maximum likelihood, and the process variance toward 0.
 
 
 \section{Iterated Filtering 2 (IF2)}
 
-	The successor to Iterated Filtering 1 [\textit{Ionides ref}], Iterated Filtering 2 is simpler, faster, and demonstrated better convergence toward maximum likelihood. The core concept involves a two-pronged approach. First, a data cloning-like procedure is used to allow more time for the parameter stochastic process means to converge to maximum likelihood, and frequent cooled perturbation of the particle parameters allow better exploration of the parameter space while still allowing convergence to good point estimates.
+	The successor to Iterated Filtering 1 \cite{Ionides2006}, Iterated Filtering 2 \cite{Ionides2015} is simpler, faster, and demonstrated better convergence toward maximum likelihood. The core concept involves a two-pronged approach. First, a data cloning-like procedure is used to allow more time for the parameter stochastic process means to converge to maximum likelihood, and frequent cooled perturbation of the particle parameters allow better exploration of the parameter space while still allowing convergence to good point estimates.
 
 	IF2 is not designed to estimate the full posterior distribution, instead to produce a Maximum Likelihood (ML) point estimate. Further, IF2 thwarts the problem of particle collapse by keeping at least some perturbation in the system at all times. It is important to note that while true particle collapse will not occur, there is still risk of a pseudo-collapse in which all particles will be extremely close to one another so as to be virtually indistinguishable. However this will only occur with the use of overly-aggressive cooling strategies or by specifying an excessive number of passes through the data.
 
@@ -227,7 +229,7 @@
 
     Figure [\ref{mcmcdataplot}] in the previous section shows the true SIR ODE system solution and data.
 
-    The IF2 algorithm was implemented in C++ for speed, and integrated into the R workflow using the \verb|Rcpp| package.
+    The IF2 algorithm was implemented in C++ for speed, and integrated into the R workflow using the Rcpp package.
 
     There are three primary reasons we implemented our own version of IF2 instead of using POMP. First, POMP does not provide final particle state distributions, making it difficult to calibrate the algorithm parameters against the parameters used in RStan (this procedure is described in the next chapter). Second, it is prudent to cross-check the validity of an algorithm using another implementation. Third, this code can then serve as a jumping-off point for further development using Graphics Processing Unit acceleration (outlined in Chapter 8). We must acknowledge the disadvantages as well: POMP has been extensively vetted with real-world usage, and using it would require far lees work as we would only need to specify the model. That being said, we believe the advantages outweigh the disadvantages in this case, and so have proceeded to develop our own implementation of IF2.
 	
