@@ -96,44 +96,44 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {8.3}Fin}{63}{section.8.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {A}Hamiltonian MCMC}{68}{appendix.A}
+\contentsline {chapter}{\numberline {A}Hamiltonian MCMC}{69}{appendix.A}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.1}Full R code}{68}{section.A.1}
+\contentsline {section}{\numberline {A.1}Full R code}{69}{section.A.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {A.2}Full Stan code}{71}{section.A.2}
+\contentsline {section}{\numberline {A.2}Full Stan code}{72}{section.A.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {B}Iterated Filtering}{73}{appendix.B}
+\contentsline {chapter}{\numberline {B}Iterated Filtering}{74}{appendix.B}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.1}Full R code}{73}{section.B.1}
+\contentsline {section}{\numberline {B.1}Full R code}{74}{section.B.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {B.2}Full C++ code}{75}{section.B.2}
+\contentsline {section}{\numberline {B.2}Full C++ code}{76}{section.B.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {C}Parameter Fitting}{86}{appendix.C}
+\contentsline {chapter}{\numberline {C}Parameter Fitting}{87}{appendix.C}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{87}{appendix.D}
+\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{88}{appendix.D}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{87}{section.D.1}
+\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{88}{section.D.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{89}{section.D.2}
+\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{90}{section.D.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {E}S-map and SIRS}{91}{appendix.E}
+\contentsline {chapter}{\numberline {E}S-map and SIRS}{92}{appendix.E}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.1}SIRS R Function Code}{91}{section.E.1}
+\contentsline {section}{\numberline {E.1}SIRS R Function Code}{92}{section.E.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.2}SMAP Code}{92}{section.E.2}
+\contentsline {section}{\numberline {E.2}SMAP Code}{93}{section.E.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{94}{section.E.3}
+\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{95}{section.E.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.4}RStan SIRS Code}{96}{section.E.4}
+\contentsline {section}{\numberline {E.4}RStan SIRS Code}{97}{section.E.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{97}{section.E.5}
+\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{98}{section.E.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {F}Spatial Epidemics}{111}{appendix.F}
+\contentsline {chapter}{\numberline {F}Spatial Epidemics}{112}{appendix.F}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{111}{section.F.1}
+\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{112}{section.F.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{113}{section.F.2}
+\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{114}{section.F.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{115}{section.F.3}
+\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{116}{section.F.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {F.4}CUDA IF2 Spatial Fitting Code}{126}{section.F.4}
+\contentsline {section}{\numberline {F.4}CUDA IF2 Spatial Fitting Code}{127}{section.F.4}

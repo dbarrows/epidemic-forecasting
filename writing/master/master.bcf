@@ -2100,6 +2100,26 @@
     <bcf:citekey order="50">Neal2011</bcf:citekey>
     <bcf:citekey order="51">Neal2011</bcf:citekey>
     <bcf:citekey order="52">Hoffman2014</bcf:citekey>
+    <bcf:citekey order="53">Arulampalam2002</bcf:citekey>
+    <bcf:citekey order="54">Arulampalam2002</bcf:citekey>
+    <bcf:citekey order="55">Bengtsson2008</bcf:citekey>
+    <bcf:citekey order="56">Arulampalam2002</bcf:citekey>
+    <bcf:citekey order="57">Arulampalam2002</bcf:citekey>
+    <bcf:citekey order="58">Ionides2006</bcf:citekey>
+    <bcf:citekey order="59">Ionides2015</bcf:citekey>
+    <bcf:citekey order="60">Ionides2006</bcf:citekey>
+    <bcf:citekey order="61">Ionides2015</bcf:citekey>
+    <bcf:citekey order="62">Harding2014</bcf:citekey>
+    <bcf:citekey order="63">King2015a</bcf:citekey>
+    <bcf:citekey order="64">King2016</bcf:citekey>
+    <bcf:citekey order="65">Sugihara1990</bcf:citekey>
+    <bcf:citekey order="66">Sugihara1994</bcf:citekey>
+    <bcf:citekey order="67">Hsieh2008</bcf:citekey>
+    <bcf:citekey order="68">Glaser2014</bcf:citekey>
+    <bcf:citekey order="69">Glaser2014</bcf:citekey>
+    <bcf:citekey order="70">Hsieh2008</bcf:citekey>
+    <bcf:citekey order="71">Waldrop2016</bcf:citekey>
+    <bcf:citekey order="72">King2015</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">

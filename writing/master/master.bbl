@@ -243,6 +243,52 @@
       \verb :Users/dexter/Dropbox/McMaster/Papers/What{\_}You{\_}See{\_}May{\_}Not{\_}Be{\_}What{\_}You{\_}Get{\_}{\_}A{\_}Brief,.21.pdf:pdf
       \endverb
     \endentry
+    \entry{Bengtsson2008}{article}{}
+      \name{author}{3}{}{%
+        {{hash=189ef45435b8d199fda6a4a7d8b366be}{%
+           family={Bengtsson},
+           family_i={B\bibinitperiod},
+           given={Thomas},
+           given_i={T\bibinitperiod}}}%
+        {{hash=4d3438d75903d8ded3f2ca3b8a74ab42}{%
+           family={Bickel},
+           family_i={B\bibinitperiod},
+           given={Peter},
+           given_i={P\bibinitperiod}}}%
+        {{hash=a9c8728e355996d027a7e56b60820a18}{%
+           family={Li},
+           family_i={L\bibinitperiod},
+           given={Bo},
+           given_i={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{fa73a1d67b43b4f1c5e4ea4155c2c2f0}
+      \strng{fullhash}{fa73a1d67b43b4f1c5e4ea4155c2c2f0}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{It has been widely realized that Monte Carlo methods (approximation via a sample ensemble) may fail in large scale systems. This work offers some theoretical insight into this phenomenon in the context of the particle filter. We demonstrate that the maximum of the weights associated with the sample ensemble converges to one as both the sample size and the system dimension tends to infinity. Specifically, under fairly weak assumptions, if the ensemble size grows sub-exponentially in the cube root of the system dimension, the convergence holds for a single update step in state-space models with independent and identically distributed kernels. Further, in an important special case, more refined arguments show (and our simulations suggest) that the convergence to unity occurs unless the ensemble grows super-exponentially in the system dimension. The weight singularity is also established in models with more general multivariate likelihoods, e.g. Gaussian and Cauchy. Although presented in the context of atmospheric data assimilation for numerical weather prediction, our results are generally valid for high-dimensional particle filters.}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{0940600749}
+      \field{journaltitle}{Probability and Statistics}
+      \field{title}{{Curse-of-dimensionality revisited: Collapse of the particle filter in very large scale systems}}
+      \field{volume}{2}
+      \field{year}{2008}
+      \field{pages}{316\bibrangedash 334}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1214/193940307000000518
+      \endverb
+      \verb{eprint}
+      \verb 0805.3034
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/euclid.imsc.1207580091.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://arxiv.org/abs/0805.3034
+      \endverb
+    \endentry
     \entry{Camacho2011}{article}{}
       \name{author}{6}{}{%
         {{hash=9ed61b4bab035a8d59dadda87cc35c83}{%
@@ -638,6 +684,29 @@
       \verb :Users/dexter/Dropbox/McMaster/Papers/Graham et al. - 2016 - Explaining rapid reinfections in multiple- wave influenza outbreaks Tristan da Cunha 1971 epidemic as a case stu.pdf:pdf
       \endverb
       \keyw{host immune response,influenza pandemic,model selection,reinfection,state-space models}
+    \endentry
+    \entry{Harding2014}{article}{}
+      \name{author}{1}{}{%
+        {{hash=6bcf4802417a221789aac87844fe2d21}{%
+           family={Harding},
+           family_i={H\bibinitperiod},
+           given={Bradley},
+           given_i={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{6bcf4802417a221789aac87844fe2d21}
+      \strng{fullhash}{6bcf4802417a221789aac87844fe2d21}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Standard errors : A review and evaluation of standard error estimators using Monte Carlo simulations}}
+      \field{year}{2014}
+      \field{pages}{107\bibrangedash 123}
+      \range{pages}{17}
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/p107.pdf:pdf
+      \endverb
+      \keyw{estimation,evaluation,standard error}
     \endentry
     \entry{Hartig2011}{article}{}
       \name{author}{5}{}{%
@@ -1580,6 +1649,31 @@
       \endverb
       \verb{file}
       \verb :Users/dexter/Dropbox/McMaster/Papers/Vidal Rodeiro, Lawson - 2006 - Online updating of space-time disease surveillance models via particle filters.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Waldrop2016}{article}{}
+      \name{author}{1}{}{%
+        {{hash=8f7a7777416f9f2b8219613c08bc65cb}{%
+           family={Waldrop},
+           family_i={W\bibinitperiod},
+           given={Mitchell},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{8f7a7777416f9f2b8219613c08bc65cb}
+      \strng{fullhash}{8f7a7777416f9f2b8219613c08bc65cb}
+      \field{sortinit}{W}
+      \field{sortinithash}{99e3ba1b3f78bb6f073e7fa7ac11636b}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Nature}
+      \field{number}{11. February}
+      \field{title}{{MORE THAN MOORE}}
+      \field{volume}{530}
+      \field{year}{2016}
+      \field{pages}{145}
+      \range{pages}{1}
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/530144a.pdf:pdf
       \endverb
     \endentry
     \entry{Yang2014}{article}{}
