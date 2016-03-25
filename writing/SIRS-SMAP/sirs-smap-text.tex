@@ -1,9 +1,11 @@
+% !TEX root = ../master/master.tex
+
 %% Dexter Barrows, 2016
 %% dbarrows.github.io
 
 \section{S-maps}
 
-    A family of forecasting methods that shy away from the mechanistic model-based approaches outlined in the previous sections have been developed by Sugihara (references) over the last several decades. As these methods do not include a mechanistic model in their forecasting process, they also do not attempt to perform parameter estimation or inference. Instead they attempt to reconstruct the underlying dynamical process as a weighted linear model from a time series.
+    A family of forecasting methods that shy away from the mechanistic model-based approaches outlined in the previous sections have been developed by George Sugihara and collaborators \cite{Sugihara1990}\cite{Sugihara1994}\cite{Hsieh2008}\cite{Glaser2014} over the last several decades. As these methods do not include a mechanistic model in their forecasting process, they also do not attempt to perform parameter estimation or inference. Instead they attempt to reconstruct the underlying dynamical process as a weighted linear model from a time series.
 
     One such method, the sequential locally weighted global linear maps (S-map), builds a global linear map model and uses it to produce forecasts directly. Despite relying on a linear mapping, the S-map does not assume the time series on which it is operating is the product of linear system dynamics, and in fact was developed to accommodate non-linear dynamics. The linear component of the method only comes into play when combining forecast components together to produce a single estimate
 
@@ -146,7 +148,7 @@
         \caption{S-map applied to the data from the previous figure. The solid line shows the infection counts with observation noise from the previous plot, and the dotted line is the S-map forecast. Parameters chosen were $E = 14$ and $\theta = 3$. \label{smap_project}}
     \end{figure}
 
-    The parameters used in the S-map algorithm to obtain the forecast used in Figure [\ref{smap_project}] were obtained using a grid search of potential parameters outlined in [\textit{Sugihara ref}]. The script to perform this optimisation procedure is included in the appendices.
+    The parameters used in the S-map algorithm to obtain the forecast used in Figure [\ref{smap_project}] were obtained using a grid search of potential parameters outlined in \cite{Glaser2014}. The script to perform this optimisation procedure is included in the appendices.
 
 
 \section{SIRS Model Forecasting}
