@@ -2049,6 +2049,57 @@
     <bcf:datasource type="file" datatype="bibtex">thesis-refs.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
+    <bcf:citekey order="2">Nsoesie2014</bcf:citekey>
+    <bcf:citekey order="3">Chretien2014</bcf:citekey>
+    <bcf:citekey order="4">Yang2014</bcf:citekey>
+    <bcf:citekey order="5">Nsoesie2014</bcf:citekey>
+    <bcf:citekey order="6">Camacho2011</bcf:citekey>
+    <bcf:citekey order="7">Babyak2004</bcf:citekey>
+    <bcf:citekey order="8">Shaman2014</bcf:citekey>
+    <bcf:citekey order="9">King2015</bcf:citekey>
+    <bcf:citekey order="10">Zhang2013</bcf:citekey>
+    <bcf:citekey order="11">Camacho2011</bcf:citekey>
+    <bcf:citekey order="12">Arulampalam2002</bcf:citekey>
+    <bcf:citekey order="13">Sau1918</bcf:citekey>
+    <bcf:citekey order="14">Yang2014</bcf:citekey>
+    <bcf:citekey order="15">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="16">Neal2011</bcf:citekey>
+    <bcf:citekey order="17">Yang2014</bcf:citekey>
+    <bcf:citekey order="18">Sugihara1994</bcf:citekey>
+    <bcf:citekey order="19">Nsoesie2014</bcf:citekey>
+    <bcf:citekey order="20">Yang2014</bcf:citekey>
+    <bcf:citekey order="21">Chretien2014</bcf:citekey>
+    <bcf:citekey order="22">Nsoesie2013</bcf:citekey>
+    <bcf:citekey order="23">Chretien2014</bcf:citekey>
+    <bcf:citekey order="24">Neal2011</bcf:citekey>
+    <bcf:citekey order="25">Carpenter2016</bcf:citekey>
+    <bcf:citekey order="26">Hoffman2014</bcf:citekey>
+    <bcf:citekey order="27">StanDevelopmentTeam2015</bcf:citekey>
+    <bcf:citekey order="28">Ionides2015</bcf:citekey>
+    <bcf:citekey order="29">Ionides2006</bcf:citekey>
+    <bcf:citekey order="30">Eddelbuettel2011</bcf:citekey>
+    <bcf:citekey order="31">King2015a</bcf:citekey>
+    <bcf:citekey order="32">King2016</bcf:citekey>
+    <bcf:citekey order="33">Sugihara1994</bcf:citekey>
+    <bcf:citekey order="34">Sugihara1990</bcf:citekey>
+    <bcf:citekey order="35">Hsieh2008</bcf:citekey>
+    <bcf:citekey order="36">Glaser2014</bcf:citekey>
+    <bcf:citekey order="37">Glaser2014</bcf:citekey>
+    <bcf:citekey order="38">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="39">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="40">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="41">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="42">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="43">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="44">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="45">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="46">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="47">Andrieu2003</bcf:citekey>
+    <bcf:citekey order="48">Link2012</bcf:citekey>
+    <bcf:citekey order="49">Neal2011</bcf:citekey>
+    <bcf:citekey order="50">Neal2011</bcf:citekey>
+    <bcf:citekey order="51">Neal2011</bcf:citekey>
+    <bcf:citekey order="52">Hoffman2014</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">

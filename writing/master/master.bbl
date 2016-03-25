@@ -213,6 +213,36 @@
       \endverb
       \keyw{Bayes Theorem,Biological Evolution,Climate,Epitopes,Epitopes: genetics,Forecasting,Forecasting: methods,Humans,Incidence,Influenza A virus,Influenza A virus: genetics,Influenza A virus: immunology,Influenza,Human,Influenza,Human: epidemiology,Israel,Israel: epidemiology,Likelihood Functions,Models,Biological,Seasons}
     \endentry
+    \entry{Babyak2004}{article}{}
+      \name{author}{1}{}{%
+        {{hash=a4147ecbd03b266ed5ae87201d248474}{%
+           family={Babyak},
+           family_i={B\bibinitperiod},
+           given={M},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{a4147ecbd03b266ed5ae87201d248474}
+      \strng{fullhash}{a4147ecbd03b266ed5ae87201d248474}
+      \field{sortinit}{B}
+      \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{isbn}{1534-7796 (Electronic)0033-3174 (Linking)}
+      \field{issn}{0033-3174}
+      \field{journaltitle}{$\backslash$it J. Bio. Med.}
+      \field{number}{3}
+      \field{title}{{What You See May Not Be What You Get: A Brief, Nontechnical Introduction to Overfitting in Regression Type Models}}
+      \field{volume}{66}
+      \field{year}{2004}
+      \field{pages}{411\bibrangedash 421}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1097/01.psy.0000127692.23278.a9
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/What{\_}You{\_}See{\_}May{\_}Not{\_}Be{\_}What{\_}You{\_}Get{\_}{\_}A{\_}Brief,.21.pdf:pdf
+      \endverb
+    \endentry
     \entry{Camacho2011}{article}{}
       \name{author}{6}{}{%
         {{hash=9ed61b4bab035a8d59dadda87cc35c83}{%
@@ -266,6 +296,46 @@
       \endverb
       \verb{file}
       \verb :Users/dexter/Dropbox/McMaster/Papers/Camacho et al. - 2011 - Explaining rapid reinfections in multiple-wave influenza outbreaks Tristan da Cunha 1971 epidemic as a case s(2).pdf:pdf
+      \endverb
+    \endentry
+    \entry{Carpenter2016}{article}{}
+      \name{author}{4}{}{%
+        {{hash=5321a7ac2b0407bc405fa8816fd73f09}{%
+           family={Carpenter},
+           family_i={C\bibinitperiod},
+           given={Bob},
+           given_i={B\bibinitperiod}}}%
+        {{hash=fb04571d965766ee6d71dafbd3eb452e}{%
+           family={Lee},
+           family_i={L\bibinitperiod},
+           given={Daniel},
+           given_i={D\bibinitperiod}}}%
+        {{hash=466c778c86cfc12e27ae556f2730db5f}{%
+           family={Brubaker},
+           family_i={B\bibinitperiod},
+           given={Ma},
+           given_i={M\bibinitperiod}}}%
+        {{hash=6f0d8885ad4c012b0ced0ee95cdf2729}{%
+           family={Riddell},
+           family_i={R\bibinitperiod},
+           given={Allen},
+           given_i={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{315a7c9e1cdeecc523de3b4d0e029d66}
+      \strng{fullhash}{cec86d2400c5967a34337b793915727d}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Stan is a probabilistic programming language for specifying statistical models. A Stan program imperatively defines a log probability function over parameters conditioned on specified data and constants. As of version 2.2.0, Stan provides full Bayesian inference for continuous-variable models through Markov chain Monte Carlo methods such as the No-U-Turn sampler, an adaptive form of Hamiltonian Monte Carlo sampling. Penalized maximum likelihood estimates are calculated using optimization methods such as the Broydenˆ a˘SFletcherˆA¸ A¸ a˘SGoldfarbˆA¸ a˘SShanno algorithm. Stan is also a platform for computing log densities and their gradients and Hessians, which can be used in alternative algorithms such as variational Bayes, expectation propa- gation, and marginal inference using approximate integration. To this end, Stan is set up so that the densities, gradients, and Hessians, along with intermediate quantities of the algorithm such as acceptance probabilities, are easily accessible. Stan can be called from the command line, through R using the RStan package, or through < Python using the PyStan package. All three interfaces support sampling or optimization-based inference and analysis, and RStan and PyStan also provide access to log}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{title}{{Stan : A Probabilistic Programming Language}}
+      \field{year}{2016}
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/stan-resubmit-JSS1293.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.stat.columbia.edu/%7B~%7Dgelman/research/unpublished/stan-resubmit-JSS1293.pdf
       \endverb
     \endentry
     \entry{Chretien2014}{article}{}
@@ -434,6 +504,50 @@
       \endverb
       \keyw{Adult,Child,Disease Outbreaks,Humans,Influenza,Human,Influenza,Human: epidemiology,Linear Models,Models,Biological,Population Surveillance,Search Engine,Search Engine: methods,Seasons,Weather}
     \endentry
+    \entry{Eddelbuettel2011}{article}{}
+      \name{author}{2}{}{%
+        {{hash=19c16a29c7c1db67796fdee712478912}{%
+           family={Eddelbuettel},
+           family_i={E\bibinitperiod},
+           given={Dirk},
+           given_i={D\bibinitperiod}}}%
+        {{hash=8f355c29d884ce73f431540d46cecc6f}{%
+           family={Fran},
+           family_i={F\bibinitperiod},
+           given={Romain},
+           given_i={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{3577bd3e539646bb0b09db1858235f67}
+      \strng{fullhash}{3577bd3e539646bb0b09db1858235f67}
+      \field{sortinit}{E}
+      \field{sortinithash}{fefc5210ef4721525b2a478df41efcd4}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The Rcpp package simplifies integrating C++ code with R. It provides a consistent C++ class hierarchy that maps various types of R objects (vectors, matrices, functions, environments, ...) to dedicated C++ classes. Object interchange between R and C++ is managed by simple, flexible and extensible concepts which include broad support for C++ Standard Template Library idioms. C++ code can both be compiled, linked and loaded on the fly, or added via packages. Flexible error and exception code handling is provided. Rcpp substantially lowers the barrier for programmers wanting to combine C++ code with R.}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{9781461468677}
+      \field{issn}{15487660}
+      \field{journaltitle}{Journal Of Statistical Software}
+      \field{number}{8}
+      \field{title}{{Rcpp : Seamless R and C ++ Integration}}
+      \field{volume}{40}
+      \field{year}{2011}
+      \field{pages}{1\bibrangedash 18}
+      \range{pages}{18}
+      \verb{doi}
+      \verb 10.1007/978-1-4614-6868-4
+      \endverb
+      \verb{eprint}
+      \verb arXiv:1011.1669v3
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/v40i08.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.jstatsoft.org/v40/i08/
+      \endverb
+      \keyw{c,call,foreign function interface,r}
+    \endentry
     \entry{Glaser2014}{article}{}
       \name{author}{3}{}{%
         {{hash=664d7804eb49ded5e0d07dca8bec26d7}{%
@@ -577,6 +691,44 @@
       \endverb
       \keyw{Bayesian statistics,Indirect inference,Intractable likelihood,Inverse modelling,Likelihood approximation,Likelihood-free inference,Maximum likelihood,Model selection,Parameter estimation,Stochastic simulation}
     \endentry
+    \entry{Hoffman2014}{article}{}
+      \name{author}{2}{}{%
+        {{hash=a922cd4d9e8a007dcbb79cbc3dcd9a96}{%
+           family={Hoffman},
+           family_i={H\bibinitperiod},
+           given={Matthew\bibnamedelima D.},
+           given_i={M\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+        {{hash=1e1eb60e3b6e222217bf8e9b24070b28}{%
+           family={Gelman},
+           family_i={G\bibinitperiod},
+           given={Andrew},
+           given_i={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{6d2817f79dd2c7ac6ea748ab4a8ac953}
+      \strng{fullhash}{6d2817f79dd2c7ac6ea748ab4a8ac953}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{Journal of Machine Learning Research}
+      \field{number}{April}
+      \field{title}{{The No-U-Turn Sampler: Adaptively Setting Path Lengths in Hamiltonian Monte Carlo}}
+      \field{volume}{15}
+      \field{year}{2014}
+      \field{pages}{1593\bibrangedash 1623}
+      \range{pages}{31}
+      \verb{eprint}
+      \verb 1111.4246
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/nuts.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://mc-stan.org/
+      \endverb
+      \keyw{adaptive monte carlo,bayesian inference,dual averaging,hamiltonian monte carlo,markov chain monte carlo}
+    \endentry
     \entry{Hsieh2008}{article}{}
       \name{author}{3}{}{%
         {{hash=519e3a9e1934a70f5bcf794f2d597168}{%
@@ -717,6 +869,44 @@
       \verb http://www.pnas.org/lookup/doi/10.1073/pnas.1410597112
       \endverb
     \endentry
+    \entry{King2015a}{article}{}
+      \name{author}{3}{}{%
+        {{hash=26453edaa112da2dca3455595f23c408}{%
+           family={King},
+           family_i={K\bibinitperiod},
+           given={Aaron\bibnamedelima A},
+           given_i={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=7e8822b2f2d10ac2f540a2428a8d5c8c}{%
+           family={Nguyen},
+           family_i={N\bibinitperiod},
+           given={Dao},
+           given_i={D\bibinitperiod}}}%
+        {{hash=f1e57780a2c782537d3810e6b107cb85}{%
+           family={Ionides},
+           family_i={I\bibinitperiod},
+           given={Edward\bibnamedelima L.},
+           given_i={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+      }
+      \strng{namehash}{f50d5d44f97a7f1126470330e2afc7b5}
+      \strng{fullhash}{f50d5d44f97a7f1126470330e2afc7b5}
+      \field{sortinit}{K}
+      \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{eprinttype}{arXiv}
+      \field{journaltitle}{Journal of Statistical Software}
+      \field{number}{10}
+      \field{title}{{Statistical Inference for Partially Observed Markov Processes via the R Package pomp}}
+      \field{volume}{59}
+      \field{year}{2015}
+      \verb{eprint}
+      \verb arXiv:1509.00503v1
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/1509.00503v2.pdf:pdf
+      \endverb
+      \keyw{data cleaning,data tidying,r,relational databases}
+    \endentry
     \entry{King2015}{article}{}
       \name{author}{4}{}{%
         {{hash=26453edaa112da2dca3455595f23c408}{%
@@ -770,6 +960,117 @@
       \verb http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2015.0347
       \endverb
       \keyw{Ebola virus disease,Subject Areas,computational biology Keywords,emerging infectious disease,forecast,health and disease and epidemiology}
+    \endentry
+    \entry{King2016}{misc}{}
+      \name{author}{11}{}{%
+        {{hash=26453edaa112da2dca3455595f23c408}{%
+           family={King},
+           family_i={K\bibinitperiod},
+           given={Aaron\bibnamedelima A},
+           given_i={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=b8eb11aad3eb7265e472ccad3b55088f}{%
+           family={Ionides},
+           family_i={I\bibinitperiod},
+           given={E},
+           given_i={E\bibinitperiod}}}%
+        {{hash=42455071a9c58f831a24360b2e78a8de}{%
+           family={Bret},
+           family_i={B\bibinitperiod},
+           given={C\bibnamedelima M},
+           given_i={C\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=f88eea518f03cfac58fbd83628cba2c9}{%
+           family={Ellner},
+           family_i={E\bibinitperiod},
+           given={S\bibnamedelima P},
+           given_i={S\bibinitperiod\bibinitdelim P\bibinitperiod}}}%
+        {{hash=93cce98c3840717ec6664161f72e0f39}{%
+           family={Ferrari},
+           family_i={F\bibinitperiod},
+           given={B},
+           given_i={B\bibinitperiod}}}%
+        {{hash=7ddb9d8ea3e3dc779d7f76578cfada61}{%
+           family={Kendall},
+           family_i={K\bibinitperiod},
+           given={B},
+           given_i={B\bibinitperiod}}}%
+        {{hash=bd1823b3aa7cda5fa711174efa703f83}{%
+           family={Lavine},
+           family_i={L\bibinitperiod},
+           given={D},
+           given_i={D\bibinitperiod}}}%
+        {{hash=c2bc7ade9876e73c444412c36adcd847}{%
+           family={Nguyen},
+           family_i={N\bibinitperiod},
+           given={D},
+           given_i={D\bibinitperiod}}}%
+        {{hash=0a63540de85a9b23e97b4f6b0ff517a9}{%
+           family={Reuman},
+           family_i={R\bibinitperiod},
+           given={Daniel\bibnamedelima C},
+           given_i={D\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=1df846795ba81cc291cb44aed860126d}{%
+           family={Wearing},
+           family_i={W\bibinitperiod},
+           given={H},
+           given_i={H\bibinitperiod}}}%
+        {{hash=d0f17f7c2da3971166e26a5ac704d743}{%
+           family={Wood},
+           family_i={W\bibinitperiod},
+           given={S\bibnamedelima N},
+           given_i={S\bibinitperiod\bibinitdelim N\bibinitperiod}}}%
+      }
+      \strng{namehash}{4ce4827150cfdde51912e9740db3d8e3}
+      \strng{fullhash}{90ed7ffc42b09ca5bb46b40bb3e03f77}
+      \field{sortinit}{K}
+      \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A package for the R programming language, available as “pomp” from the Comprehensive R Archive Network, and see http://pomp.r-forge.r-project.org/ Contributors: Maintainer: Aaron A. King}
+      \field{title}{{pomp: Statistical inference for partially observed Markov processes}}
+      \field{year}{2016}
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/pomp.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://kingaa.github.io/pomp
+      \endverb
+    \endentry
+    \entry{Link2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f5030d7064fcd84be9ba1d65c54ee46e}{%
+           family={Link},
+           family_i={L\bibinitperiod},
+           given={William\bibnamedelima A.},
+           given_i={W\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=eaf83aa1e8e229901b6c4ccb5d7e0023}{%
+           family={Eaton},
+           family_i={E\bibinitperiod},
+           given={Mitchell\bibnamedelima J.},
+           given_i={M\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{8c51dc5d1a7256fe50eaa1ef0b7caf0a}
+      \strng{fullhash}{8c51dc5d1a7256fe50eaa1ef0b7caf0a}
+      \field{sortinit}{L}
+      \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{1. Markov chain Monte Carlo (MCMC) is a simulation technique that has revolutionised the analysis of ecological data, allowing the fitting of complex models in a Bayesian framework. Since 2001, there have been nearly 200 papers using MCMC in publications of the Ecological Society of America and the British Ecological Society, including more than 75 in the journal Ecology and 35 in the Journal of Applied Ecology. 2. We have noted that many authors routinely ‘thin’ their simulations, discarding all but every kth sampled value; of the studies we surveyed with details on MCMC implementation, 40{\%} reported thinning. 3. Thinning is often unnecessary and always inefficient, reducing the precision with which features of the Markov chain are summarised. The inefficiency of thinning MCMC output has been known since the early 1990’s, long before MCMC appeared in ecological publications. 4. We discuss the background and prevalence of thinning, illustrate its consequences, discuss circumstances when it might be regarded as a reasonable option and recommend against routine thinning of chains unless necessitated by computer memory limitations.}
+      \field{isbn}{2041-210X}
+      \field{issn}{2041210X}
+      \field{journaltitle}{Methods in Ecology and Evolution}
+      \field{number}{1}
+      \field{title}{{On thinning of chains in MCMC}}
+      \field{volume}{3}
+      \field{year}{2012}
+      \field{pages}{112\bibrangedash 115}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1111/j.2041-210X.2011.00131.x
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/j.2041-210X.2011.00131.x.pdf:pdf
+      \endverb
+      \keyw{Markov chain Monte Carlo,Thinning,WinBUGS}
     \endentry
     \entry{Mardia1998}{article}{}
       \name{author}{4}{}{%
@@ -1119,6 +1420,65 @@
       \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3528592%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
       \endverb
       \keyw{Computational Biology,Computer Simulation,Disease Outbreaks,Disease Outbreaks: statistics {\&} numerical data,Forecasting,Forecasting: methods,Humans,Humidity,Influenza,Human,Influenza,Human: epidemiology,Models,Statistical,New York City,New York City: epidemiology,Retrospective Studies,Seasons}
+    \endentry
+    \entry{Shaman2014}{article}{}
+      \name{author}{3}{}{%
+        {{hash=5ecfaa73ece12900c192ebd26039d7e6}{%
+           family={Shaman},
+           family_i={S\bibinitperiod},
+           given={Jeffrey},
+           given_i={J\bibinitperiod}}}%
+        {{hash=01df867a32cb42670784206b1571551b}{%
+           family={Yang},
+           family_i={Y\bibinitperiod},
+           given={Wan},
+           given_i={W\bibinitperiod}}}%
+        {{hash=8f639bbed93ef10fb5bb373e9627faf4}{%
+           family={Kandula},
+           family_i={K\bibinitperiod},
+           given={Sasikiran},
+           given_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{8bd9ec04e0c0a89bf638958f64a326cc}
+      \strng{fullhash}{8bd9ec04e0c0a89bf638958f64a326cc}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The current West African Ebola outbreak poses an unprecedented public health challenge for the world at large. The response of the global community to the epidemic, including deployment of nurses, doctors, epidemiologists, beds, supplies and security, is shaped by our understanding of the spatial-temporal extent and progression of the disease. Ongoing evaluation of the epidemiological characteristics and future course of the Ebola outbreak is needed to stay abreast of any changes to its transmission dynamics, as well as the success or failure of intervention efforts. Here we use observations, dynamic modeling and Bayesian inference to generate simulations and weekly forecasts of the outbreaks in Guinea, Liberia and Sierra Leone. Estimates of key epidemiological characteristics over time indicate continued epidemic growth in West Africa, though there is some evidence of slowing growth in Liberia. 6-week forecasts over successive weeks corroborate these findings; forecasts projecting no future change in intervention efficacy have been more accurate for Guinea and Sierra Leone, but have overestimated incidence and mortality for Liberia.}
+      \field{isbn}{2157-3999 (Electronic)}
+      \field{issn}{2157-3999}
+      \field{journaltitle}{PLoS Currents}
+      \field{title}{{Inference and Forecast of the Current West African Ebola Outbreak in Guinea, Sierra Leone and Liberia}}
+      \field{volume}{6}
+      \field{year}{2014}
+      \field{pages}{ecurrents.outbreaks.3408774290b1a0f2dd7cae877c8b8f}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/currents.outbreaks.3408774290b1a0f2dd7cae877c8b8ff6
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Inference and Forecast of the Current W... and Liberia – PLOS Currents Outbreaks.pdf:pdf
+      \endverb
+    \endentry
+    \entry{StanDevelopmentTeam2015}{article}{}
+      \name{author}{1}{}{%
+        {{hash=2418ee02a26ab01ead911ec86c507892}{%
+           family={{Stan\bibnamedelimb Development\bibnamedelimb Team}},
+           family_i={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{2418ee02a26ab01ead911ec86c507892}
+      \strng{fullhash}{2418ee02a26ab01ead911ec86c507892}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{{Stan Modeling Language User’s Guide and Reference Manual}}
+      \field{volume}{2.9.0}
+      \field{year}{2015}
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/stan-reference-2.9.0.pdf:pdf
+      \endverb
     \endentry
     \entry{Sugihara1990}{misc}{}
       \name{author}{2}{}{%

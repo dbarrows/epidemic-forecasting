@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  25 MAR 2016 10:39
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  25 MAR 2016 15:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -883,30 +883,30 @@ File: english.lbx 2016/03/03 v3.3 biblatex localization (PK/JW/AB)
 (./master.aux)
 \openout1 = `master.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 175.
-LaTeX Font Info:    Try loading font information for TS1+cmr on input line 175.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 173.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 173.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 175.
-LaTeX Font Info:    ... okay on input line 175.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 173.
+LaTeX Font Info:    ... okay on input line 173.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -949,7 +949,7 @@ Package caption Info: End \AtBeginDocument code.
 
 \c@lstlisting=\count311
 \AtBeginShipoutBox=\box69
-Package hyperref Info: Link coloring OFF on input line 175.
+Package hyperref Info: Link coloring OFF on input line 173.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
 
@@ -959,9 +959,9 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count312
 )
-LaTeX Info: Redefining \ref on input line 175.
-LaTeX Info: Redefining \pageref on input line 175.
-LaTeX Info: Redefining \nameref on input line 175.
+LaTeX Info: Redefining \ref on input line 173.
+LaTeX Info: Redefining \pageref on input line 173.
+LaTeX Info: Redefining \nameref on input line 173.
  (./master.out) (./master.out)
 \@outlinefile=\write5
 \openout5 = `master.out'.
@@ -975,8 +975,8 @@ Package biblatex Info: Automatic encoding selection.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'master.bbl' found.
  (./master.bbl)
-Package biblatex Info: Reference section=0 on input line 175.
-Package biblatex Info: Reference segment=0 on input line 175.
+Package biblatex Info: Reference section=0 on input line 173.
+Package biblatex Info: Reference segment=0 on input line 173.
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/upquote/upquote.sty
 Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verba
@@ -1000,8 +1000,13 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 12.
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ))
-Overfull \hbox (19.907pt too wide) in paragraph at lines 12--189
-[][]  
+Overfull \hbox (15.74869pt too wide) in paragraph at lines 12--187
+[][]
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 12--187
+
  []
 
 [2] [3
@@ -1045,7 +1050,7 @@ Chapter 1.
 (../introduction/introduction.tex [1
 
 ]
-Overfull \hbox (2.57503pt too wide) in paragraph at lines 23--24
+Overfull \hbox (2.57503pt too wide) in paragraph at lines 25--26
 []\OT1/cmr/m/n/12 Combining the phe-nomeno-log-i-cal and mech-a-nis-tic ap-proa
 ches are the semi-mechanistic
  []
@@ -1058,7 +1063,7 @@ File: ../MCMC-HMCMC/./images/finitemachine.pdf Graphic file (type QTm)
 <use  "../MCMC-HMCMC/./images/finitemachine.pdf" > [5
 
 ] [6] [7]
-LaTeX Font Info:    Try loading font information for OT1+zi4 on input line 112.
+LaTeX Font Info:    Try loading font information for OT1+zi4 on input line 114.
 
 
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/inconsolata/ot1zi4.fd
@@ -1211,13 +1216,27 @@ Chapter 8.
 Missing character: There is no ó in font cmr12!
 
 [65]
-Overfull \hbox (33.67558pt too wide) in paragraph at lines 255--255
+Overfull \hbox (33.67558pt too wide) in paragraph at lines 253--253
 \OT1/cmr/m/n/12 2157-3999. \OT1/cmr/m/sc/12 doi\OT1/cmr/m/n/12 : []$\OT1/zi4/m/
 n/12 10 . 1371 / currents . outbreaks . bb1e879a23137022ea79a8c508b030bc$[]\OT1
 /cmr/m/n/12 .
  []
 
-[66] [67]
+[66]
+Overfull \hbox (16.12573pt too wide) in paragraph at lines 253--253
+\OT1/cmr/m/n/12 In: \OT1/cmr/m/it/12 PLoS Cur-rents \OT1/cmr/m/n/12 6 (2014), e
+cur-rents.outbreaks.3408774290b1a0f2dd7cae877c8b8f.
+ []
+
+
+Overfull \hbox (61.53024pt too wide) in paragraph at lines 253--253
+\OT1/cmr/m/sc/12 issn\OT1/cmr/m/n/12 : 2157-3999. \OT1/cmr/m/sc/12 doi\OT1/cmr/
+m/n/12 : []$\OT1/zi4/m/n/12 10 . 1371 / currents . outbreaks . 3408774290b1a0f2
+dd7cae877c8b8ff6$[]\OT1/cmr/m/n/12 . 
+ []
+
+Missing character: There is no ’ in font cmr12!
+[67]
 Appendix A.
 (../MCMC-HMCMC/mcmc-appendix.tex
 (/usr/local/texlive/2015basic/texmf-dist/tex/latex/listings/lstlang1.sty
@@ -1285,13 +1304,13 @@ Overfull \hbox (233.24373pt too wide) in paragraph at lines 411--413
  []
 
 [135] [136] [137] [138] [139] [140] [141] [142] [143] [144]))
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 291.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 289.
  [145]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 291.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 289.
 
 (./master.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 291.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 291.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 289.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 289.
 
 
 LaTeX Warning: There were undefined references.
@@ -1299,17 +1318,17 @@ LaTeX Warning: There were undefined references.
 Package logreq Info: Writing requests to 'master.run.xml'.
 \openout1 = `master.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 291.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 289.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23264 strings out of 495158
- 355402 string characters out of 6175470
- 1059870 words of memory out of 5000000
- 26110 multiletter control sequences out of 15000+600000
+ 23286 strings out of 495158
+ 356018 string characters out of 6175470
+ 1060171 words of memory out of 5000000
+ 26132 multiletter control sequences out of 15000+600000
  17242 words of font info for 65 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  42i,18n,69p,2204b,4958s stack positions out of 5000i,500n,10000p,200000b,80000s

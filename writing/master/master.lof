@@ -4,7 +4,7 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.1}{\ignorespaces A finite state machine. States are shown as graph nodes, and the probability of transitioning from one particular state to another is shown as a weighted graph edge. \textit {(Andrieu et al., 2003)} \relax }}{6}{figure.caption.5}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces A finite state machine. States are shown as graph nodes, and the probability of transitioning from one particular state to another is shown as a weighted graph edge. \cite {Andrieu2003} \relax }}{6}{figure.caption.5}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {2.2}{\ignorespaces True SIR ODE solution infected counts, and with added observation noise. \relax }}{14}{figure.caption.8}
 \defcounter {refsection}{0}\relax 
