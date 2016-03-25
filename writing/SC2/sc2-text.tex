@@ -5,7 +5,7 @@
 
 	This section will focus on taking the stochastic SIR model from the previous section, truncating the synthetic data output from realizations of that model, and seeing how well IF2 and HMCMC can reconstruct out-of-sample forecasts.
 
-	An example of a simulated system with truncated data can be seen in Figure [\ref{sc2dataplot}].
+	Figure [\ref{sc2dataplot}] shows an example of a simulated system with truncated data.
 
 	\begin{figure}
         \centering
@@ -14,16 +14,16 @@
         \caption{Infection count data truncated at $T = 30$. The solid line shows the true underlying system states, and the dots show those states with added observation noise. Parameters used were $R_0 = 3.0$, $r = 0.1$, $\eta = .05$, $\sigma_{proc} = 0.5$, and additive observation noise was drawn from $\mathcal{N}(0,10)$. \label{sc2dataplot}}
     \end{figure}
 
-	In essence we want to be able to give either IF2 of HMCMC only the data points and have it reconstruct the entirety of the true system states.
+	In essence, we want to be able to give either IF2 of HMCMC only the data points and have it reconstruct the entirety of the true system states.
     
 
 \section{IF2}
 
-	For IF2, we will take advantage of the fact that the particle filter will produce state estimates for every datum in the time series given to it, as well as producing parameter maximum likelihood point estimates. Both of these sources of information will be used to produce forecasts by parametric bootstrapping using the final parameter estimates from the particle swarm after the last IF2 pass, then using the newly generated parameter sets along with the system state point estimates from the first fitting to simulate the systems forward into he future.
+	For IF2, we will take advantage of the fact that the particle filter will produce state estimates for every datum in the time series given to it, as well as producing ML point estimates for the parameters. Both of these sources of information will be used to produce forecasts by parametric bootstrapping using the final parameter estimates from the particle swarm after the last IF2 pass, then using the newly generated parameter sets along with the system state point estimates from the first fitting to simulate the systems forward into he future.
 
 	We will truncate the data at half the original time series length (to $T = 30$), and fit the model as previously described.
 
-	First, we can see the state estimates for each time point produced by the last IF2 pass in Figure [\ref{if2fit}].
+	FIgure 2 shows [\ref{if2fit}] the state estimates for each time point produced by the last IF2 pass.
 
 	\begin{figure}
         \centering
@@ -32,14 +32,12 @@
         \caption{Infection count data truncated at $T = 30$ from Figure [\ref{sc2dataplot}]. The dashed line shows IF2's attempt to reconstruct the true underlying state from the observed data points. \label{if2fit}}
     \end{figure}
 
-    Recall that IF2 is not trying to generate parameter estimation densities, but rather produce a point estimate. Since we wish to determine the approximate distribution of each of the parameters in addition to the point estimate, we must turn to another method, parametric bootstrapping.
+    Recall that IF2 is not trying to generate posterior probability densities, but rather produce a point estimate. Since we wish to determine the approximate distribution of each of the parameters in addition to the point estimate, we must add another layer atop the IF2 machinery, parametric bootstrapping.
 
 
 \subsection{Parametric Bootstrapping}
 
-	The goal of the parametric bootstrap is use an initial density sample $\theta^*$ to generate further samples $\theta_1, \theta_2, ..., \theta_M$. It works by using $\theta$ to generate artificial data sets $D_1, D_2, ..., D_M$ to which we can refit our model of interest and generate new parameter sets.
-
-	\textit{[I'm still trying to dig up a good paper that talks about applicability to dynamical systems, there will be a paragraph here about it.]}
+	The goal of the parametric bootstrap is use an initial density sample $\theta^*$ to generate further samples $\theta_1, \theta_2, ..., \theta_M$ from the sampling distribution of $\theta$. It works by using $\theta$ to generate artificial data sets $D_1, D_2, ..., D_M$ to which we can refit our model of interest and generate new parameter sets. The literature suggests the most straightforward way of doing this is to fit the model to obtain $\theta^*$, then use the model's forward simulator to generate new data sets, in essence treating our original estimate $\theta^*$ as the ``truth'' set.
 
 	An algorithm for parametric bootstrapping using IF2 and our stochastic SIR model is shown in Algorithm [\ref{paraboot}].
 
@@ -83,29 +81,31 @@
 
 \subsection{IF2 Forecasts}
 
-	Using the parameter sets $\theta_1, \theta_2, ..., \theta_M$ and the point estimate of the state provided by the initial IF2 fit, we can use a normal bootstrap to produce estimates of the future state. A plot showing a projection of the data from the previous plots can be seen in Figure [\ref{if2combined}].
+	Using the parameter sets $\theta_1, \theta_2, ..., \theta_M$ and the point estimate of the state provided by the initial IF2 fit, we can use use forward simulations from the last estimated state to produce estimates of the future state.
+
+	Figure [\ref{if2combined}] shows a projection of the data from the previous plots in Figures [\ref{sc2dataplot}] and [\ref{if2fit}].
 
 	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2combined.pdf}
-        \caption{Forecast produced by the IF2 / parametric bootstrapping framework. The dotted line shows the mean estimate of the forecasts, the dark grey ribbon shows the centre 95th quantile of the true state estimates, and the lighter grey ribbon shows the centre 95th quantile of the true state estimates with added observation noise drawn from $\mathcal{N}(0,\sigma)$. \label{if2combined}}
+        \caption{Forecast produced by the IF2 / parametric bootstrapping framework. The dotted line shows the mean estimate of the forecasts, the dark grey ribbon shows the 95\% confidence interval based on the 0.025 and 0.975 quantiles on the true state estimates, and the lighter grey ribbon shows the same confidence interval on the true state estimates with added observation noise drawn from $\mathcal{N}(0,\sigma)$. \label{if2combined}}
     \end{figure}
 
-    We can define a metric to gauge forecast effectiveness by calculating the SSE and dividing that value by the number of values predicted to get the average squared error per point. For the data in Figure [\ref{if2combined}] the value was $\overline{SSE} = 1.67$.
+    We can define a metric to gauge overall forecast effectiveness by calculating the SSE and dividing that value by the number of values predicted to get the average squared error per point. For the data in Figure [\ref{if2combined}] the value was $\overline{SSE} = 1.67$. Normally we would also want to address questions of forecast coverage, but this would require at least a 100-fold increase in computational cost. This is potentially an avenue of future investigation.
     
 
 \section{HMCMC}
 
-	For HMCMC we can use a simpler bootstrapping approach. We do not get state estimates directly from the RStan fitting due to the way we implemented the model, but we can construct them using the process noise latent variables. Once we've done this we can forward simulate the system from the state estimate into the future.
+	For HMCMC we can use a simpler approach to approach forecasting. We do not get state estimates directly from the RStan fitting due to the way we implemented the model, but we can construct them using the process noise latent variables as described in Chapter 2. Once we've done this we can forward simulate the system from the state estimate into the future.
 
-	As before we fit the stochastic SIR model to the partial data, but now perform bootstrapping as described above, and obtain the plot in Figure [\ref{hmcforecast}].
+	 Figure [\ref{hmcforecast}] shows the result of the HMCMC forecasting framework as applied to the data from Figure [\ref{sc2dataplot}].
 
 	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/hmcforecast.pdf}
-        \caption{Forecast produced by the HMCMC / bootstrapping framework with $M = 200$ trajectories. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the centre 95th quantile. \label{hmcforecast}}
+        \caption{Forecast produced by the HMCMC / bootstrapping framework with $M = 200$ trajectories. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the 95\% confidence interval on the estimated true states as described in Figure [\ref{if2combined}]. \label{hmcforecast}}
     \end{figure}
 
     And as before we can evaluate the averaged SSE of the forecast for the data shown, giving $\overline{SSE} = 20.27$.
@@ -126,4 +126,4 @@
 
     IF2 and HMCMC perform very closely, with IF2 maintaining a small advantage up to a truncation of about 25-30 data points.
 
-    Since the parametric bootstrapping approach used by IF2 requires a significant number of additional fits, its computational cost is significantly higher than the simpler bootstrapping approach used by the HMCMC framework, about 35.5x as expensive. However the now much longer running time can somewhat alleviated by parallelizing the parametric bootstrapping process; as each of the parametric bootstrap fittings in entirely independent, this can be done without a great deal of additional effort. The code used here has this capability, but it was not utilised in the comparison so as to accurately represent total computational cost, not potential running time.
+    Since the parametric bootstrapping approach used by IF2 requires a significant number of additional fits, its computational cost is significantly higher than the simpler bootstrapping approach used by the HMCMC framework, about 35.5x as expensive. However the now much longer running time can somewhat alleviated by parallelizing the parametric bootstrapping process; as each of the parametric bootstrap fittings in entirely independent, this can be done without a great deal of additional effort. The code used here has this capability, but it was not utilised in the comparison so as to accurately represent total computational cost, rather than potential running time.

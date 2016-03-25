@@ -1,16 +1,18 @@
-\documentclass[12pt, twoside]{report}
+%!TEX program = xelatex
+
+\documentclass[12pt]{report}
 
 \usepackage[utf8]{inputenc}
 \usepackage{lipsum}
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsthm}
-\usepackage[pdftex]{graphicx}
+\usepackage{graphicx}
 \usepackage{setspace}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{float}
-\usepackage[margin=1.3in]{geometry}
+\usepackage[top=38mm,left=38mm,bottom=25mm,right=25mm]{geometry}
 \usepackage{listings}
 \usepackage{textcomp}
 \usepackage{multicol}
@@ -20,8 +22,7 @@
 \usepackage{hyperref}
 \usepackage{etoolbox}
 
-\usepackage[switch, displaymath, mathlines, pagewise]{lineno}
-\linenumbers
+\usepackage[displaymath, mathlines, pagewise]{lineno}
 \renewcommand\linenumberfont{\normalfont\scriptsize\rmfamily}
 
 \usepackage{lstbayes}
@@ -32,13 +33,16 @@
 
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[LE,RO]{\nouppercase{\leftmark}}
-\fancyhead[LO,RE]{Dexter Barrows}
+\fancyhead[LE,RO]{McMaster University - Mathematics}
+\fancyhead[LO,RE]{M.Sc. Thesis - Dexter Barrows}
 \fancyfoot{}
 \fancyfoot[C]{\thepage}
 %\renewcommand{\footrulewidth}{0.4pt}% default is 0pt
 
 %\setlength{\belowcaptionskip}{-10pt}
+
+\usepackage[backend=biber]{biblatex}
+\addbibresource{thesis-refs.bib}
 
 \usepackage[dvipsnames]{xcolor}
 \definecolor{DGrey}{gray}{0.25}
@@ -170,28 +174,30 @@
 
 \begin{document}
 
-	%% --------------------------------------------------------------------
+	\subfile{halftitle}
+
 	%% --------------------------------------------------------------------
 
 	\subfile{titlepage}
 
-	%% --------------------------------------------------------------------
+	\setcounter{page}{1}
+	\pagenumbering{roman}
+
 	%% --------------------------------------------------------------------
 
-	\newpage
-	\pagenumbering{roman}
+	\subfile{infopage}
+
+	%% --------------------------------------------------------------------
 
 	\chapter*{Abstract}
 
 		\lipsum[1]
 
-	\chapter*{Dedication}
-
-		To Mom and Dad
-
 	\chapter*{Acknowledgements}
 
-		Sooooooo many people
+		There are many people in my life that have provided support, love, thoughts, support, guidance, care, and a great many other things over the last two years.
+
+		I am especially thankful to my supervisor Dr. Ben Bolker for his mentorship, advice, direction, and most of all patience.
 
 	\tableofcontents
 
@@ -201,6 +207,10 @@
 	%% --------------------------------------------------------------------
 
 	\newpage
+	
+	\begin{linenumbers}
+
+	\setcounter{page}{1}
 	\pagenumbering{arabic}
 
 	\chapter{Introduction}
@@ -237,6 +247,11 @@
 
 		\subfile{../future-directions/future-directions}
 	
+	%% --------------------------------------------------------------------
+	%% --------------------------------------------------------------------
+	
+	\nocite{*}
+	\printbibliography
 
 	%% --------------------------------------------------------------------
 	%% --------------------------------------------------------------------
@@ -270,7 +285,7 @@
 		\subfile{../SPATIAL/cuda-appendix}
 
 
-
+	\end{linenumbers}
 	
 
 \end{document}

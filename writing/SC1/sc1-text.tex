@@ -5,17 +5,7 @@
 
 	Now that we have established which methods we wish to evaluate the efficacy of for epidemic forecasting, it is prudent to see how they perform when fitting parameters for a known epidemic model. We have already seen how they perform when fitting parameters for a model with a deterministic evolution process and observation noise, but a more realistic model will have both process and observation noise.
 
-	To form such a model, we will take a deterministic SIR ODE model given by
-
-	\begin{equation}
-		\begin{aligned}
-			\frac{dS}{dt} & = - \beta S I  \\
-			\frac{dI}{dt} & = \beta S I - \gamma I \\
-			\frac{dR}{dt} & = \gamma I,
-		\end{aligned}
-	\end{equation}
-
-	and add process noise by allowing $\beta$ to embark on a geometric random walk given by
+	To form such a model, we will take a deterministic SIR ODE model specified in Equation [\ref{sirode}] and add process noise by allowing $\beta$ to follow a geometric random walk given by
 
 	\begin{equation}\label{betaautoreg}
 		\beta_{t+1} = \exp \left( \log(\beta_{t}) + \eta (\log(\bar{\beta}) - \log(\beta_{t})) + \epsilon_{t} \right).
@@ -31,7 +21,7 @@
 
 	where $\epsilon_t$ is normally distributed noise with mean 0 and standard deviation $\sigma_E$. This process has a theoretical expected mean of $\mu = c / (1 - \rho)$ and variance $\sigma = \sigma_E^2 / (1 - \rho^2)$. If we choose $\eta = 0.5$, the resulting log-normal distribution has a mean of $6.80 \times 10^{-4}$ and standard deviation of $4.46 \times 10^{-4}$.
 
-	Simulating the process in Equation [\ref{betaautoreg}] with $\eta = 0.5$ gives us the plot in Figure [\ref{betaplot}].
+	Figure [\ref{betaplot}] shows the result of simulating the process in Equation [\ref{betaautoreg}] with $\eta = 0.5$.
 
 	\begin{figure}
         \centering
@@ -40,7 +30,7 @@
         \caption{Simulated geometric autoregressive process show in Equation [\ref{betaautoreg}]. \label{betaplot}}
     \end{figure}
 
-    We can obtain the corresponding density plot of the values in Figure [\ref{betaplot}], shown in Figure [\ref{betadensity}].
+    Figure [\ref{betadensity}] shows the density plot corresponding to the values in Figure [\ref{betaplot}].
 
     \begin{figure}
         \centering
@@ -57,13 +47,13 @@
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/sirmean.pdf}
-        \caption{Stochastic SIR model simulated using an explicit Euler stepping scheme. The solid line is a single random trajectory, the dots show the data points obtained by adding in observation error defined as $\epsilon_{obvs} = \mathcal{N}(0,10)$, and the grey ribbon is centre 95th quantile from 100 random trajectories. \label{sirmean}}
+        \caption{Stochastic SIR model simulated using an explicit Euler stepping scheme. The solid line is a single random trajectory, the dots show the data points obtained by adding in observation error defined as $\epsilon_{\small\text{obvs}} = \mathcal{N}(0,10)$, and the grey ribbon is centre 95th quantile from 100 random trajectories. \label{sirmean}}
     \end{figure}
 
 
 \section{Calibrating Samples}
 
-	In order to compare HMCMC and IF2 we need to set up a fair and theoretically justified way to select the number of samples to draw for the HMCMC iterations and the number of particles to use for IF2. We assume that we are working with a problem that has an unknown real solution, so we use the Monte Carlo Standard Error (MCSE).
+	In order to compare HMCMC and IF2 we need to set up a fair and theoretically justified way to select the number of samples to draw for the HMCMC iterations and the number of particles to use for IF2. As we wish to compare, among other things, approximate computational cost using runtimes, we need to determine how many sample draws for each method are required to obtain a certain accuracy. Sample draws are typically not comparable in terms of quality when considering multiple methods. For example, vanilla MCMC draws are computationally cheap compared to those from HMCMC, but HMCMC produces draws that more efficiently cover the sampling space. Thus we cannot just set the number of HMCMC draws equal to the number of particles used in IF2 -- we must calibrate both quantities based on a desired target error. We assume that we are working with a problem that has an unknown real solution, so we use the Monte Carlo Standard Error (MCSE).
 
 	Suppose we are using a Monte-Carlo based method to obtain an estimate $\hat{\mu}_{n}$ for a quantity $\mu$, where $n$ is the number of samples. Then the Law of Large Numbers says that $\hat{\mu}_{n} \rightarrow \mu$ as $n \rightarrow \infty$. Further, the Central Limit Theorem says that the error $\hat{\mu}_{n} - \mu$ should shrink with number of samples such that $\sqrt{n} (\hat{\mu}_{n} - \mu) \rightarrow \mathcal{N}(0,\sigma^2)$ as $n \rightarrow \infty$, where $\sigma^2$ is the variance of the samples drawn.
 
@@ -75,7 +65,7 @@
 
 	which is known as the Monte Carlo Standard Error.
 
-	We can modify this formula to account for multiple variables by replacing the single variance measure sum by
+	We can modify this formula to account for multiple, potentially correlated, variables by replacing the single variance measure sum by
 
 	\begin{equation}
 		\Theta^* V (\Theta^*)^T
@@ -96,13 +86,13 @@
 
 \section{IF2 Fitting}
 
-	Now we will use an implementation of the IF2 algorithm to attempt to fit the stochastic SIR model to the previous data. The goal here is just parameter inference, but since IF2 works by applying a series on particle filters we essentially get the average system state estimates for a very small additional computational cost. Hence, we will will also look at that estimated behaviour in addition the the parameter estimates.
+	Now we will use an implementation of the IF2 algorithm to attempt to fit the stochastic SIR model to the previous data. The goal here is just parameter inference, but since IF2 works by applying a series of particle filters we essentially get the average system state estimates for a very small additional computational cost. Hence, we will will also look at that estimated behaviour in addition the parameter estimates.
 
-	The code used here is a mix of R and C++ implemented using RCpp. The fitting was undertaken using $2500$ particles with 50 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.975^{p}$, where p is the pass number starting with 0.
+	The code used here is a mix of R and C++ implemented using Rcpp. The fitting was undertaken using $2500$ particles with 50 IF2 passes and a cooling schedule given by a reduction in particle spread determined by $0.975^{p}$, where p is the pass number starting with 0. This geometric cooling scheme is standard for use with IF2 [\textit{POMP ref.}], with the cooling rate chosen to neatly scale the perturbation factor from 1 to 0.02 (almost 0) over 50 passes.
 
 	The MLE parameter estimates, taken to be the mean of the particle swarm values after the final pass, are shown in the table in Figure [\ref{fiterror}], along with the true values and the relative error.
 
-	\begin{figure}[H]
+	\begin{figure}
 		\centering
 		{\small
 		\begin{tabular}{cccccc}
@@ -133,7 +123,9 @@
 
 \section{IF2 Convergence}
 
-	Since IF2 is an iterative algorithm where each pass through he data is expected to push the parameter estimates towards the MLE, we can see the evolution of these estimates as a function of the pass number. Plots showing evolution of the mean estimates are shown if Figure [\ref{if2convergence}] for the six most critical parameters.
+	Since IF2 is an iterative algorithm where each pass through he data is expected to push the parameter estimates towards the MLE, we can see the evolution of these estimates as a function of the pass number. We expect near-convergence in the parameter estimates as IF2 nears the maximum number of passes specified. Unconvincing convergence plots may signal suboptimal algorithm parameters. If sensible algorithm parameters have been chosen, we should see the convergence plots display ``flattening'' over time.
+
+	Figure [\ref{if2convergence}] shows evolution of the mean estimates for the six most critical parameters.
 
 	\begin{figure}
         \centering
@@ -142,7 +134,7 @@
         \caption{The horizontal axis shows the IF2 pass number. The solid black lines show the evolution of the ML estimates, the solid grey lines show the true value, and the dashed grey lines show the mean parameter estimates from the particle swarm after the final pass. \label{if2convergence}}
     \end{figure}
 
-    Similarly, we can look at the evolution of the standard deviations of the parameter estimates from the particle swarm as a function of the pass number, shown in Figure [\ref{if2sdconvergence}].
+    Figure [\ref{if2sdconvergence}] shows the evolution of the standard deviations of the parameter estimates from the particle swarm as a function of the pass number. We should expect to see asymptotic convergence to zero if the filter is converging.
 
     \begin{figure}
         \centering
@@ -151,12 +143,12 @@
         \caption{The horizontal axis shows the IF2 pass number and the solid black lines show the evolution of the standard deviations of the particle swarm values. \label{if2sdconvergence}}
     \end{figure}
 
-    As expected there is a downward trend in all plots, with a very strong trend in all but two of them.
-
 
 \section{IF2 Densities}
 
-	Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. These are shown if Figure [\ref{sc1if2kernels}].
+	Of diagnostic importance are the densities of the parameter estimates given by the final parameter swarm. If the swarm has collapsed, these densities will be extremely narrow, almost resembling a vertical line. A ``healthy'' swarm should display relatively smooth kernels of reasonable breadth.
+
+	Figure [\ref{sc1if2kernels}] shows the parameter sample distributions from the final parameter swarm.
 
 	\begin{figure}
         \centering
@@ -165,7 +157,7 @@
         \caption{As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \label{sc1if2kernels}}
     \end{figure}
 
-    It is worth noting that the IF2 parameters chosen were in part chosen so as to not artificially narrow these densities; a more aggressive cooling schedule and/or an increased number of passes would have resulted in much narrower densities, and indeed have the potential to collapse them to point estimates.
+    The IF2 parameters chosen were in part chosen so as to not artificially narrow these densities; a more aggressive cooling schedule and/or an increased number of passes would have resulted in much narrower densities, and indeed have the potential to collapse them to point estimates. This is undesirable as it may indicate instability -- the particles may have become ``trapped'' in a region of the sampling space.
 
 
 \section{HMCMC Fitting}
@@ -177,7 +169,7 @@
 
 \section{HMCMC Densities}
 
-	The parameter estimation densities from the Stan HMCMC fitting are shown in Figure [\ref{sc1hmckernels}].
+	Figure [\ref{sc1hmckernels}] shows the parameter estimation densities from the Stan HMCMC fitting.
 
 	\begin{figure}
         \centering
@@ -191,7 +183,9 @@
 
 \section{HMCMC and Bootstrapping}
 
-	Unlike particle particle-filtering-based approaches, HMC does not produce state estimates as a by-product of parameter fitting, but we can use information about the stochastic nodes related to the noise in the $\beta$ geometric random walk to reconstruct state estimates. The results of 100 bootstrap trajectories is shown in Figure [\ref{hmcboot}].
+	Unlike in some models, our RStan epidemic model does not keep track of state estimates directly, but does keep track of the autoregressive process latent variable draws, which allow us to reconstruct states. This was done to ease implementation as RStan places some restrictions on how interactions between parameters and states can be specified.
+
+	Figure [\ref{hmcboot}] shows the results of 100 bootstrap trajectories generated from the RStan HMCMC samples.
 
 	\begin{figure}
         \centering
@@ -203,7 +197,9 @@
 
 \section{Multi-trajectory Parameter Estimation}
 
-	Here we fit the stochastic SIR model to 200 random independent trajectories using each method and examine the density of the point estimates produced. 
+	Here we fit the stochastic SIR model to 200 random independent trajectories using each method and examine the density of the point estimates produced.
+
+	Figure [\ref{combinedmulti}] shows the results of the mean parameter fits from IF2 and HMCMC for 200 independent data sets generates using the previously described model.
 
     \begin{figure}
         \centering
@@ -214,13 +210,13 @@
 
     The densities by and large display similar coverage, with the IF2 densities for $r$ and $\varepsilon_{proc}$ showing slightly wider coverage than the HMCMC densities for the same parameters.
 
-    The running times for each algorithm are summarized in Figure [\ref{timeplot}].
+    Figure [\ref{sc1timeplot}] summarizes the running times for each algorithm.
 
 	\begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/timeplot.pdf}
-        \caption{Fitting times for IF2 and HMCMC, in seconds. The centre box in each plot shows the centre 50th quantile, with the bold centre line showing the median. \label{timeplot}}
+        \caption{Fitting times for IF2 and HMCMC, in seconds. The centre box in each plot shows the centre 50th quantile, with the bold centre line showing the median. \label{sc1timeplot}}
     \end{figure}
 
-    The average running times were approximately 45.5 seconds and 257.4 seconds for IF2 and HMCMC respectively, representing a 5.7x speedup for IF2 over HMCMC. While IF2 may be able to fit the model to data faster than HMCMC, we are obtaining less information; this will become important in the next section. Further, the results in Figure [\ref{timeplot}] show that while the running time for IF2 is relatively fixed, the times for HMCMC are anything but, showing a wide spread of potential times.
+    The average running times were approximately 45.5 seconds and 257.4 seconds for IF2 and HMCMC respectively, representing a 5.7x speedup for IF2 over HMCMC. While IF2 may be able to fit the model to data faster than HMCMC, we are obtaining less information; this will become important in the next section. Further, the results in Figure [\ref{sc1timeplot}] show that while the running time for IF2 is relatively fixed, the times for HMCMC are anything but, showing a wide spread of potential times.

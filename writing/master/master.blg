@@ -1,0 +1,26 @@
+[1] Config.pm:340> INFO - This is Biber 2.4
+[1] Config.pm:343> INFO - Logfile is 'master.blg'
+[97] biber-darwin:287> INFO - === Thu Mar 24, 2016, 17:25:31
+[123] Biber.pm:347> INFO - Reading 'master.bcf'
+[323] Biber.pm:738> INFO - Using all citekeys in bib section 0
+[341] Biber.pm:3150> INFO - Processing section 0
+[417] Biber.pm:3307> INFO - Looking for bibtex format file 'thesis-refs.bib' for section 0
+[427] bibtex.pm:1124> INFO - Decoding LaTeX character macros into UTF-8
+[445] bibtex.pm:985> INFO - Found BibTeX data source 'thesis-refs.bib'
+[559] Utils.pm:147> WARN - ISBN '09628428' in entry 'Sugihara1994' is invalid - run biber with '--validate_datamodel' for details.
+[581] Utils.pm:147> WARN - ISBN '1471-2954 (Electronic)$\backslash$r0962-8452 (Linking)' in entry 'Camacho2011' is invalid - run biber with '--validate_datamodel' for details.
+[697] Utils.pm:147> WARN - ISBN '1133-0686' in entry 'Mardia1998' is invalid - run biber with '--validate_datamodel' for details.
+[730] Utils.pm:147> WARN - ISBN '0028-0836 (Print)' in entry 'Sugihara1990' is invalid - run biber with '--validate_datamodel' for details.
+[812] Utils.pm:147> WARN - ISBN '1461-0248' in entry 'Hartig2011' is invalid - run biber with '--validate_datamodel' for details.
+[943] Utils.pm:147> WARN - ISBN '08856125 (ISSN)' in entry 'Andrieu2003' is invalid - run biber with '--validate_datamodel' for details.
+[974] Utils.pm:147> WARN - ISBN '0003-0147' in entry 'Hsieh2008' is invalid - run biber with '--validate_datamodel' for details.
+[996] Utils.pm:147> WARN - ISBN '0962-8452' in entry 'King2015' is invalid - run biber with '--validate_datamodel' for details.
+[1023] Utils.pm:147> WARN - ISBN '1932-6203' in entry 'Cook2011' is invalid - run biber with '--validate_datamodel' for details.
+[1037] Utils.pm:147> WARN - ISBN '0962-2802 (Print)' in entry 'VidalRodeiro2006' is invalid - run biber with '--validate_datamodel' for details.
+[1641] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1642] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1642] Biber.pm:3027> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-US'
+[1642] Biber.pm:3031> INFO - No sort tailoring available for locale 'en-US'
+[1712] bbl.pm:519> INFO - Writing 'master.bbl' with encoding 'UTF-8'
+[1728] bbl.pm:615> INFO - Output to master.bbl
+[1728] Biber.pm:108> INFO - WARNINGS: 10

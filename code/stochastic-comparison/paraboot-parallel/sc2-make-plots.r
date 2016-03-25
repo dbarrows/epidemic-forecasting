@@ -160,7 +160,7 @@ for (i in 1:nTraj) {
 
 }
 
-# remove NaN rows (why in the hell are these showing up????)
+# remove NaN rows
 bootstrapdata <- bootstrapdata[complete.cases(bootstrapdata),]
 
 meanTraj 	<- colMeans(bootstrapdata, na.rm = FALSE)

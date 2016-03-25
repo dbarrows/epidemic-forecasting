@@ -17,7 +17,7 @@ hmcmeds <- apply(hmcmat, 1, median)
 
 times <- 1:dim(ssedata)[1]
 
-df <- data.frame(time = times, if2 = log(if2means), hmc = log(hmcmeans))
+df <- data.frame(time = times, if2 = log10(if2means), hmc = log10(hmcmeans))
 plotdata <- melt(df, id = "time")
 
 ## full

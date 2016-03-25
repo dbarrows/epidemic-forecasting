@@ -1,0 +1,1333 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.6 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \sortlist[entry]{nty/global}
+    \entry{Ali2013}{article}{}
+      \name{author}{4}{}{%
+        {{hash=0d2f0ab6f7395484d44adc0c5b39875f}{%
+           family={Ali},
+           family_i={A\bibinitperiod},
+           given={Mohammad},
+           given_i={M\bibinitperiod}}}%
+        {{hash=11628add0c02a3e58c24c5d0a86a3379}{%
+           family={Kim},
+           family_i={K\bibinitperiod},
+           given={DR},
+           given_i={D\bibinitperiod}}}%
+        {{hash=1fe3d3be23eb115d79d6d1a535dd97b7}{%
+           family={Yunus},
+           family_i={Y\bibinitperiod},
+           given={Mohammad},
+           given_i={M\bibinitperiod}}}%
+        {{hash=a8e4dc2fa33c0c4b092ab1c808576a25}{%
+           family={Emch},
+           family_i={E\bibinitperiod},
+           given={Michael},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{71cd7b148834b5d97f446c02b76af88a}
+      \strng{fullhash}{a8bc1a457d877ef8e6573c63f1dea242}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{annotation}{- Diarrhoea surveillance data were obtained for all individuals living in the Matlab study area from 1988 to 2001 - A health and demographic surveillance system (HDSS) has recorded all vital events of the area’s population since 1966 -- - SARIMA - Box-Jenkins modelling strategy (25) to conduct a time series analysis - AIC - We assessed the predictive power of forecasting ability of the method, using the root mean square error (RMSE) criterion}
+      \field{journaltitle}{Journal of health, population, {\ldots}}
+      \field{number}{1}
+      \field{title}{{Time Series Analysis of Cholera in Matlab, Bangladesh, during 1988-2001}}
+      \field{volume}{31}
+      \field{year}{2013}
+      \field{pages}{11\bibrangedash 19}
+      \range{pages}{9}
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Ali et al. - 2013 - Time Series Analysis of Cholera in Matlab, Bangladesh, during 1988-2001.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.ncbi.nlm.nih.gov/pmc/articles/PMC3702354/
+      \endverb
+      \keyw{bangladesh,cholera,climate change,matlab,time series analysis}
+    \endentry
+    \entry{Andrieu2003}{article}{}
+      \name{author}{4}{}{%
+        {{hash=ac7a0b060593ea80a10f55d530432a50}{%
+           family={Andrieu},
+           family_i={A\bibinitperiod},
+           given={Christophe},
+           given_i={C\bibinitperiod}}}%
+        {{hash=8b0b5184c6a166ae079dd8f266cb6840}{%
+           family={{De\bibnamedelimb Freitas}},
+           family_i={D\bibinitperiod},
+           given={Nando},
+           given_i={N\bibinitperiod}}}%
+        {{hash=aca5faad8b57b96b59c12fc59d0b6eb4}{%
+           family={Doucet},
+           family_i={D\bibinitperiod},
+           given={Arnaud},
+           given_i={A\bibinitperiod}}}%
+        {{hash=f70df67fe1d13567b704ad143006af68}{%
+           family={Jordan},
+           family_i={J\bibinitperiod},
+           given={Michael\bibnamedelima I.},
+           given_i={M\bibinitperiod\bibinitdelim I\bibinitperiod}}}%
+      }
+      \strng{namehash}{839e61e53fed1e7a24a5d817e8fe9a46}
+      \strng{fullhash}{947bc55e210949b62ca0f7d8b2bebe0b}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{This purpose of this introductory paper is threefold. First, it introduces the Monte Carlo method with emphasis on probabilistic machine learning. Second, it reviews the main building blocks of modern Markov chain Monte Carlo simulation, thereby providing and introduction to the remaining papers of this special issue. Lastly, it discusses new interesting research horizons.}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{08856125 (ISSN)}
+      \field{issn}{08856125}
+      \field{journaltitle}{Machine Learning}
+      \field{number}{1-2}
+      \field{title}{{An introduction to MCMC for machine learning}}
+      \field{volume}{50}
+      \field{year}{2003}
+      \field{pages}{5\bibrangedash 43}
+      \range{pages}{39}
+      \verb{doi}
+      \verb 10.1023/A:1020281327116
+      \endverb
+      \verb{eprint}
+      \verb 1109.4435v1
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Andrieu et al. - 2003 - An introduction to MCMC for machine learning.pdf:pdf
+      \endverb
+      \keyw{MCMC,Markov chain Monte Carlo,Sampling,Stochastic algorithms}
+    \endentry
+    \entry{Arulampalam2002}{article}{}
+      \name{author}{4}{}{%
+        {{hash=51a4b4a508c6a790da89f6f8aa376bfa}{%
+           family={Arulampalam},
+           family_i={A\bibinitperiod},
+           given={M.S.},
+           given_i={M\bibinitperiod}}}%
+        {{hash=549da9573ce4caaea2f5449ead8d1f06}{%
+           family={Maskell},
+           family_i={M\bibinitperiod},
+           given={S.},
+           given_i={S\bibinitperiod}}}%
+        {{hash=9f88c2fd16f950684f39022912ec75c9}{%
+           family={Gordon},
+           family_i={G\bibinitperiod},
+           given={N.},
+           given_i={N\bibinitperiod}}}%
+        {{hash=234ec2aaaebb6b11c45f5c5eaa4cf905}{%
+           family={Clapp},
+           family_i={C\bibinitperiod},
+           given={T.},
+           given_i={T\bibinitperiod}}}%
+      }
+      \strng{namehash}{ff8acaa89fe2366c9091d7d31caab3ed}
+      \strng{fullhash}{784f7c5a4a57ee728e277b018248c93a}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{1053587X}
+      \field{journaltitle}{IEEE Transactions on Signal Processing}
+      \field{number}{2}
+      \field{title}{{A tutorial on particle filters for online nonlinear/non-Gaussian Bayesian tracking}}
+      \field{volume}{50}
+      \field{year}{2002}
+      \field{pages}{174\bibrangedash 188}
+      \range{pages}{15}
+      \verb{doi}
+      \verb 10.1109/78.978374
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Arulampalam et al. - 2002 - A tutorial on particle filters for online nonlinearnon-Gaussian Bayesian tracking.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://ieeexplore.ieee.org/lpdocs/epic03/wrapper.htm?arnumber=978374
+      \endverb
+    \endentry
+    \entry{Axelsen2014}{article}{}
+      \name{author}{4}{}{%
+        {{hash=569a9d308e076108a03976137da4a2d9}{%
+           family={Axelsen},
+           family_i={A\bibinitperiod},
+           given={Jacob\bibnamedelima Bock},
+           given_i={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=a2d760694dab73861b6e22d3292147be}{%
+           family={Yaari},
+           family_i={Y\bibinitperiod},
+           given={Rami},
+           given_i={R\bibinitperiod}}}%
+        {{hash=0b4547c0afabee96027c99441f9573ec}{%
+           family={Grenfell},
+           family_i={G\bibinitperiod},
+           given={Bryan\bibnamedelima T},
+           given_i={B\bibinitperiod\bibinitdelim T\bibinitperiod}}}%
+        {{hash=e0183a41c46d1319b0b1734e5f933b17}{%
+           family={Stone},
+           family_i={S\bibinitperiod},
+           given={Lewi},
+           given_i={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{9b62046a30cd656511675498ac8e5586}
+      \strng{fullhash}{862f1863cccba004ac8210659c4be1ca}
+      \field{sortinit}{A}
+      \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Human influenza occurs annually in most temperate climatic zones of the world, with epidemics peaking in the cold winter months. Considerable debate surrounds the relative role of epidemic dynamics, viral evolution, and climatic drivers in driving year-to-year variability of outbreaks. The ultimate test of understanding is prediction; however, existing influenza models rarely forecast beyond a single year at best. Here, we use a simple epidemiological model to reveal multiannual predictability based on high-quality influenza surveillance data for Israel; the model fit is corroborated by simple metapopulation comparisons within Israel. Successful forecasts are driven by temperature, humidity, antigenic drift, and immunity loss. Essentially, influenza dynamics are a balance between large perturbations following significant antigenic jumps, interspersed with nonlinear epidemic dynamics tuned by climatic forcing.}
+      \field{annotation}{-Tel Aviv ILI data, from Maccabi Health Maintenance Organization (HMO), covers {\~{}}45{\%} of population -- -SIRS model -use of R{\_}eff -used Baysian Inference and monte carlo chain sampling for parameter fitting - {\&}quot;standard bayesian MCMC analysis and validation methods which is documented in the manual to the 'slicesample' function in Matlab{\&}quot;}
+      \field{issn}{1091-6490}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
+      \field{month}{07}
+      \field{number}{26}
+      \field{title}{{Multiannual forecasting of seasonal influenza dynamics reveals climatic and evolutionary drivers.}}
+      \field{volume}{111}
+      \field{year}{2014}
+      \field{pages}{9538\bibrangedash 42}
+      \range{pages}{5}
+      \verb{doi}
+      \verb 10.1073/pnas.1321656111
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Axelsen et al. - 2014 - Multiannual forecasting of seasonal influenza dynamics reveals climatic and evolutionary drivers.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=4084473%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+      \keyw{Bayes Theorem,Biological Evolution,Climate,Epitopes,Epitopes: genetics,Forecasting,Forecasting: methods,Humans,Incidence,Influenza A virus,Influenza A virus: genetics,Influenza A virus: immunology,Influenza,Human,Influenza,Human: epidemiology,Israel,Israel: epidemiology,Likelihood Functions,Models,Biological,Seasons}
+    \endentry
+    \entry{Camacho2011}{article}{}
+      \name{author}{6}{}{%
+        {{hash=9ed61b4bab035a8d59dadda87cc35c83}{%
+           family={Camacho},
+           family_i={C\bibinitperiod},
+           given={a.},
+           given_i={a\bibinitperiod}}}%
+        {{hash=6fbecca55027800de44c753d38614cd0}{%
+           family={Ballesteros},
+           family_i={B\bibinitperiod},
+           given={S.},
+           given_i={S\bibinitperiod}}}%
+        {{hash=9cef8b02a002b2ffd30da23cfbec064b}{%
+           family={Graham},
+           family_i={G\bibinitperiod},
+           given={a.\bibnamedelimi L.},
+           given_i={a\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=54c5ec419e403328c4bc6a150ad5ee2c}{%
+           family={Carrat},
+           family_i={C\bibinitperiod},
+           given={F.},
+           given_i={F\bibinitperiod}}}%
+        {{hash=bf13a7ac3e32c864503958bf36832757}{%
+           family={Ratmann},
+           family_i={R\bibinitperiod},
+           given={O.},
+           given_i={O\bibinitperiod}}}%
+        {{hash=dfcac9eb87c4ceb30948c2c761885f94}{%
+           family={Cazelles},
+           family_i={C\bibinitperiod},
+           given={B.},
+           given_i={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{446ea8a4e094ff9f19d15bc43a98d489}
+      \strng{fullhash}{8d0ebecfc66f0e2a1780f06a064f3185}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Influenza usually spreads through the human population in multiple-wave outbreaks. Successive reinfection of individuals over a short time interval has been explicitly reported during past pandemics. However, the causes of rapid reinfection and the role of reinfection in driving multiple-wave outbreaks remain poorly understood. To investigate these issues, we focus on a two-wave influenza A/H3N2 epidemic that occurred on the remote island of Tristan da Cunha in 1971. Over 59 days, 273 (96{\%}) of 284 islanders experienced at least one attack and 92 (32{\%}) experienced two attacks. We formulate six mathematical models invoking a variety of antigenic and immunological reinfection mechanisms. Using a maximum-likelihood analysis to confront model predictions with the reported incidence time series, we demonstrate that only two mechanisms can be retained: some hosts with either a delayed or deficient humoral immune response to the primary influenza infection were reinfected by the same strain, thus initiating the second epidemic wave. Both mechanisms are supported by previous empirical studies and may arise from a combination of genetic and ecological causes. We advocate that a better understanding and account of heterogeneity in the human immune response are essential to analysis of multiple-wave influenza outbreaks and pandemic planning.}
+      \field{isbn}{1471-2954 (Electronic)$\backslash$r0962-8452 (Linking)}
+      \field{issn}{0962-8452}
+      \field{journaltitle}{Proceedings of the Royal Society B: Biological Sciences}
+      \field{title}{{Explaining rapid reinfections in multiple-wave influenza outbreaks: Tristan da Cunha 1971 epidemic as a case study}}
+      \field{volume}{278}
+      \field{year}{2011}
+      \field{pages}{3635\bibrangedash 3643}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1098/rspb.2011.0300
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Camacho et al. - 2011 - Explaining rapid reinfections in multiple-wave influenza outbreaks Tristan da Cunha 1971 epidemic as a case s(2).pdf:pdf
+      \endverb
+    \endentry
+    \entry{Chretien2014}{article}{}
+      \name{author}{5}{}{%
+        {{hash=2c949886f1a2f63a60fc59a09484a83e}{%
+           family={Chretien},
+           family_i={C\bibinitperiod},
+           given={Jean-Paul},
+           given_i={J\bibinithyphendelim P\bibinitperiod}}}%
+        {{hash=49e11041a90890468ba1c69eae713570}{%
+           family={George},
+           family_i={G\bibinitperiod},
+           given={Dylan},
+           given_i={D\bibinitperiod}}}%
+        {{hash=5ecfaa73ece12900c192ebd26039d7e6}{%
+           family={Shaman},
+           family_i={S\bibinitperiod},
+           given={Jeffrey},
+           given_i={J\bibinitperiod}}}%
+        {{hash=78d75cca9b15fd7155c6879eb5143f02}{%
+           family={Chitale},
+           family_i={C\bibinitperiod},
+           given={Rohit\bibnamedelima a},
+           given_i={R\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+        {{hash=928b2c574f48f143e4a53295151cd774}{%
+           family={McKenzie},
+           family_i={M\bibinitperiod},
+           given={F\bibnamedelima Ellis},
+           given_i={F\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{1ed357581d43a8040db7985b1bc56ec2}
+      \strng{fullhash}{c90620840e58ac4eb2e3b442e918d4b8}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Forecasts of influenza activity in human populations could help guide key preparedness tasks. We conducted a scoping review to characterize these methodological approaches and identify research gaps. Adapting the PRISMA methodology for systematic reviews, we searched PubMed, CINAHL, Project Euclid, and Cochrane Database of Systematic Reviews for publications in English since January 1, 2000 using the terms "influenza AND (forecast* OR predict*)", excluding studies that did not validate forecasts against independent data or incorporate influenza-related surveillance data from the season or pandemic for which the forecasts were applied. We included 35 publications describing population-based (N = 27), medical facility-based (N = 4), and regional or global pandemic spread (N = 4) forecasts. They included areas of North America (N = 15), Europe (N = 14), and/or Asia-Pacific region (N = 4), or had global scope (N = 3). Forecasting models were statistical (N = 18) or epidemiological (N = 17). Five studies used data assimilation methods to update forecasts with new surveillance data. Models used virological (N = 14), syndromic (N = 13), meteorological (N = 6), internet search query (N = 4), and/or other surveillance data as inputs. Forecasting outcomes and validation metrics varied widely. Two studies compared distinct modeling approaches using common data, 2 assessed model calibration, and 1 systematically incorporated expert input. Of the 17 studies using epidemiological models, 8 included sensitivity analysis. This review suggests need for use of good practices in influenza forecasting (e.g., sensitivity analysis); direct comparisons of diverse approaches; assessment of model calibration; integration of subjective expert input; operational research in pilot, real-world applications; and improved mutual understanding among modelers and public health officials.}
+      \field{issn}{1932-6203}
+      \field{journaltitle}{PloS one}
+      \field{month}{01}
+      \field{number}{4}
+      \field{title}{{Influenza forecasting in human populations: a scoping review.}}
+      \field{volume}{9}
+      \field{year}{2014}
+      \field{pages}{e94130}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0094130
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Chretien et al. - 2014 - Influenza forecasting in human populations a scoping review.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3979760%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+    \endentry
+    \entry{Cook2011}{article}{}
+      \name{author}{4}{}{%
+        {{hash=f2f43efa05096c10b2669ccd9dbaf5b0}{%
+           family={Cook},
+           family_i={C\bibinitperiod},
+           given={Samantha},
+           given_i={S\bibinitperiod}}}%
+        {{hash=70e17d157c5f1deaeb3223b7ba1be979}{%
+           family={Conrad},
+           family_i={C\bibinitperiod},
+           given={Corrie},
+           given_i={C\bibinitperiod}}}%
+        {{hash=4dfd3b6860d3196dba3298e4375734ca}{%
+           family={Fowlkes},
+           family_i={F\bibinitperiod},
+           given={Ashley\bibnamedelima L.},
+           given_i={A\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=e2b42061d5e2ef2e419525d4c9939189}{%
+           family={Mohebbi},
+           family_i={M\bibinitperiod},
+           given={Matthew\bibnamedelima H.},
+           given_i={M\bibinitperiod\bibinitdelim H\bibinitperiod}}}%
+      }
+      \strng{namehash}{63bcbf035ab1dbcd2d40681ceb3c795b}
+      \strng{fullhash}{98a0f29afc0b76a3e40289a8c65bc214}
+      \field{sortinit}{C}
+      \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Google Flu Trends (GFT) uses anonymized, aggregated internet search activity to provide near-real time estimates of influenza activity. GFT estimates have shown a strong correlation with official influenza surveillance data. The 2009 influenza virus A (H1N1) pandemic [pH1N1] provided the first opportunity to evaluate GFT during a non-seasonal influenza outbreak. In September 2009, an updated United States GFT model was developed using data from the beginning of pH1N1.}
+      \field{isbn}{1932-6203}
+      \field{issn}{19326203}
+      \field{journaltitle}{PLoS ONE}
+      \field{number}{8}
+      \field{title}{{Assessing Google Flu trends performance in the United States during the 2009 influenza virus A (H1N1) pandemic}}
+      \field{volume}{6}
+      \field{year}{2011}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0023610
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Cook et al. - 2011 - Assessing Google Flu trends performance in the United States during the 2009 influenza virus A (H1N1) pandemic.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Dugas2013}{article}{}
+      \name{author}{7}{}{%
+        {{hash=304e1cd5aab0016feebe1c698cd6316d}{%
+           family={Dugas},
+           family_i={D\bibinitperiod},
+           given={Andrea\bibnamedelima Freyer},
+           given_i={A\bibinitperiod\bibinitdelim F\bibinitperiod}}}%
+        {{hash=299d1b7f7c9e0f387292390b6badb7e2}{%
+           family={Jalalpour},
+           family_i={J\bibinitperiod},
+           given={Mehdi},
+           given_i={M\bibinitperiod}}}%
+        {{hash=58687cb91429272e95d17f3d52666d6f}{%
+           family={Gel},
+           family_i={G\bibinitperiod},
+           given={Yulia},
+           given_i={Y\bibinitperiod}}}%
+        {{hash=baf8c63e0a6adb9b57c069f013d074de}{%
+           family={Levin},
+           family_i={L\bibinitperiod},
+           given={Scott},
+           given_i={S\bibinitperiod}}}%
+        {{hash=ce9aa2139d21307353abdd13d2329f47}{%
+           family={Torcaso},
+           family_i={T\bibinitperiod},
+           given={Fred},
+           given_i={F\bibinitperiod}}}%
+        {{hash=35e85a913eb6cd10f546a9f69c012357}{%
+           family={Igusa},
+           family_i={I\bibinitperiod},
+           given={Takeru},
+           given_i={T\bibinitperiod}}}%
+        {{hash=c67e5c53b3d2fab8e466f383e562c2b0}{%
+           family={Rothman},
+           family_i={R\bibinitperiod},
+           given={Richard\bibnamedelima E},
+           given_i={R\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+      }
+      \strng{namehash}{9eed4496fd7a0da235e9cfcf5f4dba61}
+      \strng{fullhash}{91815af778fc405c9625385ff2c71cb4}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{BACKGROUND: We developed a practical influenza forecast model based on real-time, geographically focused, and easy to access data, designed to provide individual medical centers with advanced warning of the expected number of influenza cases, thus allowing for sufficient time to implement interventions. Secondly, we evaluated the effects of incorporating a real-time influenza surveillance system, Google Flu Trends, and meteorological and temporal information on forecast accuracy. METHODS: Forecast models designed to predict one week in advance were developed from weekly counts of confirmed influenza cases over seven seasons (2004-2011) divided into seven training and out-of-sample verification sets. Forecasting procedures using classical Box-Jenkins, generalized linear models (GLM), and generalized linear autoregressive moving average (GARMA) methods were employed to develop the final model and assess the relative contribution of external variables such as, Google Flu Trends, meteorological data, and temporal information. RESULTS: A GARMA(3,0) forecast model with Negative Binomial distribution integrating Google Flu Trends information provided the most accurate influenza case predictions. The model, on the average, predicts weekly influenza cases during 7 out-of-sample outbreaks within 7 cases for 83{\%} of estimates. Google Flu Trend data was the only source of external information to provide statistically significant forecast improvements over the base model in four of the seven out-of-sample verification sets. Overall, the p-value of adding this external information to the model is 0.0005. The other exogenous variables did not yield a statistically significant improvement in any of the verification sets. CONCLUSIONS: Integer-valued autoregression of influenza cases provides a strong base forecast model, which is enhanced by the addition of Google Flu Trends confirming the predictive capabilities of search query based syndromic surveillance. This accessible and flexible forecast model can be used by individual medical centers to provide advanced warning of future influenza cases.}
+      \field{annotation}{- ED visits (publicly available) - Google flu trends - Weather underground (temperature and relative humidity -- - Cross-validation-like approach for model training - GARMA(p,q) (Generalized Autoregressive Moving Average model) with Poisson or Negative Binomial distrobutions - GLM}
+      \field{issn}{1932-6203}
+      \field{journaltitle}{PloS one}
+      \field{month}{01}
+      \field{number}{2}
+      \field{title}{{Influenza forecasting with Google Flu Trends.}}
+      \field{volume}{8}
+      \field{year}{2013}
+      \field{pages}{e56176}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0056176
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Dugas et al. - 2013 - Influenza forecasting with Google Flu Trends.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3572967%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+      \keyw{Adult,Child,Disease Outbreaks,Humans,Influenza,Human,Influenza,Human: epidemiology,Linear Models,Models,Biological,Population Surveillance,Search Engine,Search Engine: methods,Seasons,Weather}
+    \endentry
+    \entry{Glaser2014}{article}{}
+      \name{author}{3}{}{%
+        {{hash=664d7804eb49ded5e0d07dca8bec26d7}{%
+           family={Glaser},
+           family_i={G\bibinitperiod},
+           given={Sarah\bibnamedelima M.},
+           given_i={S\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=27dfc5d4754ab8d88dfd8829759a8109}{%
+           family={Ye},
+           family_i={Y\bibinitperiod},
+           given={Hao},
+           given_i={H\bibinitperiod}}}%
+        {{hash=1d90ee645f52e4685666c6c0c748b606}{%
+           family={Sugihara},
+           family_i={S\bibinitperiod},
+           given={George},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{fa3f062f6768e17bd79bf051cea13ffd}
+      \strng{fullhash}{fa3f062f6768e17bd79bf051cea13ffd}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Spatial variability can confound accurate estimates of catch per unit effort (CPUE), especially in highly migratory species. The incorporation of spatial struc- ture into fishery stock assessment models should ultimately improve forecasts of stock biomass. Here, we describe a nonlinear time series model for produc- ing spatially explicit forecasts of CPUE that does not require ancillary environmental or demographic data, or specification of a model functional form. We dem- onstrate this method using spatially resolved (1° 9 1° cells) CPUE time series of North Pacific albacore in the California Current System. The spatial model is highly significant (P < 0.00001) and outperforms two spatial null models. We then create a spatial forecast map for years beyond the range of data. Such approaches can guide spatial management of resources and provide a complement to more data-intensive, highly parameterized population dynamics and ecosys- tem models currently in use.}
+      \field{issn}{10546006}
+      \field{journaltitle}{Fisheries Oceanography}
+      \field{title}{{A nonlinear, low data requirement model for producing spatially explicit fishery forecasts}}
+      \field{volume}{23}
+      \field{year}{2014}
+      \field{pages}{45\bibrangedash 53}
+      \range{pages}{9}
+      \verb{doi}
+      \verb 10.1111/fog.12042
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Glaser, Ye, Sugihara - 2014 - A nonlinear, low data requirement model for producing spatially explicit fishery forecasts.pdf:pdf
+      \endverb
+      \keyw{California Current System,Catch per unit effort,Data-poor fisheries,Nonlinear forecasting,North Pacific albacore,Spatial distribution model}
+    \endentry
+    \entry{Graham2016}{article}{}
+      \name{author}{6}{}{%
+        {{hash=e2b64996ebc49d4c3d0118c441898a24}{%
+           family={Graham},
+           family_i={G\bibinitperiod},
+           given={Andrea\bibnamedelima L},
+           given_i={A\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=72e0cd8c69a9f9735a951372b17eb988}{%
+           family={Camacho},
+           family_i={C\bibinitperiod},
+           given={Anton},
+           given_i={A\bibinitperiod}}}%
+        {{hash=945f316cea1e3e4692800824bb2467af}{%
+           family={Carrat},
+           family_i={C\bibinitperiod},
+           given={Fabrice},
+           given_i={F\bibinitperiod}}}%
+        {{hash=d19b7b577e2721c3ce90012e25786982}{%
+           family={Ratmann},
+           family_i={R\bibinitperiod},
+           given={Oliver},
+           given_i={O\bibinitperiod}}}%
+        {{hash=bf594220c5a6fc197a11ca2f3755d247}{%
+           family={Cazelles},
+           family_i={C\bibinitperiod},
+           given={Bernard},
+           given_i={B\bibinitperiod}}}%
+        {{hash=de392bc373b4a5a31b967bded248099a}{%
+           family={Mathe},
+           family_i={M\bibinitperiod},
+           given={Laboratoire\bibnamedelima Eco-evolution},
+           given_i={L\bibinitperiod\bibinitdelim E\bibinithyphendelim e\bibinitperiod}}}%
+      }
+      \strng{namehash}{737e693ee46cb17cb6139f833230abbe}
+      \strng{fullhash}{7745070235b01bef150438691eb4621a}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{annotation}{TdC flu (but from where?) -{\&}gt; Mantle, J. {\&}amp; Tyrrell, D. A. J. 1973 An epidemic of influenza on Tristan da Cunha. J. Hyg. 71, 89–95. 14 perhaps? -- - AIC - comparison under multiple difference hypotheses ML}
+      \field{journaltitle}{Proc. R. Soc. B}
+      \field{title}{{Explaining rapid reinfections in multiple- wave influenza outbreaks : Tristan da Cunha 1971 epidemic as a case study}}
+      \field{year}{2016}
+      \verb{doi}
+      \verb 10.1098/rspb.2011.0300
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Graham et al. - 2016 - Explaining rapid reinfections in multiple- wave influenza outbreaks Tristan da Cunha 1971 epidemic as a case stu.pdf:pdf
+      \endverb
+      \keyw{host immune response,influenza pandemic,model selection,reinfection,state-space models}
+    \endentry
+    \entry{Hartig2011}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f2023df7507c5721104bd31350623c8c}{%
+           family={Hartig},
+           family_i={H\bibinitperiod},
+           given={Florian},
+           given_i={F\bibinitperiod}}}%
+        {{hash=8138347852f31878c545f80b5c141bdc}{%
+           family={Calabrese},
+           family_i={C\bibinitperiod},
+           given={Justin\bibnamedelima M.},
+           given_i={J\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+        {{hash=b2b5fe6047e1c5ee7ff053818a17f3bc}{%
+           family={Reineking},
+           family_i={R\bibinitperiod},
+           given={Björn},
+           given_i={B\bibinitperiod}}}%
+        {{hash=fc6d0b75ef26e66b7a3e177f167815ad}{%
+           family={Wiegand},
+           family_i={W\bibinitperiod},
+           given={Thorsten},
+           given_i={T\bibinitperiod}}}%
+        {{hash=316c08a9f785779ecfe98cb04fd33fb1}{%
+           family={Huth},
+           family_i={H\bibinitperiod},
+           given={Andreas},
+           given_i={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{5155ed83806f7c75a350b0690ced6643}
+      \strng{fullhash}{abea242a2ac1cc69ec8311c9e0cd445c}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Statistical models are the traditional choice to test scientific theories when observations, processes or boundary conditions are subject to stochasticity. Many important systems in ecology and biology, however, are difficult to capture with statistical models. Stochastic simulation models offer an alternative, but they were hitherto associated with a major disadvantage: their likelihood functions can usually not be calculated explicitly, and thus it is difficult to couple them to well-established statistical theory such as maximum likelihood and Bayesian statistics. A number of new methods, among them Approximate Bayesian Computing and Pattern-Oriented Modelling, bypass this limitation. These methods share three main principles: aggregation of simulated and observed data via summary statistics, likelihood approximation based on the summary statistics, and efficient sampling. We discuss principles as well as advantages and caveats of these methods, and demonstrate their potential for integrating stochastic simulation models into a unified framework for statistical modelling.}
+      \field{isbn}{1461-0248}
+      \field{issn}{1461023X}
+      \field{journaltitle}{Ecology Letters}
+      \field{number}{8}
+      \field{title}{{Statistical inference for stochastic simulation models - theory and application}}
+      \field{volume}{14}
+      \field{year}{2011}
+      \field{pages}{816\bibrangedash 827}
+      \range{pages}{12}
+      \verb{doi}
+      \verb 10.1111/j.1461-0248.2011.01640.x
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Hartig et al. - 2011 - Statistical inference for stochastic simulation models - theory and application.pdf:pdf
+      \endverb
+      \keyw{Bayesian statistics,Indirect inference,Intractable likelihood,Inverse modelling,Likelihood approximation,Likelihood-free inference,Maximum likelihood,Model selection,Parameter estimation,Stochastic simulation}
+    \endentry
+    \entry{Hsieh2008}{article}{}
+      \name{author}{3}{}{%
+        {{hash=519e3a9e1934a70f5bcf794f2d597168}{%
+           family={Hsieh},
+           family_i={H\bibinitperiod},
+           given={Chih-hao},
+           given_i={C\bibinithyphendelim h\bibinitperiod}}}%
+        {{hash=ba182e8d6931061f8db96879c83e3f7e}{%
+           family={Anderson},
+           family_i={A\bibinitperiod},
+           given={Christian},
+           given_i={C\bibinitperiod}}}%
+        {{hash=1d90ee645f52e4685666c6c0c748b606}{%
+           family={Sugihara},
+           family_i={S\bibinitperiod},
+           given={George},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{29220f239bc8c0c9152693a376f4f658}
+      \strng{fullhash}{29220f239bc8c0c9152693a376f4f658}
+      \field{sortinit}{H}
+      \field{sortinithash}{82012198d5dfa657b8c4a168793268a6}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Nonlinearity is important and ubiquitous in ecology. Though detectable in principle, nonlinear behavior is often difficult to characterize, analyze, and incorporate mechanistically into models of ecosystem function. One obvious reason is that quantitative nonlinear analysis tools are data intensive (require long time series), and time series in ecology are generally short. Here we demonstrate a useful method that circumvents data limitation and reduces sampling error by combining ecologically similar multispecies time series into one long time series. With this technique, individual ecological time series containing as few as 20 data points can be mined for such important information as (1) significantly improved forecast ability, (2) the presence and location of nonlinearity, and (3) the effective dimensionality (the number of relevant variables) of an ecological system.}
+      \field{isbn}{0003-0147}
+      \field{issn}{0003-0147}
+      \field{journaltitle}{The American naturalist}
+      \field{number}{1}
+      \field{title}{{Extending nonlinear analysis to short ecological time series.}}
+      \field{volume}{171}
+      \field{year}{2008}
+      \field{pages}{71\bibrangedash 80}
+      \range{pages}{10}
+      \verb{doi}
+      \verb 10.1086/524202
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Hsieh, Anderson, Sugihara - 2008 - Extending nonlinear analysis to short ecological time series.pdf:pdf
+      \endverb
+      \keyw{abruptly from one state,and,can appear to shift,compos-,dewdrop regression,dimensionality,ecological systems often show,erratic ups and downs,forecasting,ite time series,nonlinearity,s-map,to another}
+    \endentry
+    \entry{Ionides2006}{article}{}
+      \name{author}{3}{}{%
+        {{hash=e9f1274f30ac533333b278c9bdb4fb8b}{%
+           family={Ionides},
+           family_i={I\bibinitperiod},
+           given={E\bibnamedelima L},
+           given_i={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=3526d3eacdf0735b02bbc788a72923b5}{%
+           family={Bretó},
+           family_i={B\bibinitperiod},
+           given={C},
+           given_i={C\bibinitperiod}}}%
+        {{hash=e0903f2b7dd908fcff0eb1cccc12ae4b}{%
+           family={King},
+           family_i={K\bibinitperiod},
+           given={a\bibnamedelima a},
+           given_i={a\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+      }
+      \strng{namehash}{393f3a32b6221a56e9b4145774443a5e}
+      \strng{fullhash}{393f3a32b6221a56e9b4145774443a5e}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Nonlinear stochastic dynamical systems are widely used to model systems across the sciences and engineering. Such models are natural to formulate and can be analyzed mathematically and numerically. However, difficulties associated with inference from time-series data about unknown parameters in these models have been a constraint on their application. We present a new method that makes maximum likelihood estimation feasible for partially-observed nonlinear stochastic dynamical systems (also known as state-space models) where this was not previously the case. The method is based on a sequence of filtering operations which are shown to converge to a maximum likelihood parameter estimate. We make use of recent advances in nonlinear filtering in the implementation of the algorithm. We apply the method to the study of cholera in Bangladesh. We construct confidence intervals, perform residual analysis, and apply other diagnostics. Our analysis, based upon a model capturing the intrinsic nonlinear dynamics of the system, reveals some effects overlooked by previous studies.}
+      \field{annotation}{- Simulated data - Historic monthly cholera mortality data for Dhaka, Bangladesh -- - MIF - Multiple recovered classes, allow flexibility in the distribution of immune periods (SIR{\^{}}1R{\^{}}2...R{\^{}}k) - influence of ENSO looked at}
+      \field{issn}{0027-8424}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
+      \field{month}{12}
+      \field{number}{49}
+      \field{title}{{Inference for nonlinear dynamical systems.}}
+      \field{volume}{103}
+      \field{year}{2006}
+      \field{pages}{18438\bibrangedash 43}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.0603181103
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Ionides, Bretó, King - 2006 - Inference for nonlinear dynamical systems.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3020138%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+      \keyw{Cholera,Cholera: diagnosis,Cholera: epidemiology,Cholera: mortality,Computer Simulation,Confidence Intervals,Humans,Incidence,Likelihood Functions,Models,Biological,Nonlinear Dynamics,Stochastic Processes}
+    \endentry
+    \entry{Ionides2015}{article}{}
+      \name{author}{5}{}{%
+        {{hash=f1e57780a2c782537d3810e6b107cb85}{%
+           family={Ionides},
+           family_i={I\bibinitperiod},
+           given={Edward\bibnamedelima L.},
+           given_i={E\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=7e8822b2f2d10ac2f540a2428a8d5c8c}{%
+           family={Nguyen},
+           family_i={N\bibinitperiod},
+           given={Dao},
+           given_i={D\bibinitperiod}}}%
+        {{hash=479fa153d16de86f69b09b3510722313}{%
+           family={Atchadé},
+           family_i={A\bibinitperiod},
+           given={Yves},
+           given_i={Y\bibinitperiod}}}%
+        {{hash=ab8000c849f1409c7663571bfe084fa3}{%
+           family={Stoev},
+           family_i={S\bibinitperiod},
+           given={Stilian},
+           given_i={S\bibinitperiod}}}%
+        {{hash=e4f695cf446da6d90c43e91d8503ad51}{%
+           family={King},
+           family_i={K\bibinitperiod},
+           given={Aaron\bibnamedelima a.},
+           given_i={A\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+      }
+      \strng{namehash}{8ed3b750c30b775c4ddeb365e6c0cf1b}
+      \strng{fullhash}{e8085da022dc3bb7e85f52768f726357}
+      \field{sortinit}{I}
+      \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0027-8424}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences}
+      \field{number}{3}
+      \field{title}{{Inference for dynamic and latent variable models via iterated, perturbed Bayes maps}}
+      \field{volume}{112}
+      \field{year}{2015}
+      \field{pages}{719\bibrangedash 724}
+      \range{pages}{6}
+      \verb{doi}
+      \verb 10.1073/pnas.1410597112
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Ionides et al. - 2015 - Inference for dynamic and latent variable models via iterated, perturbed Bayes maps.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pnas.org/lookup/doi/10.1073/pnas.1410597112
+      \endverb
+    \endentry
+    \entry{King2015}{article}{}
+      \name{author}{4}{}{%
+        {{hash=26453edaa112da2dca3455595f23c408}{%
+           family={King},
+           family_i={K\bibinitperiod},
+           given={Aaron\bibnamedelima A},
+           given_i={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=6e370e2d7a5f8681cc65fe681f071b62}{%
+           family={{Domenech\bibnamedelimb de\bibnamedelimb Celles}},
+           family_i={D\bibinitperiod},
+           given={M.},
+           given_i={M\bibinitperiod}}}%
+        {{hash=d99b3054e48d948ad930c5bd6dde1b49}{%
+           family={Magpantay},
+           family_i={M\bibinitperiod},
+           given={Felicia\bibnamedelimb M\bibnamedelima G},
+           given_i={F\bibinitperiod\bibinitdelim M\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=fd326819b672bac0a44a56faae74d848}{%
+           family={Rohani},
+           family_i={R\bibinitperiod},
+           given={Pejman},
+           given_i={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{4ce4827150cfdde51912e9740db3d8e3}
+      \strng{fullhash}{f0c2c65a67e77ff8bc367bad72b272dc}
+      \field{sortinit}{K}
+      \field{sortinithash}{a7d5b3aec5a0890aae7baf85a209abfc}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{As an emergent infectious disease outbreak unfolds, public health response is reliant on information on key epidemiological quantities, such as trans-mission potential and serial interval. Increasingly, transmission models fit to incidence data are used to estimate these parameters and guide policy. Some widely used modelling practices lead to potentially large errors in par-ameter estimates and, consequently, errors in model-based forecasts. Even more worryingly, in such situations, confidence in parameter estimates and forecasts can itself be far overestimated, leading to the potential for large errors that mask their own presence. Fortunately, straightforward and com-putationally inexpensive alternatives exist that avoid these problems. Here, we first use a simulation study to demonstrate potential pitfalls of the stan-dard practice of fitting deterministic models to cumulative incidence data. Next, we demonstrate an alternative based on stochastic models fit to raw data from an early phase of 2014 West Africa Ebola virus disease outbreak. We show not only that bias is thereby reduced, but that uncertainty in esti-mates and forecasts is better quantified and that, critically, lack of model fit is more readily diagnosed. We conclude with a short list of principles to guide the modelling response to future infectious disease outbreaks.}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{0962-8452}
+      \field{issn}{0962-8452}
+      \field{journaltitle}{Proceedings of the Royal Society B: Biological Sciences}
+      \field{number}{1806}
+      \field{title}{{Avoidable errors in the modelling of outbreaks of emerging pathogens, with special reference to Ebola}}
+      \field{volume}{282}
+      \field{year}{2015}
+      \field{pages}{20150347\bibrangedash 20150347}
+      \range{pages}{1}
+      \verb{doi}
+      \verb 10.1098/rspb.2015.0347
+      \endverb
+      \verb{eprint}
+      \verb 1412.0968
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/King et al. - 2015 - Avoidable errors in the modelling of outbreaks of emerging pathogens, with special reference to Ebola.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://rspb.royalsocietypublishing.org/cgi/doi/10.1098/rspb.2015.0347
+      \endverb
+      \keyw{Ebola virus disease,Subject Areas,computational biology Keywords,emerging infectious disease,forecast,health and disease and epidemiology}
+    \endentry
+    \entry{Mardia1998}{article}{}
+      \name{author}{4}{}{%
+        {{hash=4078f8a0548068c1f53fee3bd85a4255}{%
+           family={Mardia},
+           family_i={M\bibinitperiod},
+           given={Kanti\bibnamedelima V.},
+           given_i={K\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+        {{hash=0745904d7cdabf3570d890e15e2d373e}{%
+           family={Goodall},
+           family_i={G\bibinitperiod},
+           given={Colin},
+           given_i={C\bibinitperiod}}}%
+        {{hash=1c6933ed43f4070c9a3adfebab7fe4e4}{%
+           family={Redfern},
+           family_i={R\bibinitperiod},
+           given={Edwin\bibnamedelima J.},
+           given_i={E\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+        {{hash=5f5b8b7398e7945bbb19119c8efc2afe}{%
+           family={Alonso},
+           family_i={A\bibinitperiod},
+           given={Francisco\bibnamedelima J.},
+           given_i={F\bibinitperiod\bibinitdelim J\bibinitperiod}}}%
+      }
+      \strng{namehash}{94cdc35fe64a16d04f5c1c2a5fe7be9f}
+      \strng{fullhash}{99d0a27ea0959fef14c57cbc05ef90b2}
+      \field{sortinit}{M}
+      \field{sortinithash}{2684bec41e9697b92699b46491061da2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In recent years there has been growing interest in spatial-temporal modelling, partly due to the potential of large scale data in pollution and global climate monitoring to answer important environmental questions. We consider the Kriged Kalman filter (KKF), a powerful modelling strategy which combines the two well-established approaches of (a) Kriging, in the field of spatial statistics, and (b) the Kalman filter, in general state space formulations of multivariate time series analysis. We give a brief introduction to the model and describe its various properties, and highlight that the model allows prediction in time as well as in space, simultaneously. Some special cases of the time series model are considered. We give some procedures to implement the model, also illustrated through a practical example. The paper concludes with a discussion.}
+      \field{isbn}{1133-0686}
+      \field{issn}{11330686}
+      \field{journaltitle}{Test}
+      \field{number}{2}
+      \field{title}{{The Kriged Kalman filter}}
+      \field{volume}{7}
+      \field{year}{1998}
+      \field{pages}{217\bibrangedash 282}
+      \range{pages}{66}
+      \verb{doi}
+      \verb 10.1007/BF02565111
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Mardia et al. - 1998 - The Kriged Kalman filter.pdf:pdf
+      \endverb
+      \keyw{62M30,62M99,AMS subject classification: 62M10,Bending energy,EM algorithm,Kalman filter,Karahunen-Loeve expansions,Kriging,pollution,spatial temporal modelling,state-space model}
+    \endentry
+    \entry{Neal2011}{article}{}
+      \name{author}{1}{}{%
+        {{hash=f1c61e3c1e4c3e4e5ab01f29a7be7d65}{%
+           family={Neal},
+           family_i={N\bibinitperiod},
+           given={Radford\bibnamedelima M},
+           given_i={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{f1c61e3c1e4c3e4e5ab01f29a7be7d65}
+      \strng{fullhash}{f1c61e3c1e4c3e4e5ab01f29a7be7d65}
+      \field{sortinit}{N}
+      \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Hamiltonian dynamics can be used to produce distant proposals for the Metropolis algorithm, thereby avoiding the slow exploration of the state space that results from the diffusive behaviour of simple random-walk proposals. Though originating in physics, Hamiltonian dynamics can be applied to most problems with continuous state spaces by simply introducing fictitious "momentum" variables. A key to its usefulness is that Hamiltonian dynamics preserves volume, and its trajectories can thus be used to define complex mappings without the need to account for a hard to compute Jacobian factor - a property that can be exactly maintained even when the dynamics is approximated by discretizing time. In this review, discuss theoretical and practical aspects of Hamiltonian Monte Carlo, and present some of its variations, including using windows of states for approximations, tempering during the course of a trajectory to handle isolated modes, and short-cut methods that prevent useless trajectories form taking much computation time.}
+      \field{eprinttype}{arXiv}
+      \field{isbn}{978-1-4200-7941-8}
+      \field{issn}{<null>}
+      \field{journaltitle}{Handbook of Markov Chain Monte Carlo}
+      \field{title}{{Handbook of Markov Chain Monte Carlo}}
+      \field{volume}{20116022}
+      \field{year}{2011}
+      \field{pages}{113\bibrangedash 162}
+      \range{pages}{50}
+      \verb{doi}
+      \verb 10.1201/b10905
+      \endverb
+      \verb{eprint}
+      \verb arXiv:1206.1901v1
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Neal - 2011 - MCMC using Hamiltonian dynamics.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.crcnetbase.com/doi/book/10.1201/b10905
+      \endverb
+      \keyw{hamiltonian dynamics,mcmc}
+    \endentry
+    \entry{Nsoesie2014}{article}{}
+      \name{author}{4}{}{%
+        {{hash=9c08a9df24e5a3712b21c191c064a558}{%
+           family={Nsoesie},
+           family_i={N\bibinitperiod},
+           given={Elaine\bibnamedelima O},
+           given_i={E\bibinitperiod\bibinitdelim O\bibinitperiod}}}%
+        {{hash=4c1c5b5029e012e7674a320a273a23fd}{%
+           family={Brownstein},
+           family_i={B\bibinitperiod},
+           given={John\bibnamedelima S},
+           given_i={J\bibinitperiod\bibinitdelim S\bibinitperiod}}}%
+        {{hash=66d7745374d904c396b01378abae20e8}{%
+           family={Ramakrishnan},
+           family_i={R\bibinitperiod},
+           given={Naren},
+           given_i={N\bibinitperiod}}}%
+        {{hash=dfc63acc371a79f72a1400ba6423850d}{%
+           family={Marathe},
+           family_i={M\bibinitperiod},
+           given={Madhav\bibnamedelima V},
+           given_i={M\bibinitperiod\bibinitdelim V\bibinitperiod}}}%
+      }
+      \strng{namehash}{6d30d46b632018025110554954e62def}
+      \strng{fullhash}{a16167cb1b3c39da78295e2da8d6b072}
+      \field{sortinit}{N}
+      \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Forecasting the dynamics of influenza outbreaks could be useful for decision-making regarding the allocation of public health resources. Reliable forecasts could also aid in the selection and implementation of interventions to reduce morbidity and mortality due to influenza illness. This paper reviews methods for influenza forecasting proposed during previous influenza outbreaks and those evaluated in hindsight. We discuss the various approaches, in addition to the variability in measures of accuracy and precision of predicted measures. PubMed and Google Scholar searches for articles on influenza forecasting retrieved sixteen studies that matched the study criteria. We focused on studies that aimed at forecasting influenza outbreaks at the local, regional, national, or global level. The selected studies spanned a wide range of regions including USA, Sweden, Hong Kong, Japan, Singapore, United Kingdom, Canada, France, and Cuba. The methods were also applied to forecast a single measure or multiple measures. Typical measures predicted included peak timing, peak height, daily/weekly case counts, and outbreak magnitude. Due to differences in measures used to assess accuracy, a single estimate of predictive error for each of the measures was difficult to obtain. However, collectively, the results suggest that these diverse approaches to influenza forecasting are capable of capturing specific outbreak measures with some degree of accuracy given reliable data and correct disease assumptions. Nonetheless, several of these approaches need to be evaluated and their performance quantified in real-time predictions.}
+      \field{issn}{1750-2659}
+      \field{journaltitle}{Influenza and other respiratory viruses}
+      \field{month}{05}
+      \field{number}{3}
+      \field{title}{{A systematic review of studies on forecasting the dynamics of influenza outbreaks.}}
+      \field{volume}{8}
+      \field{year}{2014}
+      \field{pages}{309\bibrangedash 16}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1111/irv.12226
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Nsoesie et al. - 2014 - A systematic review of studies on forecasting the dynamics of influenza outbreaks.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=4181479%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+      \keyw{Disease Outbreaks,Forecasting,Forecasting: methods,Global Health,Humans,Influenza,Human,Influenza,Human: epidemiology,Models,Statistical,Seasons}
+    \endentry
+    \entry{Nsoesie2013}{article}{}
+      \name{author}{3}{}{%
+        {{hash=682e095194ad038f4b84e50562fad147}{%
+           family={Nsoesie},
+           family_i={N\bibinitperiod},
+           given={Elaine},
+           given_i={E\bibinitperiod}}}%
+        {{hash=cd9a85cee9cc16be8298d17e18d4011b}{%
+           family={Mararthe},
+           family_i={M\bibinitperiod},
+           given={Madhav},
+           given_i={M\bibinitperiod}}}%
+        {{hash=08ee0ad57dc1f672d7cd5b29f51eb179}{%
+           family={Brownstein},
+           family_i={B\bibinitperiod},
+           given={John},
+           given_i={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{4b7c1656b073bd7177c28c86a350be48}
+      \strng{fullhash}{4b7c1656b073bd7177c28c86a350be48}
+      \field{sortinit}{N}
+      \field{sortinithash}{925374ca63e7594de7fafdb83e64d41d}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{We present a framework for near real-time forecast of influenza epidemics using a simulation optimization approach. The method combines an individual-based model and a simple root finding optimization method for parameter estimation and forecasting. In this study, retrospective forecasts were generated for seasonal influenza epidemics using web-based estimates of influenza activity from Google Flu Trends for 2004-2005, 2007-2008 and 2012-2013 flu seasons. In some cases, the peak could be forecasted 5-6 weeks ahead. This study adds to existing resources for influenza forecasting and the proposed method can be used in conjunction with other approaches in an ensemble framework.}
+      \field{annotation}{Google flu trends -- -Simulation Optimization Approach -Synthetic Networks and Individual-based Networked Model (graph) -SEIR containers -Parameter search optimization approach (Robbins Monro)}
+      \field{issn}{2157-3999}
+      \field{journaltitle}{PLoS currents}
+      \field{month}{01}
+      \field{title}{{Forecasting peaks of seasonal influenza epidemics.}}
+      \field{volume}{5}
+      \field{year}{2013}
+      \field{pages}{1\bibrangedash 14}
+      \range{pages}{14}
+      \verb{doi}
+      \verb 10.1371/currents.outbreaks.bb1e879a23137022ea79a8c508b030bc
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Nsoesie, Mararthe, Brownstein - 2013 - Forecasting peaks of seasonal influenza epidemics.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3712489%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+    \endentry
+    \entry{Reiner2012}{article}{}
+      \name{author}{6}{}{%
+        {{hash=3183729e7e4dd741bf47a5a4d8b8351e}{%
+           family={Reiner},
+           family_i={R\bibinitperiod},
+           given={Robert\bibnamedelima C},
+           given_i={R\bibinitperiod\bibinitdelim C\bibinitperiod}}}%
+        {{hash=def57048bfdf9d8768f8d40b22bac8c7}{%
+           family={King},
+           family_i={K\bibinitperiod},
+           given={Aaron\bibnamedelima a},
+           given_i={A\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+        {{hash=a8e4dc2fa33c0c4b092ab1c808576a25}{%
+           family={Emch},
+           family_i={E\bibinitperiod},
+           given={Michael},
+           given_i={M\bibinitperiod}}}%
+        {{hash=1fe3d3be23eb115d79d6d1a535dd97b7}{%
+           family={Yunus},
+           family_i={Y\bibinitperiod},
+           given={Mohammad},
+           given_i={M\bibinitperiod}}}%
+        {{hash=009f296abaa0169a1ec687f70983f947}{%
+           family={Faruque},
+           family_i={F\bibinitperiod},
+           given={a\bibnamedelima S\bibnamedelima G},
+           given_i={a\bibinitperiod\bibinitdelim S\bibinitperiod\bibinitdelim G\bibinitperiod}}}%
+        {{hash=511515d1b6bcc900e4bb269c41a4dee5}{%
+           family={Pascual},
+           family_i={P\bibinitperiod},
+           given={Mercedes},
+           given_i={M\bibinitperiod}}}%
+      }
+      \strng{namehash}{f6d5415f938a2f5b36602bd43c87714b}
+      \strng{fullhash}{6f1e8c0cfc6db6ccda7035a612ce71d3}
+      \field{sortinit}{R}
+      \field{sortinithash}{c7387613477035a752d935acfc3e3ea2}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{The population dynamics of endemic cholera in urban environments--in particular interannual variation in the size and distribution of seasonal outbreaks--remain poorly understood and highly unpredictable. In part, this situation is due to the considerable demographic, socioeconomic, and environmental heterogeneity of large and growing urban centers. Despite this heterogeneity, the influence of climate variability on the population dynamics of infectious diseases is considered a large-scale, regional, phenomenon, and as such has been previously addressed for cholera only with temporal models that do not incorporate spatial structure. Here we show that a probabilistic spatial model can explain cholera dynamics in the megacity of Dhaka, Bangladesh, and afford a basis for cholera forecasts at lead times of 11 mo. Critically, we find that the action of climate variability (El Niño southern oscillation and flooding) is quite localized: There is a climate-sensitive urban core that acts to propagate risk to the rest of the city. The modeling framework presented here should be applicable to cholera in other cities, as well as to other infectious diseases in urban settings and other biological systems with spatiotemporal interactions.}
+      \field{annotation}{- O1 El Tor cholera hospitalization data broken down into administrative subdivisions called thanas (Fig. 1) - cholera case data used here were collected by International Centre for Diarrhoeal Disease Re- search, Bangladesh (ICDDR,B) hospital located in Dhaka city -- - model is a multidimensional inhomogeneous Markov chain (MDIMC), schematized in Fig. 3}
+      \field{issn}{1091-6490}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
+      \field{month}{02}
+      \field{number}{6}
+      \field{title}{{Highly localized sensitivity to climate forcing drives endemic cholera in a megacity.}}
+      \field{volume}{109}
+      \field{year}{2012}
+      \field{pages}{2033\bibrangedash 6}
+      \range{pages}{4}
+      \verb{doi}
+      \verb 10.1073/pnas.1108438109
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Reiner et al. - 2012 - Highly localized sensitivity to climate forcing drives endemic cholera in a megacity.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3277579%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+      \keyw{Bangladesh,Bangladesh: epidemiology,Cholera,Cholera: epidemiology,Cities,Climate,Endemic Diseases,Endemic Diseases: statistics {\&} numerical data,Humans,Markov Chains,Models,Biological}
+    \endentry
+    \entry{Sahu2005}{article}{}
+      \name{author}{1}{}{%
+        {{hash=bfa7794eb2da9fc038b9bd76db9b804a}{%
+           family={Sahu},
+           family_i={S\bibinitperiod},
+           given={Sujit\bibnamedelima K},
+           given_i={S\bibinitperiod\bibinitdelim K\bibinitperiod}}}%
+      }
+      \strng{namehash}{bfa7794eb2da9fc038b9bd76db9b804a}
+      \strng{fullhash}{bfa7794eb2da9fc038b9bd76db9b804a}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{issn}{0035-9254}
+      \field{journaltitle}{Appl. Statist}
+      \field{title}{{A Bayesian Kriged-Kalman model for short-term fore- casting of air pollution levels}}
+      \field{volume}{54}
+      \field{year}{2005}
+      \field{pages}{223\bibrangedash 244}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1111/j.1467-9876.2005.00480.x
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Sahu, Mardia - Unknown - A Bayesian Kriged-Kalman model for short-term fore- casting of air pollution levels.pdf:pdf
+      \endverb
+      \keyw{bending energy,gibbs sampler,kalman filter,kriging,markov chain monte carlo,spatial temporal modelling,state-space model}
+    \endentry
+    \entry{Sau1918}{article}{}
+      \name{author}{4}{}{%
+        {{hash=2e99ad00fccfd111ababe44c9fdf5bfe}{%
+           family={Sau},
+           family_i={S\bibinitperiod},
+           given={Jacques},
+           given_i={J\bibinitperiod}}}%
+        {{hash=eaedf54c2463f944285d9fb7a145b929}{%
+           family={Faouzi},
+           family_i={F\bibinitperiod},
+           given={Nour-eddin\bibnamedelima El},
+           given_i={N\bibinithyphendelim e\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=acd11c6443cc39371bfa3a8f9ce245e4}{%
+           family={Aissa},
+           family_i={A\bibinitperiod},
+           given={Anis\bibnamedelima Ben},
+           given_i={A\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=07d3788abe9939a6c7c4e16399cb71a4}{%
+           family={Mouzon},
+           family_i={M\bibinitperiod},
+           given={Olivier\bibnamedelima De},
+           given_i={O\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{53cb0e578ef6b15028f6c4fd6563ed65}
+      \strng{fullhash}{dc791e58ef5fa810f74220cd66102922}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Information Systems}
+      \field{title}{{Particle filter-based real-time estimation and prediction of traffic conditions Modeling framework}}
+      \field{year}{1918}
+      \field{pages}{1\bibrangedash 8}
+      \range{pages}{8}
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Sau et al. - 1918 - Particle filter-based real-time estimation and prediction of traffic conditions Modeling framework.pdf:pdf
+      \endverb
+      \keyw{bayesian monte carlo,real-time traffic estimation,travel time prediction}
+    \endentry
+    \entry{Shaman2012}{article}{}
+      \name{author}{2}{}{%
+        {{hash=5ecfaa73ece12900c192ebd26039d7e6}{%
+           family={Shaman},
+           family_i={S\bibinitperiod},
+           given={Jeffrey},
+           given_i={J\bibinitperiod}}}%
+        {{hash=b762951d5066461e9572fc4a4e9d998e}{%
+           family={Karspeck},
+           family_i={K\bibinitperiod},
+           given={Alicia},
+           given_i={A\bibinitperiod}}}%
+      }
+      \strng{namehash}{a347372cb9484b9b7976eead0d40125b}
+      \strng{fullhash}{a347372cb9484b9b7976eead0d40125b}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Influenza recurs seasonally in temperate regions of the world; however, our ability to predict the timing, duration, and magnitude of local seasonal outbreaks of influenza remains limited. Here we develop a framework for initializing real-time forecasts of seasonal influenza outbreaks, using a data assimilation technique commonly applied in numerical weather prediction. The availability of real-time, web-based estimates of local influenza infection rates makes this type of quantitative forecasting possible. Retrospective ensemble forecasts are generated on a weekly basis following assimilation of these web-based estimates for the 2003-2008 influenza seasons in New York City. The findings indicate that real-time skillful predictions of peak timing can be made more than 7 wk in advance of the actual peak. In addition, confidence in those predictions can be inferred from the spread of the forecast ensemble. This work represents an initial step in the development of a statistically rigorous system for real-time forecast of seasonal influenza.}
+      \field{annotation}{- Google flu trends -- - SIRS-EAKF framework}
+      \field{issn}{1091-6490}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
+      \field{month}{12}
+      \field{number}{50}
+      \field{title}{{Forecasting seasonal outbreaks of influenza.}}
+      \field{volume}{109}
+      \field{year}{2012}
+      \field{pages}{20425\bibrangedash 30}
+      \range{pages}{11}
+      \verb{doi}
+      \verb 10.1073/pnas.1208772109
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Shaman, Karspeck - 2012 - Forecasting seasonal outbreaks of influenza.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3528592%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+      \keyw{Computational Biology,Computer Simulation,Disease Outbreaks,Disease Outbreaks: statistics {\&} numerical data,Forecasting,Forecasting: methods,Humans,Humidity,Influenza,Human,Influenza,Human: epidemiology,Models,Statistical,New York City,New York City: epidemiology,Retrospective Studies,Seasons}
+    \endentry
+    \entry{Sugihara1990}{misc}{}
+      \name{author}{2}{}{%
+        {{hash=1e350d84f4bac368bd6cd71e0a4ea2f9}{%
+           family={Sugihara},
+           family_i={S\bibinitperiod},
+           given={G},
+           given_i={G\bibinitperiod}}}%
+        {{hash=2dd073cf3e9be177319055b98ab5de3f}{%
+           family={May},
+           family_i={M\bibinitperiod},
+           given={R\bibnamedelima M},
+           given_i={R\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{8ebef6a7e09223965dd4b254b7d2881a}
+      \strng{fullhash}{8ebef6a7e09223965dd4b254b7d2881a}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{An approach is presented for making short-term predictions about the trajectories of chaotic dynamical systems. The method is applied to data on measles, chickenpox, and marine phytoplankton populations, to show how apparent noise associated with deterministic chaos can be distinguished from sampling error and other sources of externally induced environmental noise.}
+      \field{booktitle}{Nature}
+      \field{isbn}{0028-0836 (Print)}
+      \field{issn}{0028-0836}
+      \field{number}{6268}
+      \field{title}{{Nonlinear forecasting as a way of distinguishing chaos from measurement error in time series.}}
+      \field{volume}{344}
+      \field{year}{1990}
+      \field{pages}{734\bibrangedash 741}
+      \range{pages}{8}
+      \verb{doi}
+      \verb 10.1038/344734a0
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Sugihara, May - 1990 - Nonlinear forecasting as a way of distinguishing chaos from measurement error in time series.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Sugihara1994}{article}{}
+      \name{author}{1}{}{%
+        {{hash=1d90ee645f52e4685666c6c0c748b606}{%
+           family={Sugihara},
+           family_i={S\bibinitperiod},
+           given={George},
+           given_i={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{1d90ee645f52e4685666c6c0c748b606}
+      \strng{fullhash}{1d90ee645f52e4685666c6c0c748b606}
+      \field{sortinit}{S}
+      \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{There is a growing trend in the natural sciences to view time series as products of dynamical systems. This viewpoint has proven to be particularly useful in stimulating debate and insight into the nature of the underlying generating mechanisms. Here I review some of the issues concerning the use of forecasting in the detection of nonlinearities and possible chaos, particularly with regard to stochastic chaos. Moreover, it is shown how recent attempts to measure meaningful Lyapunov exponents for ecological data are fundamentally flawed, and that when observational noise is convolved with process noise, computing Lyapunov exponents for the real system will be difficult. Such problems pave the way for more operational definitions of dynamic complexity (cf. Yao {\&} Tong, this volume). Aside from its use in the characterization of chaos, nonlinear forecasting can be used more broadly in pragmatic classification problems. Here I review a recent example of nonlinear forecasting as it is applied to classify human heart rhythms. In particular, it is shown how forecast nonlinearity can be a good discriminator of the physiological effects of age, and how prediction-decay may discriminate heart-disease. In so doing, I introduce a method for characterizing nonlinearity using `S-maps' and a method for analysing multiple short time series with composite attractors.}
+      \field{isbn}{09628428}
+      \field{issn}{1364-503X}
+      \field{journaltitle}{Philosophical Transactions of the Royal Society A: Mathematical, Physical and Engineering Sciences}
+      \field{title}{{Nonlinear Forecasting for the Classification of Natural Time Series}}
+      \field{volume}{348}
+      \field{year}{1994}
+      \field{pages}{477\bibrangedash 495}
+      \range{pages}{19}
+      \verb{doi}
+      \verb 10.1098/rsta.1994.0106
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Sugihara - 1994 - Nonlinear Forecasting for the Classification of Natural Time Series.pdf:pdf
+      \endverb
+    \endentry
+    \entry{VidalRodeiro2006}{article}{}
+      \name{author}{2}{}{%
+        {{hash=47eecd6088a47d901f8f6865be83ea9b}{%
+           family={{Vidal\bibnamedelimb Rodeiro}},
+           family_i={V\bibinitperiod},
+           given={Carmen\bibnamedelima L},
+           given_i={C\bibinitperiod\bibinitdelim L\bibinitperiod}}}%
+        {{hash=fcc1db977ee7da9ff8ef715afa9451a4}{%
+           family={Lawson},
+           family_i={L\bibinitperiod},
+           given={Andrew\bibnamedelima B},
+           given_i={A\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+      }
+      \strng{namehash}{bf6b9211e9bcb8e3d867adcaa7382ab3}
+      \strng{fullhash}{bf6b9211e9bcb8e3d867adcaa7382ab3}
+      \field{sortinit}{V}
+      \field{sortinithash}{d18f5ce25ce0b5ca7f924e3f6c04870e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Online surveillance of disease has become an important issue in public health. In particular, the space-time monitoring of disease plays an important part in any syndromic system. However, methodology for these systems is generally lacking. One approach to space-time monitoring of health data is to consider the space-time model parameters as the focus and to monitor their changes as multivariate time series (Lawson AB. Some considerations in spatial-temporal analysis of public health surveillance data. In Brookmeyer R, Stroup DF eds. Monitoring the Health of Populations. Oxford University Press, 2004; Vidal Rodeiro CL, Lawson AB. Monitoring changes in spatio-temporal maps of disease. Biometrical Journal 2006; to appear). However with complex space-time models, this becomes very time consuming. Some simplifications may be necessary and these can be made in a number of ways. In this article, the focus is on particle filters that can be used to resample the history of the process and thereby reduce computation time. This article describes a particular case of particle filters, the resample-move algorithm, proposed by Gilks and Berzuini (Gilks WR, Berzuini C. Following a moving target--Monte Carlo inference for dynamic Bayesian models. Journal of the Royal Statistical Society, Series B 2001; 63: 127-46), in the context of disease map surveillance. This is followed by an application to a real data set in which a comparison between the use of Markov chain Monte Carlo methods and the resample-move algorithm is carried out.}
+      \field{isbn}{0962-2802 (Print)}
+      \field{issn}{0962-2802}
+      \field{journaltitle}{Statistical methods in medical research}
+      \field{number}{5}
+      \field{title}{{Online updating of space-time disease surveillance models via particle filters.}}
+      \field{volume}{15}
+      \field{year}{2006}
+      \field{pages}{423\bibrangedash 444}
+      \range{pages}{22}
+      \verb{doi}
+      \verb 10.1177/0962280206071640
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Vidal Rodeiro, Lawson - 2006 - Online updating of space-time disease surveillance models via particle filters.pdf:pdf
+      \endverb
+    \endentry
+    \entry{Yang2014}{article}{}
+      \name{author}{3}{}{%
+        {{hash=01df867a32cb42670784206b1571551b}{%
+           family={Yang},
+           family_i={Y\bibinitperiod},
+           given={Wan},
+           given_i={W\bibinitperiod}}}%
+        {{hash=b762951d5066461e9572fc4a4e9d998e}{%
+           family={Karspeck},
+           family_i={K\bibinitperiod},
+           given={Alicia},
+           given_i={A\bibinitperiod}}}%
+        {{hash=5ecfaa73ece12900c192ebd26039d7e6}{%
+           family={Shaman},
+           family_i={S\bibinitperiod},
+           given={Jeffrey},
+           given_i={J\bibinitperiod}}}%
+      }
+      \strng{namehash}{708d3d65cdf3e23bc3301026e13d476a}
+      \strng{fullhash}{708d3d65cdf3e23bc3301026e13d476a}
+      \field{sortinit}{Y}
+      \field{sortinithash}{3cbc1e3d286284cedb5e5218a3248f94}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{A variety of filtering methods enable the recursive estimation of system state variables and inference of model parameters. These methods have found application in a range of disciplines and settings, including engineering design and forecasting, and, over the last two decades, have been applied to infectious disease epidemiology. For any system of interest, the ideal filter depends on the nonlinearity and complexity of the model to which it is applied, the quality and abundance of observations being entrained, and the ultimate application (e.g. forecast, parameter estimation, etc.). Here, we compare the performance of six state-of-the-art filter methods when used to model and forecast influenza activity. Three particle filters--a basic particle filter (PF) with resampling and regularization, maximum likelihood estimation via iterated filtering (MIF), and particle Markov chain Monte Carlo (pMCMC)--and three ensemble filters--the ensemble Kalman filter (EnKF), the ensemble adjustment Kalman filter (EAKF), and the rank histogram filter (RHF)--were used in conjunction with a humidity-forced susceptible-infectious-recovered-susceptible (SIRS) model and weekly estimates of influenza incidence. The modeling frameworks, first validated with synthetic influenza epidemic data, were then applied to fit and retrospectively forecast the historical incidence time series of seven influenza epidemics during 2003-2012, for 115 cities in the United States. Results suggest that when using the SIRS model the ensemble filters and the basic PF are more capable of faithfully recreating historical influenza incidence time series, while the MIF and pMCMC do not perform as well for multimodal outbreaks. For forecast of the week with the highest influenza activity, the accuracies of the six model-filter frameworks are comparable; the three particle filters perform slightly better predicting peaks 1-5 weeks in the future; the ensemble filters are more accurate predicting peaks in the past.}
+      \field{issn}{1553-7358}
+      \field{journaltitle}{PLoS computational biology}
+      \field{month}{04}
+      \field{number}{4}
+      \field{title}{{Comparison of filtering methods for the modeling and retrospective forecasting of influenza epidemics.}}
+      \field{volume}{10}
+      \field{year}{2014}
+      \field{pages}{e1003583}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pcbi.1003583
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Yang, Karspeck, Shaman - 2014 - Comparison of filtering methods for the modeling and retrospective forecasting of influenza epidemics.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3998879%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+      \keyw{Forecasting,Humans,Influenza,Human,Influenza,Human: epidemiology,Models,Theoretical,Retrospective Studies,United States,United States: epidemiology}
+    \endentry
+    \entry{Zhang2013}{article}{}
+      \name{author}{6}{}{%
+        {{hash=d7a49cb3169a3894f4e174519f422e34}{%
+           family={Zhang},
+           family_i={Z\bibinitperiod},
+           given={Xingyu},
+           given_i={X\bibinitperiod}}}%
+        {{hash=962a5576d150eefda5961bb315340c4e}{%
+           family={Liu},
+           family_i={L\bibinitperiod},
+           given={Yuanyuan},
+           given_i={Y\bibinitperiod}}}%
+        {{hash=feb96ca112c179e320db2db693e022b8}{%
+           family={Yang},
+           family_i={Y\bibinitperiod},
+           given={Min},
+           given_i={M\bibinitperiod}}}%
+        {{hash=228dd687961f3612985beeddec81f72a}{%
+           family={Zhang},
+           family_i={Z\bibinitperiod},
+           given={Tao},
+           given_i={T\bibinitperiod}}}%
+        {{hash=8f799455eb2a810fa0ca410b6c0540e6}{%
+           family={Young},
+           family_i={Y\bibinitperiod},
+           given={Alistair\bibnamedelima a},
+           given_i={A\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+        {{hash=c68dceda37059287e8f454a9be849ac6}{%
+           family={Li},
+           family_i={L\bibinitperiod},
+           given={Xiaosong},
+           given_i={X\bibinitperiod}}}%
+      }
+      \strng{namehash}{b1941b41e43da707bb05e0ad659d7b84}
+      \strng{fullhash}{8d688c8179a369a5bbc7d8b7579bb21b}
+      \field{sortinit}{Z}
+      \field{sortinithash}{fdda4caaa6b5fa63e0c081dcb159543a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Accurate incidence forecasting of infectious disease is critical for early prevention and for better government strategic planning. In this paper, we present a comprehensive study of different forecasting methods based on the monthly incidence of typhoid fever. The seasonal autoregressive integrated moving average (SARIMA) model and three different models inspired by neural networks, namely, back propagation neural networks (BPNN), radial basis function neural networks (RBFNN), and Elman recurrent neural networks (ERNN) were compared. The differences as well as the advantages and disadvantages, among the SARIMA model and the neural networks were summarized and discussed. The data obtained for 2005 to 2009 and for 2010 from the Chinese Center for Disease Control and Prevention were used as modeling and forecasting samples, respectively. The performances were evaluated based on three metrics: mean absolute error (MAE), mean absolute percentage error (MAPE), and mean square error (MSE). The results showed that RBFNN obtained the smallest MAE, MAPE and MSE in both the modeling and forecasting processes. The performances of the four models ranked in descending order were: RBFNN, ERNN, BPNN and the SARIMA model.}
+      \field{issn}{1932-6203}
+      \field{journaltitle}{PloS one}
+      \field{month}{01}
+      \field{number}{5}
+      \field{title}{{Comparative study of four time series methods in forecasting typhoid fever incidence in China.}}
+      \field{volume}{8}
+      \field{year}{2013}
+      \field{pages}{e63116}
+      \range{pages}{-1}
+      \verb{doi}
+      \verb 10.1371/journal.pone.0063116
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Zhang et al. - 2013 - Comparative study of four time series methods in forecasting typhoid fever incidence in China.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pubmedcentral.nih.gov/articlerender.fcgi?artid=3641111%7B%5C&%7Dtool=pmcentrez%7B%5C&%7Drendertype=abstract
+      \endverb
+      \keyw{Algorithms,China,China: epidemiology,Data Interpretation,Statistical,Forecasting,Forecasting: methods,Humans,Incidence,Models,Statistical,Neural Networks (Computer),Typhoid Fever,Typhoid Fever: epidemiology}
+    \endentry
+  \endsortlist
+\endrefsection
+\endinput
+

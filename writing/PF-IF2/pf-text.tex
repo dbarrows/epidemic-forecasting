@@ -1,14 +1,15 @@
 %% Dexter Barrows, 2016
 %% dbarrows.github.io
 
-\section{Intro}
 
-	Particle filters are similar to MCMC-based methods in that they attempt to draw samples from an approximation of the posterior distribution of model parameters $\theta$ given observed data $D$. Instead of constructing a Markov chain and approximating its stationary distribution, a cohort of ``particles'' are used to move through the data in an on-line (sequential) fashion with the cohort being culled of poorly-performing particles at each iteration via importance sampling. If the culled particles are not replenished, this will be a Sequential Importance Sampling (SIS) particle filter. If the culled particles are replenished from surviving particles, in a sense setting up a process not dissimilar from Darwinian selection, then this will be a Sequential Importance Resampling (SIR) particle filter.
+	Particle filters are similar to MCMC-based methods in that they use likelihoods to evaluate the validity of proposed parameter sets given observed data $D$, but differ in that they are largely trying to produce point estimates of the parameters instead of samples from the posterior distribution.
+
+	Instead of constructing a Markov chain and approximating its stationary distribution, a cohort of ``particles'' are used to move through the data in an on-line (sequential) fashion with the cohort being culled of poorly-performing particles at each iteration via importance sampling. If the culled particles are not replenished, this will be a Sequential Importance Sampling (SIS) particle filter. If the culled particles are replenished from surviving particles, in a sense setting up a process analogous to Darwinian selection, then this will be a Sequential Importance Resampling (SIR) particle filter.
 
 
 \section{Formulation}
 
-	Particle filters, also called Sequential Monte-Carlo (SMC) or bootstrap filters, feature similar core functionality as the venerable Kalman Filter. As the algorithm moves through the data (sequence of observations), a prediction-update cycle is used to simulate the evolution of the model $M$ with different particular parameter selections, track how closely these predictions approximate the new observed value, and update the current cohort appropriately.
+	Particle filters, also called Sequential Monte-Carlo (SMC) filters, feature similar core functionality as the venerable Kalman Filter. As the algorithm moves through the data (sequence of observations), a prediction-update cycle is used to simulate the evolution of the model $M$ with different particular parameter selections, track how closely these predictions approximate the new observed value, and update the current cohort appropriately.
 
 	Two separate functions are used to simulate the evolution and observation processes. The ``true'' state evolution is specified by
 
@@ -22,16 +23,16 @@
 		Y_t \sim f_2 (X_t, \theta).
 	\end{equation}
 
-	Note that components of $\theta$ can contribute to both functions, but a typical formulation is to have some components contribute to $f_1 (\cdot, \theta)$ and others to $f_2 (\cdot,\theta)$.
+	Components of $\theta$ can contribute to both functions, but a typical formulation is to have some components contribute to $f_1 (\cdot, \theta)$ and others to $f_2 (\cdot,\theta)$.
 
-	The prediction part of the cycle utilises $f_1 (\cdot, \theta)$ to update each particle's current state estimate to the next time step, while $f_2 (\cdot, \theta)$ is used to evaluate a weighting $w$ for each particle which will be used to determine how closely that particle is estimating the true underlying state of the system. Note that $f_2 (\cdot, \theta)$ could be thought of as a probability of observing a piece of data $y_t$ given the particle's current state estimate and parameter set, $P(y_t | X_t, \theta)$. Then, the new cohort of particles is drawn from the old cohort proportional to the weights. This process is repeated until the set of observations $D$ is exhausted.
+	The prediction part of the cycle uses $f_1 (\cdot, \theta)$ to update each particle's current state estimate to the next time step, while $f_2 (\cdot, \theta)$ is used to evaluate a weighting $w$ for each particle which will be used to determine how closely that particle is estimating the true underlying state of the system. Note that $f_2 (\cdot, \theta)$ could be thought of as a probability of observing a piece of data $y_t$ given the particle's current state estimate and parameter set, $P(y_t | X_t, \theta)$. Then, the new cohort of particles is drawn from the old cohort proportional to the weights. This process is repeated until the set of observations $D$ is exhausted.
 
 
 \section{Algorithm}
 
     Now we will formalize the particle filter.
 
-    We will denote each particle $p^{(j)}$ as the $j^{th}$ particle consisting of a state estimate at time $t$, $X_t^{(j)}$, a parameter set $\theta^{(j)}$, and a weight $w^{(j)}$. Note that the state estimates will evolve with the system as the cohort traverses the data.
+    We will denote each particle $p^{(j)}$ as the $j^{\text{th}}$ particle consisting of a state estimate at time $t$, $X_t^{(j)}$, a parameter set $\theta^{(j)}$, and a weight $w^{(j)}$. Note that the state estimates will evolve with the system as the cohort traverses the data.
 
     The algorithm for a Sequential Importance Resampling particle is shown in Algorithm [\ref{pfsir}].
     
@@ -95,7 +96,7 @@
 
 \section{Particle Collapse}
 
-	Not uncommonly, a situation may arise in which a single particle is assigned a normalized weight very close to 1 and all the other particles are assigned weights very close to 0. When this occurs, the next generation of the cohort will overwhelmingly consist of descendants of the heavily-weighted particle, termed particle collapse or degeneracy.
+	Often, a situation may arise in which a single particle is assigned a normalized weight very close to 1 and all the other particles are assigned weights very close to 0. When this occurs, the next generation of the cohort will overwhelmingly consist of descendants of the heavily-weighted particle, termed particle collapse or degeneracy.
 
 	Since the basic SIR particle filter does not perturb either the particle system states or system parameter values, the cohort will quickly consist solely of identical particles, effectively halting further exploration of the parameter space as new data is introduced.
 
@@ -103,10 +104,10 @@
 
 	In either case, the hallmark feature used to detect collapse is the same -- at some point the cohort will consist of particles with very similar or identical parameter sets which will consequently result in their assigned weights being extremely close together.
 
-	Mathematically, we are interested in the number of effective particles, $N_{eff}$, which represents the number of particles that are acceptably dissimilar. This is estimated by evaluating
+	Mathematically, we are interested in the number of effective particles, $N_{\small\text{eff}}$, which represents the number of particles that are acceptably dissimilar. This is estimated by evaluating
 
 	\begin{equation}
-		N_{eff} = \frac{1}{\sum_1^J (w^{(j)})^2}.
+		N_{\small\text{eff}} = \frac{1}{\sum_1^J (w^{(j)})^2}.
 	\end{equation}
 
 	This can be used to diagnose not only when collapse has occurred, but can also indicate when it is near.
@@ -116,16 +117,16 @@
 
 	A particle filter hinges on the idea that as it progresses through the data set $D$, its estimate of the posterior carried in the cohort of particles approaches maximum likelihood. However, this convergence may not be fast enough so that the estimate it produces is of quality before the data runs out. One way around this problem is to ``clone'' the data and make multiple passes through it as if it were a continuation of the original time series. Note that the system state contained in each particle will have to be reset with each pass.
 
-	Rigorous proofs have been developed (references to Ionides et. al. work) that show that by treating the parameters as stochastic processes instead of fixed values, the multiple passes through the data will indeed force convergence of the process mean toward maximum likelihood, and the process variance toward 0.
+	Rigorous proofs have been developed [\textit{Ionides ref.}] that show that by treating the parameters as stochastic processes instead of fixed values, the multiple passes through the data will indeed force convergence of the process mean toward maximum likelihood, and the process variance toward 0.
 
 
-\section{IF2}
+\section{Iterated Filtering 2 (IF2)}
 
-	The successor to Iterated Filtering 1 (reference), Iterated Filtering 2 is simpler, faster, and demonstrated better convergence toward maximum likelihood (reference). The core concept involves a two-pronged approach. First, Data cloning is used to allow more time for the parameter stochastic process means to converge to maximum likelihood, and frequent cooled perturbation of the particle parameters allow better exploration of the parameter space while still allowing convergence to good point estimates.
+	The successor to Iterated Filtering 1 [\textit{Ionides ref}], Iterated Filtering 2 is simpler, faster, and demonstrated better convergence toward maximum likelihood. The core concept involves a two-pronged approach. First, a data cloning-like procedure is used to allow more time for the parameter stochastic process means to converge to maximum likelihood, and frequent cooled perturbation of the particle parameters allow better exploration of the parameter space while still allowing convergence to good point estimates.
 
-	It is worth noting that IF2 is not designed to estimate the full posterior distribution, but in practice can be used to do so within reason. Further, IF2 thwarts the problem of particle collapse by keeping at least some perturbation in the system at all times. It is important to note that while true particle collapse will not occur, there is still risk of a pseudo-collapse in which all particles will be extremely close to one another so as to be virtually indistinguishable. However this will only occur with the use of overly-aggressive cooling strategies or by specifying an excessive number of passes through the data.
+	IF2 is not designed to estimate the full posterior distribution, instead to produce a Maximum Likelihood (ML) point estimate. Further, IF2 thwarts the problem of particle collapse by keeping at least some perturbation in the system at all times. It is important to note that while true particle collapse will not occur, there is still risk of a pseudo-collapse in which all particles will be extremely close to one another so as to be virtually indistinguishable. However this will only occur with the use of overly-aggressive cooling strategies or by specifying an excessive number of passes through the data.
 
-	An important new quantity is the particle perturbation density denoted $h(\theta|,\sigma)$. Typically this is multi-normal with $\sigma$ being a vector of variances proportional to the expected values of $\theta$. In practice the proportionality can be derived from current means or specified ahead of time. Further, these intensities must decrease over time. This can be done via exponential or geometric cooling, a decreasing step function, a combination of these, or though some other similar scheme.
+	An important new quantity is the particle perturbation density denoted $h(\theta|,\sigma)$. Typically this is multivariate Normal with $\sigma$ being a vector of variances proportional to the expected values of $\theta$. In practice the proportionality can be derived from current means or specified ahead of time. Further, these intensities must decrease over time. This can be done via exponential or geometric cooling, a decreasing step function, a combination of these, or through some other similar scheme.
 
 	The algorithm for IF2 can be seen in Algorithm [\ref{if2}].\\
 
@@ -218,121 +219,23 @@
     \end{algorithm}
 
 
-\section{Fitting}
+\section{IF2 Fitting}
 
     Here we will examine a test case in which IF2 will be used to fit a Susceptible-Infected-Removed (SIR) epidemic model to mock infectious count data.
 
-    The synthetic data was produced by taking the solution to a basic SIR ODE model, sampling it at regular intervals, and perturbing those values by adding in observation noise. The SIR model used was
+    As in the previous section, the model in Equation [\ref{sirode}] was use to produce synthetic data. The same parameters and initial conditions were used, namely: parameter values were set to $R_0 = 3.0, r = 0.1, N = 500$, initial conditions were set to 5 infectious individuals, 495 people susceptible to infection, and no one had yet recovered from infection and been removed, and observation error was taken to be $\varepsilon_{obs} \sim \mathcal{N}(0,\sigma)$, where individual values were drawn for each synthetic data point.
 
-    \begin{equation}
-        \begin{array}{rl}
-            \dfrac{dS}{dt} & = - \beta I S \\
-            \dfrac{dI}{dt} & = \beta I S - rI  \\
-            \dfrac{dR}{dt} & = rI
-        \end{array}
-    \end{equation}
+    Figure [\ref{mcmcdataplot}] in the previous section shows the true SIR ODE system solution and data.
 
-    where $S$ is the number of individuals susceptible to infection, $I$ is the number of infectious individuals, $R$ is the number of recovered individuals, $\beta = R_0 r / N$ is the force of infection, $R_0$ is the number of secondary cases per infected individual, $r$ is the recovery rate, and $N$ is the population size.
+    The IF2 algorithm was implemented in C++ for speed, and integrated into the R workflow using the \verb|Rcpp| package.
 
-    The solution to this system was obtained using the \verb|ode()| function from the \verb|deSolve| package. The required derivative array function in the format required by \verb|ode()| was specified as
-
-    \begin{R}    
-    SIR <- function(Time, State, Pars) {
-
-        with(as.list(c(State, Pars)), {
-            
-            B   <- R0*r/N    # calculate Beta
-            BSI <- B*S*I     # save product
-            rI  <- r*I       # save product
-            
-            dS = -BSI       # change in Susceptible people
-            dI = BSI - rI   # change in Infected people
-            dR = rI         # change in Removed (recovered people)
-            
-            return(list(c(dS, dI, dR)))
-            
-        })
-        
-    }
-    \end{R}
-
-    The true parameter values were set to $R_0 = 3.0, r = 0.1, N = 500$ by
-
-    \begin{R}
-    pars  <- c(R0  = 3.0,  # new infected people per infected person
-              r   = 0.1,  # recovery rate
-              N   = 500)  # population size
-    \end{R}
-
-    The initial conditions were set to 5 infectious individuals, 495 people susceptible to infection, and no one had yet recovered from infection and been removed. These were set using
-
-    \begin{R}
-	true_init_cond <- c(S = N - i_infec,
-                	   I = i_infec,
-                	   R = 0)
-    \end{R}
-
-    The \verb|ode()| function is called as
-
-    \begin{R}
-    odeout <- ode(y = true_init_cond, times = 0:(T-1), func = SIR, parms = true_pars)
-    \end{R}
-
-    where \verb|odeout| is a $T \times 4$ matrix where the rows correspond to solutions at the given times (the first row is the initial condition), and the columns correspond to the solution times and S-I-R counts at those times.
-
-    The observation error was taken to be $\varepsilon_{obs} \sim \mathcal{N}(0,\sigma)$, where individual values were drawn for each synthetic data point.
-
-    These ``true'' values were perturbed to mimic observation error by
-
-    \begin{R}
-    set.seed(1001)  # set RNG seed for reproducibility
-    sigma <- 10      # observation error standard deviation
-    infec_counts_raw <- odeout[,3] + rnorm(101, 0, sigma)
-    infec_counts     <- ifelse(infec_counts_raw < 0, 0, infec_counts)
-    \end{R}
-
-    where the last two lines simply set negative observations (impossible) to 0.
-
-    Plotting the data using the \verb|ggplot2| package by
-
-    \begin{R}
-    plotdata <- data.frame(times=1:T,true=trueTraj,data=infec_counts)
-
-	  g <- ggplot(plotdata, aes(times)) +
-	        geom_line(aes(y = true, colour = "True")) +
-	        geom_point(aes(y = data, color = "Data")) +
-	        labs(x = "Time", y = "Infection count", color = "") +
-	        scale_color_brewer(palette="Paired") +
-	        theme(panel.background = element_rect(fill = "#F0F0F0"))
-    \end{R}
-
-    we obtain Figure [\ref{pfdataplot}].
-
-    \begin{figure}
-        \centering
-        \captionsetup{width=0.8\linewidth}
-        \includegraphics[width=0.8\textwidth]{./images/dataplot.pdf}
-        \caption{True SIR ODE solution infected counts, and with added observation noise. \label{pfdataplot}}
-    \end{figure}
-
-    The IF2 algorithm was implemented in C++ for speed, and integrated into the R workflow using the \verb|Rcpp| package. The C++ code is compiled using
-
-    \begin{R}
-    sourceCpp(paste(getwd(),"if2.cpp",sep="/"))
-    \end{R}
-
-    Then run and packed into a data frame using
-
-    \begin{R}
-    paramdata <- data.frame(if2(infec_counts[1:Tlim], Tlim, N))
-	  colnames(paramdata) <- c("R0", "r", "sigma", "Sinit", "Iinit", "Rinit")
-    \end{R}
-
-    The final kernel estimates for four of the key parameters are shown in Figure [\ref{if2kernelplot}].
+    There are three primary reasons we implemented our own version of IF2 instead of using POMP. First, POMP does not provide final particle state distributions, making it difficult to calibrate the algorithm parameters against the parameters used in RStan (this procedure is described in the next chapter). Second, it is prudent to cross-check the validity of an algorithm using another implementation. Third, this code can then serve as a jumping-off point for further development using Graphics Processing Unit acceleration (outlined in Chapter 8). We must acknowledge the disadvantages as well: POMP has been extensively vetted with real-world usage, and using it would require far lees work as we would only need to specify the model. That being said, we believe the advantages outweigh the disadvantages in this case, and so have proceeded to develop our own implementation of IF2.
+	
+	Figure [\ref{if2kernelplot}] shows the final kernel estimates for four of the key parameters. As with HMCMC, the distributions are not perfect, but are promising. Unlike with HMCMC, these distributions are not meant to consist of samples from the true posterior distribution, but rather serve a diagnostic role.
 
     \begin{figure}
         \centering
         \captionsetup{width=0.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/if2kernels.pdf}
-        \caption{Kernel estimates for four essential system parameters. True values are indicated by solid vertical lines, sample means by dashed lines. \label{if2kernelplot}}
+        \caption{Kernel estimates for four essential system parameters. True values are indicated by dashed lines. \label{if2kernelplot}}
     \end{figure}

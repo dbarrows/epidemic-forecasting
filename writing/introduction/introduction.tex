@@ -10,7 +10,7 @@ Phenomenological methods operate purely on data, fitting models that do not try 
 
 Pure mechanistic approaches simply try to capture the essential drivers in the disease spreading process and use the model alone to generate predictions. For example one could use a compartment model in which individuals are divided into categories based on whether they are susceptible to infection or infected but not yet themselves infectious, infectious, or recovered. These models are referred to as susceptible-infectious-removed (SIR) models and are heavily used in epidemiological study. Typically the transition between compartments is governed by a set of ordinary differential equations, such as 
 
-\begin{equation}
+\begin{equation}\label{sirode}
     \begin{array}{rl}
         \dfrac{dS}{dt} & = - \beta I S \\
         \dfrac{dI}{dt} & = \beta I S - \gamma I  \\
@@ -18,7 +18,7 @@ Pure mechanistic approaches simply try to capture the essential drivers in the d
     \end{array}
 \end{equation}
 
-where $S$, $I$, and $R$ are the number of individuals in each compartment, $\beta$ is the ``force'' of infection acting on the susceptible population, and $\gamma$ is a recovery rate. As an outbreak progresses, individuals transition from the susceptible compartment, through the infectious compartment, then finish in the removed compartment where they no longer impact the system dynamics. Many extensions of the SIR model exist are are commonly used, such as the SEIR model in which susceptible individuals pass through an exposed class (or several) where they have been infected but are not yet themselves infectious, and the SIRS model in which individuals become susceptible again after their immunity wanes.
+where $S$, $I$, and $R$ are the number of individuals in each compartment, $\beta$ is the ``force'' of infection acting on the susceptible population, and $\gamma$ is a recovery rate. We also let $\beta = R_0 r / N$ , where $R_0$ is the number of secondary cases per infected individual, and $N$ is the population size. As an outbreak progresses, individuals transition from the susceptible compartment, through the infectious compartment, then finish in the removed compartment where they no longer impact the system dynamics. Many extensions of the SIR model exist are are commonly used, such as the SEIR model in which susceptible individuals pass through an exposed class (or several) where they have been infected but are not yet themselves infectious, and the SIRS model in which individuals become susceptible again after their immunity wanes.
 
 Combining the phenomenological and mechanistic approaches are the semi-mechanistic techniques. These methods use a model to define the expected underlying dynamics of the system, but integrate data into the model in order to refine estimates of the model parameters and produce more accurate forecasts. Typically the first step in implementing such a technique is fitting the desired model to existing data. There are many ways to do this, most of which fall into two main categories: particle filter-based (PF) methods, and Markov chain Monte Carlo-based (MCMC) methods. From there data can either be integrated into the model by refitting the model to the new longer data set, or in an ``on-line'' fashion in which data points can be directly integrated without the need to refit the entire model. Normally, MCMC-based machinery must refit the entire model whereas PF-based approaches can sometimes integrate data in an on-line fashion.
 
