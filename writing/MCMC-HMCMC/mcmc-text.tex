@@ -1,8 +1,10 @@
+% !TEX root = ../master/master.tex
+
 %% Dexter Barrows, 2016
 %% dbarrows.github.io
 
 
-	Markov Chain Monte Carlo (MCMC) is a general class of methods designed to sample from the posterior distribution of model parameters. It is an algorithm used when we wish to fit a model $M$ that depends on some parameter (or more typically vector of parameters) $\theta$ to observed data $D$. MCMC works by constructing a Markov chain whose stationary distribution converges to desired posterior distribution. The samples drawn using MCMC are used to numerically approximate the stationary distribution, and in turn the posterior.
+	Markov Chain Monte Carlo (MCMC) is a general class of methods designed to sample from the posterior distribution of model parameters \cite{Andrieu2003}. It is an algorithm used when we wish to fit a model $M$ that depends on some parameter (or more typically vector of parameters) $\theta$ to observed data $D$. MCMC works by constructing a Markov chain whose stationary distribution converges to desired posterior distribution. The samples drawn using MCMC are used to numerically approximate the stationary distribution, and in turn the posterior \cite{Andrieu2003}.
 
 
 \section{Markov Chains}
@@ -13,7 +15,7 @@
         \centering
         \captionsetup{width=0.8\linewidth}
         \includegraphics[width=0.5\textwidth]{./images/finitemachine.pdf}
-        \caption{A finite state machine. States are shown as graph nodes, and the probability of transitioning from one particular state to another is shown as a weighted graph edge. \textit{(Andrieu et al., 2003)} \label{fsm}}
+        \caption{A finite state machine. States are shown as graph nodes, and the probability of transitioning from one particular state to another is shown as a weighted graph edge. \cite{Andrieu2003} \label{fsm}}
     \end{figure}
 
     The transition probabilities can be summarized as a matrix as
@@ -43,7 +45,7 @@
         \item \textit{Aperiodic} The chain must be able to explore the parameter space without becoming trapped in a cycle
     \end{itemize}
 
-    Note that MCMC sampling generates a Markov chain $(\theta^{(1)}, \theta^{(2)},..., \theta^{(N)})$ that does indeed satisfy these conditions, and uses the chain's equilibrium distribution to approximate the posterior distribution of the parameter space.    
+    Note that MCMC sampling generates a Markov chain $(\theta^{(1)}, \theta^{(2)},..., \theta^{(N)})$ that does indeed satisfy these conditions, and uses the chain's equilibrium distribution to approximate the posterior distribution of the parameter space \cite{Andrieu2003}.    
 
 
 \section{Likelihood}
@@ -54,14 +56,14 @@
     	\mathcal{L}(\theta) \propto P(D|\theta).
     \end{equation}
 
-    In standard Maximum Likelihood approaches, $\mathcal{L}(\theta)$ is searched to find a value of $\theta$ that maximizes $\mathcal{L}(\theta)$, then this $\theta$ is taken to be the most likely true value. Here our aim is to not just maximize the likelihood but to also explore the area around it.
+    In some standard Maximum Likelihood approaches, $\mathcal{L}(\theta)$ is searched to find a value of $\theta$ that maximizes $\mathcal{L}(\theta)$, then this $\theta$ is taken to be the most likely true value. Here our aim is to not just maximize the likelihood but to also explore the area around it \cite{Andrieu2003}.
 
 
 \section{Prior distribution}
 
     Another significant component of MCMC is the user-specified prior distribution for $\theta$ or distributions for the individual components of $\theta$ (priors). Priors serve as a way for us to tell the MCMC algorithm what we think consist of good values for the parameters. Note that if very little is known about the parameters, or we are worried about biasing our estimate of the posterior, we can simply use a a wide uniform distribution. We cannot, however, avoid this problem entirely. Bayesian frameworks, such as MCMC, \textit{require} priors to be specified; what the user must decide is how strong to make priors.
 
-   	Exceedingly weak priors can pose problematic in some circumstances. In the case of MCMC, weak priors handicap the algorithm in two ways: convergence of the chain may become exceedingly slow, and more pressure is put on the likelihood function to be as good as possible -- it will now be the only thing informing the algorithm of what constitutes a ``good'' set of parameters, and what should be considered poor. In the majority of cases this does not pose as much as problem as it would appear; if enough samples are drawn, we should still obtain a good posterior estimate. We will only really run into problems if an exceedingly weak prior, such as an unbounded uniform distribution, or another unbounded distribution with a high standard deviation -- in those cases we may obtain poor posterior estimates if the data are weak.
+   	Exceedingly weak priors can pose problematic in some circumstances. In the case of MCMC, weak priors handicap the algorithm in two ways: convergence of the chain may become exceedingly slow, and more pressure is put on the likelihood function to be as good as possible -- it will now be the only thing informing the algorithm of what constitutes a ``good'' set of parameters, and what should be considered poor. In the majority of cases this does not pose as much as problem as it would appear; if enough samples are drawn, we should still obtain a good posterior estimate. We will only really run into problems if an exceedingly weak prior, such as an unbounded uniform distribution, or another unbounded distribution with a high standard deviation -- in those cases we may obtain poor posterior estimates if the data are weak \cite{Andrieu2003}.
 
 \section{Proposal distribution}
 
@@ -69,7 +71,7 @@
 
     This is done through the use of a proposal or candidate distribution. This will usually be a distribution centred around our last accepted step and with a dispersion potential narrower than that of our prior distribution.
 
-    The choice of this distribution is theoretically not of the utmost importance, but in practice becomes important so as to not waste computer time.
+    The choice of this distribution is theoretically not of the utmost importance, but in practice becomes important so as to not waste computer time \cite{Andrieu2003}.
 
 
 \section{Algorithm}
@@ -149,24 +151,24 @@
     \end{algorithm}
     
 
-    In this way we are ensuring that steps that lead to better likelihood outcomes are likely to be accepted, but steps that do not will not be accepted as frequently. Note that these less ``advantageous'' moves will still occur but that this is by design -- it ensures that as much of the parameter space as possible will be explored but more efficiently than using pure brute force.
+    In this way we are ensuring that steps that lead to better likelihood outcomes are likely to be accepted, but steps that do not will not be accepted as frequently. Note that these less ``advantageous'' moves will still occur but that this is by design -- it ensures that as much of the parameter space as possible will be explored but more efficiently than using pure brute force \cite{Andrieu2003}.
 
 
 \section{Burn-in}
 
     One critical aspect of MCMC-based algorithms has yet to be discussed. The algorithm requires an initial starting point $\theta$ to be selected, but as the proposal distribution is supposed to restrict moves to an area close to the last accepted state, then the posterior distribution will be biased towards this starting point. This issue is avoided through the use of a Burn-in period.
 
-    Burning in a chain is the act of running the MCMC algorithm normally without saving first $M$ samples. As we are seeking a chain of length $N$, the total computation will be equivalent to generating a chain of length $M+N$.
+    Burning in a chain is the act of running the MCMC algorithm normally without saving first $M$ samples. As we are seeking a chain of length $N$, the total computation will be equivalent to generating a chain of length $M+N$ \cite{Andrieu2003}.
 
 
 \section{Thinning}
 
-    Some models will require very long chains to get a good approximation of the posterior, which will consequently require a non-trivial amount of computer storage. One way to reduce the burden of storing so many samples is by thinning. This involves saving only every $n^{\text{th}}$ step, which should still give a decent approximate of the posterior (since the chain has time to explore a large portion of the parameter space), but require less room to store.
+    Some models will require very long chains to get a good approximation of the posterior, which will consequently require a non-trivial amount of computer storage. One way to reduce the burden of storing so many samples is by thinning. This involves saving only every $n^{\text{th}}$ step, which should still give a decent approximate of the posterior (since the chain has time to explore a large portion of the parameter space), but require less room to store \cite{Link2012}.
 
 
 \section{Hamiltonian Monte Carlo}
 
-    The Metropolis-Hastings algorithm has a primary drawback in that the parameter space may not be explored efficiently -- a consequence of the rudimentary proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a potential decrease in overall computational complexity. This algorithm is coined Hamiltonian MCMC (HMCMC). Prior to the advent of HMCMC, some work was conducted exploring adaptive step-sizing using MCMC-based methods, but lack strong theoretical justification, and can lead to some samples being drawn from an incorrect distribution.
+    The Metropolis-Hastings algorithm has a primary drawback in that the parameter space may not be explored efficiently in some circumstances -- a consequence of the rudimentary proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a potential decrease in overall computational complexity. This algorithm is coined Hamiltonian MCMC (HMC or HMCMC) \cite{Neal2011}. Prior to the advent of HMCMC, some work was conducted exploring adaptive step-sizing using MCMC-based methods, but lack strong theoretical justification, and can lead to some samples being drawn from an incorrect distribution \cite{Neal2011}.
 
     From physics, we will borrow the ideas of potential and kinetic energy. Here potential energy is analogous to the negative log likelihood of the parameter selection given the data, formally
 
@@ -282,7 +284,7 @@
 
     \end{algorithm}
 
-    Note that the parameters $\varepsilon$ and $L$ have to be tuned in order to maintain stability and maximize efficiency, a sometimes non-trivial process. However, some recent algorithms, such as the No U-Turn sampler implemented in RStan, and adaptively select appropriate values automatically during the sampling process.
+    Note that the parameters $\varepsilon$ and $L$ have to be tuned in order to maintain stability and maximize efficiency, a sometimes non-trivial process \cite{Neal2011}. However, some recent algorithms, such as the No U-Turn sampler implemented in RStan, and adaptively select appropriate values automatically during the sampling process \cite{Hoffman2014}.
     
 
 \section{RStan Fitting}
