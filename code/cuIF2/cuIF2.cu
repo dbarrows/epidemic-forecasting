@@ -60,13 +60,6 @@ typedef struct {
 	float eta;
 	float berr;
 	float phi;
-	/*
-	float * S;
-	float * I;
-	float * R;
-	float * B;
-	float * Iinit;
-	*/
 	float S[NLOC];
 	float I[NLOC];
 	float R[NLOC];
@@ -93,15 +86,6 @@ __global__ void initializeParticles (Particle * particles, int nloc) {
 		// initialize PRNG state
 		curandState state;
 		curand_init(id, 0, 0, &state);
-		
-		// allocate space for arays inside particle
-		//particles[id].S = (float*) malloc(nloc*sizeof(float));
-		//particles[id].I = (float*) malloc(nloc*sizeof(float));
-		//particles[id].R = (float*) malloc(nloc*sizeof(float));
-		//particles[id].B = (float*) malloc(nloc*sizeof(float));
-		//particles[id].Iinit = (float*) malloc(nloc*sizeof(float));
-
-		// initialize all parameters
 
 		float R0can, rcan, sigmacan, Iinitcan, etacan, berrcan, phican;
 
@@ -155,10 +139,14 @@ __global__ void resetStates (Particle * particles, int nloc) {
 
 	int id 	= blockIdx.x*blockDim.x + threadIdx.x;	// global thread ID
 
-	for (int loc = 0; loc < nloc; loc++) {
-		particles[id].S[loc] = N - particles[id].Iinit[loc];
-		particles[id].I[loc] = particles[id].Iinit[loc];
-		particles[id].R[loc] = 0.0;
+	if (id < NP) {
+
+		for (int loc = 0; loc < nloc; loc++) {
+			particles[id].S[loc] = N - particles[id].Iinit[loc];
+			particles[id].I[loc] = particles[id].Iinit[loc];
+			particles[id].R[loc] = 0.0;
+		}
+
 	}
 
 }
@@ -167,17 +155,20 @@ __global__ void clobberParams (Particle * particles, int nloc) {
 
 	int id 	= blockIdx.x*blockDim.x + threadIdx.x;	// global thread ID
 
-	particles[id].R0 = R0true;
-	particles[id].r = rtrue;
-	particles[id].sigma = merr;
-	particles[id].eta = etatrue;
-	particles[id].berr = berrtrue;
-	particles[id].phi = phitrue;
+	if (id < NP) {
 
-	for (int loc = 0; loc < nloc; loc++) {
-		particles[id].Iinit[loc] = I0;
+		particles[id].R0 = R0true;
+		particles[id].r = rtrue;
+		particles[id].sigma = merr;
+		particles[id].eta = etatrue;
+		particles[id].berr = berrtrue;
+		particles[id].phi = phitrue;
+
+		for (int loc = 0; loc < nloc; loc++) {
+			particles[id].Iinit[loc] = I0;
+		}
+
 	}
-
 
 }
 
@@ -356,9 +347,6 @@ int main (int argc, char *argv[]) {
 	double restime;
 	struct timeval tdr0, tdr1, tdrMaster;
 
-	gettimeofday (&tdr0, NULL);
-
-
 	// Parse arguments **********************************************
 
 	if (argc < 4) {
@@ -369,11 +357,13 @@ int main (int argc, char *argv[]) {
 	std::string arg1(argv[1]); 	// infection counts
 	std::string arg2(argv[2]);	// neighbour counts
 	std::string arg3(argv[3]);	// neighbour indices
+	std::string arg4(argv[4]); 	// outfile: params + runtime
 
 	std::cout << "Arguments:" << std::endl;
 	std::cout << "Infection data: 	 " << arg1 << std::endl;
 	std::cout << "Neighbour counts:  " << arg2 << std::endl;
 	std::cout << "Neighbour indices: " << arg3 << std::endl;
+	std::cout << "Outfile            " << arg4 << std::endl;
 
 	// **************************************************************
 
@@ -401,20 +391,15 @@ int main (int argc, char *argv[]) {
 	size_t neibmatsize = nloc * nloc * sizeof(int);
 
 	// **************************************************************
-	
-
-	gettimeofday (&tdr1, NULL);
-    timeval_subtract (&restime, &tdr1, &tdr0);
-
-    std::cout << "\t" << getHRtime(restime) << std::endl;
 
 	// *****************************************************************************************************
+
+    // start timing
+	gettimeofday (&tdr0, NULL);
 
 	// CUDA data ****************************************************
 
 	std::cout << "Allocating device storage" << std::endl;
-
-	gettimeofday (&tdr0, NULL);
 
 	float 		* d_data;			// device copy of data
 	Particle 	* particles;		// particles
@@ -466,7 +451,7 @@ int main (int argc, char *argv[]) {
 
 	std::cout << "Initializing particles" << std::endl;
 
-	gettimeofday (&tdr0, NULL);
+	//gettimeofday (&tdr0, NULL);
 
 	int nThreads 	= 32;
 	int nBlocks 	= ceil( (float) NP / nThreads);
@@ -479,10 +464,9 @@ int main (int argc, char *argv[]) {
 	CUDA_CALL( cudaGetLastError() );
 	CUDA_CALL( cudaDeviceSynchronize() );
 
-	gettimeofday (&tdr1, NULL);
-    timeval_subtract (&restime, &tdr1, &tdr0);
-
-    std::cout << "\t" << getHRtime(restime) << std::endl;
+	//gettimeofday (&tdr1, NULL);
+    //timeval_subtract (&restime, &tdr1, &tdr0);
+    //std::cout << "\t" << getHRtime(restime) << std::endl;
 
     cudaMemGetInfo( &avail, &total );
 	used = total - avail;
@@ -494,7 +478,7 @@ int main (int argc, char *argv[]) {
 
 	for (int pass = 0; pass < 50; pass++) {
 
-		std::cout << "pass = " << pass << std::endl;
+		//std::cout << "pass = " << pass << std::endl;
 
 		// ** TEMP **
 		//clobberParams <<< nBlocks, nThreads >>> (particles, nloc);
@@ -507,11 +491,9 @@ int main (int argc, char *argv[]) {
 		CUDA_CALL( cudaGetLastError() );
 		CUDA_CALL( cudaDeviceSynchronize() );
 
-		std::cout << "Filtering over [1," << Tlim << "]"<< std::endl;
+		//std::cout << "Filtering over [1," << Tlim << "]"<< std::endl;
 
-		gettimeofday (&tdrMaster, NULL);
-
-		gettimeofday (&tdr0, NULL);
+		//gettimeofday (&tdr0, NULL);
 
 		nThreads = 1;
 		nBlocks  = 10;
@@ -522,9 +504,9 @@ int main (int argc, char *argv[]) {
 			CUDA_CALL( cudaDeviceSynchronize() );
 		}
 
-		gettimeofday (&tdr1, NULL);
-		timeval_subtract (&restime, &tdr1, &tdr0);
-		std::cout << "Reduction        " << getHRtime(restime) << std::endl;
+		//gettimeofday (&tdr1, NULL);
+		//timeval_subtract (&restime, &tdr1, &tdr0);
+		//std::cout << "\tReduction " << getHRtime(restime) << std::endl;
 
 		int Tlim = T;
 
@@ -542,7 +524,7 @@ int main (int argc, char *argv[]) {
 			CUDA_CALL( cudaGetLastError() );
 			CUDA_CALL( cudaDeviceSynchronize() );
 
-			//if (t == 1) {
+			//if (t == 1 && pass == 0) {
 			//	gettimeofday (&tdr1, NULL);
 		    //	timeval_subtract (&restime, &tdr1, &tdr0);
 		    //	std::cout << "\tProjection " << getHRtime(restime) << std::endl;
@@ -562,18 +544,18 @@ int main (int argc, char *argv[]) {
 			nThreads 	= 1;
 			nBlocks 	= 1;
 
-			if (t == 1)
-				gettimeofday (&tdr0, NULL);
+			//if (t == 1)
+			//	gettimeofday (&tdr0, NULL);
 
 			cumsumWeights <<< nBlocks, nThreads >>> (w);
 			CUDA_CALL( cudaGetLastError() );
 			CUDA_CALL( cudaDeviceSynchronize() );
 
-			if (t == 1) {
-				gettimeofday (&tdr1, NULL);
-		    	timeval_subtract (&restime, &tdr1, &tdr0);
-		    	std::cout << "Cumulative sum   " << getHRtime(restime) << std::endl;
-		    }
+			//if (t == 1) {
+			//	gettimeofday (&tdr1, NULL);
+		    //	timeval_subtract (&restime, &tdr1, &tdr0);
+		    //	std::cout << "\tCumulative sum   " << getHRtime(restime) << std::endl;
+		    //}
 
 		    // Save particles for resampling from *************************
 
@@ -590,18 +572,18 @@ int main (int argc, char *argv[]) {
 			nThreads 	= 32;
 			nBlocks 	= ceil( (float) NP/ nThreads);
 
-			if (t == 1)
-				gettimeofday (&tdr0, NULL);
+			//if (t == 1)
+			//	gettimeofday (&tdr0, NULL);
 
 			resample <<< nBlocks, nThreads >>> (particles, particles_old, w, nloc);
 			CUDA_CALL( cudaGetLastError() );
 			CUDA_CALL( cudaDeviceSynchronize() );
 
-			if (t == 1) {
-				gettimeofday (&tdr1, NULL);
-		    	timeval_subtract (&restime, &tdr1, &tdr0);
-		    	std::cout << "\tResampling " << getHRtime(restime) << std::endl;
-		    }
+			//if (t == 1) {
+			//	gettimeofday (&tdr1, NULL);
+		    //	timeval_subtract (&restime, &tdr1, &tdr0);
+		    //	std::cout << "\tResampling " << getHRtime(restime) << std::endl;
+		    //}
 
 		    // Reduction **************************************************
 
@@ -609,8 +591,8 @@ int main (int argc, char *argv[]) {
 
 		    if (pass == 49) {
 
-		    	if (t == 1)
-					gettimeofday (&tdr0, NULL);
+		    	//if (t == 1)
+				//	gettimeofday (&tdr0, NULL);
 
 		    	nThreads = 1;
 		    	nBlocks  = 10;
@@ -619,11 +601,11 @@ int main (int argc, char *argv[]) {
 		    	CUDA_CALL( cudaGetLastError() );
 				CUDA_CALL( cudaDeviceSynchronize() );
 
-				if (t == 1) {
-					gettimeofday (&tdr1, NULL);
-			    	timeval_subtract (&restime, &tdr1, &tdr0);
-			    	std::cout << "Reduction        " << getHRtime(restime) << std::endl;
-			    }
+				//if (t == 1) {
+				//	gettimeofday (&tdr1, NULL);
+			    //	timeval_subtract (&restime, &tdr1, &tdr0);
+			    //	std::cout << "Reduction        " << getHRtime(restime) << std::endl;
+			    //}
 
 			}
 
@@ -636,24 +618,6 @@ int main (int argc, char *argv[]) {
 		    CUDA_CALL( cudaGetLastError() );
 			CUDA_CALL( cudaDeviceSynchronize() );
 
-		    //}
-			/*
-			nThreads 	= RB_DIM;
-			nBlocks 	= nCells;
-
-			
-
-			reduce <<< nBlocks, nThreads >>> (d_E, t, particles, Beta_last, nCells);
-			CUDA_CALL( cudaGetLastError() );
-			CUDA_CALL( cudaDeviceSynchronize() );
-
-			if (t == 1) {
-				gettimeofday (&tdr1, NULL);
-		    	timeval_subtract (&restime, &tdr1, &tdr0);
-		    	std::cout << "Reduction        " << getHRtime(restime) << std::endl;
-		    }
-		    */
-
 
 		} // end time
 
@@ -664,7 +628,16 @@ int main (int argc, char *argv[]) {
 	countmeans = (float*) malloc (nloc*T*sizeof(float));
 	cudaMemcpy(countmeans, d_countmeans, nloc*T*sizeof(float), cudaMemcpyDeviceToHost);
 
-	std::string filename = "cuIF2states.dat";
+	// stop master timer and print
+
+	gettimeofday (&tdrMaster, NULL);
+	timeval_subtract(&restime, &tdrMaster, &tdr0);
+	std::cout << "Time: " << getHRtime(restime) << std::endl;
+	std::cout << "Rawtime: " << restime <, std::endl;
+
+	// Write results out
+
+	std::string filename = arg4;
 
 	std::cout << "Writing results to file '" << filename << "' ..." << std::endl;
 
@@ -678,30 +651,11 @@ int main (int argc, char *argv[]) {
 		outfile << std::endl;
 	}
 
-	/*
-	double * h_w = (double*) malloc (NP*sizeof(double));
-	cudaMemcpy(h_w, w, NP*sizeof(double), cudaMemcpyDeviceToHost);
-
-	for (int n = 0; n < NP; n++) {
-		std::cout << h_w[n] << " ";
-	}
-	*/
-
-	/*
-	for (int i = 0; i < nCells; i++) {
-		outfile << trueCounts[t*nCells + i];
-		if (i % dim == 0)
-			outfile << std::endl;
-		else
-			outfile << " ";
-	}
-	*/
-
 	outfile.close();
 
-	gettimeofday (&tdr1, NULL);
-	timeval_subtract (&restime, &tdr1, &tdrMaster);
-	std::cout << "Total PF time (excluding setup) " << getHRtime(restime) << std::endl;
+	//gettimeofday (&tdr1, NULL);
+	//timeval_subtract (&restime, &tdr1, &tdrMaster);
+	//std::cout << "Total PF time (excluding setup) " << getHRtime(restime) << std::endl;
 
 	cudaFree(d_data);
 	cudaFree(particles);
