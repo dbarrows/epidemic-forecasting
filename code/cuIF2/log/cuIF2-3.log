@@ -9,11 +9,12 @@ ylen 10
 Getting neighbour count data
 Getting neighbour count data
 Allocating device storage
-	3.54123 s
+	3.54162 s
 	[66.8906 MB] used of [5.24945 GB]
 Copying data to device
 	4.3e-05 s
 Initializing particles
 	[66.8906 MB] used of [5.24945 GB]
-Time: 1.02403 m
+Time: 1.02516 m
+Rawtime: 61.509638
 Writing results to file 'out/cuIF2states-3.dat' ...

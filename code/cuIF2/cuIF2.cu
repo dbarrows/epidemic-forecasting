@@ -633,7 +633,7 @@ int main (int argc, char *argv[]) {
 	gettimeofday (&tdrMaster, NULL);
 	timeval_subtract(&restime, &tdrMaster, &tdr0);
 	std::cout << "Time: " << getHRtime(restime) << std::endl;
-	std::cout << "Rawtime: " << restime <, std::endl;
+	std::cout << "Rawtime: " << restime << std::endl;
 
 	// Write results out
 
