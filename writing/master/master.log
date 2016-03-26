@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  25 MAR 2016 16:19
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  25 MAR 2016 17:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1212,32 +1212,26 @@ Chapter 8.
 Missing character: There is no ó in font cmr12!
 
 [65]
-Overfull \hbox (33.67558pt too wide) in paragraph at lines 253--253
+Overfull \hbox (33.67558pt too wide) in paragraph at lines 262--262
 \OT1/cmr/m/n/12 2157-3999. \OT1/cmr/m/sc/12 doi\OT1/cmr/m/n/12 : []$\OT1/zi4/m/
 n/12 10 . 1371 / currents . outbreaks . bb1e879a23137022ea79a8c508b030bc$[]\OT1
 /cmr/m/n/12 .
  []
 
 [66]
-Overfull \hbox (16.12573pt too wide) in paragraph at lines 253--253
+Overfull \hbox (16.12573pt too wide) in paragraph at lines 262--262
 \OT1/cmr/m/n/12 In: \OT1/cmr/m/it/12 PLoS Cur-rents \OT1/cmr/m/n/12 6 (2014), e
 cur-rents.outbreaks.3408774290b1a0f2dd7cae877c8b8f.
  []
 
 
-Overfull \hbox (61.53024pt too wide) in paragraph at lines 253--253
+Overfull \hbox (61.53024pt too wide) in paragraph at lines 262--262
 \OT1/cmr/m/sc/12 issn\OT1/cmr/m/n/12 : 2157-3999. \OT1/cmr/m/sc/12 doi\OT1/cmr/
 m/n/12 : []$\OT1/zi4/m/n/12 10 . 1371 / currents . outbreaks . 3408774290b1a0f2
 dd7cae877c8b8ff6$[]\OT1/cmr/m/n/12 . 
  []
 
 Missing character: There is no ’ in font cmr12!
-
-Overfull \hbox (7.02647pt too wide) in paragraph at lines 253--253
-[]\OT1/cmr/m/n/12 Mitchell Wal-drop. ``MORE THAN MOORE''. In: \OT1/cmr/m/it/12 
-Na-ture \OT1/cmr/m/n/12 530.11. Febru-ary (2016),
- []
-
 [67] [68]
 Appendix A.
 (../MCMC-HMCMC/mcmc-appendix.tex
@@ -1306,29 +1300,29 @@ Overfull \hbox (233.24373pt too wide) in paragraph at lines 411--413
  []
 
 [136] [137] [138] [139] [140] [141] [142] [143] [144] [145]))
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 289.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 298.
  [146]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 289.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 298.
 
 (./master.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 289.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 289.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 298.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 298.
 Package logreq Info: Writing requests to 'master.run.xml'.
 \openout1 = `master.run.xml'.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 289.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 298.
  )
 (\end occurred inside a group at level 1)
 
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23293 strings out of 495158
- 356193 string characters out of 6175470
+ 23294 strings out of 495158
+ 356202 string characters out of 6175470
  1060248 words of memory out of 5000000
- 26139 multiletter control sequences out of 15000+600000
+ 26140 multiletter control sequences out of 15000+600000
  17242 words of font info for 65 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 42i,18n,69p,2204b,4954s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 42i,18n,69p,2204b,4951s stack positions out of 5000i,500n,10000p,200000b,80000s
 
 Output written on master.pdf (157 pages).
