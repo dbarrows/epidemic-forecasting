@@ -63,6 +63,10 @@ for (filenum in 1:length(filelist)) {
             hmctimes    <- numeric(nTrials)
             smaptimes   <- numeric(nTrials)
 
+            if2fittimes <- numeric(nTrials)
+            hmcfittimes <- numeric(nTrials)
+            cuIF2times  <- numeric(nTrials)
+
             first <- FALSE
 
         }
@@ -97,6 +101,7 @@ for (filenum in 1:length(filelist)) {
         }
         if2traj[fctr,,] <- countmeans[,-1]
         if2times[fctr] <- get("if2time", e)[['user.self']]
+        if2fittimes[fctr] <- get("if2time1", e)[['user.self']]
 
         ## HMCMC
         hmcbootdata <- get("bootstrapdata", e)[,,(Tlim+2):(T+1)]
@@ -110,6 +115,7 @@ for (filenum in 1:length(filelist)) {
         }
         hmctraj[fctr,,] <- meanTraj
         hmctimes[fctr] <- get("hmctime", e)[['user.self']]
+        hmcfittimes[fctr] <- get("hmctime1", e)[['user.self']]
 
         ## S-map
         smapproj <- get("predictions", e)
@@ -118,6 +124,16 @@ for (filenum in 1:length(filelist)) {
         smaptimes[fctr] <- get("smaptime", e)[['user.self']]
         
     }
+}
+
+## cuIF2 get data
+cudir 	<- paste(getwd(), "../../cuIF2/log", sep = "/")
+cufiles <- list.files(cudir)
+
+for (filenum in 1:length(cufiles)) {
+	filepath <- paste(cudir, cufiles[filenum], sep = "/")
+	sysout <- system( paste("cat ", filepath, " | grep Rawtime  | sed -e s/[^0-9.]//g" , sep = ""), intern = TRUE)
+	cuIF2times[filenum] <- as.numeric(sysout)
 }
 
 
@@ -138,6 +154,15 @@ smapmeantime <- mean(smaptimes)
 printvar( if2meantime )
 printvar( hmcmeantime )
 printvar( smapmeantime )
+
+## average fitting times
+if2fitmeantime <- mean(if2fittimes)
+hmcfitmeantime <- mean(hmcfittimes)
+cuIF2meantime <- mean(cuIF2times)
+
+printvar( if2fitmeantime )
+printvar( hmcfitmeantime )
+printvar( cuIF2meantime )
 
 if2sses <- matrix(NA, nloc, stepsAhead)
 hmcsses <- matrix(NA, nloc, stepsAhead)
@@ -167,7 +192,8 @@ q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable
 
 ggsave(q, filename = "sseplot.pdf", width = 6.5, height = 4)
 
-# times plot
+## times plot
+##########################################################################################
 
 timedf <- data.frame(if2 = if2times, hmc = hmctimes, smap = smaptimes)
 timedata <- melt(timedf)
@@ -180,5 +206,17 @@ timeplot <- ggplot(timedata, aes(factor(variable, ordered = TRUE), value)) +
 
 ggsave(timeplot, filename = "timeplot.pdf", width = 6.5, height = 4)
 
+## second times plot with cuIF2
+
+timedf2 <- data.frame(if2 = log10(if2fittimes), hmc = log10(hmcfittimes), cuif2 = log10(cuIF2times))
+timedata2 <- melt(timedf2)
+timeplot2 <- ggplot(timedata2, aes(factor(variable, ordered = TRUE), value)) +
+				geom_boxplot() +
+				scale_x_discrete(labels = c("IF2", "HMCMC", "cuIF2")  ) +
+				labs(x = "", y = expression(Time~(log[10]~seconds)) )  +
+				coord_flip() +
+				theme_bw()
+
+ggsave(timeplot2, filename = "timeplot2.pdf", width = 6.5, height = 4)
 
 #save.image("fsim.RData")
