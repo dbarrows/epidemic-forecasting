@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  25 MAR 2016 17:33
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  27 MAR 2016 18:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1294,17 +1294,18 @@ Appendix F.
 (../../code/if2/if2-spa/if2-spa.cpp [116] [117] [118] [119] [120] [121]
 [122] [123] [124] [125] [126])) (../SPATIAL/cuda-appendix.tex
 (../../code/cuIF2/cuIF2.cu [127] [128] [129] [130] [131] [132] [133] [134]
-[135]
-Overfull \hbox (233.24373pt too wide) in paragraph at lines 411--413
+Overfull \hbox (233.24373pt too wide) in paragraph at lines 395--397
 [][][][] 
  []
 
-[136] [137] [138] [139] [140] [141] [142] [143] [144] [145]))
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 298.
- [146]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 298.
+[135] [136] [137] [138] [139] [140] [141] [142] [143] [144])
+File: ../SPATIAL/./images/timeplot2.pdf Graphic file (type QTm)
 
-(./master.aux)
+<use  "../SPATIAL/./images/timeplot2.pdf" >)
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 298.
+ [145]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 298.
+ (./master.aux)
 Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 298.
 Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 298.
 Package logreq Info: Writing requests to 'master.run.xml'.
@@ -1317,12 +1318,12 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 298.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23294 strings out of 495158
- 356202 string characters out of 6175470
- 1060248 words of memory out of 5000000
- 26140 multiletter control sequences out of 15000+600000
+ 23297 strings out of 495158
+ 356264 string characters out of 6175470
+ 1060302 words of memory out of 5000000
+ 26142 multiletter control sequences out of 15000+600000
  17242 words of font info for 65 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  42i,18n,69p,2204b,4951s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on master.pdf (157 pages).
+Output written on master.pdf (156 pages).
