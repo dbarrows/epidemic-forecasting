@@ -182,10 +182,10 @@ smapssecollapse <- colMeans(smapsses)
 ## SSE plot
 ##########################################################################################
 
-df <- data.frame(time = 1:(T-Tlim), if2 = log(if2ssecollapse), hmc = log(hmcssecollapse), smap = log(smapssecollapse))
+df <- data.frame(time = 1:(T-Tlim), if2 = log10(if2ssecollapse), hmc = log10(hmcssecollapse), smap = log10(smapssecollapse))
 plotdata <- melt(df, id = "time")
 
-q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable, xlab = "Weeks ahead", ylab = "Average error (log)") +
+q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable, xlab = "Weeks ahead", ylab = expression(SSE~(log[10]))) +
 		scale_color_grey(labels = c("IF2","HMCMC","S-map")) +
 		theme_bw() +
 		theme(legend.title=element_blank())

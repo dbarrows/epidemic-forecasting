@@ -133,10 +133,10 @@ quantplot <- ggplot(quantdf, aes(x = time)) +
 ## SSE plot
 ##########################################################################################
 
-df <- data.frame(time = 1:(T-Tlim), if2 = log(if2sse), hmc = log(hmcsse), smap = log(smapsse))
+df <- data.frame(time = 1:(T-Tlim), if2 = log10(if2sse), hmc = log10(hmcsse), smap = log10(smapsse))
 plotdata <- melt(df, id = "time")
 
-q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable, xlab = "Weeks ahead", ylab = "Average error (log)") +
+q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable, xlab = "Weeks ahead", ylab = expression(SSE~(log[10]))) +
 		scale_color_grey(labels = c("IF2","HMCMC","S-map")) +
 		theme_bw() +
 		theme(legend.title=element_blank())
@@ -151,7 +151,7 @@ q2 <- qplot(data = plotdata2, x = time, y = value, geom = "line", color = variab
 		theme_bw() +
 		theme(legend.title=element_blank())
 
-ggsave(q2, filename = "sseplot2.pdf", width = 6.5, height = 4)
+#sggsave(q2, filename = "sseplot2.pdf", width = 6.5, height = 4)
 
 
 # times plot

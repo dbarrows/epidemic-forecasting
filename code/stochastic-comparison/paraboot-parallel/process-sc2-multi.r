@@ -21,7 +21,7 @@ df <- data.frame(time = times, if2 = log10(if2means), hmc = log10(hmcmeans))
 plotdata <- melt(df, id = "time")
 
 ## full
-q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable, xlab = "Truncation", ylab = "log(SSE)") +
+q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable, xlab = "Truncation", ylab = expression(SSE~(log[10]))) +
 		scale_colour_manual(values = c("black","grey"),
 		                    labels = c("IF2", "HMCMC"),
 		                    name = "Method") +
@@ -30,7 +30,7 @@ q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable
 ggsave(q, filename="truncation.pdf", height=4, width=6.5)
 
 
-df2 <- data.frame(time = times, if2 = log(if2meds), hmc = log(hmcmeds))
+df2 <- data.frame(time = times, if2 = log10(if2meds), hmc = log10(hmcmeds))
 plotdata2 <- melt(df2, id = "time")
 
 q2 <- qplot(data = plotdata2, x = time, y = value, geom = "line", color = variable, xlab = "Truncation", ylab = "log(SSE)") +
