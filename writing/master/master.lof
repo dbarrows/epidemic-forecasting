@@ -8,9 +8,9 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {2.2}{\ignorespaces True SIR ODE solution infected counts, and with added observation noise. \relax }}{14}{figure.caption.8}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.3}{\ignorespaces Traceplot of samples drawn for parameter $R_0$, excluding warmup. \relax }}{15}{figure.caption.9}
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Traceplot of samples drawn for parameter $R_0$, excluding burn-in. \relax }}{15}{figure.caption.9}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {2.4}{\ignorespaces Traceplot of samples drawn for parameter $R_0$, including warmup. \relax }}{16}{figure.caption.10}
+\contentsline {figure}{\numberline {2.4}{\ignorespaces Traceplot of samples drawn for parameter $R_0$, including burn-in. \relax }}{16}{figure.caption.10}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {2.5}{\ignorespaces Kernel density estimates produced by Stan. Dashed lines show true parameter values. \relax }}{17}{figure.caption.11}
 \defcounter {refsection}{0}\relax 
@@ -34,15 +34,15 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {4.7}{\ignorespaces The horizontal axis shows the IF2 pass number and the solid black lines show the evolution of the standard deviations of the particle swarm values. \relax }}{33}{figure.caption.21}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.8}{\ignorespaces As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \relax }}{35}{figure.caption.22}
+\contentsline {figure}{\numberline {4.8}{\ignorespaces The solid grey lines show the true parameter values and the dashed grey lines show the density medians. \relax }}{35}{figure.caption.22}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.9}{\ignorespaces As before, the solid grey lines show the true parameter values and the dashed grey lines show the density means. \relax }}{36}{figure.caption.23}
+\contentsline {figure}{\numberline {4.9}{\ignorespaces As before, the solid grey lines show the true parameter values and the dashed grey lines show the density medians. \relax }}{36}{figure.caption.23}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Result from 100 HMCMC bootstrap trajectories. The solid line shows the true states, the dots show the data, the dotted line shows the average system behaviour, the dashed line shows the bootstrap mean, and the grey ribbon shows the centre 95th quantile of the bootstrap trajectories. \relax }}{37}{figure.caption.24}
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Result from 100 HMC bootstrap trajectories. The solid line shows the true states, the dots show the data, the dotted line shows the average system behaviour, the dashed line shows the bootstrap mean, and the grey ribbon shows the centre 95th quantile of the bootstrap trajectories. \relax }}{37}{figure.caption.24}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.11}{\ignorespaces IF2 point estimate densities are shown in black and HMCMC point estimate densities are shown in grey. The vertical black lines show the true parameter values. \relax }}{38}{figure.caption.25}
+\contentsline {figure}{\numberline {4.11}{\ignorespaces IF2 point estimate densities are shown in black and HMC point estimate densities are shown in grey. The vertical lines show the true parameter values. \relax }}{38}{figure.caption.25}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {4.12}{\ignorespaces Fitting times for IF2 and HMCMC, in seconds. The centre box in each plot shows the centre 50th quantile, with the bold centre line showing the median. \relax }}{38}{figure.caption.26}
+\contentsline {figure}{\numberline {4.12}{\ignorespaces Fitting times for IF2 and HMC, in seconds. The centre box in each plot shows the centre 50th percent, with the bold centre line showing the median. \relax }}{38}{figure.caption.26}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
@@ -52,7 +52,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {5.3}{\ignorespaces Forecast produced by the IF2 / parametric bootstrapping framework. The dotted line shows the mean estimate of the forecasts, the dark grey ribbon shows the 95\% confidence interval based on the 0.025 and 0.975 quantiles on the true state estimates, and the lighter grey ribbon shows the same confidence interval on the true state estimates with added observation noise drawn from $\mathcal {N}(0,\sigma )$. \relax }}{42}{figure.caption.30}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Forecast produced by the HMCMC / bootstrapping framework with $M = 200$ trajectories. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the 95\% confidence interval on the estimated true states as described in Figure [\ref {if2combined}]. \relax }}{44}{figure.caption.31}
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Forecast produced by the HMC / bootstrapping framework with $M = 200$ trajectories. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the 95\% confidence interval on the estimated true states as described in Figure [\ref {if2combined}]. \relax }}{44}{figure.caption.31}
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {5.5}{\ignorespaces Error growth as a function of data truncation amount. Both methods used 200 bootstrap trajectories. Note that the y-axis shows the natural log of the averaged SSE, not the total SSE. \relax }}{45}{figure.caption.32}
 \defcounter {refsection}{0}\relax 
@@ -64,7 +64,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {6.3}{\ignorespaces Error as a function of forecast length. \relax }}{52}{figure.caption.36}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {6.4}{\ignorespaces Runtimes for producing SIRS forecasts. The box shows the middle 50th quantile, the bold line is the median, and the dots are outliers. Note that these are not ``true'' outliers, simply ones outside a ranges based on the interquartile range. \relax }}{53}{figure.caption.37}
+\contentsline {figure}{\numberline {6.4}{\ignorespaces Runtimes for producing SIRS forecasts. The box shows the middle 50th percent, the bold line is the median, and the dots are outliers. Note that these are not ``true'' outliers, simply ones outside a threshold based on the interquartile range. \relax }}{53}{figure.caption.37}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
@@ -74,7 +74,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {figure}{\numberline {7.3}{\ignorespaces Average SSE (log scale) across each location and all trials as a function of the number of weeks ahead in the forecast. \relax }}{58}{figure.caption.40}
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {7.4}{\ignorespaces Runtimes for producing spatial SIR forecasts. The box shows the middle 50th quantile, the bold line is the median, and the dots are outliers. \relax }}{58}{figure.caption.41}
+\contentsline {figure}{\numberline {7.4}{\ignorespaces Runtimes for producing spatial SIR forecasts. The box shows the middle 50th percent, the bold line is the median, and the dots are outliers. \relax }}{58}{figure.caption.41}
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
@@ -90,4 +90,4 @@
 \defcounter {refsection}{0}\relax 
 \addvspace {10\p@ }
 \defcounter {refsection}{0}\relax 
-\contentsline {figure}{\numberline {F.1}{\ignorespaces Running times for fitting the spatial SIR model to data. \relax }}{145}{figure.caption.43}
+\contentsline {figure}{\numberline {F.1}{\ignorespaces Running times for fitting the spatial SIR model to data. \relax }}{147}{figure.caption.43}

@@ -1,5 +1,7 @@
-##	Author: Dexter Barrows
-##	Github: dbarrows.github.io
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
 
 library(deSolve)
 library(ggplot2)
@@ -105,4 +107,3 @@ grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, ncol = 2, nrow = 2)
 pdf("if2kernels.pdf", height = 6.5, width = 6.5)
 grid.arrange(R0kernel, rkernel, sigmakernel, infeckernel, ncol = 2, nrow = 2)
 dev.off()
-#ggsave(filename="if2kernels.pdf", g2,  height=6.5, width=6.5)

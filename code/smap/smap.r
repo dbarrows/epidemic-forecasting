@@ -1,4 +1,9 @@
-library(pracma)
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
+
+library(pracma) # needed for tiling function
 
 smap <- function(data, E, theta, stepsAhead) {
 
@@ -15,8 +20,6 @@ smap <- function(data, E, theta, stepsAhead) {
     tslen <- length(tseries)
     predictee <- rev(t(as.matrix(tseries[(tslen-E+1):tslen])))
     predictions <- numeric(stepsAhead)
-
-    #allPredictees <- matrix(NA, stepsAhead, E)
 
     # for each prediction index (number of steps ahead)
     for(i in 1:stepsAhead) {
@@ -48,11 +51,6 @@ smap <- function(data, E, theta, stepsAhead) {
         # save
 
         predictions[i] <- predsum
-
-        # next predictee
-
-        #predictee <- c( predsum, predictee[-E] )
-        #allPredictees[i,] <- predictee
 
     }
 

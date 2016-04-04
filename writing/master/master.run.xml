@@ -80,6 +80,7 @@
     </requires>
     <requires type="editable">
       <file>thesis-refs.bib</file>
+      <file>thesis-refs-2.bib</file>
     </requires>
   </external>
 </requests>

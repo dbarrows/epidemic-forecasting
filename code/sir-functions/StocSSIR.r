@@ -1,3 +1,8 @@
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
+
 ## ymat: 	Contains the initial conditions where:
 #  			- rows are locations
 #  			- columns are S, I, R
@@ -7,6 +12,7 @@
 ## neibmat: Contains lists of neighbors for each location
 #			- rows are parent locations (nodes)
 # 			- columns are locations each parent is attached to (edges)
+
 StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
 
 	## number of locations
@@ -16,6 +22,7 @@ StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
     ## dims are locations, (S,I,R,B), times
     # output array
     out <- array(NA, c(nloc, 4, T+1), dimnames = list(NULL, c("S","I","R","B"), NULL))
+    
     # temp storage
     BSI <- numeric(nloc)
     rI <- numeric(nloc)
@@ -53,9 +60,6 @@ StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
         	BSI[loc] <- S[loc]*( sphi*B[loc]*I[loc] + ophi*nBIsum )
         }
 
-        #if(i == 1)
-        #	print(BSI)
-
         rI <- r*I
 
         dS <- -BSI
@@ -71,8 +75,6 @@ StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
         }
 
     }
-
-    #out[,,2] <- cbind(S,I,R,B)
 
 	return(out)
 
@@ -90,4 +92,5 @@ StocSSIR <- function(ymat, pars, T, steps, neinum, neibmat) {
 #           r = 0.1,      # recovery rate
 #           N = 500,      # population size
 #           eta = 0.5,    # geometric random walk
-#           berr = 0.5)   # Beta geometric walk noise
+#           berr = 0.5,   # Beta geometric walk noise
+#			phi = 0.5) 	  # degree of connectivity

@@ -1,3 +1,8 @@
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
+
 StocSIRS <- function(y, pars, T, steps) {
 
 	out <- matrix(NA, nrow = (T+1), ncol = 4)

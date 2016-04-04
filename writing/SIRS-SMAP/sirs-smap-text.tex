@@ -104,7 +104,7 @@
 
 	In an epidemic or infectious disease context, the S-map algorithm will only really work on time series that appear cyclic. While there is nothing mechanically that prevents it from operating on a time series that do not appear cyclic, S-mapping requires a long time series in order to build a quality library. Without one the forecasting process would produce unreliable data.
 
-	Given, the S-map's data requrements, we need to specify a modified version of the SIR model. As IF2 and HMCMC in principle should be able operate on any reasonably well-specified model, the easiest way to compare the efficacy of S-mapping to IF2 or HMCMC is to generate data from a SIRS model with a seasonal component, and have all methods operate on the resulting time series.
+	Given, the S-map's data requrements, we need to specify a modified version of the SIR model. As IF2 and HMC in principle should be able operate on any reasonably well-specified model, the easiest way to compare the efficacy of S-mapping to IF2 or HMC is to generate data from a SIRS model with a seasonal component, and have all methods operate on the resulting time series.
 
 	The basic skeleton of the SIRS model is similar to the stochastic SIR model described previously, with one small addition. The deterministic ODE component of the model is as follows.
 
@@ -153,7 +153,7 @@
 
 \section{SIRS Model Forecasting}
 
-	Naturally we wish to compare the efficacy of this comparatively simple technique against the more complex and more computationally taxing frameworks we have established to perform forecasting using IF2 and HMCMC.
+	Naturally we wish to compare the efficacy of this comparatively simple technique against the more complex and more computationally taxing frameworks we have established to perform forecasting using IF2 and HMC.
 
 	To do this we generated a series of artificial time series of length $260$ meant to represent 5 years of weekly incidence counts and used each method to forecast up to 2 years into the future. Our goal here was to determine how forecast error changed with forecast length.
 
@@ -166,15 +166,15 @@
         \caption{Error as a function of forecast length. \label{sirssseplot}}
     \end{figure}
 
-    Interestingly, all methods produce roughly the same result, which is to say the spikes in each outbreak cycle are difficult to accurately predict. IF2 produces better results than either HMCMC and the S-map for the majority of forecast lengths, with the S-map producing the poorest results with the exception of the second rise in infection rates where it outperforms the other methods.
+    Interestingly, all methods produce roughly the same result, which is to say the spikes in each outbreak cycle are difficult to accurately predict. IF2 produces better results than either HMC and the S-map for the majority of forecast lengths, with the S-map producing the poorest results with the exception of the second rise in infection rates where it outperforms the other methods.
 
-    While the S-map may not provide the same fidelity or forecast as IF2 or HMCMC, it shines when it comes to running time. Figure [\ref{sirstimeplot}] shows the running times over 20 simulations.
+    While the S-map may not provide the same fidelity or forecast as IF2 or HMC, it shines when it comes to running time. Figure [\ref{sirstimeplot}] shows the running times over 20 simulations.
 
     \begin{figure}
         \centering
         \captionsetup{width=.8\linewidth}
         \includegraphics[width=0.8\textwidth]{./images/timeplot.pdf}
-        \caption{Runtimes for producing SIRS forecasts. The box shows the middle 50th quantile, the bold line is the median, and the dots are outliers. Note that these are not ``true'' outliers, simply ones outside a ranges based on the interquartile range. \label{sirstimeplot}}
+        \caption{Runtimes for producing SIRS forecasts. The box shows the middle 50th percent, the bold line is the median, and the dots are outliers. Note that these are not ``true'' outliers, simply ones outside a threshold based on the interquartile range. \label{sirstimeplot}}
     \end{figure}
 
-    It is clear from Figure [\ref{sirstimeplot}] that the S-map running times are minute compared to the other methods, but to emphasize the degree: The average running time for the S-map is about $0.15$ seconds, for IF2 it is about $47,000$, and for HMCMC it is about $9,200$. This is a speed-up of over 316,000x compared to IF2 and over 61,800x compared to HMCMC.
+    It is clear from Figure [\ref{sirstimeplot}] that the S-map running times are minute compared to the other methods, but to emphasize the degree: The average running time for the S-map is about $0.15$ seconds, for IF2 it is about $47,000$, and for HMC it is about $9,200$. This is a speed-up of over 316,000x compared to IF2 and over 61,800x compared to HMC.

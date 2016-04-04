@@ -1,3 +1,8 @@
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
+
 data {
 
     int     <lower=1>   T;      // total integration steps

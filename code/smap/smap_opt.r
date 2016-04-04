@@ -1,7 +1,12 @@
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
+
 library(deSolve)
 library(ggplot2)
 library(RColorBrewer)
-library(pracma)
+library(pracma) 		## for tiling function
 
 set.seed(1010)
 
@@ -11,8 +16,6 @@ stoc_sirs_file 	<- paste(getwd(), "../sir-functions", "StocSIRS.r", sep = "/")
 smap_file 		<- paste(getwd(), "smap.r", sep = "/")
 source(stoc_sirs_file)
 source(smap_file)
-
-
 
 ## parameters
 ##
@@ -34,7 +37,7 @@ true_init_cond <- c(S = N - i_infec,
                     I = i_infec,
                     R = 0)
 
-## trial parameter values to check.options
+## trial parameter values to check
 ##
 Elist <- 1:20
 thetalist <- 10*exp(-(seq(0,9.5,0.5)))
@@ -80,15 +83,6 @@ quartz()
 image(-ssemat)
 quartz()
 filled.contour(-ssemat)
-
-#print(ssemat)
-#cms <- colMeans(ssemat)
-#rms <- rowMeans(ssemat)
-
-#Emin <- Elist[which.min(rms)]
-#thetamin <- thetalist[which.min(cms)]
-#print(Emin)
-#print(thetamin)
 
 mininds <- which(ssemat==min(ssemat),arr.ind=TRUE)
 

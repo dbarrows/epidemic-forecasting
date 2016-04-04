@@ -169,10 +169,13 @@ colnames(quantTraj) <- c("025","975")
 
 
 qhmcforecast <- qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
-					geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.2) +
+					geom_ribbon(aes( ymin = c(rep(NA, Tlim+1), quantTraj[(Tlim+2):(T+1),'025']),
+					                 ymax = c(rep(NA, Tlim+1), quantTraj[(Tlim+2):(T+1),'975']),
+									 alpha=0.2) ) +
 					geom_line(aes(y = meanTraj), linetype = "dashed") +
 					geom_point(aes(y = datapart)) +
-					theme_bw()
+					theme_bw() +
+					theme(legend.position="none")
 
 ggsave(qhmcforecast, filename="hmcforecast.pdf", height=4, width=6.5)
 

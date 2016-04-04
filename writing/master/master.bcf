@@ -2047,6 +2047,7 @@
   <!-- SECTION 0 -->
   <bcf:bibdata section="0">
     <bcf:datasource type="file" datatype="bibtex">thesis-refs.bib</bcf:datasource>
+    <bcf:datasource type="file" datatype="bibtex">thesis-refs-2.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
     <bcf:citekey order="2">Chretien2014</bcf:citekey>
@@ -2112,14 +2113,15 @@
     <bcf:citekey order="62">Harding2014</bcf:citekey>
     <bcf:citekey order="63">King2015a</bcf:citekey>
     <bcf:citekey order="64">King2016</bcf:citekey>
-    <bcf:citekey order="65">Sugihara1990</bcf:citekey>
-    <bcf:citekey order="66">Sugihara1994</bcf:citekey>
-    <bcf:citekey order="67">Hsieh2008</bcf:citekey>
-    <bcf:citekey order="68">Glaser2014</bcf:citekey>
+    <bcf:citekey order="65">Genest2008</bcf:citekey>
+    <bcf:citekey order="66">Sugihara1990</bcf:citekey>
+    <bcf:citekey order="67">Sugihara1994</bcf:citekey>
+    <bcf:citekey order="68">Hsieh2008</bcf:citekey>
     <bcf:citekey order="69">Glaser2014</bcf:citekey>
-    <bcf:citekey order="70">Hsieh2008</bcf:citekey>
-    <bcf:citekey order="71">Waldrop2016</bcf:citekey>
-    <bcf:citekey order="72">King2015</bcf:citekey>
+    <bcf:citekey order="70">Glaser2014</bcf:citekey>
+    <bcf:citekey order="71">Hsieh2008</bcf:citekey>
+    <bcf:citekey order="72">Waldrop2016</bcf:citekey>
+    <bcf:citekey order="73">King2015</bcf:citekey>
     <bcf:citekey order="0">*</bcf:citekey>
   </bcf:section>
   <bcf:sortlist section="0" name="nty/global" type="entry" sortscheme="nty" sortnamekeyscheme="global">

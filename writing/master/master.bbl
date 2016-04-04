@@ -594,6 +594,42 @@
       \endverb
       \keyw{c,call,foreign function interface,r}
     \endentry
+    \entry{Genest2008}{article}{}
+      \name{author}{2}{}{%
+        {{hash=f5e783a208e58d36d2ec34e35ff9f9d4}{%
+           family={Genest},
+           family_i={G\bibinitperiod},
+           given={Christian},
+           given_i={C\bibinitperiod}}}%
+        {{hash=12b48009bcee643c0daa5dd736a4b0d8}{%
+           family={Remillard},
+           family_i={R\bibinitperiod},
+           given={Bruno},
+           given_i={B\bibinitperiod}}}%
+      }
+      \strng{namehash}{1093fe0ae9fd218886903d6176c845f1}
+      \strng{fullhash}{1093fe0ae9fd218886903d6176c845f1}
+      \field{sortinit}{G}
+      \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{In testing that a given distribution P belongs to a parameterized family P, one is often led to compare a nonparametric estimate An of some functional A of P with an element A$\theta$n corresponding to an estimate $\theta$n of $\theta$. In many cases, the asymptotic distribution of goodness-of-fit statistics derived from the process n1/2(An − A$\theta$n) depends on the unknown distribution P.Itis shown here that if the sequences An and $\theta$n of estimators are regular in some sense, a parametric bootstrap approach yields valid approximations for the P-values of the tests. In other words if A∗ from P$\theta$n , the empirical processes n1/2(An−A$\theta$n) and n1/2(A∗ n and $\theta$∗ n−A$\theta$∗ of the same limit. This result is used to establish the validity of the parametric bootstrap method when testing the goodness- of-fit of families of multivariate distributions and copulas. Two types of tests are considered: certain procedures compare the empirical version of a distribution function or copula and its parametric estimation under the null hypothesis; others measure the distance between a parametric and a nonparametric estimation of the distribution associated with the classical probability integral transform. The validity of a two-level bootstrap is also proved in cases where the parametric estimate cannot be computed easily. Themethodology is illustrated using a new goodness-of-fit test statistic for copulas based on a Cramér–von Mises functional of the empirical copula process. n are analogs of An and $\theta$n computed from a sample n ) then converge jointly in distribution to independent copies}
+      \field{issn}{02460203}
+      \field{journaltitle}{Annales de l'institut Henri Poincare (B) Probability and Statistics}
+      \field{number}{6}
+      \field{title}{{Validity of the parametric bootstrap for goodness-of-fit testing in semiparametric models}}
+      \field{volume}{44}
+      \field{year}{2008}
+      \field{pages}{1096\bibrangedash 1127}
+      \range{pages}{32}
+      \verb{doi}
+      \verb 10.1214/07-AIHP148
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/AIHPB{\_}2008{\_}{\_}44{\_}6{\_}1096{\_}0.pdf:pdf
+      \endverb
+      \keyw{Copula,Goodness-of-fit test,Monte Carlo simulation,P-values,Parametric bootstrap,Semiparametric estimation}
+    \endentry
     \entry{Glaser2014}{article}{}
       \name{author}{3}{}{%
         {{hash=664d7804eb49ded5e0d07dca8bec26d7}{%

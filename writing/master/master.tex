@@ -43,6 +43,7 @@
 
 \usepackage[backend=biber]{biblatex}
 \addbibresource{thesis-refs.bib}
+\addbibresource{thesis-refs-2.bib}
 
 \usepackage[dvipsnames]{xcolor}
 \definecolor{DGrey}{gray}{0.25}
@@ -189,7 +190,7 @@
 
 	\chapter*{Abstract}
 
-		Forecasting tools play an important role in public response to epidemics. Despite this, limited work has been done in comparing best-in-class techniques across the broad spectrum of time series forecasting methodologies. Forecasting frameworks were developed that utilised three methods designed to work with nonlinear dynamics: Iterated Filtering (IF) 2, Hamiltonian MCMC, and S-mapping. These were compared in several forecasting scenarios including a seasonal epidemic and a spatiotemporal epidemic. IF2 combined with parametric bootstrapping produced superior predictions in all scenarios. S-mapping combined with Dewdrop Regression produced forecasts slightly less-accurate than IF2 and HMCMC, but demonstrated vastly reduced running times. Hence, S-mapping with or without Dewdrop Regression should be used to glean initial insight into future epidemic behaviour, while IF2 and parametric bootstrapping should be used to refine forecast estimates in time.
+		Forecasting tools play an important role in public response to epidemics. Despite this, limited work has been done in comparing best-in-class techniques across the broad spectrum of time series forecasting methodologies. Forecasting frameworks were developed that utilised three methods designed to work with nonlinear dynamics: Iterated Filtering (IF) 2, Hamiltonian MCMC (HMC), and S-mapping. These were compared in several forecasting scenarios including a seasonal epidemic and a spatiotemporal epidemic. IF2 combined with parametric bootstrapping produced superior predictions in all scenarios. S-mapping combined with Dewdrop Regression produced forecasts slightly less-accurate than IF2 and HMC, but demonstrated vastly reduced running times. Hence, S-mapping with or without Dewdrop Regression should be used to glean initial insight into future epidemic behaviour, while IF2 and parametric bootstrapping should be used to refine forecast estimates in time.
 
 
 	\chapter*{Acknowledgements}
@@ -230,13 +231,11 @@
 
 	\chapter{Iterated Filtering}
 
-		\graphicspath{{../PF-IF2/}}
-		\input{../PF-IF2/pf-text}
+		\subfile{../PF-IF2/pf-text}
 
 	\chapter{Parameter Fitting}
 
-		\graphicspath{{../SC1/}}
-		\input{../SC1/sc1-text}
+		\subfile{../SC1/sc1-text}
 
 	\chapter{Forecasting Frameworks}
 

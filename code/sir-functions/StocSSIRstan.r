@@ -1,3 +1,8 @@
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
+
 ## ymat: 	Contains the initial conditions where:
 #  			- rows are locations
 #  			- columns are S, I, R
@@ -58,9 +63,6 @@ StocSSIRstan <- function(ymat, pars, T, steps, neinum, neibmat, berrmat, bmatlim
         	BSI[loc] <- S[loc]*( sphi*B[loc]*I[loc] + ophi*nBIsum )
         }
 
-        #if(i == 1)
-        #	print(BSI)
-
         rI <- r*I
 
         dS <- -BSI
@@ -75,8 +77,6 @@ StocSSIRstan <- function(ymat, pars, T, steps, neinum, neibmat, berrmat, bmatlim
             out[,,i/steps+1] <- cbind(S,I,R,B)
 
     }
-
-    #out[,,2] <- cbind(S,I,R,B)
 
 	return(out)
 

@@ -1,5 +1,7 @@
-/*	Author: Dexter Barrows
-	Github: dbarrows.github.io
+/*	Dexter Barrows
+	dbarrows.github.io
+	McMaster University
+	2016
 
 	*/
 
@@ -12,9 +14,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
-
-//#include "rand.h"
-//#include "timer.h"
 
 #define Treal 		100			// time to simulate over
 #define R0true 		3.0			// infectiousness
@@ -74,28 +73,6 @@ Rcpp::List if2_spa(NumericMatrix data, int T, int N, int NP, int nPasses, double
 	Particle * particles_old = NULL; 	// intermediate particle states for resampling
 	initializeParticles(&particles, NP, nloc, N);
 	initializeParticles(&particles_old, NP, nloc, N);
-
-	/*
-	// copy particle test
-	copyParticle(&particles[0], &particles_old[0], nloc);
-
-	// perturb particle test
-	perturbParticles(particles, N, NP, nloc, 1, coolrate);
-
-	// evolution test
-	// reset particle system evolution states
-	for (int n = 0; n < NP; n++) {
-		for (int loc = 0; loc < nloc; loc++) {
-			particles[n].S[loc] = N - particles[n].Iinit[loc];
-			particles[n].I[loc] = particles[n].Iinit[loc];
-			particles[n].R[loc] = 0.0;
-			particles[n].B[loc] = (double) particles[n].R0 * particles[n].r / N;
-		}
-	}
-	printf("Before S:%f | I:%f | R:%f\n", particles[0].S[0], particles[0].I[0], particles[0].R[0]);
-	exp_euler_SSIR(1.0/7.0, 0.0, 1.0, N, &particles[0], neinum, neibmat, nloc);
-	printf("After S:%f | I:%f | R:%f\n", particles[0].S[0], particles[0].I[0], particles[0].R[0]);
-	*/
 
 	// START PASSES THROUGH DATA
 
@@ -270,8 +247,6 @@ void exp_euler_SSIR(double h, double t0, double tn, int N, Particle * particle,
 	double berr = particle->berr;
 	double phi  = particle->phi;
 
-	//printf("sphi \t\t| ophi \t\t| BSI \t\t| rI \t\t| dS \t\t| dI \t\t| dR \t\t| S \t\t| I \t\t| R |\n");
-
 	for(int t = 0; t < num_steps; t++) {
 
 		for (int loc = 0; loc < nloc; loc++) {
@@ -306,17 +281,9 @@ void exp_euler_SSIR(double h, double t0, double tn, int N, Particle * particle,
 			I[loc] += h*dI;
 			R[loc] += h*dR;
 
-			//if (loc == 1)
-			//	printf("%f\t|%f\t|%f\t|%f\t|%f\t|%f\t|%f\t|%f\t|%f\t|%f\t|\n", sphi, ophi, BSI, rI, dS, dI, dR, S[1], I[1], R[1]);
-
 		}
 
 	}
-
-	/*particle->S = S;
-	particle->I = I;
-	particle->R = R;
-	particle->B = B;*/
 
 }
 
@@ -467,30 +434,12 @@ void copyParticle(Particle * dst, Particle * src, int nloc) {
 }
 
 
-
 double randu() {
 
 	return (double) rand() / (double) RAND_MAX;
 
 }
 
-/*
-void getStateMeans(State * state, Particle* particles, int NP) {
-
-	double Smean = 0, Imean = 0, Rmean = 0;
-
-	for (int n = 0; n < NP; n++) {
-		Smean += particles[n].S;
-		Imean += particles[n].I;
-		Rmean += particles[n].R;
-	}
-
-	state->S = (double) Smean / NP;
-	state->I = (double) Imean / NP;
-	state->R = (double) Rmean / NP;
-
-}
-*/
 
 /*	Return a normally distributed random number with mean 0 and standard deviation 1
 	Uses the polar form of the Box-Muller transformation

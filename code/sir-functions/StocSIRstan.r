@@ -1,3 +1,8 @@
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
+
 StocSIRstan <- function(y, pars, T, steps, berrvec, bveclim) {
 	
 	out <- matrix(NA, nrow = (T+1), ncol = 4)
@@ -34,9 +39,9 @@ StocSIRstan <- function(y, pars, T, steps, berrvec, bveclim) {
 		dI <- BSI - rI
 		dR <- rI
 
-		S <- S + h*dS  #newInf
-		I <- I + h*dI  #newInf - h*dR
-		R <- R + h*dR  #h*dR
+		S <- S + h*dS
+		I <- I + h*dI
+		R <- R + h*dR
 
 		if (i %% steps == 0)
 			out[i/steps+1,] <- c(S,I,R,B)

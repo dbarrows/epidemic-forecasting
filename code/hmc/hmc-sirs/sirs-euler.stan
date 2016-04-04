@@ -1,3 +1,8 @@
+## Dexter Barrows
+## dbarrows.github.io
+## McMaster University
+## 2016
+
 data {
 
     int     <lower=1>   T;      // total integration steps
@@ -19,10 +24,6 @@ parameters {
     real <lower=-1.5, upper=1.5>    Bnoise[T];   // Beta vector
 
 }
-
-//transformed parameters {
-//    real B0 <- R0 * r / N;
-//}
 
 model {
 

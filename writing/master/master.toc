@@ -16,7 +16,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.6}Burn-in}{9}{section.2.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.7}Thinning}{9}{section.2.7}
+\contentsline {section}{\numberline {2.7}Thinning}{10}{section.2.7}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.8}Hamiltonian Monte Carlo}{10}{section.2.8}
 \defcounter {refsection}{0}\relax 
@@ -48,11 +48,11 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.5}IF2 Densities}{34}{section.4.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.6}HMCMC Fitting}{35}{section.4.6}
+\contentsline {section}{\numberline {4.6}HMC Fitting}{35}{section.4.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.7}HMCMC Densities}{35}{section.4.7}
+\contentsline {section}{\numberline {4.7}HMC Densities}{35}{section.4.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.8}HMCMC and Bootstrapping}{36}{section.4.8}
+\contentsline {section}{\numberline {4.8}HMC and Bootstrapping}{36}{section.4.8}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.9}Multi-trajectory Parameter Estimation}{37}{section.4.9}
 \defcounter {refsection}{0}\relax 
@@ -66,7 +66,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {5.2.2}IF2 Forecasts}{41}{subsection.5.2.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.3}HMCMC}{43}{section.5.3}
+\contentsline {section}{\numberline {5.3}HMC}{43}{section.5.3}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {5.4}Truncation vs. Error}{44}{section.5.4}
 \defcounter {refsection}{0}\relax 
@@ -110,30 +110,36 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {C}Parameter Fitting}{87}{appendix.C}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{88}{appendix.D}
+\contentsline {section}{\numberline {C.1}SIR Forward Simulator}{87}{section.C.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{88}{section.D.1}
+\contentsline {chapter}{\numberline {D}Forecasting Frameworks}{89}{appendix.D}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{90}{section.D.2}
+\contentsline {section}{\numberline {D.1}IF2 Parametric Bootstrapping Function}{89}{section.D.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {E}S-map and SIRS}{92}{appendix.E}
+\contentsline {section}{\numberline {D.2}RStan Forward Simulator}{91}{section.D.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.1}SIRS R Function Code}{92}{section.E.1}
+\contentsline {chapter}{\numberline {E}S-map and SIRS}{93}{appendix.E}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.2}SMAP Code}{93}{section.E.2}
+\contentsline {section}{\numberline {E.1}SIRS R Function Code}{93}{section.E.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.3}SMAP Parameter Optimization Code}{95}{section.E.3}
+\contentsline {section}{\numberline {E.2}SIRS HMC R Function Code}{94}{section.E.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.4}RStan SIRS Code}{97}{section.E.4}
+\contentsline {section}{\numberline {E.3}SMAP Code}{96}{section.E.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {E.5}IF2 SIRS Code}{98}{section.E.5}
+\contentsline {section}{\numberline {E.4}SMAP Parameter Optimization Code}{97}{section.E.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {F}Spatial Epidemics}{112}{appendix.F}
+\contentsline {section}{\numberline {E.5}RStan SIRS Code}{99}{section.E.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{112}{section.F.1}
+\contentsline {section}{\numberline {E.6}IF2 SIRS Code}{101}{section.E.6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {F.2}RStan Spatial SIR Code}{114}{section.F.2}
+\contentsline {chapter}{\numberline {F}Spatial Epidemics}{114}{appendix.F}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {F.3}IF2 Spatial SIR Code}{116}{section.F.3}
+\contentsline {section}{\numberline {F.1}Spatial SIR R Function Code}{114}{section.F.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {F.4}CUDA IF2 Spatial Fitting Code}{127}{section.F.4}
+\contentsline {section}{\numberline {F.2}Spatial SIR HMC R Function Code}{116}{section.F.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {F.3}RStan Spatial SIR Code}{118}{section.F.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {F.4}IF2 Spatial SIR Code}{120}{section.F.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {F.5}CUDA IF2 Spatial Fitting Code}{130}{section.F.5}

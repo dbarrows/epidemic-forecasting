@@ -1,5 +1,7 @@
-/*	Author: Dexter Barrows
-	Github: dbarrows.github.io
+/*	Dexter Barrows
+	dbarrows.github.io
+	McMaster University
+	2016
 
 	*/
 
@@ -13,9 +15,6 @@
 #include <cstdlib>
 #include <fstream>
 
-//#include "rand.h"
-//#include "timer.h"
-
 #define Treal 	100			// time to simulate over
 #define R0true 	3.0			// infectiousness
 #define rtrue 	0.1			// recovery rate
@@ -25,7 +24,6 @@
 
 #include <Rcpp.h>
 using namespace Rcpp;
-
 
 struct Particle {
 	double R0;

@@ -4,7 +4,7 @@
 
 	\lstinputlisting[style=Cppsty]{../../code/cuIF2/cuIF2.cu}
 
-	Figure [\ref{cudatimeplot2}] shows the running times for parameter fitting as compared to IF2 and HMCMC.
+	Figure [\ref{cudatimeplot2}] shows the running times for parameter fitting as compared to IF2 and HMC.
 
 	\begin{figure}[H]
         \centering
@@ -13,5 +13,5 @@
         \caption{Running times for fitting the spatial SIR model to data. \label{cudatimeplot2}}
     \end{figure}
 
-    The means from the data in Figure [\ref{cudatimeplot2}] are about $61.5$ seconds for \texttt{cuIF2}, $574$ seconds for IF2, and $38,800$ seconds for HMCMC. For \texttt{cuIF2} This is a speedup of over $9.33$x against IF2 and over $617$x against HMCMC.
+    The means from the data in Figure [\ref{cudatimeplot2}] are about $61.5$ seconds for \texttt{cuIF2}, $574$ seconds for IF2, and $38,800$ seconds for HMC. For \texttt{cuIF2} This is a speedup of over $9.33$x against IF2 and over $617$x against HMC.
 

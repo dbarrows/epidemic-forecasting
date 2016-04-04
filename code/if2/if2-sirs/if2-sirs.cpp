@@ -1,5 +1,7 @@
-/*	Author: Dexter Barrows
-	Github: dbarrows.github.io
+/*	Dexter Barrows
+	dbarrows.github.io
+	McMaster University
+	2016
 
 	*/
 
@@ -12,9 +14,6 @@
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
-
-//#include "rand.h"
-//#include "timer.h"
 
 #define Treal 		100			// time to simulate over
 #define R0true 		3.0			// infectiousness
@@ -270,8 +269,6 @@ Rcpp::List if2_sirs(NumericVector data, int T, int N, int NP, int nPasses, doubl
 
 	printf("\n");
 
-
-
 	// Get particle results to pass back to R
 
 	for (int n = 0; n < NP; n++) {
@@ -296,8 +293,6 @@ Rcpp::List if2_sirs(NumericVector data, int T, int N, int NP, int nPasses, doubl
 		statedata(n, 3) = particles[n].B;
 
 	}
-
-
 
 	return Rcpp::List::create(	Rcpp::Named("paramdata") = paramdata, 
                              	Rcpp::Named("means") = means,

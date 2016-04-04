@@ -56,14 +56,14 @@
     	\mathcal{L}(\theta) \propto P(D|\theta).
     \end{equation}
 
-    In some standard Maximum Likelihood approaches, $\mathcal{L}(\theta)$ is searched to find a value of $\theta$ that maximizes $\mathcal{L}(\theta)$, then this $\theta$ is taken to be the most likely true value. Here our aim is to not just maximize the likelihood but to also explore the area around it \cite{Andrieu2003}.
+    In frequentist Maximum Likelihood approaches, $\mathcal{L}(\theta)$ is searched to find a value of $\theta$ that maximizes $\mathcal{L}(\theta)$, then this $\theta$ is taken to be the most likely true value. Bayesian approaches take this further by aiming to generate a posterior distribution of likelihood values conditioned on prior information about the parameters and the data -- to not just maximize the likelihood but to also explore the area around it \cite{Andrieu2003}.
 
 
 \section{Prior distribution}
 
     Another significant component of MCMC is the user-specified prior distribution for $\theta$ or distributions for the individual components of $\theta$ (priors). Priors serve as a way for us to tell the MCMC algorithm what we think consist of good values for the parameters. Note that if very little is known about the parameters, or we are worried about biasing our estimate of the posterior, we can simply use a a wide uniform distribution. We cannot, however, avoid this problem entirely. Bayesian frameworks, such as MCMC, \textit{require} priors to be specified; what the user must decide is how strong to make priors.
 
-   	Exceedingly weak priors can pose problematic in some circumstances. In the case of MCMC, weak priors handicap the algorithm in two ways: convergence of the chain may become exceedingly slow, and more pressure is put on the likelihood function to be as good as possible -- it will now be the only thing informing the algorithm of what constitutes a ``good'' set of parameters, and what should be considered poor. In the majority of cases this does not pose as much as problem as it would appear; if enough samples are drawn, we should still obtain a good posterior estimate. We will only really run into problems if an exceedingly weak prior, such as an unbounded uniform distribution, or another unbounded distribution with a high standard deviation -- in those cases we may obtain poor posterior estimates if the data are weak \cite{Andrieu2003}.
+   	Exceedingly weak priors can pose problematic in some circumstances. In the case of MCMC, weak priors handicap the algorithm in two ways: convergence of the chain may become exceedingly slow, and more pressure is put on the likelihood function to be as good as possible -- it will now be the only thing informing the algorithm of what constitutes a ``good'' set of parameters, and what should be considered poor. In the majority of cases this does not pose as much as problem as it would appear; if enough samples are drawn, we should still obtain a good posterior estimate. We will only really run into problems if an exceedingly weak prior, such as an unbounded uniform distribution, or another unbounded distribution with a high standard deviation, is specified -- in those cases we may obtain poor posterior estimates if the data are weak \cite{Andrieu2003}.
 
 \section{Proposal distribution}
 
@@ -168,7 +168,7 @@
 
 \section{Hamiltonian Monte Carlo}
 
-    The Metropolis-Hastings algorithm has a primary drawback in that the parameter space may not be explored efficiently in some circumstances -- a consequence of the rudimentary proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a potential decrease in overall computational complexity. This algorithm is coined Hamiltonian MCMC (HMC or HMCMC) \cite{Neal2011}. Prior to the advent of HMCMC, some work was conducted exploring adaptive step-sizing using MCMC-based methods, but lack strong theoretical justification, and can lead to some samples being drawn from an incorrect distribution \cite{Neal2011}.
+    The Metropolis-Hastings algorithm has a primary drawback in that the parameter space may not be explored efficiently in some circumstances -- a consequence of the rudimentary proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a potential decrease in overall computational complexity. This algorithm is coined Hamiltonian MCMC (HMC) \cite{Neal2011}. Prior to the advent of HMC, some work was conducted exploring adaptive step-sizing using MCMC-based methods, but found they lack strong theoretical justification, and can lead to some samples being drawn from an incorrect distribution \cite{Neal2011}.
 
     From physics, we will borrow the ideas of potential and kinetic energy. Here potential energy is analogous to the negative log likelihood of the parameter selection given the data, formally
 
@@ -313,22 +313,22 @@
 
     In order to use an Explicit Euler-like stepping method in the later Stan model, the synthetic observation counts were treated as weekly observations in which the counts on the other six days of the week were unobserved.
 
-    Figure [\ref{traceplot}] shows the traceplot for the the post-warmup chain data returned by the \verb|stan()| function in the \verb|fit| object. We see that the chains are mixing well and convergence has likely been reached.
+    Figure [\ref{traceplot}] shows the traceplot for the the post-burn-in chain data returned by the RStan fitting. We see that the chains are mixing well and convergence has likely been reached.
 
     \begin{figure}
         \centering
         \captionsetup{width=0.8\linewidth}
         \includegraphics[width=\textwidth]{./images/traceplotR0.pdf}
-        \caption{Traceplot of samples drawn for parameter $R_0$, excluding warmup. \label{traceplot}}
+        \caption{Traceplot of samples drawn for parameter $R_0$, excluding burn-in. \label{traceplot}}
     \end{figure}
 
-	Figure [\ref{traceplot2}] shows the chain data including the warmup samples in. We can see why is is wise to discard these samples (note the scale).
+	Figure [\ref{traceplot2}] shows the chain data including the burn-in samples. We can see why is is wise to discard these samples (note the scale).
 
     \begin{figure}
         \centering
         \captionsetup{width=0.8\linewidth}
         \includegraphics[width=\textwidth]{./images/traceplotR0_inc.pdf}
-        \caption{Traceplot of samples drawn for parameter $R_0$, including warmup. \label{traceplot2}}
+        \caption{Traceplot of samples drawn for parameter $R_0$, including burn-in. \label{traceplot2}}
     \end{figure}
 
     Figure [\ref{hmckernels}] shows the the kernel density estimates for each of the model parameters and the initial number of cases. We see that while the estimates are not perfect, they are more than satisfactory.

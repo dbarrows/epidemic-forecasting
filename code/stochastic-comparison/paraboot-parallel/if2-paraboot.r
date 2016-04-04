@@ -1,4 +1,7 @@
 # Dexter Barrows
+# dbarrows.github.io
+# McMaster University
+# 2016
 #
 # IF2 parametric bootstrapping function
 
