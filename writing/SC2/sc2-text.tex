@@ -92,7 +92,7 @@
         \caption{Forecast produced by the IF2 / parametric bootstrapping framework. The dotted line shows the mean estimate of the forecasts, the dark grey ribbon shows the 95\% confidence interval based on the 0.025 and 0.975 quantiles on the true state estimates, and the lighter grey ribbon shows the same confidence interval on the true state estimates with added observation noise drawn from $\mathcal{N}(0,\sigma)$. \label{if2combined}}
     \end{figure}
 
-    We can define a metric to gauge overall forecast effectiveness by calculating the SSE and dividing that value by the number of values predicted to get the average squared error per point. For the data in Figure [\ref{if2combined}] the value was $\overline{SSE} = 1.67$. Normally we would also want to address questions of forecast coverage, but this would require at least a 100-fold increase in computational cost. This is potentially an avenue of future investigation.
+    We can define a metric to gauge overall forecast effectiveness by calculating the sum of squared errors of prediction (SSE). For the data in Figure [\ref{if2combined}] the value was approximately $SSE = 50.1$. Normally we would also want to address questions of forecast coverage, but this would require at least a 100-fold increase in computational cost. This is potentially an avenue of future investigation.
     
 
 \section{HMCMC}
@@ -108,7 +108,7 @@
         \caption{Forecast produced by the HMCMC / bootstrapping framework with $M = 200$ trajectories. The dotted line shows the mean estimate of the forecasts, and the grey ribbon shows the 95\% confidence interval on the estimated true states as described in Figure [\ref{if2combined}]. \label{hmcforecast}}
     \end{figure}
 
-    And as before we can evaluate the averaged SSE of the forecast for the data shown, giving $\overline{SSE} = 20.27$.
+    And as before we can evaluate the SSE of the forecast for the data shown, giving approximately $SSE = 608$.
 
 
 \section{Truncation vs. Error}

@@ -9,7 +9,7 @@ printvar <- function(v) {
 
 load(file = "sc2-script.RData")
 
-q <- qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infction count") +
+q <- qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
 		geom_point(aes(y = c(infec_counts[1:(Tlim+1)], rep(NA,T-Tlim)))) +
 		theme_bw()
 
@@ -52,7 +52,7 @@ ggsave(qif2forecast, filename="if2forecast.pdf", height=4, width=6.5)
 truefuture  <- sdeout_true[(Tlim+2):(T+1),'I']
 estfuture   <- meanTraj
 err <- estfuture - truefuture
-if2sse <- sum(err^2) / (T - Tlim)
+if2sse <- sum(err^2)
 printvar(if2sse)
 
 ## With observation noise
@@ -169,7 +169,7 @@ colnames(quantTraj) <- c("025","975")
 
 
 qhmcforecast <- qplot(0:T, sdeout_true[,'I'], geom = "line", xlab = "Time", ylab = "Infection count") +
-					geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.1) +
+					geom_ribbon(aes(ymin = quantTraj[,'025'], ymax=quantTraj[,'975']), alpha=0.2) +
 					geom_line(aes(y = meanTraj), linetype = "dashed") +
 					geom_point(aes(y = datapart)) +
 					theme_bw()
@@ -180,5 +180,5 @@ truefuture  <- sdeout_true[(Tlim+2):(T+1),'I']
 estfuture   <- meanTraj[(Tlim+2):(T+1)]
 
 err <- estfuture - truefuture
-hmcsse <- sum(err^2) / (T - Tlim)
+hmcsse <- sum(err^2)
 printvar(hmcsse)
