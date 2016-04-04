@@ -1,29 +1,29 @@
 [0] Config.pm:340> INFO - This is Biber 2.4
-[0] Config.pm:343> INFO - Logfile is 'master.blg'
-[87] biber-darwin:287> INFO - === Fri Mar 25, 2016, 17:03:46
-[110] Biber.pm:347> INFO - Reading 'master.bcf'
-[260] Biber.pm:738> INFO - Using all citekeys in bib section 0
-[275] Biber.pm:3150> INFO - Processing section 0
-[349] Biber.pm:3307> INFO - Looking for bibtex format file 'thesis-refs.bib' for section 0
-[365] bibtex.pm:1124> INFO - Decoding LaTeX character macros into UTF-8
-[380] bibtex.pm:985> INFO - Found BibTeX data source 'thesis-refs.bib'
-[430] Utils.pm:147> WARN - ISBN '1932-6203' in entry 'Cook2011' is invalid - run biber with '--validate_datamodel' for details.
-[503] Utils.pm:147> WARN - ISBN '1461-0248' in entry 'Hartig2011' is invalid - run biber with '--validate_datamodel' for details.
-[514] Utils.pm:147> WARN - ISBN '1133-0686' in entry 'Mardia1998' is invalid - run biber with '--validate_datamodel' for details.
-[537] Utils.pm:147> WARN - ISBN '0003-0147' in entry 'Hsieh2008' is invalid - run biber with '--validate_datamodel' for details.
-[557] Utils.pm:147> WARN - ISBN '1534-7796 (Electronic)0033-3174 (Linking)' in entry 'Babyak2004' is invalid - run biber with '--validate_datamodel' for details.
-[671] Utils.pm:147> WARN - ISBN '08856125 (ISSN)' in entry 'Andrieu2003' is invalid - run biber with '--validate_datamodel' for details.
-[802] Utils.pm:147> WARN - ISBN '1471-2954 (Electronic)$\backslash$r0962-8452 (Linking)' in entry 'Camacho2011' is invalid - run biber with '--validate_datamodel' for details.
-[812] Utils.pm:147> WARN - ISBN '2041-210X' in entry 'Link2012' is invalid - run biber with '--validate_datamodel' for details.
-[847] Utils.pm:147> WARN - ISBN '2157-3999 (Electronic)' in entry 'Shaman2014' is invalid - run biber with '--validate_datamodel' for details.
-[942] Utils.pm:147> WARN - ISBN '09628428' in entry 'Sugihara1994' is invalid - run biber with '--validate_datamodel' for details.
-[963] Utils.pm:147> WARN - ISBN '0028-0836 (Print)' in entry 'Sugihara1990' is invalid - run biber with '--validate_datamodel' for details.
-[975] Utils.pm:147> WARN - ISBN '0962-8452' in entry 'King2015' is invalid - run biber with '--validate_datamodel' for details.
-[986] Utils.pm:147> WARN - ISBN '0962-2802 (Print)' in entry 'VidalRodeiro2006' is invalid - run biber with '--validate_datamodel' for details.
-[1648] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
-[1648] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
-[1648] Biber.pm:3027> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-US'
-[1649] Biber.pm:3031> INFO - No sort tailoring available for locale 'en-US'
-[1802] bbl.pm:519> INFO - Writing 'master.bbl' with encoding 'UTF-8'
-[1816] bbl.pm:615> INFO - Output to master.bbl
-[1816] Biber.pm:108> INFO - WARNINGS: 13
+[1] Config.pm:343> INFO - Logfile is 'master.blg'
+[79] biber-darwin:287> INFO - === Mon Apr  4, 2016, 11:38:29
+[101] Biber.pm:347> INFO - Reading 'master.bcf'
+[251] Biber.pm:738> INFO - Using all citekeys in bib section 0
+[270] Biber.pm:3150> INFO - Processing section 0
+[331] Biber.pm:3307> INFO - Looking for bibtex format file 'thesis-refs.bib' for section 0
+[347] bibtex.pm:1124> INFO - Decoding LaTeX character macros into UTF-8
+[365] bibtex.pm:985> INFO - Found BibTeX data source 'thesis-refs.bib'
+[444] Utils.pm:147> WARN - ISBN '2041-210X' in entry 'Link2012' is invalid - run biber with '--validate_datamodel' for details.
+[513] Utils.pm:147> WARN - ISBN '08856125 (ISSN)' in entry 'Andrieu2003' is invalid - run biber with '--validate_datamodel' for details.
+[524] Utils.pm:147> WARN - ISBN '09628428' in entry 'Sugihara1994' is invalid - run biber with '--validate_datamodel' for details.
+[536] Utils.pm:147> WARN - ISBN '0962-2802 (Print)' in entry 'VidalRodeiro2006' is invalid - run biber with '--validate_datamodel' for details.
+[546] Utils.pm:147> WARN - ISBN '1534-7796 (Electronic) 0033-3174 (Linking)' in entry 'Babyak2004' is invalid - run biber with '--validate_datamodel' for details.
+[558] Utils.pm:147> WARN - ISBN '0962-8452' in entry 'King2015' is invalid - run biber with '--validate_datamodel' for details.
+[583] Utils.pm:147> WARN - ISBN '1461-0248' in entry 'Hartig2011' is invalid - run biber with '--validate_datamodel' for details.
+[606] Utils.pm:147> WARN - ISBN '1932-6203' in entry 'Cook2011' is invalid - run biber with '--validate_datamodel' for details.
+[643] Utils.pm:147> WARN - ISBN '0003-0147' in entry 'Hsieh2008' is invalid - run biber with '--validate_datamodel' for details.
+[746] Utils.pm:147> WARN - ISBN '1133-0686' in entry 'Mardia1998' is invalid - run biber with '--validate_datamodel' for details.
+[758] Utils.pm:147> WARN - ISBN '1471-2954 (Electronic)$\backslash$r0962-8452 (Linking)' in entry 'Camacho2011' is invalid - run biber with '--validate_datamodel' for details.
+[828] Utils.pm:147> WARN - ISBN '2157-3999 (Electronic)' in entry 'Shaman2014' is invalid - run biber with '--validate_datamodel' for details.
+[866] Utils.pm:147> WARN - ISBN '0028-0836 (Print)' in entry 'Sugihara1990' is invalid - run biber with '--validate_datamodel' for details.
+[1583] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'normalization = NFD' with 'normalization = prenormalized'
+[1583] UCollate.pm:65> INFO - Overriding locale 'en-US' defaults 'variable = shifted' with 'variable = non-ignorable'
+[1583] Biber.pm:3027> INFO - Sorting list 'nty/global' of type 'entry' with scheme 'nty' and locale 'en-US'
+[1583] Biber.pm:3031> INFO - No sort tailoring available for locale 'en-US'
+[1688] bbl.pm:519> INFO - Writing 'master.bbl' with encoding 'UTF-8'
+[1700] bbl.pm:615> INFO - Output to master.bbl
+[1700] Biber.pm:108> INFO - WARNINGS: 13

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  27 MAR 2016 18:45
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  4 APR 2016 11:38
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1049,13 +1049,7 @@ s $\OML/cmm/m/it/12 ^^O[] \OT1/cmr/m/n/12 = \OMS/cmsy/m/n/12 N\OT1/cmr/m/n/12 (
 Chapter 1.
 (../introduction/introduction.tex [1
 
-]
-Overfull \hbox (2.57503pt too wide) in paragraph at lines 25--26
-[]\OT1/cmr/m/n/12 Combining the phe-nomeno-log-i-cal and mech-a-nis-tic ap-proa
-ches are the semi-mechanistic
- []
-
-[2] [3]) [4]
+] [2] [3]) [4]
 Chapter 2.
 (../MCMC-HMCMC/mcmc-text.tex
 File: ../MCMC-HMCMC/./images/finitemachine.pdf Graphic file (type QTm)
@@ -1206,7 +1200,7 @@ File: ../SPATIAL/./images/timeplot.pdf Graphic file (type QTm)
 Chapter 8.
 (../future-directions/future-directions.tex [59
 
-] [60] [61] [62]) [63] [64
+] [60] [61]) [62] [63] [64
 
 ]
 Missing character: There is no ó in font cmr12!
@@ -1320,7 +1314,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 298.
 Here is how much of TeX's memory you used:
  23297 strings out of 495158
  356264 string characters out of 6175470
- 1060302 words of memory out of 5000000
+ 1060301 words of memory out of 5000000
  26142 multiletter control sequences out of 15000+600000
  17242 words of font info for 65 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191

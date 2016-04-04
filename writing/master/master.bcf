@@ -2049,8 +2049,8 @@
     <bcf:datasource type="file" datatype="bibtex">thesis-refs.bib</bcf:datasource>
   </bcf:bibdata>
   <bcf:section number="0">
-    <bcf:citekey order="2">Nsoesie2014</bcf:citekey>
-    <bcf:citekey order="3">Chretien2014</bcf:citekey>
+    <bcf:citekey order="2">Chretien2014</bcf:citekey>
+    <bcf:citekey order="3">Nsoesie2014</bcf:citekey>
     <bcf:citekey order="4">Yang2014</bcf:citekey>
     <bcf:citekey order="5">Nsoesie2014</bcf:citekey>
     <bcf:citekey order="6">Camacho2011</bcf:citekey>
@@ -2064,13 +2064,13 @@
     <bcf:citekey order="14">Yang2014</bcf:citekey>
     <bcf:citekey order="15">Andrieu2003</bcf:citekey>
     <bcf:citekey order="16">Neal2011</bcf:citekey>
-    <bcf:citekey order="17">Yang2014</bcf:citekey>
-    <bcf:citekey order="18">Sugihara1994</bcf:citekey>
-    <bcf:citekey order="19">Nsoesie2014</bcf:citekey>
-    <bcf:citekey order="20">Yang2014</bcf:citekey>
-    <bcf:citekey order="21">Chretien2014</bcf:citekey>
-    <bcf:citekey order="22">Nsoesie2013</bcf:citekey>
-    <bcf:citekey order="23">Chretien2014</bcf:citekey>
+    <bcf:citekey order="17">Sugihara1994</bcf:citekey>
+    <bcf:citekey order="18">Yang2014</bcf:citekey>
+    <bcf:citekey order="19">Chretien2014</bcf:citekey>
+    <bcf:citekey order="20">Nsoesie2014</bcf:citekey>
+    <bcf:citekey order="21">Yang2014</bcf:citekey>
+    <bcf:citekey order="22">Chretien2014</bcf:citekey>
+    <bcf:citekey order="23">Nsoesie2013</bcf:citekey>
     <bcf:citekey order="24">Neal2011</bcf:citekey>
     <bcf:citekey order="25">Carpenter2016</bcf:citekey>
     <bcf:citekey order="26">Hoffman2014</bcf:citekey>
@@ -2080,10 +2080,10 @@
     <bcf:citekey order="30">Eddelbuettel2011</bcf:citekey>
     <bcf:citekey order="31">King2015a</bcf:citekey>
     <bcf:citekey order="32">King2016</bcf:citekey>
-    <bcf:citekey order="33">Sugihara1994</bcf:citekey>
-    <bcf:citekey order="34">Sugihara1990</bcf:citekey>
-    <bcf:citekey order="35">Hsieh2008</bcf:citekey>
-    <bcf:citekey order="36">Glaser2014</bcf:citekey>
+    <bcf:citekey order="33">Glaser2014</bcf:citekey>
+    <bcf:citekey order="34">Hsieh2008</bcf:citekey>
+    <bcf:citekey order="35">Sugihara1990</bcf:citekey>
+    <bcf:citekey order="36">Sugihara1994</bcf:citekey>
     <bcf:citekey order="37">Glaser2014</bcf:citekey>
     <bcf:citekey order="38">Andrieu2003</bcf:citekey>
     <bcf:citekey order="39">Andrieu2003</bcf:citekey>

@@ -227,9 +227,9 @@
       \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{1534-7796 (Electronic)0033-3174 (Linking)}
+      \field{isbn}{1534-7796 (Electronic) 0033-3174 (Linking)}
       \field{issn}{0033-3174}
-      \field{journaltitle}{$\backslash$it J. Bio. Med.}
+      \field{journaltitle}{J. Bio. Med.}
       \field{number}{3}
       \field{title}{{What You See May Not Be What You Get: A Brief, Nontechnical Introduction to Overfitting in Regression Type Models}}
       \field{volume}{66}
@@ -375,7 +375,7 @@
       \field{labeltitlesource}{title}
       \field{abstract}{Stan is a probabilistic programming language for specifying statistical models. A Stan program imperatively defines a log probability function over parameters conditioned on specified data and constants. As of version 2.2.0, Stan provides full Bayesian inference for continuous-variable models through Markov chain Monte Carlo methods such as the No-U-Turn sampler, an adaptive form of Hamiltonian Monte Carlo sampling. Penalized maximum likelihood estimates are calculated using optimization methods such as the Broydenˆ a˘SFletcherˆA¸ A¸ a˘SGoldfarbˆA¸ a˘SShanno algorithm. Stan is also a platform for computing log densities and their gradients and Hessians, which can be used in alternative algorithms such as variational Bayes, expectation propa- gation, and marginal inference using approximate integration. To this end, Stan is set up so that the densities, gradients, and Hessians, along with intermediate quantities of the algorithm such as acceptance probabilities, are easily accessible. Stan can be called from the command line, through R using the RStan package, or through < Python using the PyStan package. All three interfaces support sampling or optimization-based inference and analysis, and RStan and PyStan also provide access to log}
       \field{journaltitle}{Journal of Statistical Software}
-      \field{title}{{Stan : A Probabilistic Programming Language}}
+      \field{title}{{Stan: A Probabilistic Programming Language}}
       \field{year}{2016}
       \verb{file}
       \verb :Users/dexter/Dropbox/McMaster/Papers/stan-resubmit-JSS1293.pdf:pdf
@@ -575,7 +575,7 @@
       \field{issn}{15487660}
       \field{journaltitle}{Journal Of Statistical Software}
       \field{number}{8}
-      \field{title}{{Rcpp : Seamless R and C ++ Integration}}
+      \field{title}{{Rcpp: Seamless R and C ++ Integration}}
       \field{volume}{40}
       \field{year}{2011}
       \field{pages}{1\bibrangedash 18}
@@ -675,7 +675,7 @@
       \field{labeltitlesource}{title}
       \field{annotation}{TdC flu (but from where?) -{\&}gt; Mantle, J. {\&}amp; Tyrrell, D. A. J. 1973 An epidemic of influenza on Tristan da Cunha. J. Hyg. 71, 89–95. 14 perhaps? -- - AIC - comparison under multiple difference hypotheses ML}
       \field{journaltitle}{Proc. R. Soc. B}
-      \field{title}{{Explaining rapid reinfections in multiple- wave influenza outbreaks : Tristan da Cunha 1971 epidemic as a case study}}
+      \field{title}{{Explaining rapid reinfections in multiple-wave influenza outbreaks : Tristan da Cunha 1971 epidemic as a case study}}
       \field{year}{2016}
       \verb{doi}
       \verb 10.1098/rspb.2011.0300
@@ -852,14 +852,14 @@
            family_i={B\bibinitperiod},
            given={C},
            given_i={C\bibinitperiod}}}%
-        {{hash=e0903f2b7dd908fcff0eb1cccc12ae4b}{%
+        {{hash=5f9f8b9981cd9abf80bf0ad08bd885ae}{%
            family={King},
            family_i={K\bibinitperiod},
-           given={a\bibnamedelima a},
-           given_i={a\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+           given={A.\bibnamedelimi A.},
+           given_i={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
       }
-      \strng{namehash}{393f3a32b6221a56e9b4145774443a5e}
-      \strng{fullhash}{393f3a32b6221a56e9b4145774443a5e}
+      \strng{namehash}{47adaffb25b1d297de29d0fae434d134}
+      \strng{fullhash}{47adaffb25b1d297de29d0fae434d134}
       \field{sortinit}{I}
       \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
       \field{labelnamesource}{author}
@@ -908,14 +908,14 @@
            family_i={S\bibinitperiod},
            given={Stilian},
            given_i={S\bibinitperiod}}}%
-        {{hash=e4f695cf446da6d90c43e91d8503ad51}{%
+        {{hash=02293e830df8533325abdcd7d5cb4584}{%
            family={King},
            family_i={K\bibinitperiod},
-           given={Aaron\bibnamedelima a.},
-           given_i={A\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
+           given={Aaron\bibnamedelima A.},
+           given_i={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
       }
       \strng{namehash}{8ed3b750c30b775c4ddeb365e6c0cf1b}
-      \strng{fullhash}{e8085da022dc3bb7e85f52768f726357}
+      \strng{fullhash}{15bfecedc646c84b0eb0ec3b381ebdbe}
       \field{sortinit}{I}
       \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
       \field{labelnamesource}{author}
@@ -1205,7 +1205,6 @@
       \field{abstract}{Hamiltonian dynamics can be used to produce distant proposals for the Metropolis algorithm, thereby avoiding the slow exploration of the state space that results from the diffusive behaviour of simple random-walk proposals. Though originating in physics, Hamiltonian dynamics can be applied to most problems with continuous state spaces by simply introducing fictitious "momentum" variables. A key to its usefulness is that Hamiltonian dynamics preserves volume, and its trajectories can thus be used to define complex mappings without the need to account for a hard to compute Jacobian factor - a property that can be exactly maintained even when the dynamics is approximated by discretizing time. In this review, discuss theoretical and practical aspects of Hamiltonian Monte Carlo, and present some of its variations, including using windows of states for approximations, tempering during the course of a trajectory to handle isolated modes, and short-cut methods that prevent useless trajectories form taking much computation time.}
       \field{eprinttype}{arXiv}
       \field{isbn}{978-1-4200-7941-8}
-      \field{issn}{<null>}
       \field{journaltitle}{Handbook of Markov Chain Monte Carlo}
       \field{title}{{Handbook of Markov Chain Monte Carlo}}
       \field{volume}{20116022}
@@ -1406,7 +1405,7 @@
       \verb 10.1111/j.1467-9876.2005.00480.x
       \endverb
       \verb{file}
-      \verb :Users/dexter/Dropbox/McMaster/Papers/Sahu, Mardia - Unknown - A Bayesian Kriged-Kalman model for short-term fore- casting of air pollution levels.pdf:pdf
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Sahu, Mardia - Unknown - A Bayesian Kriged-Kalman model for short-term forecasting of air pollution levels.pdf:pdf
       \endverb
       \keyw{bending energy,gibbs sampler,kalman filter,kriging,markov chain monte carlo,spatial temporal modelling,state-space model}
     \endentry
