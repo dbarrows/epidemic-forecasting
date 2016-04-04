@@ -64,21 +64,21 @@ Pass
 ...49 / 50
 Parameter results (mean | sd)
 -----------------------------
-R0        3.272442 0.284893
-r         0.103610 0.000167
-sigma     8.845410 1.826889
-eta       0.586737 0.013965
-berr    0.163455 0.004231
-S_init  492.102888 1.799224
-I_init    7.897112 1.799224
+R0        3.382981 0.308595
+r         0.104711 0.000165
+sigma     8.890175 2.101491
+eta       0.841566 0.006618
+berr    0.099615 0.005062
+S_init  494.237837 1.706498
+I_init    5.762163 1.706498
 R_init    0.000000 0.000000
 
-[1] "if2means : 3.27244186321046"  "if2means : 0.103610304764355"
-[3] "if2means : 7.8971121600325"   "if2means : 8.84540968562412" 
-[5] "if2means : 0.586736727282992" "if2means : 0.163454754773347"
-[1] "relerrs : 0.0908139544034866" "relerrs : 0.0361030476435506"
-[3] "relerrs : 0.5794224320065"    "relerrs : -0.115459031437588"
-[5] "relerrs : 0.173473454565983"  "relerrs : -0.673090490453305"
+[1] "if2means : 3.38298138227942"   "if2means : 0.104711340411895" 
+[3] "if2means : 5.76216269421921"   "if2means : 8.89017510926901"  
+[5] "if2means : 0.841566109226316"  "if2means : 0.0996148899369891"
+[1] "relerrs : 0.127660460759806"  "relerrs : 0.0471134041189471"
+[3] "relerrs : 0.152432538843841"  "relerrs : -0.110982489073099"
+[5] "relerrs : 0.683132218452633"  "relerrs : -0.800770220126022"
 null device 
           1 
 null device 
@@ -100,9 +100,9 @@ Chain 1, Iteration: 1400 / 2000 [ 70%]  (Sampling)
 Chain 1, Iteration: 1600 / 2000 [ 80%]  (Sampling)
 Chain 1, Iteration: 1800 / 2000 [ 90%]  (Sampling)
 Chain 1, Iteration: 2000 / 2000 [100%]  (Sampling)# 
-#  Elapsed Time: 31.1635 seconds (Warm-up)
-#                22.0987 seconds (Sampling)
-#                53.2621 seconds (Total)
+#  Elapsed Time: 32.0965 seconds (Warm-up)
+#                22.4172 seconds (Sampling)
+#                54.5137 seconds (Total)
 # 
 The following numerical problems occured the indicated number of times after warmup on chain 1
                                                                                          count

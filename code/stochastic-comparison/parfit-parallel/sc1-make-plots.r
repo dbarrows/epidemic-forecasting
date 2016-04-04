@@ -498,7 +498,7 @@ avhmctime <- mean(hmctimes)
 # times plot
 
 timedf <- data.frame(if2 = if2times, hmc = hmctimes)
-timedf$variable <- factor(timedf$variable, levels = c("if2", "hmc"), ordered = TRUE)
+#timedf$variable <- factor(timedf$variable, levels = c("if2", "hmc"), ordered = TRUE)
 timedata <- melt(timedf)
 timeplot <- ggplot(timedata, aes(factor(variable, ordered = TRUE), value)) +
 				geom_boxplot() +
@@ -537,32 +537,32 @@ lineweight <- 0.5
 
 R0kernel <- qplot(if2plotdata$R0, geom = "density", xlab = expression(R[0]), ylab = "frequency") +
     geom_vline(aes(xintercept=pars_true['R0']), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(if2plotdata$R0)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(if2plotdata$R0)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 rkernel <- qplot(if2plotdata$r, geom = "density", xlab = "r", ylab = "") +
     geom_vline(aes(xintercept=pars_true['r']), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(if2plotdata$r)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(if2plotdata$r)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 sigmakernel <- qplot(if2plotdata$sigma, geom = "density", xlab = expression(sigma), ylab = "") +
     geom_vline(aes(xintercept=sigma), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(if2plotdata$sigma)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(if2plotdata$sigma)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 infeckernel <- qplot(if2plotdata$Iinit, geom = "density", xlab = "Initial Infected", ylab = "frequency") +
     geom_vline(aes(xintercept=i_infec), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(if2plotdata$Iinit)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(if2plotdata$Iinit)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 etakernel <- qplot(if2plotdata$eta, geom = "density", xlab = expression(eta), ylab = "") +
     geom_vline(aes(xintercept=pars_true['eta']), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(if2plotdata$eta)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(if2plotdata$eta)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 berrkernel <- qplot(if2plotdata$berr, geom = "density", xlab = expression(epsilon[proc]), ylab = "") +
     geom_vline(aes(xintercept=pars_true['berr']), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(if2plotdata$berr)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(if2plotdata$berr)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 
@@ -575,32 +575,32 @@ dev.off()
 
 R0kernel <- qplot(hmcplotdata$R0, geom = "density", xlab = expression(R[0]), ylab = "frequency") +
     geom_vline(aes(xintercept=pars_true['R0']), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(hmcplotdata$R0)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(hmcplotdata$R0)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 rkernel <- qplot(hmcplotdata$r, geom = "density", xlab = "r", ylab = "") +
     geom_vline(aes(xintercept=pars_true['r']), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(hmcplotdata$r)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(hmcplotdata$r)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 sigmakernel <- qplot(hmcplotdata$sigma, geom = "density", xlab = expression(sigma), ylab = "") +
     geom_vline(aes(xintercept=sigma), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(hmcplotdata$sigma)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(hmcplotdata$sigma)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 infeckernel <- qplot(hmcplotdata$Iinit, geom = "density", xlab = "Initial Infected", ylab = "frequency") +
     geom_vline(aes(xintercept=i_infec), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(hmcplotdata$Iinit)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(hmcplotdata$Iinit)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 etakernel <- qplot(hmcplotdata$eta, geom = "density", xlab = expression(eta), ylab = "") +
     geom_vline(aes(xintercept=pars_true['eta']), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(hmcplotdata$eta)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(hmcplotdata$eta)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 berrkernel <- qplot(hmcplotdata$berr, geom = "density", xlab = expression(epsilon[proc]), ylab = "") +
     geom_vline(aes(xintercept=pars_true['berr']), linetype="solid", size=lineweight, color=linecolour) +
-    geom_vline(aes(xintercept=mean(hmcplotdata$berr)), linetype="dashed", size=lineweight, color=linecolour) +
+    geom_vline(aes(xintercept=median(hmcplotdata$berr)), linetype="dashed", size=lineweight, color=linecolour) +
     theme_bw()
 
 
