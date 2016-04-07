@@ -42,6 +42,8 @@
 			 SmallCapsFont=P22UndergroundLightSC]{P22UndergroundLight}
 \setmonofont{Hack}
 
+% bib stuff
+\setbeamertemplate{bibliography item}{[\theenumiv]}
 
 
 % Define colors
@@ -118,8 +120,9 @@
 			\begin{enumerate}
 				\item Framing
 				\item Stochastic SIR Model
-				\item Hamiltonian HMCMC
+				\item Hamiltonian HMC
 				\item Iterated Filtering 2
+				\item Fitting Results
 				\item Forecasting Frameworks
 				\item S-maps \& Seasonal Outbreaks
 				\item Spatiotemporal Epidemics
@@ -156,9 +159,7 @@
 \begin{frame}
 
 	\null
-	\vfill
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{images/wordcloud}
-	\vfill
 
 \end{frame}
 
@@ -200,7 +201,7 @@
 		\dfrac{dR}{dt} 	& =  \gamma I
 	\end{align*}
 	\vspace{0.5\baselineskip}
-	$+$	\\
+	{\Large $+$}	\\
 	\vspace{1\baselineskip}
 	$\beta_{t+1} = \exp \left[ \beta_t + \eta \left( \bar{\beta} - \beta_t \right) + \mathcal{N}(0, \sigma_{\small\text{proc}}) \right]$
 
@@ -211,14 +212,20 @@
 \begin{frame}
 
 	\null
-	\vfill
+	\large
+	Model simulations \\
+	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC1/images/sirmean}
-	\vfill
+	
+	\vspace{0.5\baselineskip}
+	\tiny
+	\centering
+	Solid -- sample trajectory $\quad\cdot\quad$ dots -- sample data $\quad\cdot\quad$ dotted -- average $\quad\cdot\quad$ ribbon -- overall
 
 \end{frame}
 
 
-%% 3. HMCMC
+%% 3. HMC
 %% --------------------------------------------------------------------------------------
 %% --------------------------------------------------------------------------------------
 
@@ -238,21 +245,22 @@
 
 \end{frame}
 
+
 \setbeamercolor{normal text}{fg=Grey, bg=white}
 \usebeamercolor[fg]{normal text}
 \begin{frame}
 
 	\begin{columns}
-		\begin{column}{0.5\textwidth}
+		\begin{column}[t]{0.5\textwidth}
 
 			\large
 			MCMC
-			\vspace{\baselineskip}
+			\vspace{1.5\baselineskip}
 
 			\normalsize
 			Iteratively construct Markov chain to approximate posterior
 
-			\vspace{\baselineskip}
+			\vspace{0.5\baselineskip}
 
 			\footnotesize
 			\begin{enumerate}
@@ -265,57 +273,33 @@
 					\item Accept/reject sample
 				\end{enumerate}
 			\end{enumerate}
+
 			
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\begin{column}[t]{0.5\textwidth}
 
-			\tiny
-			\begin{algorithm}[H]
+			\large
+			HMC
+			\vspace{1.5\baselineskip}
 
-		        \BlankLine
+			\normalsize
+			Proposal via Hamiltonian dynamics
 
-		        \SetKwInOut{Input}{Input}
-		        \SetKwInOut{Output}{Output}
-		        \DontPrintSemicolon
+			\vspace{1.5\baselineskip}
 
-		        \tcc{Select a starting point}
-		        \Input{Initialize $\theta^{(1)}$}
+			\footnotesize
+			\begin{enumerate}
+				\item Choose starting parameter set
+				\item Generate N samples by
+				\begin{enumerate}
+					\footnotesize
+					\item Resample moments
+					\item Simulate Hamiltonian dynamics using Leapfrog integration
+					\item Compute acceptance ratio
+					\item Accept/reject sample
+				\end{enumerate}
+			\end{enumerate}
 
-		        \BlankLine
-
-		        \For{$i = 2:N$}{
-
-		            \BlankLine
-
-		            \tcc{Sample}
-		            $\theta^* \sim q(\cdot|\theta^{(i-1)})$ \;
-		            $u \sim \mathcal{U}(0,1)$
-
-		            \BlankLine
-
-		            \tcc{Evaluate acceptance ratio}
-		            $r$ $\gets$ $\frac{\mathcal{L}(\theta^*)p(\theta^*)}{\mathcal{L}(\theta)p(\theta)}$
-
-		            \BlankLine
-
-		            \tcc{Step acceptance criterion}
-		            \eIf{ $u < \min\left\{ 1 , r \right\}$ }{ 
-		                $\theta^{(i)} = \theta^*$\;
-		            }{
-		                $\theta^{(i)} = \theta^{(i-1)}$\;
-		            }
-		        }
-
-		        \BlankLine
-
-		        \tcc{Samples from approximated posterior distribution}
-		        \Output{Chain of samples $(\theta^{(1)},\theta^{(2)},...,\theta^{(N)})$}
-
-		        \BlankLine
-
-		        %\caption{Metropolis MCMC \label{mhmcmc}}
-
-		    \end{algorithm}
 
 		\end{column}
 	\end{columns}
@@ -339,122 +323,12 @@
 		& \quad\quad \text{Kinetic} 	& K(r) 					& = \frac{1}{2} r^T M^{-1} r \\
 		& \quad\quad \text{Potential} 	& U(\theta) 			& = - \log(\mathcal{L}(\theta)p(\theta)) \\
 		& & & \\
-		& & & \\
 		& \text{Hamiltonian} 			& H(\theta,r)  			& = U(\theta) + K(r) \\
-		& & & \\
 		& & & \\
 		& \text{Dynamics simulation}	& \frac{d\theta}{dt} 	& = M^{-1} r \\
 		& 								& \frac{dr}{dt}			& = - \nabla U (\theta) \\
 	\end{align*}
 
-	\vfill
-
-\end{frame}
-
-\setbeamercolor{normal text}{fg=Grey, bg=white}
-\usebeamercolor[fg]{normal text}
-\begin{frame}
-
-	\begin{columns}
-		\begin{column}{0.6\textwidth}
-
-			\large
-			HMCMC algorithm
-			\vspace{\baselineskip}
-
-			\footnotesize
-			\begin{enumerate}
-				\item Choose starting parameter set
-				\item Generate N samples by
-				\begin{enumerate}
-					\footnotesize
-					\item Resampling moments
-					\item Simulate Hamiltonian dynamics using Leapfrog integration
-					\item Compute acceptance ratio
-					\item Accept/reject sample
-				\end{enumerate}
-			\end{enumerate}
-			
-		\end{column}
-		\begin{column}{0.4\textwidth}
-
-			\tiny
-			\begin{algorithm}[H]
-
-		        \SetKwInOut{Input}{Input}
-		        \SetKwInOut{Output}{Output}
-		        \DontPrintSemicolon
-
-		        \tcc{Select a starting point}
-		        \Input{Initialize $\theta^{(1)}$}
-
-		        \For{$i = 2:N$}{
-
-		            \tcc{Resample moments}
-		            \For{$i = 1:n$}{
-		                r(i) $\gets$ $\mathcal{N}(0,1)$
-		            }
-
-		            \tcc{Leapfrog initialization}
-		            $\theta_0$ $\gets$ $\theta^{(i-1)}$ \;
-		            $r_0$ $\gets$ $r - \nabla U(\theta_0) \cdot \varepsilon / 2$
-
-		            \tcc{Leapfrog intermediate steps}
-		            \For{$j = 1:L-1$}{
-		                $\theta_j$ $\gets$ $\theta_{j-1} + M^{-1} r_{j-1} \cdot \varepsilon$ \;
-		                $r_j$ $\gets$ $r_{j-1} - \nabla U(\theta_j) \cdot \varepsilon$
-		            }
-
-		            \tcc{Leapfrog last steps}
-		            $\theta^*$ $\gets$ $\theta_{L-1} + M^{-1} r_{L-1} \cdot \varepsilon$ \;
-		            $r^*$ $\gets$ $\nabla U(\theta_L) \cdot \varepsilon / 2 - r_{L-1}$
-
-		            \tcc{Evaluate acceptance ratio}
-		            $r = \exp \left[ H(\theta^{(i-1)},r) - H(\theta^*,r^*) \right]$
-
-		            \tcc{Sample}
-		            $u \sim \mathcal{U}(0,1)$
-
-		            \tcc{Step acceptance criterion}
-		            \eIf{ $u < \min\left\{ 1 , r \right\}$ }{ 
-		                $\theta^{(i)} = \theta^*$\;
-		            }{
-		                $\theta^{(i)} = \theta^{(i-1)}$\;
-		            }
-		        }
-
-		        \tcc{Samples from approximated posterior distribution}
-		        \Output{Chain of samples $(\theta^{(1)},\theta^{(2)},...,\theta^{(N)})$}
-
-		    \end{algorithm}
-
-		\end{column}
-	\end{columns}
-
-\end{frame}
-
-\setbeamercolor{normal text}{fg=Grey, bg=white}
-\usebeamercolor[fg]{normal text}
-\begin{frame}
-
-	\null
-	\vfill
-	HMCMC state reconstruction sample \\
-	\vspace{\baselineskip}
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC1/images/hmcboot}
-	\vfill
-
-\end{frame}
-
-\setbeamercolor{normal text}{fg=Grey, bg=white}
-\usebeamercolor[fg]{normal text}
-\begin{frame}
-
-	\null
-	\vfill
-	HMCMC parameter estimation kernels sample \\
-	\vspace{\baselineskip}
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC1/images/hmckernels}
 	\vfill
 
 \end{frame}
@@ -465,7 +339,7 @@
 %% --------------------------------------------------------------------------------------
 
 % Section title
-\setbeamercolor{normal text}{fg=white, bg=Red}
+\setbeamercolor{normal text}{fg=white, bg=LBlue}
 \usebeamercolor[fg]{normal text}
 \begin{frame}
 
@@ -484,14 +358,16 @@
 \usebeamercolor[fg]{normal text}
 \begin{frame}
 
+	\null
+	\hspace{-0.475cm}
+	\large
+	Basic particle filter
+	\vspace{\baselineskip}
+
 	\begin{columns}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.45\textwidth}
 
-			\large
-			Basic Particle Filter
-			\vspace{\baselineskip}
 			\footnotesize
-
 			Iterative prediction-update cycle prunes particle cohort of poor parameter estimates
 
 			\begin{enumerate}
@@ -507,69 +383,80 @@
 			
 			
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.55\textwidth}
 
-			\tiny
-			\begin{algorithm}[H]
-
-		        \BlankLine
-
-		        \SetKwInOut{Input}{Input}
-		        \SetKwInOut{Output}{Output}
-		        \DontPrintSemicolon
-
-		        \tcc{Select a starting point}
-		        \Input{Observations $D = y_1, y_2, ..., y_T$, initial particle distribution $P_0$ of size $J$}
-
-		        \BlankLine
-
-		        \tcc{Setup}
-		        Initialize particle cohort by sampling $(p^{(1)}, p^{(2)}, ..., p^{(J)})$ from $P_0$
-
-		        \BlankLine
-
-		        \For{$t = 1:T$}{
-
-		            \BlankLine
-
-		            \tcc{Evolve}
-		            \For{j = 1:J}{
-		            	$X_t^{(j)} \gets f_1 (X_{t-1}^{(j)}, \theta^{(j)})$
-		            }
-
-		            \BlankLine
-
-		            \tcc{Weight}
-		            \For{j = 1:J}{
-		            	$w^{(j)} \gets P(y_t | X_t^{(j)}, \theta^{(j)}) = f_2 (X_t^{(j)}, \theta^{(j)})$
-		            }
-
-		            \BlankLine
-
-		            \tcc{Normalize}
-		            \For{j = 1:J}{
-		            	$w^{(j)} \gets w^{(j)} / \sum_{1}^{J} w^{(j)}$
-		            }
-
-		            \BlankLine
-
-		            \tcc{Resample}
-		            $p^{(1:J)} \gets \text{sample}(p^{(1:J)}, \text{prob} = w, \text{replace} = true)$
-		        }
-
-		        \BlankLine
-
-		        \tcc{Samples from approximated posterior distribution}
-		        \Output{Cohort of posterior samples $(\theta^{(1)},\theta^{(2)},...,\theta^{(J)})$}
-
-		        \BlankLine
-
-		        %\caption{SIR particle filter \label{pfsir}}
-
-		    \end{algorithm}
+			\includegraphics[width=\textwidth,height=0.9\textheight,keepaspectratio=true]{images/PF-diagram}
 
 		\end{column}
 	\end{columns}
+
+	\centering
+	\tiny
+	Image source \cite{Doucet2001}
+
+\end{frame}
+
+\setbeamercolor{normal text}{fg=Grey, bg=white}
+\usebeamercolor[fg]{normal text}
+\begin{frame}
+
+	\null
+	\hspace{-0.475cm}
+	\large
+	Iterated Filtering 2 (IF2)
+	\vspace{0.5\baselineskip}
+
+	\begin{columns}
+		\begin{column}[t]{0.5\textwidth}
+
+			\footnotesize
+			Evolution of MIF (IF1) \\
+			\vspace{\baselineskip}
+			Multiple passes through data \\
+			\vspace{\baselineskip}
+			Treat parameter estimates as stochastic processes
+			\begin{itemize}
+				\footnotesize
+				\item Alleviates risk of particle collapse
+				\item Process noise decreases with passes
+			\end{itemize}
+
+			
+		\end{column}
+		\begin{column}[t]{0.5\textwidth}
+
+			\includegraphics[width=\textwidth,height=0.7\textheight,keepaspectratio=true]{images/IF2-diagram}
+
+		\end{column}
+	\end{columns}
+
+	\null
+	\vspace{0.25\baselineskip}
+	\centering
+	\tiny
+	Image source \cite{Doucet2001}
+
+\end{frame}
+
+
+%% 5. Fitting results
+%%------------------------------------------
+%%------------------------------------------
+
+
+% Section title
+\setbeamercolor{normal text}{fg=white, bg=Red}
+\usebeamercolor[fg]{normal text}
+\begin{frame}
+
+	\vspace{2cm}
+	\hspace{0.5cm} {\Huge Fitting Results }
+	\begin{tikzpicture}[overlay]
+	    \node[at=(current page.center), shift={(-4.5 cm, -4.7 cm)}, opacity=0.25] {
+	    	\fontsize{200pt}{0pt}\selectfont
+	        \color{white}{5}
+	    };
+	\end{tikzpicture}
 
 \end{frame}
 
@@ -578,124 +465,129 @@
 \begin{frame}
 
 	\begin{columns}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.00001\textwidth}
+		\null
+		\end{column}
 
+		\begin{column}{0.25\textwidth}
+
+			\null
 			\large
-			Iterated Filtering 2
-			\vspace{2\baselineskip}
+			IF2 \\
+			\vspace{0.5\baselineskip}
 			\footnotesize
-
-			Treat parameter estimates as stochastic processes \\
-			\vspace{\baselineskip}
-			Multiple passes through data (a la Data cloning)
-			
+			state estimates
 			
 		\end{column}
-		\begin{column}{0.5\textwidth}
+		\begin{column}{0.65\textwidth}
 
-			\tiny
-			\begin{algorithm}[H]
-
-		        \SetKwInOut{Input}{Input}
-		        \SetKwInOut{Output}{Output}
-		        \DontPrintSemicolon
-
-		        \tcc{Setup}
-		        Initialize particle cohort by sampling $(p^{(1)}, p^{(2)}, ..., p^{(J)})$ from $P_0$
-
-		        \tcc{Particle seeding distribution}
-		        $\Theta \gets P_0$
-
-		        \For{$m = 1:M$}{
-
-		        	\tcc{Pass perturbation}
-		            \For{j = 1:J}{
-		            	$p^{(j)} \sim h(\Theta^{(j)}, \sigma_m)$
-		            }
-
-			        \For{$t = 1:T$}{
-			        	
-				        \For{j = 1:J}{
-				        	\tcc{Iteration perturbation}
-			            	$p^{(j)} \sim h(p^{(j)}, \sigma_m)$
-
-			            	\tcc{Evolve}
-			            	$X_t^{(j)} \gets f_1 (X_{t-1}^{(j)}, \theta^{(j)})$
-
-			            	\tcc{Weight}
-			            	$w^{(j)} \gets P(y_t | X_t^{(j)}, \theta^{(j)}) = f_2 (X_t^{(j)}, \theta^{(j)})$
-
-			            }
-
-			            \tcc{Normalize}
-			            \For{j = 1:J}{
-			            	$w^{(j)} \gets w^{(j)} / \sum_{1}^{J} w^{(j)}$
-			            }
-
-			            \tcc{Resample}
-			            $p^{(1:J)} \gets \text{sample}(p^{(1:J)}, \text{prob} = w, \text{replace} = true)$
-
-			        }
-
-			        \tcc{Collect particles for next pass}
-			        \For{$j = 1:J$}{
-			        	$\Theta^{(j)} \gets p^{(j)}$
-			        }
-
-			    }
-
-		        \tcc{Samples from approximated posterior distribution}
-		        \Output{Cohort of posterior samples $(\theta^{(1)},\theta^{(2)},...,\theta^{(J)})$}
-
-		    \end{algorithm}
+			\includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio=true]{../../writing/SC1/images/if2state}
 
 		\end{column}
 	\end{columns}
 
+	\textcolor{Grey50}{\rule{\textwidth}{0.4pt}} \\
+
+	\begin{columns}
+		\begin{column}{0.00001\textwidth}
+		\null
+		\end{column}
+
+		\begin{column}{0.25\textwidth}
+
+			\null
+			\large
+			HMC \\
+			\vspace{0.5\baselineskip}
+			\footnotesize
+			state estimates
+			
+		\end{column}
+		\begin{column}{0.65\textwidth}
+
+			\includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio=true]{../../writing/SC1/images/hmcboot}
+
+		\end{column}
+	\end{columns}
+
+	\vspace{0.5\baselineskip}
+	\tiny
+	\centering
+	Dashed -- estimates $\quad\cdot\quad$ solid -- true $\quad\cdot\quad$ dots -- data $\quad\cdot\quad$ ribbon -- trajectories
+
 \end{frame}
+
+
+\setbeamercolor{normal text}{fg=Grey, bg=white}
+\usebeamercolor[fg]{normal text}
+\begin{frame}
+
+	\begin{columns}
+		\begin{column}{0.00001\textwidth}
+		\null
+		\end{column}
+
+		\begin{column}{0.25\textwidth}
+
+			\null
+			\large
+			IF2 \\
+			\vspace{0.5\baselineskip}
+			\footnotesize
+			final particle swarm samples
+			
+		\end{column}
+		\begin{column}{0.65\textwidth}
+
+			\includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio=true]{../../writing/SC1/images/if2kernels}
+
+		\end{column}
+	\end{columns}
+	
+	\textcolor{Grey50}{\rule{\textwidth}{0.4pt}} \\
+
+	\begin{columns}
+		\begin{column}{0.00001\textwidth}
+		\null
+		\end{column}
+
+		\begin{column}{0.25\textwidth}
+
+			\null
+			\large
+			HMC \\
+			\vspace{0.5\baselineskip}
+			\footnotesize
+			posterior distribution estimates \\
+			
+		\end{column}
+		\begin{column}{0.65\textwidth}
+
+			\includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio=true]{../../writing/SC1/images/hmckernels}
+
+		\end{column}
+	\end{columns}
+
+	\tiny
+	\vspace{0.5\baselineskip}
+	\centering
+	Dashed -- medians $\quad\cdot\quad$ solid -- true
+
+\end{frame}
+
 
 \setbeamercolor{normal text}{fg=Grey, bg=white}
 \usebeamercolor[fg]{normal text}
 \begin{frame}
 
 	\null
-	\vfill
-	IF2 state reconstruction sample \\
-	\vspace{\baselineskip}
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC1/images/if2state}
-	\vfill
-
-\end{frame}
-
-\setbeamercolor{normal text}{fg=Grey, bg=white}
-\usebeamercolor[fg]{normal text}
-\begin{frame}
-
-	\null
-	\vfill
-	IF2 parameter estimation kernels sample \\
-	\vspace{\baselineskip}
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC1/images/if2kernels}
-	\vfill
-
-\end{frame}
-
-
-%%------------------------------------------
-%%------------------------------------------
-
-\setbeamercolor{normal text}{fg=Grey, bg=white}
-\usebeamercolor[fg]{normal text}
-\begin{frame}
-
-	\null
-	\vfill
-	Mean parameter estimation distributions \\
+	\large
+	Mean parameter estimate distributions \\
 	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC1/images/combined-multi} \\
 	\centering
-	\textbf{IF2 \quad \textcolor{Grey50}{HMCMC}}
-	\vfill
+	\normalsize
+	\textbf{IF2 \quad $\cdot$ \quad \textcolor{Grey50}{HMC}}
 
 \end{frame}
 
@@ -704,11 +596,16 @@
 \begin{frame}
 
 	\null
-	\vfill
+	\large
 	Running times \\
 	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC1/images/timeplot}
-	\vfill
+
+	\centering
+	\vspace{0.5\baselineskip}
+	\footnotesize
+	IF2: 5.7x faster than HMC
+
 
 \end{frame}
 
@@ -731,7 +628,7 @@
 	\begin{tikzpicture}[overlay]
 	    \node[at=(current page.center), shift={(-4 cm, -4.3 cm)}, opacity=0.25] {
 	    	\fontsize{200pt}{0pt}\selectfont
-	        \color{white}{5}
+	        \color{white}{6}
 	    };
 	\end{tikzpicture}
 
@@ -742,83 +639,46 @@
 \begin{frame}
 
 	\begin{columns}
-		\begin{column}{0.65\textwidth}
 
+		\begin{column}[t]{0.55\textwidth}
+
+			\null
 			\large
-			IF2 $+$ \\
-			Parametric bootstrapping $+$ \\
-			Forward simulation
+			IF2 \\
 			\vspace{\baselineskip}
-			\footnotesize
 
+			\normalsize
+			Parametric bootstrapping \\
+			$+$ forward simulation
+			\vspace{\baselineskip}
+			
+			\footnotesize
 			\begin{itemize}
 				\item Provides additional samples from posterior distribution
 				\item Forward simulation using states point estimate, posterior samples
 			\end{itemize}
 			
-			
 		\end{column}
-		\begin{column}{0.35\textwidth}
+		\begin{column}[t]{0.45\textwidth}
 
-			\tiny
-			\begin{algorithm}[H]
-
-		        \BlankLine
-
-		        \SetKwInOut{Input}{Input}
-		        \SetKwInOut{Output}{Output}
-		        \DontPrintSemicolon
-
-		        \Input{Forward simulator $S(\theta)$, data set D}
-
-		        \BlankLine
-
-		        \tcc{Initial fit}
-		        $\theta^* \gets IF2(D)$
-
-		        \BlankLine
-
-		        \tcc{Generate artificial data sets}
-		        \For{$i = 1:M$}{
-			        $D_i \gets S(\theta^*)$
-		        }
-
-		        \BlankLine
-
-		        \tcc{Fit to new data sets}
-		        \For{$i = 1:M$}{
-			        $\theta_i \gets IF2(D_i)$
-		        }
-
-		        \tcc{Simulate forward to produce forecasts}
-		        \For{$i = 1:M$}{
-			        $F_i \gets S(D, \theta_i)$
-		        }
-
-		        \BlankLine
-
-		        \Output{Forecast trajectories $F_1, F_2, ..., F_M$}
-
-		        %\caption{Parametric Bootstrap \label{paraboot}}
-
-		    \end{algorithm}
+			\null
+			\large
+			HMC \\
+			\vspace{\baselineskip}
+			\normalsize
+			State reconstructions \\
+			$+$ forward simulation
+			\vspace{\baselineskip}
+			
+			\footnotesize
+			\begin{itemize}
+				\item Reconstruct states using latent process noise samples
+				\item Simulate forward
+			\end{itemize}
 
 		\end{column}
 	\end{columns}
-
-\end{frame}
-
-\setbeamercolor{normal text}{fg=Grey, bg=white}
-\usebeamercolor[fg]{normal text}
-\begin{frame}
-
-	\null
-	\vfill
-	IF2 parametric bootstrapping forecast \\
-	\vspace{\baselineskip}
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC2/images/if2combined}
-	\vfill
-
+	
 \end{frame}
 
 \setbeamercolor{normal text}{fg=Grey, bg=white}
@@ -826,86 +686,68 @@
 \begin{frame}
 
 	\begin{columns}
-		\begin{column}{0.6\textwidth}
+		\begin{column}{0.00001\textwidth}
+		\null
+		\end{column}
 
+		\begin{column}{0.25\textwidth}
+
+			\null
 			\large
-			HMCMC $+$ \\
-			State reconstructions $+$ \\
-			\vspace{0.35\baselineskip}
-			Forward simulation
-			\vspace{\baselineskip}
+			IF2 \\
+			\vspace{0.5\baselineskip}
 			\footnotesize
-
-			\begin{itemize}
-				\item Reconstruct states using latent process noise samples
-				\item Simulate forward
-			\end{itemize}
+			forecast
 			
 		\end{column}
-		\begin{column}{0.4\textwidth}
+		\begin{column}{0.65\textwidth}
 
-			\tiny
-			\begin{algorithm}[H]
+			\includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio=true]{../../writing/SC2/images/if2combined}
 
-		        \BlankLine
+		\end{column}
+	\end{columns}
+	
+	\textcolor{Grey50}{\rule{\textwidth}{0.4pt}} \\
 
-		        \SetKwInOut{Input}{Input}
-		        \SetKwInOut{Output}{Output}
-		        \DontPrintSemicolon
+	\begin{columns}
+		\begin{column}{0.00001\textwidth}
+		\null
+		\end{column}
 
-		        \tcc{Sample from the posterior}
-		        \Input{Posterior samples $\theta_1, \theta_2, ..., \theta_M$}
+		\begin{column}{0.25\textwidth}
 
-		        \BlankLine\
+			\null
+			\large
+			HMC \\
+			\vspace{0.5\baselineskip}
+			\footnotesize
+			forecast
+			
+		\end{column}
+		\begin{column}{0.65\textwidth}
 
-		        \tcc{Reconstruct state estimates}
-		        \For{$i = 1:M$}{
-			        $D_i \gets S(\theta_i)$
-		        }
-
-		        \BlankLine
-
-		        \tcc{Simulate forward to produce forecasts}
-		        \For{$i = 1:M$}{
-			        $F_i \gets S(D_i, \theta_i)$
-		        }
-
-		        \BlankLine
-
-		        \Output{Forecast trajectories $F_1, F_2, ..., F_M$}
-
-		        %\caption{Parametric Bootstrap \label{paraboot}}
-
-		    \end{algorithm}
+			\includegraphics[width=\textwidth,height=0.45\textheight,keepaspectratio=true]{../../writing/SC2/images/hmcforecast}
 
 		\end{column}
 	\end{columns}
 
+	\vspace{0.5\baselineskip}
+	\tiny
+	\centering
+	Dotted/dashed -- mean $\quad\cdot\quad$ Dark ribbon - state $\quad\cdot\quad$ Light ribbon - observation
+
 \end{frame}
+
 
 \setbeamercolor{normal text}{fg=Grey, bg=white}
 \usebeamercolor[fg]{normal text}
 \begin{frame}
 
 	\null
-	\vfill
-	HMCMC parametric bootstrapping forecast \\
-	\vspace{\baselineskip}
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC2/images/hmcforecast}
-	\vfill
-
-\end{frame}
-
-\setbeamercolor{normal text}{fg=Grey, bg=white}
-\usebeamercolor[fg]{normal text}
-\begin{frame}
-
-	\null
-	\vfill
+	\large
 	Forecast accuracy comparison \\
 	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SC2/images/truncation}
-	\vfill
 
 \end{frame}
 
@@ -921,12 +763,11 @@
 
 	\vspace{2cm}
 	\hspace{-0.5cm} {\Huge S-maps \& } \\
-	%\vspace{0.05cm}
 	\hspace{-0.5cm} {\Huge Seasonal Outbreaks }
 	\begin{tikzpicture}[overlay]
 	    \node[at=(current page.center), shift={(-4.7 cm, -4.3 cm)}, opacity=0.25] {
 	    	\fontsize{200pt}{0pt}\selectfont
-	        \color{white}{6}
+	        \color{white}{7}
 	    };
 	\end{tikzpicture}
 
@@ -944,14 +785,18 @@
 
 	\centering
 	\begin{align*}
-		\dfrac{dS}{dt} 	& = - \beta S I + \textcolor{Teal}{\alpha R}\\
-		\dfrac{dI}{dt} 	& = \beta S I - \gamma I \\
+		\dfrac{dS}{dt} 	& = - \Gamma(t) \beta S I + \textcolor{Teal}{\alpha R}\\
+		\dfrac{dI}{dt} 	& = \Gamma(t) \beta S I - \gamma I \\
 		\dfrac{dR}{dt} 	& =  \gamma I - \textcolor{Teal}{\alpha R}
 	\end{align*}
 	\vspace{0.5\baselineskip}
-	$+$	\\
-	\vspace{1\baselineskip}
-	$\beta_{t+1} = \exp \left[ \beta_t + \eta \left( \bar{\beta} - \beta_t \right) + \mathcal{N}(0, \sigma_{\small\text{proc}}) \right]$
+	{\Large $+$}	\\
+	\vspace{-0.5\baselineskip}
+	\begin{align*}
+		\Gamma (t) & = \exp \left[ 2 \left( \cos \left( \frac{2\pi}{365} t \right) \right) \right] \\
+		& \\
+		\beta_{t+1} & = \exp \left[ \beta_t + \eta \left( \bar{\beta} - \beta_t \right) + \mathcal{N}(0, \sigma_{\small\text{proc}}) \right]
+	\end{align*}
 
 \end{frame}
 
@@ -960,86 +805,10 @@
 \begin{frame}
 
 	\null
-	\vfill
+	\large
+	SIRS model simulation \\
+	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SIRS-SMAP/images/dataplot}
-	\vfill
-
-\end{frame}
-
-\setbeamercolor{normal text}{fg=Grey, bg=white}
-\usebeamercolor[fg]{normal text}
-\begin{frame}
-
-	\begin{columns}
-		\begin{column}{0.6\textwidth}
-
-			\large
-			S-map
-			\vspace{\baselineskip}
-			\footnotesize
-
-			\begin{itemize}
-				\item Construct global mapping of time-lagged vectors (the library) to future states
-				\item Weightings are used to penalize poorly matching library vectors
-			\end{itemize}
-			
-		\end{column}
-		\begin{column}{0.4\textwidth}
-
-			\tiny
-			\begin{algorithm}[H]
-
-		        \BlankLine
-
-		        \SetKwInOut{Input}{Input}
-		        \SetKwInOut{Output}{Output}
-		        \DontPrintSemicolon
-
-		        \tcc{Select a starting point}
-		        \Input{Time series $x_1, x_2, ..., x_T$, embedding dimension $E$, distance penalization $\theta$, forecast length $L$, predictor vector $\mathbf{x_t}$}
-
-		        \BlankLine
-
-		        \tcc{Construct library $\{{\mathbf{x_i}}\}$}
-		        \For{$i = E:T$}{
-		        	$\mathbf{x_i} = (x_i, x_{i-1}, ...,x_{i-E-1})$
-		        }
-
-		        \BlankLine
-
-		        \tcc{Construct mapping from library vectors to predictions}
-		        \For{$i = 1:(T_E+1)$}{
-		        	\For{$j = 1:E$}{
-			        	$A(i,j) = w(||\mathbf{x_i} - \mathbf{x_t}||) \mathbf{x_i}(j)$
-			        }
-		        }
-		        \For{$i = 1:(T_E+1)$}{
-			        $b(i) = w(||\mathbf{x_i} - \mathbf{x_t}||) y_i$
-		        }
-
-		        \BlankLine
-
-		        \tcc{Use SVD to solve the mapping system, Ac = b}
-		        $SVD(Ac = b)$
-
-		        \BlankLine
-
-		        \tcc{Compute forecast}
-		        $\hat{y_t} = \sum_{j = 0}^{E} c_t (j) \mathbf{x_t} (j)$
-
-		        \BlankLine
-
-		        \tcc{Forecasted value in time series}
-		        \Output{Forecast $\hat{y_t}$}
-
-		        \BlankLine
-
-		        %\caption{S-map \label{smap}}
-
-		    \end{algorithm}
-
-		\end{column}
-	\end{columns}
 
 \end{frame}
 
@@ -1048,11 +817,29 @@
 \begin{frame}
 
 	\null
-	\vfill
+	\large
+	S-map
+	\vspace{\baselineskip}
+	\footnotesize
+
+	A little bit of history repeating
+
+	\begin{itemize}
+		\item Construct global weighted mapping of time-lagged vectors (the library) to future states
+		\item Weightings are used to penalize poorly matching library vectors
+	\end{itemize}
+
+\end{frame}
+
+\setbeamercolor{normal text}{fg=Grey, bg=white}
+\usebeamercolor[fg]{normal text}
+\begin{frame}
+
+	\null
+	\large
 	S-map forecast \\
 	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SIRS-SMAP/images/smap-project}
-	\vfill
 
 \end{frame}
 
@@ -1061,11 +848,10 @@
 \begin{frame}
 
 	\null
-	\vfill
+	\large
 	SIRS model forecasting error \\
 	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SIRS-SMAP/images/sseplot}
-	\vfill
 
 \end{frame}
 
@@ -1074,15 +860,16 @@
 \begin{frame}
 
 	\null
-	\vfill
+	\large
 	SIRS model forecasting runtimes \\
 	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SIRS-SMAP/images/timeplot}
 	\vfill
 
 	\centering
+	\vspace{0.5\baselineskip}
 	\footnotesize
-	S-map: 316,000x faster than IF2, 61,800x faster than HMCMC
+	S-map: 316,000x faster than IF2, 61,800x faster than HMC
 
 \end{frame}
 
@@ -1103,7 +890,7 @@
 	\begin{tikzpicture}[overlay]
 	    \node[at=(current page.center), shift={(-2 cm, -4.2 cm)}, opacity=0.25] {
 	    	\fontsize{200pt}{0pt}\selectfont
-	        \color{white}{7}
+	        \color{white}{8}
 	    };
 	\end{tikzpicture}
 
@@ -1124,7 +911,7 @@
 		\dfrac{dR_i}{dt} 	& = \gamma I_i
 	\end{align*}
 	\vspace{\baselineskip}
-	$+$ \\
+	{\Large $+$} \\
 	$\beta_{i,t+1} = \exp \left[ \beta_{i,t} + \eta \left( \bar{\beta} - \beta_{i,t} \right) + \mathcal{N}(0, \sigma_{\small\text{proc}}) \right]$
 
 \end{frame}
@@ -1161,11 +948,10 @@
 \begin{frame}
 
 	\null
-	\vfill
-	Stochastic SIR model forecasting error \\
+	\large
+	Spatial SIR model forecasting error \\
 	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SPATIAL/images/sseplot}
-	\vfill
 
 \end{frame}
 
@@ -1174,11 +960,15 @@
 \begin{frame}
 
 	\null
+	\large
 	Spatial SIR model forecasting runtimes \\
-
-	\vfill
+	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SPATIAL/images/timeplot}
-	\vfill
+
+	\centering
+	\vspace{0.5\baselineskip}
+	\footnotesize
+	S-map: 116x faster than IF2, 156x faster than HMC
 
 \end{frame}
 
@@ -1198,7 +988,7 @@
 	\begin{tikzpicture}[overlay]
 	    \node[at=(current page.center), shift={(-4.7 cm, -4.3 cm)}, opacity=0.25] {
 	    	\fontsize{200pt}{0pt}\selectfont
-	        \color{white}{8}
+	        \color{white}{9}
 	    };
 	\end{tikzpicture}
 
@@ -1245,26 +1035,47 @@
 \begin{frame}
 
 	\null
-	Spatial SIR model fitting times
-
-	\vfill
+	\large
+	Spatial SIR model fitting times \\
+	\vspace{\baselineskip}
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{../../writing/SPATIAL/images/timeplot2}
-	\vfill
 
 	\centering
+	\vspace{0.5\baselineskip}
 	\footnotesize
-	\texttt{cuIF2}: 9.33x faster than IF2, 617x faster than HMCMC
+	\texttt{cuIF2}: 9.33x faster than IF2, 617x faster than HMC
 
 \end{frame}
+
+
+\setbeamercolor{normal text}{fg=white, bg=Grey}
+\usebeamercolor[fg]{normal text}
+\begin{frame}
+	
+	\null
+	\vspace{\baselineskip}
+	\centering
+	\huge
+	Questions
+
+\end{frame}
+
+\setbeamercolor{normal text}{fg=Grey, bg=white}
+\setbeamercolor{bibliography item}{parent=normal text}
+\usebeamercolor[fg]{normal text}
+\begin{frame}
+	\nocite{*}
+	\bibliographystyle{abbrv}
+	\bibliography{defence-refs}
+\end{frame}
+
 
 \setbeamercolor{normal text}{fg=Grey, bg=white}
 \usebeamercolor[fg]{normal text}
 \begin{frame}
 
 	\null
-	\vfill
 	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{images/thesis_defense}
-	\vfill
 
 \end{frame}
 
