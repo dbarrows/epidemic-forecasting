@@ -45,6 +45,18 @@
 % bib stuff
 \setbeamertemplate{bibliography item}{[\theenumiv]}
 
+% full frame picture
+\newcommand{\fullframepicture}[1]{
+%\mode
+{
+\usebackgroundtemplate{\includegraphics[width=\paperwidth]{#1}}
+\begin{frame}[plain]
+\end{frame}
+}
+\mode{\usebackgroundtemplate{}}
+%\mode*
+}
+
 
 % Define colors
 % -------------
@@ -156,10 +168,11 @@
 
 \setbeamercolor{normal text}{fg=Grey, bg=white}
 \usebeamercolor[fg]{normal text}
-\begin{frame}
+\hspace{-1.55cm}
+\begin{frame}[plain]
 
-	\null
-	\includegraphics[width=\textwidth,height=\textheight,keepaspectratio=true]{images/wordcloud}
+	\hspace{-2cm}
+	\includegraphics[width=\paperwidth,keepaspectratio=true]{images/wordcloud-6}
 
 \end{frame}
 
