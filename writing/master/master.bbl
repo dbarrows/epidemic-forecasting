@@ -48,7 +48,7 @@
       \field{sortinithash}{b685c7856330eaee22789815b49de9bb}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{annotation}{- Diarrhoea surveillance data were obtained for all individuals living in the Matlab study area from 1988 to 2001 - A health and demographic surveillance system (HDSS) has recorded all vital events of the area’s population since 1966 -- - SARIMA - Box-Jenkins modelling strategy (25) to conduct a time series analysis - AIC - We assessed the predictive power of forecasting ability of the method, using the root mean square error (RMSE) criterion}
+      \field{annotation}{- Diarrhoea surveillance data were obtained for all individuals living in the Matlab study area from 1988 to 2001 - A health and demographic surveillance system (HDSS) has recorded all vital events of the area's population since 1966 -- - SARIMA - Box-Jenkins modelling strategy (25) to conduct a time series analysis - AIC - We assessed the predictive power of forecasting ability of the method, using the root mean square error (RMSE) criterion}
       \field{journaltitle}{Journal of health, population, {\ldots}}
       \field{number}{1}
       \field{title}{{Time Series Analysis of Cholera in Matlab, Bangladesh, during 1988-2001}}
@@ -192,7 +192,7 @@
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
       \field{abstract}{Human influenza occurs annually in most temperate climatic zones of the world, with epidemics peaking in the cold winter months. Considerable debate surrounds the relative role of epidemic dynamics, viral evolution, and climatic drivers in driving year-to-year variability of outbreaks. The ultimate test of understanding is prediction; however, existing influenza models rarely forecast beyond a single year at best. Here, we use a simple epidemiological model to reveal multiannual predictability based on high-quality influenza surveillance data for Israel; the model fit is corroborated by simple metapopulation comparisons within Israel. Successful forecasts are driven by temperature, humidity, antigenic drift, and immunity loss. Essentially, influenza dynamics are a balance between large perturbations following significant antigenic jumps, interspersed with nonlinear epidemic dynamics tuned by climatic forcing.}
-      \field{annotation}{-Tel Aviv ILI data, from Maccabi Health Maintenance Organization (HMO), covers {\~{}}45{\%} of population -- -SIRS model -use of R{\_}eff -used Baysian Inference and monte carlo chain sampling for parameter fitting - {\&}quot;standard bayesian MCMC analysis and validation methods which is documented in the manual to the 'slicesample' function in Matlab{\&}quot;}
+      \field{annotation}{-Tel Aviv ILI data, from Maccabi Health Maintenance Organization (HMO), covers {\~{}}45{\%} of population -- -SIRS model -use of R{\_}eff -used Baysian Inference and monte carlo chain sampling for parameter fitting - "standard bayesian MCMC analysis and validation methods which is documented in the manual to the 'slicesample' function in Matlab"}
       \field{issn}{1091-6490}
       \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
       \field{month}{07}
@@ -227,9 +227,9 @@
       \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{1534-7796 (Electronic) 0033-3174 (Linking)}
+      \field{isbn}{1534-7796 (Electronic)0033-3174 (Linking)}
       \field{issn}{0033-3174}
-      \field{journaltitle}{J. Bio. Med.}
+      \field{journaltitle}{$\backslash$it J. Bio. Med.}
       \field{number}{3}
       \field{title}{{What You See May Not Be What You Get: A Brief, Nontechnical Introduction to Overfitting in Regression Type Models}}
       \field{volume}{66}
@@ -373,9 +373,9 @@
       \field{sortinithash}{59f25d509f3381b07695554a9f35ecb2}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Stan is a probabilistic programming language for specifying statistical models. A Stan program imperatively defines a log probability function over parameters conditioned on specified data and constants. As of version 2.2.0, Stan provides full Bayesian inference for continuous-variable models through Markov chain Monte Carlo methods such as the No-U-Turn sampler, an adaptive form of Hamiltonian Monte Carlo sampling. Penalized maximum likelihood estimates are calculated using optimization methods such as the Broydenˆ a˘SFletcherˆA¸ A¸ a˘SGoldfarbˆA¸ a˘SShanno algorithm. Stan is also a platform for computing log densities and their gradients and Hessians, which can be used in alternative algorithms such as variational Bayes, expectation propa- gation, and marginal inference using approximate integration. To this end, Stan is set up so that the densities, gradients, and Hessians, along with intermediate quantities of the algorithm such as acceptance probabilities, are easily accessible. Stan can be called from the command line, through R using the RStan package, or through < Python using the PyStan package. All three interfaces support sampling or optimization-based inference and analysis, and RStan and PyStan also provide access to log}
+      \field{abstract}{Stan is a probabilistic programming language for specifying statistical models. A Stan program imperatively defines a log probability function over parameters conditioned on specified data and constants. As of version 2.2.0, Stan provides full Bayesian inference for continuous-variable models through Markov chain Monte Carlo methods such as the No-U-Turn sampler, an adaptive form of Hamiltonian Monte Carlo sampling. Penalized maximum likelihood estimates are calculated using optimization methods such as the Broydenˆ a˘SFletcherˆA¸ A¸ a˘SGoldfarbˆA¸ a˘SShanno algorithm. Stan is also a platform for computing log densities and their gradients and Hessians, which can be used in alternative algorithms such as variational Bayes, expectation propa- gation, and marginal inference using approximate integration. To this end, Stan is set up so that the densities, gradients, and Hessians, along with intermediate quantities of the algorithm such as acceptance probabilities, are easily accessible. Stan can be called from the command line, through R using the RStan package, or through {<} Python using the PyStan package. All three interfaces support sampling or optimization-based inference and analysis, and RStan and PyStan also provide access to log}
       \field{journaltitle}{Journal of Statistical Software}
-      \field{title}{{Stan: A Probabilistic Programming Language}}
+      \field{title}{{Stan : A Probabilistic Programming Language}}
       \field{year}{2016}
       \verb{file}
       \verb :Users/dexter/Dropbox/McMaster/Papers/stan-resubmit-JSS1293.pdf:pdf
@@ -550,6 +550,56 @@
       \endverb
       \keyw{Adult,Child,Disease Outbreaks,Humans,Influenza,Human,Influenza,Human: epidemiology,Linear Models,Models,Biological,Population Surveillance,Search Engine,Search Engine: methods,Seasons,Weather}
     \endentry
+    \entry{Dushoff2004}{article}{}
+      \name{author}{4}{}{%
+        {{hash=c2a8e631a88f3202dac9537521758960}{%
+           family={Dushoff},
+           family_i={D\bibinitperiod},
+           given={Jonathan},
+           given_i={J\bibinitperiod}}}%
+        {{hash=c1f3525fb354c2dd4bee7d444fd3d64f}{%
+           family={Plotkin},
+           family_i={P\bibinitperiod},
+           given={Joshua\bibnamedelima B},
+           given_i={J\bibinitperiod\bibinitdelim B\bibinitperiod}}}%
+        {{hash=354a4e91cf88a7f4fb42b6ccb32ef98d}{%
+           family={Levin},
+           family_i={L\bibinitperiod},
+           given={Simon\bibnamedelima A},
+           given_i={S\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+        {{hash=41fa4758d98128a0e7f8bdf35d371705}{%
+           family={Earn},
+           family_i={E\bibinitperiod},
+           given={David\bibnamedelimb J\bibnamedelima D},
+           given_i={D\bibinitperiod\bibinitdelim J\bibinitperiod\bibinitdelim D\bibinitperiod}}}%
+      }
+      \strng{namehash}{87c888f809c2997b692a00dd9281edd8}
+      \strng{fullhash}{f295ed1877781a48a9d1637b33eb27eb}
+      \field{sortinit}{D}
+      \field{sortinithash}{78f7c4753a2004675f316a80bdb31742}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{abstract}{Influenza incidence exhibits strong seasonal fluctuations in temperate regions throughout the world, concentrating the mortality and morbidity burden of the disease into a few months each year. The cause of influenza's seasonality has remained elusive. Here we show that the large oscillations in incidence may be caused by undetectably small seasonal changes in the influenza transmission rate that are amplified by dynamical resonance.}
+      \field{isbn}{0027-8424}
+      \field{issn}{0027-8424}
+      \field{journaltitle}{Proceedings of the National Academy of Sciences of the United States of America}
+      \field{number}{48}
+      \field{title}{{Dynamical resonance can account for seasonality of influenza epidemics.}}
+      \field{volume}{101}
+      \field{year}{2004}
+      \field{pages}{16915\bibrangedash 16916}
+      \range{pages}{2}
+      \verb{doi}
+      \verb 10.1073/pnas.0407293101
+      \endverb
+      \verb{file}
+      \verb :Users/dexter/Dropbox/McMaster/Papers/PNAS-2004-Dushoff-16915-6.pdf:pdf
+      \endverb
+      \verb{url}
+      \verb http://www.pnas.org/content/101/48/16915.full
+      \endverb
+      \keyw{Disease Outbreaks,Human,Human: epidemiology,Humans,Influenza,Seasons}
+    \endentry
     \entry{Eddelbuettel2011}{article}{}
       \name{author}{2}{}{%
         {{hash=19c16a29c7c1db67796fdee712478912}{%
@@ -575,7 +625,7 @@
       \field{issn}{15487660}
       \field{journaltitle}{Journal Of Statistical Software}
       \field{number}{8}
-      \field{title}{{Rcpp: Seamless R and C ++ Integration}}
+      \field{title}{{Rcpp : Seamless R and C ++ Integration}}
       \field{volume}{40}
       \field{year}{2011}
       \field{pages}{1\bibrangedash 18}
@@ -654,7 +704,7 @@
       \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{Spatial variability can confound accurate estimates of catch per unit effort (CPUE), especially in highly migratory species. The incorporation of spatial struc- ture into fishery stock assessment models should ultimately improve forecasts of stock biomass. Here, we describe a nonlinear time series model for produc- ing spatially explicit forecasts of CPUE that does not require ancillary environmental or demographic data, or specification of a model functional form. We dem- onstrate this method using spatially resolved (1° 9 1° cells) CPUE time series of North Pacific albacore in the California Current System. The spatial model is highly significant (P < 0.00001) and outperforms two spatial null models. We then create a spatial forecast map for years beyond the range of data. Such approaches can guide spatial management of resources and provide a complement to more data-intensive, highly parameterized population dynamics and ecosys- tem models currently in use.}
+      \field{abstract}{Spatial variability can confound accurate estimates of catch per unit effort (CPUE), especially in highly migratory species. The incorporation of spatial struc- ture into fishery stock assessment models should ultimately improve forecasts of stock biomass. Here, we describe a nonlinear time series model for produc- ing spatially explicit forecasts of CPUE that does not require ancillary environmental or demographic data, or specification of a model functional form. We dem- onstrate this method using spatially resolved (1° 9 1° cells) CPUE time series of North Pacific albacore in the California Current System. The spatial model is highly significant (P {<} 0.00001) and outperforms two spatial null models. We then create a spatial forecast map for years beyond the range of data. Such approaches can guide spatial management of resources and provide a complement to more data-intensive, highly parameterized population dynamics and ecosys- tem models currently in use.}
       \field{issn}{10546006}
       \field{journaltitle}{Fisheries Oceanography}
       \field{title}{{A nonlinear, low data requirement model for producing spatially explicit fishery forecasts}}
@@ -709,9 +759,9 @@
       \field{sortinithash}{1c854ef9177a91bf894e66485bdbd3ed}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{annotation}{TdC flu (but from where?) -{\&}gt; Mantle, J. {\&}amp; Tyrrell, D. A. J. 1973 An epidemic of influenza on Tristan da Cunha. J. Hyg. 71, 89–95. 14 perhaps? -- - AIC - comparison under multiple difference hypotheses ML}
+      \field{annotation}{TdC flu (but from where?) -{>} Mantle, J. {\&} Tyrrell, D. A. J. 1973 An epidemic of influenza on Tristan da Cunha. J. Hyg. 71, 89–95. 14 perhaps? -- - AIC - comparison under multiple difference hypotheses ML}
       \field{journaltitle}{Proc. R. Soc. B}
-      \field{title}{{Explaining rapid reinfections in multiple-wave influenza outbreaks : Tristan da Cunha 1971 epidemic as a case study}}
+      \field{title}{{Explaining rapid reinfections in multiple- wave influenza outbreaks : Tristan da Cunha 1971 epidemic as a case study}}
       \field{year}{2016}
       \verb{doi}
       \verb 10.1098/rspb.2011.0300
@@ -888,14 +938,14 @@
            family_i={B\bibinitperiod},
            given={C},
            given_i={C\bibinitperiod}}}%
-        {{hash=5f9f8b9981cd9abf80bf0ad08bd885ae}{%
+        {{hash=e0903f2b7dd908fcff0eb1cccc12ae4b}{%
            family={King},
            family_i={K\bibinitperiod},
-           given={A.\bibnamedelimi A.},
-           given_i={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+           given={a\bibnamedelima a},
+           given_i={a\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
       }
-      \strng{namehash}{47adaffb25b1d297de29d0fae434d134}
-      \strng{fullhash}{47adaffb25b1d297de29d0fae434d134}
+      \strng{namehash}{393f3a32b6221a56e9b4145774443a5e}
+      \strng{fullhash}{393f3a32b6221a56e9b4145774443a5e}
       \field{sortinit}{I}
       \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
       \field{labelnamesource}{author}
@@ -944,14 +994,14 @@
            family_i={S\bibinitperiod},
            given={Stilian},
            given_i={S\bibinitperiod}}}%
-        {{hash=02293e830df8533325abdcd7d5cb4584}{%
+        {{hash=e4f695cf446da6d90c43e91d8503ad51}{%
            family={King},
            family_i={K\bibinitperiod},
-           given={Aaron\bibnamedelima A.},
-           given_i={A\bibinitperiod\bibinitdelim A\bibinitperiod}}}%
+           given={Aaron\bibnamedelima a.},
+           given_i={A\bibinitperiod\bibinitdelim a\bibinitperiod}}}%
       }
       \strng{namehash}{8ed3b750c30b775c4ddeb365e6c0cf1b}
-      \strng{fullhash}{15bfecedc646c84b0eb0ec3b381ebdbe}
+      \strng{fullhash}{e8085da022dc3bb7e85f52768f726357}
       \field{sortinit}{I}
       \field{sortinithash}{25e99d37ba90f7c4fb20baf4e310faf3}
       \field{labelnamesource}{author}
@@ -1159,7 +1209,7 @@
       \field{sortinithash}{872351f18d0f736066eda0bf18bfa4f7}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{abstract}{1. Markov chain Monte Carlo (MCMC) is a simulation technique that has revolutionised the analysis of ecological data, allowing the fitting of complex models in a Bayesian framework. Since 2001, there have been nearly 200 papers using MCMC in publications of the Ecological Society of America and the British Ecological Society, including more than 75 in the journal Ecology and 35 in the Journal of Applied Ecology. 2. We have noted that many authors routinely ‘thin’ their simulations, discarding all but every kth sampled value; of the studies we surveyed with details on MCMC implementation, 40{\%} reported thinning. 3. Thinning is often unnecessary and always inefficient, reducing the precision with which features of the Markov chain are summarised. The inefficiency of thinning MCMC output has been known since the early 1990’s, long before MCMC appeared in ecological publications. 4. We discuss the background and prevalence of thinning, illustrate its consequences, discuss circumstances when it might be regarded as a reasonable option and recommend against routine thinning of chains unless necessitated by computer memory limitations.}
+      \field{abstract}{1. Markov chain Monte Carlo (MCMC) is a simulation technique that has revolutionised the analysis of ecological data, allowing the fitting of complex models in a Bayesian framework. Since 2001, there have been nearly 200 papers using MCMC in publications of the Ecological Society of America and the British Ecological Society, including more than 75 in the journal Ecology and 35 in the Journal of Applied Ecology. 2. We have noted that many authors routinely ‘thin' their simulations, discarding all but every kth sampled value; of the studies we surveyed with details on MCMC implementation, 40{\%} reported thinning. 3. Thinning is often unnecessary and always inefficient, reducing the precision with which features of the Markov chain are summarised. The inefficiency of thinning MCMC output has been known since the early 1990's, long before MCMC appeared in ecological publications. 4. We discuss the background and prevalence of thinning, illustrate its consequences, discuss circumstances when it might be regarded as a reasonable option and recommend against routine thinning of chains unless necessitated by computer memory limitations.}
       \field{isbn}{2041-210X}
       \field{issn}{2041210X}
       \field{journaltitle}{Methods in Ecology and Evolution}
@@ -1241,6 +1291,7 @@
       \field{abstract}{Hamiltonian dynamics can be used to produce distant proposals for the Metropolis algorithm, thereby avoiding the slow exploration of the state space that results from the diffusive behaviour of simple random-walk proposals. Though originating in physics, Hamiltonian dynamics can be applied to most problems with continuous state spaces by simply introducing fictitious "momentum" variables. A key to its usefulness is that Hamiltonian dynamics preserves volume, and its trajectories can thus be used to define complex mappings without the need to account for a hard to compute Jacobian factor - a property that can be exactly maintained even when the dynamics is approximated by discretizing time. In this review, discuss theoretical and practical aspects of Hamiltonian Monte Carlo, and present some of its variations, including using windows of states for approximations, tempering during the course of a trajectory to handle isolated modes, and short-cut methods that prevent useless trajectories form taking much computation time.}
       \field{eprinttype}{arXiv}
       \field{isbn}{978-1-4200-7941-8}
+      \field{issn}{{<}null{>}}
       \field{journaltitle}{Handbook of Markov Chain Monte Carlo}
       \field{title}{{Handbook of Markov Chain Monte Carlo}}
       \field{volume}{20116022}
@@ -1441,7 +1492,7 @@
       \verb 10.1111/j.1467-9876.2005.00480.x
       \endverb
       \verb{file}
-      \verb :Users/dexter/Dropbox/McMaster/Papers/Sahu, Mardia - Unknown - A Bayesian Kriged-Kalman model for short-term forecasting of air pollution levels.pdf:pdf
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Sahu, Mardia - Unknown - A Bayesian Kriged-Kalman model for short-term fore- casting of air pollution levels.pdf:pdf
       \endverb
       \keyw{bending energy,gibbs sampler,kalman filter,kriging,markov chain monte carlo,spatial temporal modelling,state-space model}
     \endentry
@@ -1577,7 +1628,7 @@
       \field{sortinithash}{fd1e7c5ab79596b13dbbb67f8d70fb5a}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{title}{{Stan Modeling Language User’s Guide and Reference Manual}}
+      \field{title}{{Stan Modeling Language User's Guide and Reference Manual}}
       \field{volume}{2.9.0}
       \field{year}{2015}
       \verb{file}

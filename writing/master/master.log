@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  4 APR 2016 16:49
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.3.2)  10 APR 2016 17:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1065,10 +1065,10 @@ File: ot1zi4.fd 2014/06/22 OT1/zi4 (Inconsolata)
 )
 [8] [9] [10] [11] [12]
 File: ../MCMC-HMCMC/./images/dataplot.pdf Graphic file (type QTm)
- <use  "../MCMC-HMCMC/./images/dataplot.pdf" >
+ <use  "../MCMC-HMCMC/./images/dataplot.pdf" > [13]
 File: ../MCMC-HMCMC/./images/traceplotR0.pdf Graphic file (type QTm)
 
-<use  "../MCMC-HMCMC/./images/traceplotR0.pdf" > [13]
+<use  "../MCMC-HMCMC/./images/traceplotR0.pdf" >
 File: ../MCMC-HMCMC/./images/traceplotR0_inc.pdf Graphic file (type QTm)
 
 <use  "../MCMC-HMCMC/./images/traceplotR0_inc.pdf" >
@@ -1209,14 +1209,14 @@ Chapter 8.
 ]
 [65]
 Missing character: There is no ó in font cmr12!
-
+ [66]
 Overfull \hbox (33.67558pt too wide) in paragraph at lines 261--261
 \OT1/cmr/m/n/12 2157-3999. \OT1/cmr/m/sc/12 doi\OT1/cmr/m/n/12 : []$\OT1/zi4/m/
 n/12 10 . 1371 / currents . outbreaks . bb1e879a23137022ea79a8c508b030bc$[]\OT1
 /cmr/m/n/12 .
  []
 
-[66]
+
 Overfull \hbox (16.12573pt too wide) in paragraph at lines 261--261
 \OT1/cmr/m/n/12 In: \OT1/cmr/m/it/12 PLoS Cur-rents \OT1/cmr/m/n/12 6 (2014), e
 cur-rents.outbreaks.3408774290b1a0f2dd7cae877c8b8f.
@@ -1229,7 +1229,6 @@ m/n/12 : []$\OT1/zi4/m/n/12 10 . 1371 / currents . outbreaks . 3408774290b1a0f2
 dd7cae877c8b8ff6$[]\OT1/cmr/m/n/12 . 
  []
 
-Missing character: There is no ’ in font cmr12!
 [67] [68]
 Appendix A.
 (../MCMC-HMCMC/mcmc-appendix.tex
@@ -1318,10 +1317,10 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 297.
 ### simple group (level 1) entered at line 1061 ({)
 ### bottom level 
 Here is how much of TeX's memory you used:
- 23328 strings out of 495158
- 356954 string characters out of 6175470
- 1053958 words of memory out of 5000000
- 26164 multiletter control sequences out of 15000+600000
+ 23330 strings out of 495158
+ 356997 string characters out of 6175470
+ 1054031 words of memory out of 5000000
+ 26166 multiletter control sequences out of 15000+600000
  17242 words of font info for 65 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
  42i,18n,69p,2204b,4933s stack positions out of 5000i,500n,10000p,200000b,80000s

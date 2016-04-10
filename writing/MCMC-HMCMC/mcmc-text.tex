@@ -63,7 +63,7 @@
 
     Another significant component of MCMC is the user-specified prior distribution for $\theta$ or distributions for the individual components of $\theta$ (priors). Priors serve as a way for us to tell the MCMC algorithm what we think consist of good values for the parameters. Note that if very little is known about the parameters, or we are worried about biasing our estimate of the posterior, we can simply use a a wide uniform distribution. We cannot, however, avoid this problem entirely. Bayesian frameworks, such as MCMC, \textit{require} priors to be specified; what the user must decide is how strong to make priors.
 
-   	Exceedingly weak priors can pose problematic in some circumstances. In the case of MCMC, weak priors handicap the algorithm in two ways: convergence of the chain may become exceedingly slow, and more pressure is put on the likelihood function to be as good as possible -- it will now be the only thing informing the algorithm of what constitutes a ``good'' set of parameters, and what should be considered poor. In the majority of cases this does not pose as much as problem as it would appear; if enough samples are drawn, we should still obtain a good posterior estimate. We will only really run into problems if an exceedingly weak prior, such as an unbounded uniform distribution, or another unbounded distribution with a high standard deviation, is specified -- in those cases we may obtain poor posterior estimates if the data are weak \cite{Andrieu2003}.
+   	Exceedingly weak priors can prove problematic in some circumstances. In the case of MCMC, weak priors handicap the algorithm in two ways: convergence of the chain may become exceedingly slow, and more pressure is put on the likelihood function to be as good as possible -- it will now be the only thing informing the algorithm of what constitutes a ``good'' set of parameters, and what should be considered poor. In the majority of cases this does not pose as much as a problem as it would appear; if enough samples are drawn, we should still obtain a good posterior estimate. We will only really run into problems if an exceedingly weak prior, such as an unbounded uniform distribution, or another unbounded distribution with a high standard deviation, is specified -- in those cases we may obtain poor posterior estimates if the data are weak \cite{Andrieu2003}.
 
 \section{Proposal distribution}
 
@@ -163,12 +163,12 @@
 
 \section{Thinning}
 
-    Some models will require very long chains to get a good approximation of the posterior, which will consequently require a non-trivial amount of computer storage. One way to reduce the burden of storing so many samples is by thinning. This involves saving only every $n^{\text{th}}$ step, which should still give a decent approximate of the posterior (since the chain has time to explore a large portion of the parameter space), but require less room to store \cite{Link2012}.
+    Some models will require very long chains to get a good approximation of the posterior, which will consequently require a non-trivial amount of computer storage. One way to reduce the burden of storing so many samples is by thinning. This involves saving only every $n^{\text{th}}$ step, which should still give a decent approximate of the posterior (since the chain has time to explore a large portion of the parameter space), but requires less room to store \cite{Link2012}.
 
 
 \section{Hamiltonian Monte Carlo}
 
-    The Metropolis-Hastings algorithm has a primary drawback in that the parameter space may not be explored efficiently in some circumstances -- a consequence of the rudimentary proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a potential decrease in overall computational complexity. This algorithm is coined Hamiltonian MCMC (HMC) \cite{Neal2011}. Prior to the advent of HMC, some work was conducted exploring adaptive step-sizing using MCMC-based methods, but found they lack strong theoretical justification, and can lead to some samples being drawn from an incorrect distribution \cite{Neal2011}.
+    The Metropolis-Hastings algorithm has a primary drawback in that the parameter space may not be explored efficiently in some circumstances -- a consequence of the rudimentary proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a potential decrease in overall computational complexity. This algorithm is coined Hamiltonian MCMC (HMC) \cite{Neal2011}. Prior to the advent of HMC, some work was conducted exploring adaptive step-sizing using MCMC-based methods, but found they lack strong theoretical justification, and can lead to some samples being drawn from an incorrect distribution \cite{Neal2011}. HMC has in fact existed for nearly the same amount of time as MCMC -- both methods having been developed to model molecular dynamics, with MCMC taking a probabilistic approach and HMC taking a more deterministic one -- but had not received much attention outside its native discipline until recently.
 
     From physics, we will borrow the ideas of potential and kinetic energy. Here potential energy is analogous to the negative log likelihood of the parameter selection given the data, formally
 
@@ -198,17 +198,23 @@
             \dfrac{d\theta}{dt} & = M^{-1} r \\
             \dfrac{dr}{dt} & = - \nabla U(\theta) .
         \end{array}
-    \end{equation}.
+    \end{equation}
 
-    It is tempting to try to integrate this system using the standard Euler evolution scheme, but in practice this leads to instability. Instead the ``Leapfrog'' scheme is used. This scheme is very similar to Euler scheme, except instead of using a fixed step size $h$ for all evolutions, a step size of $\varepsilon$ is used for most evolutions, with a half step size of $\varepsilon / 2$ for evolutions of $\frac{dr}{dt}$ at the first step, and last step $L$. In this way the evolution steps ``leapfrog'' over each other while using future values from the other set of steps, leading to the scheme's name.
+    It is tempting to try to integrate this system using the standard Euler evolution scheme, but in practice this leads to instability as it will not preserve the volume of the system. Instead the ``Leapfrog'' scheme is used. This scheme is very similar to Euler scheme, except instead of using a fixed step size $h$ for all evolutions, a step size of $\epsilon$ is used for most evolutions, with a half step size of $\epsilon / 2$ for evolutions of $\frac{dr}{dt}$ at the first step, and last step $L$. In this way the evolution steps ``leapfrog'' over each other while using future values from the other set of steps, leading to the scheme's name.
 
     The end product of the Leapfrog steps are the new proposed parameters $(\theta^*,r^*)$. These are either accepted or rejected using a mechanism similar to that of standard Metropolis-Hastings MCMC. Now, however, the acceptance ratio $r$ is defined as
 
-    \begin{equation}
+    \begin{equation}\label{hmcratio}
         r = \exp \left[ H(\theta,r) - H(\theta^*,r^*) \right],
     \end{equation}
 
-    where $(\theta,r)$ are the last values in the chain.
+    where $(\theta,r)$ are the last values in the chain. This form of the acceptance ratio comes from the definition of the Hamiltonian as an energy function. If we define the distribution of the total potential energy in the system (known as the canonical distribution) as a function of the Hamiltonian as
+
+    \begin{equation}
+    	P(\theta,r) = \frac{1}{Z} \exp (-H(\theta,r))
+    \end{equation}
+
+    where $Z$ is a normalizing constant, then taking the ratio of the total potential energy of the proposed step $P(\theta^*,r^*)$ to the total potential energy in the last accepted step $P(\theta, r)$, we obtain Equation (\ref{hmcratio}).
 
     Together, we have Algorithm [\ref{hmcmc}].
 
@@ -238,21 +244,21 @@
 
             \tcc{Leapfrog initialization}
             $\theta_0$ $\gets$ $\theta^{(i-1)}$ \;
-            $r_0$ $\gets$ $r - \nabla U(\theta_0) \cdot \varepsilon / 2$
+            $r_0$ $\gets$ $r - \nabla U(\theta_0) \cdot \epsilon / 2$
 
             \BlankLine
 
             \tcc{Leapfrog intermediate steps}
             \For{$j = 1:L-1$}{
-                $\theta_j$ $\gets$ $\theta_{j-1} + M^{-1} r_{j-1} \cdot \varepsilon$ \;
-                $r_j$ $\gets$ $r_{j-1} - \nabla U(\theta_j) \cdot \varepsilon$
+                $\theta_j$ $\gets$ $\theta_{j-1} + M^{-1} r_{j-1} \cdot \epsilon$ \;
+                $r_j$ $\gets$ $r_{j-1} - \nabla U(\theta_j) \cdot \epsilon$
             }
 
             \BlankLine
 
             \tcc{Leapfrog last steps}
-            $\theta^*$ $\gets$ $\theta_{L-1} + M^{-1} r_{L-1} \cdot \varepsilon$ \;
-            $r^*$ $\gets$ $\nabla U(\theta_L) \cdot \varepsilon / 2 - r_{L-1}$            
+            $\theta^*$ $\gets$ $\theta_{L-1} + M^{-1} r_{L-1} \cdot \epsilon$ \;
+            $r^*$ $\gets$ $\nabla U(\theta_L) \cdot \epsilon / 2 - r_{L-1}$            
             \BlankLine
 
             \tcc{Evaluate acceptance ratio}
@@ -284,7 +290,7 @@
 
     \end{algorithm}
 
-    Note that the parameters $\varepsilon$ and $L$ have to be tuned in order to maintain stability and maximize efficiency, a sometimes non-trivial process \cite{Neal2011}. However, some recent algorithms, such as the No U-Turn sampler implemented in RStan, and adaptively select appropriate values automatically during the sampling process \cite{Hoffman2014}.
+    Note that the parameters $\epsilon$ and $L$ have to be tuned in order to maintain stability and maximize efficiency, a sometimes non-trivial process utilising trial fitting with candidate values of $\epsilon$ and $L$ \cite{Neal2011}. However, some recent algorithms, such as the No U-Turn sampler implemented in RStan, and adaptively select appropriate values automatically during the sampling process \cite{Hoffman2014}.
     
 
 \section{RStan Fitting}
@@ -295,7 +301,7 @@
 
     The solution to this system was obtained using the \verb|ode()| function from the \verb|deSolve| package. The required derivative array function in the format required by \verb|ode()| was specified as the gradient in Equation [\ref{sirode}].
 
-    The true parameter values were set to $R_0 = 3.0, r = 0.1, N = 500$. The initial conditions were set to 5 infectious individuals, 495 people susceptible to infection, and no one had yet recovered from infection and been removed. The system was integrated over $[0,100]$ with infected counts drawn at each integer time step.
+    The true parameter values were set to $R_0 = 3.0, \gamma = 0.1, N = 500$. The initial conditions were set to 5 infectious individuals, 495 people susceptible to infection, and no one had yet recovered from infection and been removed. The system was integrated over $[0,100]$ weeks with infected counts drawn at each integer time step.
 
     The observation error was taken to be $\varepsilon_{obs} \sim \mathcal{N}(0,\sigma)$, where individual values were drawn for each synthetic data point.
 
@@ -322,7 +328,7 @@
         \caption{Traceplot of samples drawn for parameter $R_0$, excluding burn-in. \label{traceplot}}
     \end{figure}
 
-	Figure [\ref{traceplot2}] shows the chain data including the burn-in samples. We can see why is is wise to discard these samples (note the scale).
+	Figure [\ref{traceplot2}] shows the chain data including the burn-in samples. We can see why it is wise to discard these samples (note the scale).
 
     \begin{figure}
         \centering
