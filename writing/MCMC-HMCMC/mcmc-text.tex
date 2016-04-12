@@ -301,7 +301,7 @@
 
     The solution to this system was obtained using the \verb|ode()| function from the \verb|deSolve| package. The required derivative array function in the format required by \verb|ode()| was specified as the gradient in Equation [\ref{sirode}].
 
-    The true parameter values were set to $R_0 = 3.0, \gamma = 0.1, N = 500$. The initial conditions were set to 5 infectious individuals, 495 people susceptible to infection, and no one had yet recovered from infection and been removed. The system was integrated over $[0,100]$ weeks with infected counts drawn at each integer time step.
+    The true parameter values were set to $\mathcal{R}_0 = 3.0, \gamma = 0.1, N = 500$. The initial conditions were set to 5 infectious individuals, 495 people susceptible to infection, and no one had yet recovered from infection and been removed. The system was integrated over $[0,100]$ weeks with infected counts drawn at each integer time step.
 
     The observation error was taken to be $\varepsilon_{obs} \sim \mathcal{N}(0,\sigma)$, where individual values were drawn for each synthetic data point.
 
@@ -325,7 +325,7 @@
         \centering
         \captionsetup{width=0.8\linewidth}
         \includegraphics[width=\textwidth]{./images/traceplotR0.pdf}
-        \caption{Traceplot of samples drawn for parameter $R_0$, excluding burn-in. \label{traceplot}}
+        \caption{Traceplot of samples drawn for parameter $\mathcal{R}_0$, excluding burn-in. \label{traceplot}}
     \end{figure}
 
 	Figure [\ref{traceplot2}] shows the chain data including the burn-in samples. We can see why it is wise to discard these samples (note the scale).
@@ -334,7 +334,7 @@
         \centering
         \captionsetup{width=0.8\linewidth}
         \includegraphics[width=\textwidth]{./images/traceplotR0_inc.pdf}
-        \caption{Traceplot of samples drawn for parameter $R_0$, including burn-in. \label{traceplot2}}
+        \caption{Traceplot of samples drawn for parameter $\mathcal{R}_0$, including burn-in. \label{traceplot2}}
     \end{figure}
 
     Figure [\ref{hmckernels}] shows the the kernel density estimates for each of the model parameters and the initial number of cases. We see that while the estimates are not perfect, they are more than satisfactory.

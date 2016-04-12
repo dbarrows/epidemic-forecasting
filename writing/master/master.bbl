@@ -107,9 +107,6 @@
       \verb{doi}
       \verb 10.1023/A:1020281327116
       \endverb
-      \verb{eprint}
-      \verb 1109.4435v1
-      \endverb
       \verb{file}
       \verb :Users/dexter/Dropbox/McMaster/Papers/Andrieu et al. - 2003 - An introduction to MCMC for machine learning.pdf:pdf
       \endverb
@@ -227,9 +224,9 @@
       \field{sortinithash}{4ecbea03efd0532989d3836d1a048c32}
       \field{labelnamesource}{author}
       \field{labeltitlesource}{title}
-      \field{isbn}{1534-7796 (Electronic)0033-3174 (Linking)}
+      \field{isbn}{1534-7796 (Electronic) 0033-3174 (Linking)}
       \field{issn}{0033-3174}
-      \field{journaltitle}{$\backslash$it J. Bio. Med.}
+      \field{journaltitle}{\it J. Bio. Med.}
       \field{number}{3}
       \field{title}{{What You See May Not Be What You Get: A Brief, Nontechnical Introduction to Overfitting in Regression Type Models}}
       \field{volume}{66}
@@ -625,7 +622,7 @@
       \field{issn}{15487660}
       \field{journaltitle}{Journal Of Statistical Software}
       \field{number}{8}
-      \field{title}{{Rcpp : Seamless R and C ++ Integration}}
+      \field{title}{{Rcpp: Seamless R and C ++ Integration}}
       \field{volume}{40}
       \field{year}{2011}
       \field{pages}{1\bibrangedash 18}
@@ -761,13 +758,13 @@
       \field{labeltitlesource}{title}
       \field{annotation}{TdC flu (but from where?) -{>} Mantle, J. {\&} Tyrrell, D. A. J. 1973 An epidemic of influenza on Tristan da Cunha. J. Hyg. 71, 89–95. 14 perhaps? -- - AIC - comparison under multiple difference hypotheses ML}
       \field{journaltitle}{Proc. R. Soc. B}
-      \field{title}{{Explaining rapid reinfections in multiple- wave influenza outbreaks : Tristan da Cunha 1971 epidemic as a case study}}
+      \field{title}{{Explaining rapid reinfections in multiple-wave influenza outbreaks : Tristan da Cunha 1971 epidemic as a case study}}
       \field{year}{2016}
       \verb{doi}
       \verb 10.1098/rspb.2011.0300
       \endverb
       \verb{file}
-      \verb :Users/dexter/Dropbox/McMaster/Papers/Graham et al. - 2016 - Explaining rapid reinfections in multiple- wave influenza outbreaks Tristan da Cunha 1971 epidemic as a case stu.pdf:pdf
+      \verb :Users/dexter/Dropbox/McMaster/Papers/Graham et al. - 2016 - Explaining rapid reinfections in multiple-wave influenza outbreaks Tristan da Cunha 1971 epidemic as a case stu.pdf:pdf
       \endverb
       \keyw{host immune response,influenza pandemic,model selection,reinfection,state-space models}
     \endentry
@@ -1291,7 +1288,6 @@
       \field{abstract}{Hamiltonian dynamics can be used to produce distant proposals for the Metropolis algorithm, thereby avoiding the slow exploration of the state space that results from the diffusive behaviour of simple random-walk proposals. Though originating in physics, Hamiltonian dynamics can be applied to most problems with continuous state spaces by simply introducing fictitious "momentum" variables. A key to its usefulness is that Hamiltonian dynamics preserves volume, and its trajectories can thus be used to define complex mappings without the need to account for a hard to compute Jacobian factor - a property that can be exactly maintained even when the dynamics is approximated by discretizing time. In this review, discuss theoretical and practical aspects of Hamiltonian Monte Carlo, and present some of its variations, including using windows of states for approximations, tempering during the course of a trajectory to handle isolated modes, and short-cut methods that prevent useless trajectories form taking much computation time.}
       \field{eprinttype}{arXiv}
       \field{isbn}{978-1-4200-7941-8}
-      \field{issn}{{<}null{>}}
       \field{journaltitle}{Handbook of Markov Chain Monte Carlo}
       \field{title}{{Handbook of Markov Chain Monte Carlo}}
       \field{volume}{20116022}
