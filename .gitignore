@@ -11,9 +11,11 @@
 *.nav
 *.run.xml
 *.snm
-writing/*.log
-writing/*.out
+writing/master/*.log
+writing/master/*.out
 *.toc
+*.bcf
+*.lof
 
 
 ## R
