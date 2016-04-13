@@ -1,4 +1,23 @@
+## Latex
+##
 *.aux
 *.fdb_latexmk
 *.fls
+*.synctex
 *.synctex.gz
+*.synctex.gz(busy)
+*.bbl
+*.blg
+*.nav
+*.run.xml
+*.snm
+writing/*.log
+writing/*.out
+*.toc
+
+
+## R
+##
+*.Rhistory
+*.rdb
+*.rdx
