@@ -1,9 +1,0 @@
-void simplex() {
-
-}
-
-int main () {
-
-	
-
-}

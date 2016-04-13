@@ -3,7 +3,7 @@ CC 		= g++
 NVFLAGS = -arch=sm_20 -O2
 CFLAGS 	= -O2
 OBJ 	= cuSPF.o timer.o rand.o readdata.o
-PROGRAM = cuSPF
+PROGRAM = cuSPF.x
 
 %.o: %.cpp %.h
 	@$(CC) -c -o $@ $< $(CFLAGS)

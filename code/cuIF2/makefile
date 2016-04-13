@@ -3,7 +3,7 @@ CC 		= g++
 NVFLAGS = -arch=sm_20 -O2
 CFLAGS 	= -O2
 OBJ 	= cuIF2.o timer.o rand.o readdata.o
-PROGRAM = cuIF2
+PROGRAM = cuIF2.x
 
 %.o: %.cpp %.h
 	@$(CC) -c -o $@ $< $(CFLAGS)

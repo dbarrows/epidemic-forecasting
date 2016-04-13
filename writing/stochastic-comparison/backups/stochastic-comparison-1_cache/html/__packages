@@ -1,8 +1,0 @@
-base
-ggplot2
-RColorBrewer
-reshape2
-Rcpp
-gridExtra
-pomp
-rstan

@@ -1,7 +1,0 @@
-\beamer@endinputifotherversion {3.36pt}
-\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
-\beamer@sectionintoc {2}{Techniques}{5}{0}{2}
-\beamer@subsectionintoc {2}{1}{Phenomenological}{7}{0}{2}
-\beamer@subsectionintoc {2}{2}{Mechanistic / semimechanistic}{13}{0}{2}
-\beamer@sectionintoc {3}{Data assimilation}{22}{0}{3}
-\beamer@sectionintoc {4}{Measuring prediction accuracy}{27}{0}{4}

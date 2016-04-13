@@ -21,3 +21,9 @@ writing/*.out
 *.Rhistory
 *.rdb
 *.rdx
+*.rda
+
+## C/C++/CUDA
+##
+*.o
+*.x

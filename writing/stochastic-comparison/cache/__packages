@@ -1,7 +1,0 @@
-base
-knitr
-ggplot2
-Rcpp
-gridExtra
-rstan
-reshape2

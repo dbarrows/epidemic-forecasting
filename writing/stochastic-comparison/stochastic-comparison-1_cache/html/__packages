@@ -1,7 +1,0 @@
-base
-ggplot2
-Rcpp
-gridExtra
-rstan
-reshape2
-colorout
