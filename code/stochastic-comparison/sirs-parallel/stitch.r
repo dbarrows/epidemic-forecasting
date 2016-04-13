@@ -1,6 +1,7 @@
 library(ggplot2)
 library(reshape2)
 library(RColorBrewer)
+library(gridExtra)
 
 printvar <- function(v) {
   	name <- deparse(substitute(v))
@@ -9,6 +10,7 @@ printvar <- function(v) {
 
 dir <- paste(getwd(), "../../../../Thesis_data","sirs-varimages", sep = "/")
 filelist <- list.files(dir)
+
 
 source("stanbootmean.r")
 
@@ -50,6 +52,11 @@ for (filenum in 1:length(filelist)) {
 			hmctimes 	<- numeric(nTrials)
 			smaptimes 	<- numeric(nTrials)
 
+			if2covdata <- data.frame(matrix(NA, nTrials, 6))
+			names(if2covdata) <- c("mean10", "lower10", "upper10", "mean45", "lower45", "upper45")
+			hmccovdata <- data.frame(matrix(NA, nTrials, 6))
+			names(hmccovdata) <- c("mean10", "lower10", "upper10", "mean45", "lower45", "upper45")
+
 			first <- FALSE
 
 		}
@@ -64,6 +71,18 @@ for (filenum in 1:length(filelist)) {
 		if2proj <- apply(parabootdata, 2, mean)
 		if2traj[fctr,] <- if2proj
 		if2times[fctr] <- get("if2time", e)[['user.self']]
+		# coverage
+		# try 90%
+		real10 	 <- trueproj[10]
+		real45 	 <- trueproj[45]
+		quants10 <- quantile(parabootdata[,10], probs = c(0.05, 0.95), na.rm = TRUE)
+		quants45 <- quantile(parabootdata[,45], probs = c(0.05, 0.95), na.rm = TRUE)
+		mean10   <- if2proj[10] - real10
+		diff10 	 <- quants10 - real10
+		mean45 	 <- if2proj[45] - real45
+		diff45 	 <- quants45 - real45
+		if2covdata[fctr,] <- c(mean10, diff10, mean45, diff45)
+
 
 		## HMCMC
 		hmcbootdata <- get("bootstrapdata", e)[,(Tlim+2):(T+1)]
@@ -71,10 +90,20 @@ for (filenum in 1:length(filelist)) {
 		hmctraj[fctr,] <- hmcproj
 		hmctimes[fctr] <- get("hmctime", e)[['user.self']]
 		# test
-		stanfit <- get("fit", e)
-		hmcbootdata2 <- stanbootmean(stanfit, nTraj, 500.0, Tlim, steps)[,(Tlim+2):(T+1)]
-		hmcproj2 <- apply(hmcbootdata2, 2, mean)
-		hmctraj2[fctr,] <- hmcproj2
+		#stanfit <- get("fit", e)
+		#hmcbootdata2 <- stanbootmean(stanfit, nTraj, 500.0, Tlim, steps)[,(Tlim+2):(T+1)]
+		#hmcproj2 <- apply(hmcbootdata2, 2, mean)
+		#hmctraj2[fctr,] <- hmcproj2
+		real10 	 <- trueproj[10]
+		real45 	 <- trueproj[45]
+		quants10 <- quantile(hmcbootdata[,10], probs = c(0.05, 0.95), na.rm = TRUE)
+		quants45 <- quantile(hmcbootdata[,45], probs = c(0.05, 0.95), na.rm = TRUE)
+		mean10   <- hmcproj[10] - real10
+		diff10 	 <- quants10 - real10
+		mean45 	 <- hmcproj[45] - real45
+		diff45 	 <- quants45 - real45
+		hmccovdata[fctr,] <- c(mean10, diff10, mean45, diff45)
+
 
 		## S-map
 		smapproj <- get("predictions", e)
@@ -94,7 +123,7 @@ hmctimes  <- hmctimes[1:fctr]
 smaptimes <- smaptimes[1:fctr]
 
 #temp
-hmctraj2  <- hmctraj2[1:fctr,]
+#hmctraj2  <- hmctraj2[1:fctr,]
 
 ## average times
 if2meantime <- mean(if2times)
@@ -111,8 +140,8 @@ hmcsse <- colMeans((abs(hmctraj[hmcinds,] - truetraj[hmcinds,])^2))
 smapsse <- colMeans((abs(smaptraj - truetraj)^2))
 
 #temp
-hmcinds2 <- complete.cases(hmctraj2)
-hmcsse2 <- colMeans((abs(hmctraj2[hmcinds2,] - truetraj[hmcinds2,])^2))
+#hmcinds2 <- complete.cases(hmctraj2)
+#hmcsse2 <- colMeans((abs(hmctraj2[hmcinds2,] - truetraj[hmcinds2,])^2))
 
 
 if2sseraw 	<- (abs(if2traj - truetraj)^2)
@@ -143,15 +172,15 @@ q <- qplot(data = plotdata, x = time, y = value, geom = "line", color = variable
 
 ggsave(q, filename = "sseplot.pdf", width = 6.5, height = 4)
 
-df2 <- data.frame(time = 1:(T-Tlim), if2 = log(if2sse), hmc = log(hmcsse2), smap = log(smapsse))
-plotdata2 <- melt(df2, id = "time")
+#df2 <- data.frame(time = 1:(T-Tlim), if2 = log(if2sse), hmc = log(hmcsse2), smap = log(smapsse))
+#plotdata2 <- melt(df2, id = "time")
 
-q2 <- qplot(data = plotdata2, x = time, y = value, geom = "line", color = variable, xlab = "Weeks ahead", ylab = "Average error (log)") +
-		scale_color_grey(labels = c("IF2","HMCMC","S-map")) +
-		theme_bw() +
-		theme(legend.title=element_blank())
+#q2 <- qplot(data = plotdata2, x = time, y = value, geom = "line", color = variable, xlab = "Weeks ahead", ylab = "Average error (log)") +
+#		scale_color_grey(labels = c("IF2","HMCMC","S-map")) +
+#		theme_bw() +
+#		theme(legend.title=element_blank())
 
-#sggsave(q2, filename = "sseplot2.pdf", width = 6.5, height = 4)
+# ggsave(q2, filename = "sseplot2.pdf", width = 6.5, height = 4)
 
 
 # times plot
@@ -170,3 +199,65 @@ ggsave(timeplot, filename = "timeplot.pdf", width = 6.5, height = 4)
 
 
 #save.image("fsim.RData")
+
+
+## Let's try this coverage plot thing
+##########################################################################################
+
+
+inds <- complete.cases(hmccovdata)
+nCovSets <- sum(inds, rm.na = TRUE)
+
+if2pdraw <- if2covdata[inds,][1:nCovSets,]
+hmcpdraw <- hmccovdata[inds,][1:nCovSets,]
+
+## 10 weeks ahead
+##
+
+pd10if2 <- data.frame(setnum = 1:nCovSets, method = rep("if2",nCovSets), if2pdraw[order(if2pdraw[,"mean10"]),])
+pd10hmc <- data.frame(setnum = 1:nCovSets, method = rep("hmc",nCovSets), hmcpdraw[order(if2pdraw[,"mean10"]),])
+cnames <- names(pd10if2)
+pd10if2melted <- melt(pd10if2, id = cnames)
+pd10hmcmelted <- melt(pd10hmc, id = cnames)
+pd10 <- rbind(pd10if2melted, pd10hmcmelted)
+
+pd <- position_dodge(0.5)
+cov10plot <- ggplot(pd10, aes(x = setnum, color = method)) +
+					geom_hline(aes(yintercept = 0)) +
+					geom_errorbar(aes(ymin = lower10, ymax = upper10), width = 0, position = pd) +
+					geom_point(aes(y = mean10), position = pd) +
+					labs(x = "", y = "True - Estimate") +
+					theme_bw() +
+					scale_color_grey() +
+					theme(axis.ticks.x=element_blank(),
+					      axis.text.x=element_blank(),
+					      legend.position='none')
+
+## 45 weeks ahead
+##
+
+pd45if2 <- data.frame(setnum = 1:nCovSets, method = rep("if2",nCovSets), if2pdraw[order(if2pdraw[,"mean45"]),])
+pd45hmc <- data.frame(setnum = 1:nCovSets, method = rep("hmc",nCovSets), hmcpdraw[order(if2pdraw[,"mean45"]),])
+cnames <- names(pd45if2)
+pd45if2melted <- melt(pd45if2, id = cnames)
+pd45hmcmelted <- melt(pd45hmc, id = cnames)
+pd45 <- rbind(pd45if2melted, pd45hmcmelted)
+
+pd <- position_dodge(0.5)
+cov45plot <- ggplot(pd45, aes(x = setnum, color = method)) +
+					geom_hline(aes(yintercept = 0)) +
+					geom_errorbar(aes(ymin = lower45, ymax = upper45), width = 0, position = pd) +
+					geom_point(aes(y = mean45), position = pd) +
+					labs(x = "Data set", y = "True - Estimate") +
+					theme_bw() +
+					scale_color_grey() +
+					theme(axis.ticks.x=element_blank(),
+					      axis.text.x=element_blank(),
+					      legend.position='none')
+
+
+## save combined plot
+##
+pdf("coverage.pdf", width = 6.5, height = 4)
+grid.arrange(cov10plot, cov45plot, ncol = 1, nrow = 2)
+dev.off()
