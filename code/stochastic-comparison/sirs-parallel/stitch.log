@@ -1,0 +1,29 @@
+rstan (Version 2.9.0-3, packaged: 2016-02-11 15:54:41 UTC, GitRev: 05c3d0058b6a)
+For execution on a local, multicore CPU with excess RAM we recommend calling
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+[1] "1 thread-1.RData"
+[1] "2 thread-10.RData"
+[1] "3 thread-11.RData"
+[1] "4 thread-12.RData"
+[1] "5 thread-13.RData"
+[1] "6 thread-14.RData"
+[1] "7 thread-15.RData"
+[1] "8 thread-16.RData"
+[1] "9 thread-17.RData"
+[1] "10 thread-18.RData"
+[1] "11 thread-19.RData"
+[1] "12 thread-2.RData"
+[1] "13 thread-20.RData"
+[1] "14 thread-3.RData"
+[1] "15 thread-4.RData"
+[1] "16 thread-5.RData"
+[1] "17 thread-6.RData"
+[1] "18 thread-7.RData"
+[1] "19 thread-9.RData"
+[1] "if2meantime : 47041.423368421"
+[1] "hmcmeantime : 9199.43605263158"
+[1] "smapmeantime : 0.148684210527694"
+No id variables; using all as measure variables
+null device 
+          1 

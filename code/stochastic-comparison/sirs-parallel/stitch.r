@@ -206,7 +206,7 @@ ggsave(timeplot, filename = "timeplot.pdf", width = 6.5, height = 4)
 
 
 inds <- complete.cases(hmccovdata)
-nCovSets <- sum(inds, rm.na = TRUE)
+nCovSets <- sum(inds)
 
 if2pdraw <- if2covdata[inds,][1:nCovSets,]
 hmcpdraw <- hmccovdata[inds,][1:nCovSets,]
@@ -226,7 +226,7 @@ cov10plot <- ggplot(pd10, aes(x = setnum, color = method)) +
 					geom_hline(aes(yintercept = 0)) +
 					geom_errorbar(aes(ymin = lower10, ymax = upper10), width = 0, position = pd) +
 					geom_point(aes(y = mean10), position = pd) +
-					labs(x = "", y = "True - Estimate") +
+					labs(x = "", y = "Estimate - True") +
 					theme_bw() +
 					scale_color_grey() +
 					theme(axis.ticks.x=element_blank(),
@@ -248,7 +248,7 @@ cov45plot <- ggplot(pd45, aes(x = setnum, color = method)) +
 					geom_hline(aes(yintercept = 0)) +
 					geom_errorbar(aes(ymin = lower45, ymax = upper45), width = 0, position = pd) +
 					geom_point(aes(y = mean45), position = pd) +
-					labs(x = "Data set", y = "True - Estimate") +
+					labs(x = "Data set", y = "Estimate - True") +
 					theme_bw() +
 					scale_color_grey() +
 					theme(axis.ticks.x=element_blank(),
