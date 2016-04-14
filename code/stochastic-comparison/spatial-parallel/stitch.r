@@ -1,6 +1,7 @@
 library(ggplot2)
 library(reshape2)
 library(RColorBrewer)
+library(gridExtra)
 
 printvar <- function(v) {
   	name <- deparse(substitute(v))
@@ -67,6 +68,11 @@ for (filenum in 1:length(filelist)) {
             hmcfittimes <- numeric(nTrials)
             cuIF2times  <- numeric(nTrials)
 
+            if2covdata <- data.frame(matrix(NA, nTrials, 6))
+			names(if2covdata) <- c("mean2", "lower2", "upper2", "mean10", "lower10", "upper10")
+			hmccovdata <- data.frame(matrix(NA, nTrials, 6))
+			names(hmccovdata) <- c("mean2", "lower2", "upper2", "mean10", "lower10", "upper10")
+
             first <- FALSE
 
         }
@@ -102,6 +108,18 @@ for (filenum in 1:length(filelist)) {
         if2traj[fctr,,] <- countmeans[,-1]
         if2times[fctr] <- get("if2time", e)[['user.self']]
         if2fittimes[fctr] <- get("if2time1", e)[['user.self']]
+        # coverage
+        # location 8, times 2 and 10
+        real2 	 <- trueproj[8,2]
+		real10 	 <- trueproj[8,10]
+		quants2 <- quantile(parabootdata[,8,2], probs = c(0.05, 0.95), na.rm = TRUE)
+		quants10 <- quantile(parabootdata[,8,10], probs = c(0.05, 0.95), na.rm = TRUE)
+		mean2   <- countmeans[8,3] - real2
+		diff2 	 <- quants2 - real2
+		mean10 	 <- countmeans[8,11] - real10
+		diff10 	 <- quants10 - real10
+		if2covdata[fctr,] <- c(mean2, diff2, mean10, diff10)
+
 
         ## HMCMC
         hmcbootdata <- get("bootstrapdata", e)[,,(Tlim+2):(T+1)]
@@ -116,6 +134,18 @@ for (filenum in 1:length(filelist)) {
         hmctraj[fctr,,] <- meanTraj
         hmctimes[fctr] <- get("hmctime", e)[['user.self']]
         hmcfittimes[fctr] <- get("hmctime1", e)[['user.self']]
+        # coverage
+        # location 8, times 2 and 10
+        real2 	 <- trueproj[8,2]
+		real10 	 <- trueproj[8,10]
+		quants2 <- quantile(hmcbootdata[,8,2], probs = c(0.05, 0.95), na.rm = TRUE)
+		quants10 <- quantile(hmcbootdata[,8,10], probs = c(0.05, 0.95), na.rm = TRUE)
+		mean2   <- meanTraj[8,2] - real2
+		diff2 	 <- quants2 - real2
+		mean10 	 <- meanTraj[8,10] - real10
+		diff10 	 <- quants10 - real10
+		hmccovdata[fctr,] <- c(mean2, diff2, mean10, diff10)
+
 
         ## S-map
         smapproj <- get("predictions", e)
@@ -220,3 +250,65 @@ timeplot2 <- ggplot(timedata2, aes(factor(variable, ordered = TRUE), value)) +
 ggsave(timeplot2, filename = "timeplot2.pdf", width = 6.5, height = 4)
 
 #save.image("fsim.RData")
+
+
+## Let's try this coverage plot thing
+##########################################################################################
+
+
+inds <- complete.cases(hmccovdata)
+nCovSets <- sum(inds)
+
+if2pdraw <- if2covdata[inds,][1:nCovSets,]
+hmcpdraw <- hmccovdata[inds,][1:nCovSets,]
+
+## 10 weeks ahead
+##
+
+pd2if2 <- data.frame(setnum = 1:nCovSets, method = rep("if2",nCovSets), if2pdraw[order(if2pdraw[,"mean2"]),])
+pd2hmc <- data.frame(setnum = 1:nCovSets, method = rep("hmc",nCovSets), hmcpdraw[order(if2pdraw[,"mean2"]),])
+cnames <- names(pd2if2)
+pd2if2melted <- melt(pd2if2, id = cnames)
+pd2hmcmelted <- melt(pd2hmc, id = cnames)
+pd2 <- rbind(pd2if2melted, pd2hmcmelted)
+
+pd <- position_dodge(0.5)
+cov2plot <- ggplot(pd2, aes(x = setnum, color = method)) +
+					geom_hline(aes(yintercept = 0)) +
+					geom_errorbar(aes(ymin = lower2, ymax = upper2), width = 0, position = pd) +
+					geom_point(aes(y = mean2), position = pd) +
+					labs(x = "", y = "Estimate - True") +
+					theme_bw() +
+					scale_color_grey() +
+					theme(axis.ticks.x=element_blank(),
+					      axis.text.x=element_blank(),
+					      legend.position='none')
+
+## 45 weeks ahead
+##
+
+pd10if2 <- data.frame(setnum = 1:nCovSets, method = rep("if2",nCovSets), if2pdraw[order(if2pdraw[,"mean10"]),])
+pd10hmc <- data.frame(setnum = 1:nCovSets, method = rep("hmc",nCovSets), hmcpdraw[order(if2pdraw[,"mean10"]),])
+cnames <- names(pd10if2)
+pd10if2melted <- melt(pd10if2, id = cnames)
+pd10hmcmelted <- melt(pd10hmc, id = cnames)
+pd10 <- rbind(pd10if2melted, pd10hmcmelted)
+
+pd <- position_dodge(0.5)
+cov10plot <- ggplot(pd10, aes(x = setnum, color = method)) +
+					geom_hline(aes(yintercept = 0)) +
+					geom_errorbar(aes(ymin = lower10, ymax = upper10), width = 0, position = pd) +
+					geom_point(aes(y = mean10), position = pd) +
+					labs(x = "Data set", y = "Estimate - True") +
+					theme_bw() +
+					scale_color_grey() +
+					theme(axis.ticks.x=element_blank(),
+					      axis.text.x=element_blank(),
+					      legend.position='none')
+
+
+## save combined plot
+##
+pdf("coverage.pdf", width = 6.5, height = 4)
+grid.arrange(cov2plot, cov10plot, ncol = 1, nrow = 2)
+dev.off()
