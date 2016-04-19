@@ -170,7 +170,7 @@
 
     The Metropolis-Hastings algorithm has a primary drawback in that the parameter space may not be explored efficiently in some circumstances -- a consequence of the rudimentary proposal mechanism. Instead, smarter moves can be proposed through the use of Hamiltonian dynamics, leading to a better exploration of the target distribution and a potential decrease in overall computational complexity. This algorithm is coined Hamiltonian MCMC (HMC) \cite{Neal2011}. Prior to the advent of HMC, some work was conducted exploring adaptive step-sizing using MCMC-based methods, but found they lack strong theoretical justification, and can lead to some samples being drawn from an incorrect distribution \cite{Neal2011}. HMC has in fact existed for nearly the same amount of time as MCMC -- both methods having been developed to model molecular dynamics, with MCMC taking a probabilistic approach and HMC taking a more deterministic one -- but had not received much attention outside its native discipline until recently.
 
-    From physics, we will borrow the ideas of potential and kinetic energy. Here potential energy is analogous to the negative log likelihood of the parameter selection given the data, formally
+    In the HMC formulation, the parameter estimates are treated as a physical particle exploring a sloped likelihood surface. From physics, we will borrow the ideas of potential and kinetic energy. Here potential energy, or gravity, is analogous to the negative log likelihood of the parameter selection given the data, formally
 
     \begin{equation}
         U(\theta) = -\log(\mathcal{L}(\theta)p(\theta)).
@@ -301,7 +301,7 @@
 
     The solution to this system was obtained using the \verb|ode()| function from the \verb|deSolve| package. The required derivative array function in the format required by \verb|ode()| was specified as the gradient in Equation [\ref{sirode}].
 
-    The true parameter values were set to $\mathcal{R}_0 = 3.0, \gamma = 0.1, N = 500$. The initial conditions were set to 5 infectious individuals, 495 people susceptible to infection, and no one had yet recovered from infection and been removed. The system was integrated over $[0,100]$ weeks with infected counts drawn at each integer time step.
+    The true parameter values were set to $\mathcal{R}_0 = 3.0$, $\gamma = 0.1$ recoveries/week, $N = 500$ individuals. The initial conditions were set to 5 infectious individuals, 495 people susceptible to infection, and no one had yet recovered from infection and been removed. The system was integrated over $[0,100]$ weeks with infected counts drawn at each integer time step.
 
     The observation error was taken to be $\varepsilon_{obs} \sim \mathcal{N}(0,\sigma)$, where individual values were drawn for each synthetic data point.
 
@@ -317,7 +317,7 @@
 
     Throughout this paper, the explicit Euler integration scheme was used to obtain solutions to our ODE-based models. While this scheme is not the most accurate or efficient one available, it as chosen for its ease of implementation in the required languages and transparency with regards to stochastic processes, which have been added into later models. Using a more advanced integrator such as Runge-Kutta makes it harder to properly specify how stochastic process evolution should be handled, and would have required significantly more implementation work to boot. Hence, we have opted for the lo-fi solution we know will function the way we require.
 
-    In order to use an Explicit Euler-like stepping method in the later Stan model, the synthetic observation counts were treated as weekly observations in which the counts on the other six days of the week were unobserved.
+    In order to use an Explicit Euler-like stepping method, with a step size of one per day, in the later Stan model, the synthetic observation counts were treated as weekly observations in which the counts on the other six days of the week were unobserved.
 
     Figure [\ref{traceplot}] shows the traceplot for the the post-burn-in chain data returned by the RStan fitting. We see that the chains are mixing well and convergence has likely been reached.
 

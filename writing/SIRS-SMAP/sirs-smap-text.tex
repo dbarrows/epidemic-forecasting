@@ -119,10 +119,10 @@
 	There are two new features here. We have a rate or waning immunity $\alpha$ through which people become able to be reinfected, and a seasonality factor function $\Gamma (t)$ defined as
 
 	\begin{equation}
-		\Gamma(t) = \exp \left[ 2 \left( \cos \left(  \frac{2 \pi}{365} t \right) - 1 \right) \right].
+		\Gamma(t) = \exp \left[ 2 \left( \cos \left(  \frac{2 \pi}{1 \, \text{year}} t \right) - 1 \right) \right],
 	\end{equation}
 
-	This function oscillates between 1 and $e^{-4}$ (close to 0) and is meant to represent transmission damping during the off-season, for example summer for influenza. Further, it displays flatter troughs and sharper peaks to exaggerate its effect in peak season.
+	where $t$ is in days. This function oscillates between 1 and $e^{-4}$ (close to 0) and is meant to represent transmission damping during the off-season, for example summer for influenza. Further, it displays flatter troughs and sharper peaks to exaggerate its effect in peak season.
 
 	As before, $\beta$ is allowed to walk restricted by a geometric mean, described by
 

@@ -39,7 +39,7 @@
 
 \subsection{Parametric Bootstrapping}
 
-	The goal of the parametric bootstrap is use an initial density sample $\theta^*$ to generate further samples $\theta_1, \theta_2, ..., \theta_M$ from the sampling distribution of $\theta$. It works by using $\theta$ to generate artificial data sets $D_1, D_2, ..., D_M$ to which we can refit our model of interest and generate new parameter sets. The literature suggests the most straightforward way of doing this is to fit the model to obtain $\theta^*$, then use the model's forward simulator to generate new data sets, in essence treating our original estimate $\theta^*$ as the ``truth'' set [\cite{Genest2008}].
+	The goal of the parametric bootstrap is use an initial density sample $\theta^*$ to generate further samples $\theta_1, \theta_2, ..., \theta_M$ from the sampling distribution of $\theta$. It works by using $\theta$ to generate artificial data sets $D_1, D_2, ..., D_M$ to which we can refit our model of interest and generate new parameter sets. The literature suggests the most straightforward way of doing this is to fit the model to obtain $\theta^*$, then use the model's forward simulator to generate new data sets, in essence treating our original estimate $\theta^*$ as the ``truth'' set \cite{Genest2008}.
 
 	An algorithm for parametric bootstrapping using IF2 and our stochastic SIR model is shown in Algorithm [\ref{paraboot}].
 
